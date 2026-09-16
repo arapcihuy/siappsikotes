@@ -252,13 +252,19 @@ S.answers = {};
 S.flagged = {};
 S.dur = {};
 S.tSoalIdx = -1;
+var pakaiAdaptif = (typeof pilihSoalAdaptif === 'function') && (mode === 'learn' || mode === 'drill25');
 if (cat === 'all') {
-S.questions = shuffle(getAllSoal());
+var semua = getAllSoal();
+S.questions = pakaiAdaptif ? pilihSoalAdaptif(semua, (mode === 'drill25' ? 25 : semua.length), {}) : shuffle(semua);
 } else if (SOAL_DATABASE[cat]) {
 var db = SOAL_DATABASE[cat];
-S.questions = shuffle(db.soal.map(function(s) {
+var bankKat = db.soal.map(function(s) {
 return Object.assign({}, s, { kategori: db.nama });
-}));
+});
+// Mode Belajar & Drill memakai pemilihan berprioritas (anti-hafalan):
+// soal yang belum pernah keluar selalu didahulukan, lalu yang belum tuntas.
+// Mode Tryout tetap acak murni supaya hasilnya jujur seperti ujian asli.
+S.questions = pakaiAdaptif ? pilihSoalAdaptif(bankKat, (mode === 'drill25' ? 25 : bankKat.length), {}) : shuffle(bankKat);
 } else {
 S.questions = [];   // kategori tidak dikenal: jangan sampai error
 }
@@ -459,6 +465,7 @@ if (i === q.jawaban) prog[kat].benar++;
 saveProgress(prog);
 if (window.catatSoalSalah) catatSoalSalah(q.id, i === q.jawaban);
 if (window.catatStatSoal) catatStatSoal(q.id, i === q.jawaban);
+if (window.catatHasilSoal) catatHasilSoal(q, i === q.jawaban);
 if (window.catatWaktuSoal && S.tStart) catatWaktuSoal(S.idx, Math.round((Date.now() - S.tStart) / 1000));
 if (window.tambahHarian) tambahHarian('soal', 1);
 if (window.simpanSesiAktif) simpanSesiAktif();

@@ -226,9 +226,17 @@ def main():
 
         segar()
         print('== G. IQ Lab ==')
+        # Generator IQ (data/soal-iq.js) dimuat malas sejak v58: halaman IQ
+        # mengunduhnya saat dibuka. Jadi tunggu dulu sampai siap.
+        page.evaluate("() => navTo('iq')")
+        siap_iq = False
+        for _ in range(40):
+            siap_iq = page.evaluate("() => typeof IQ_GEN !== 'undefined'")
+            if siap_iq:
+                break
+            page.wait_for_timeout(250)
         g = page.evaluate("""() => {
-            const out = {};
-            navTo('iq');
+            const out = { generatorDimuat: typeof IQ_GEN !== 'undefined' };
             out.halaman = !!document.getElementById('main').innerHTML;
             out.adaDrill = typeof IQ_GEN !== 'undefined' && typeof iqMulai === 'function';
             if (out.adaDrill) {
@@ -236,12 +244,19 @@ def main():
                 out.drillJumlah = items.length;
                 if (items.length) iqMulai(items, 0);
                 out.drillJalan = !!document.querySelector('.option');
+                // semua domain harus menghasilkan 10 soal (pernah kosong untuk rotasi)
+                out.perDomain = {};
+                ['angka', 'huruf', 'matriks', 'rotasi', 'verbal', 'campuran'].forEach(d => {
+                    out.perDomain[d] = IQ_GEN.buat(d, 10).length;
+                });
             }
             out.nbFungsi = typeof iqNbStart === 'function';
             return out;
         }""")
         cek(g['adaDrill'] and g['drillJumlah'] >= 5 and g['drillJalan'], 'drill IQ bisa dijalankan', g)
         cek(g['nbFungsi'], 'fungsi Dual N-Back tersedia', g)
+        kurang = {k: v for k, v in (g.get('perDomain') or {}).items() if v < 10}
+        cek(not kurang, 'tiap jenis soal IQ menghasilkan 10 soal', kurang or g.get('perDomain'))
 
         segar()
         print('== H. Psikologi (semua jenis tes) ==')

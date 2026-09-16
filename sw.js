@@ -38,6 +38,7 @@ const FILES = [
   './static/js/fitur8.js?v=af09a64',
   './static/js/fitur9.js?v=af09a64', './static/js/fitur10.js?v=af09a64', './static/js/fitur11.js?v=af09a64', './static/js/fitur12.js?v=af09a64', './static/js/fitur13.js?v=af09a64', './static/js/fitur14.js?v=af09a64', './static/js/akun-google.js?v=af09a64', './static/js/akses.js?v=af09a64', './static/js/sinkron-db.js?v=af09a64',
   './static/js/icons.js?v=af09a64',
+  './static/js/mesin-soal.js?v=af09a64',
   './static/js/iq.js?v=af09a64',
   './static/js/psikologi.js?v=af09a64',
   './static/icons/apple-touch-icon-180.png?v=af09a64',

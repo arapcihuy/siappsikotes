@@ -65,6 +65,20 @@ return '<div class="iq-dom" onclick="startIQDrill(\'' + key + '\')">' +
 '</div>';
 }
 function renderIQ() {
+// Generator IQ (data/soal-iq.js) dimuat saat halaman ini dibuka.
+// Tanpa penjagaan ini halaman tampil kosong pada kunjungan pertama.
+if (typeof window.IQ_GEN === 'undefined') {
+if (window.pastikanIQ) {
+window.pastikanIQ().then(function (ok) {
+if (ok) render();
+else {
+var m = document.getElementById('main');
+if (m) m.innerHTML = '<div class="empty"><div class="empty-icon">' + icon('alert', 40) + '</div><p>Soal IQ gagal dimuat. Periksa sambungan lalu muat ulang halaman.</p></div>';
+}
+});
+}
+return '<div class="empty"><div class="empty-icon">' + icon('refresh', 40) + '</div><p>Menyiapkan bank soal IQ...</p></div>';
+}
 var meta = loadIqMeta();
 var log = loadIqLog();
 var last = iqTerakhir();

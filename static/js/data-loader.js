@@ -78,6 +78,17 @@ return memuat[kat];
 window.pastikanSemua = function () {
 return Promise.all(window.daftarKategori().map(function (k) { return window.pastikanKategori(k); }));
 };
+// IQ Lab: generator soal (data/soal-iq.js) sengaja TIDAK dimuat di awal supaya
+// beban muat pertama tetap ringan. Baru diunduh saat halaman IQ dibuka.
+var memuatIQ = null;
+window.pastikanIQ = function () {
+if (typeof window.IQ_GEN !== 'undefined') return Promise.resolve(true);
+if (memuatIQ) return memuatIQ;
+memuatIQ = muatSkrip('data/soal-iq.js?v=' + versiAset())
+.then(function () { return typeof window.IQ_GEN !== 'undefined'; })
+.catch(function () { memuatIQ = null; return false; });
+return memuatIQ;
+};
 window.htmlMemuat = function (pesan) {
 return '<div class="empty"><div class="empty-icon">' + icon('refresh', 40) + '</div><p>' +
 escapeHtml(pesan || 'Menyiapkan soal...') + '</p></div>';
