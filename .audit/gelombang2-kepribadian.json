@@ -1,0 +1,222 @@
+[
+ {
+  "id": "kpb1",
+  "pertanyaan": "Beberapa hari setelah sebuah permohonan diselesaikan, pengguna layanan melapor bahwa isi berkas yang Anda periksa ternyata keliru.",
+  "pilihan": [
+   "Mengakui kekeliruan itu, segera memperbaiki berkasnya, dan menyampaikan permintaan maaf serta penjelasan langkah perbaikan",
+   "Menjelaskan bahwa kekeliruan seperti itu biasa terjadi pada permohonan yang rumit",
+   "Menunjuk bagian lain yang menyerahkan berkas sebagai penyebab kekeliruannya",
+   "Memperbaiki berkasnya tanpa memberi tahu pengguna agar tidak menimbulkan keluhan"
+  ]
+ },
+ {
+  "id": "kpb2",
+  "pertanyaan": "Di tengah presentasi penting, seorang peserta mengajukan pertanyaan teknis yang jawabannya tidak Anda kuasai.",
+  "pilihan": [
+   "Menjawab berdasarkan perkiraan agar presentasi tetap terlihat meyakinkan",
+   "Mengalihkan pertanyaan itu kepada peserta lain yang dianggap lebih menguasai",
+   "Mengganti pokok bahasan agar pertanyaan tersebut tidak berlanjut",
+   "Mengakui dengan tenang bahwa Anda perlu memeriksa datanya lebih dulu, mencatat pertanyaan itu, dan berjanji memberi jawaban pada waktu yang disepakati"
+  ]
+ },
+ {
+  "id": "kpb3",
+  "pertanyaan": "Anda menerima kabar bahwa seorang rekan menceritakan hal buruk tentang Anda kepada orang lain di tempat kerja.",
+  "pilihan": [
+   "Menanyakan langsung kepada rekan itu dengan tenang untuk memastikan duduk perkaranya sebelum menarik kesimpulan",
+   "Membalas dengan menceritakan hal buruk tentangnya kepada orang lain",
+   "Menjauhinya tanpa penjelasan sampai ia menyadari kesalahannya",
+   "Membuka masalah itu di grup percakapan tim agar semua orang mengetahuinya"
+  ]
+ },
+ {
+  "id": "kpb4",
+  "pertanyaan": "Atasan menyampaikan arahan secara lisan dengan cepat, sementara Anda harus segera memulai pekerjaan pada hari itu.",
+  "pilihan": [
+   "Mengulang kembali pemahaman Anda tentang arahan itu dan meminta konfirmasi sebelum mulai bekerja",
+   "Menanyakan kepada rekan apa yang biasanya dimaksud atasan dalam situasi serupa",
+   "Bekerja sesuai tafsiran sendiri lalu memperbaikinya setelah ada koreksi",
+   "Menunggu atasan menanyakan hasilnya sebelum menjelaskan tafsiran Anda"
+  ]
+ },
+ {
+  "id": "kpb5",
+  "pertanyaan": "Saat menghitung ulang uang kas, Anda menemukan kelebihan jumlah yang belum tercatat pada laporan hari itu.",
+  "pilihan": [
+   "Menyimpannya dahulu untuk menutup kemungkinan kekurangan pada hari berikutnya",
+   "Membagikan kelebihan itu kepada rekan satu tim karena jumlahnya kecil",
+   "Mencatat temuan itu pada berita acara dan melaporkannya agar selisihnya ditelusuri",
+   "Membiarkannya tanpa dicatat karena pengecekan bukan bagian tugas Anda"
+  ]
+ },
+ {
+  "id": "kpb6",
+  "pertanyaan": "Sebelum pekerjaan dimulai, Anda menemukan satu alat pelindung yang rusak dan tidak layak dipakai, sedangkan alat penggantinya belum tersedia.",
+  "pilihan": [
+   "Tetap memakainya karena hanya bagian kecil yang rusak",
+   "Menghentikan penggunaan alat itu dan melaporkan kondisi perlengkapan agar diganti sebelum pekerjaan dimulai",
+   "Meminjam alat milik rekan agar pekerjaan tetap berjalan pada hari itu",
+   "Melanjutkan pekerjaan tanpa pelindung sambil mengajukan penggantian untuk keesokan harinya"
+  ]
+ },
+ {
+  "id": "kpb7",
+  "pertanyaan": "Seorang pengguna layanan meminta permohonannya didahulukan karena mengaku memiliki kenalan di bagian lain, sedangkan pengguna lain menunggu sesuai antrean.",
+  "pilihan": [
+   "Mempercepat permohonannya agar tidak menimbulkan keributan dengan pihak lain",
+   "Mengarahkannya kepada kenalan yang disebutkan agar urusannya bisa diselesaikan",
+   "Memintanya menunggu tanpa penjelasan sampai seluruh antrean selesai",
+   "Menjelaskan prosedur dan urutan antrean dengan sopan, serta menolak mempercepat di luar ketentuan"
+  ]
+ },
+ {
+  "id": "kpb8",
+  "pertanyaan": "Sistem kerja yang biasa Anda gunakan tiba-tiba tidak dapat diakses ketika pekerjaan sedang padat, sementara hasil pekerjaan Anda ditunggu pihak lain.",
+  "pilihan": [
+   "Berhenti bekerja dan menunggu sampai sistem pulih sepenuhnya, tanpa memberi tahu pihak yang menunggu",
+   "Menunggu tanpa memberi tahu pihak yang menunggu hasil pekerjaan Anda tentang kendalanya",
+   "Memakai akun milik rekan agar pekerjaan Anda tetap dapat diselesaikan hari itu",
+   "Memastikan apakah gangguan bersifat luas, memberi tahu pihak yang menunggu hasil pekerjaan, dan menjalankan langkah alternatif yang diizinkan"
+  ]
+ },
+ {
+  "id": "kpb9",
+  "pertanyaan": "Seorang pemasok menawarkan hadiah pribadi kepada Anda ketika proses pengadaan sedang berjalan.",
+  "pilihan": [
+   "Menerimanya karena penilaian Anda tetap dilakukan secara objektif",
+   "Menolak hadiah itu dengan sopan dan melaporkan tawaran tersebut sesuai aturan yang berlaku",
+   "Menunda jawabannya dan memutuskan setelah proses pengadaan selesai",
+   "Meminta pemasok mengalihkan hadiah itu untuk kegiatan tim agar tidak mencurigakan"
+  ]
+ },
+ {
+  "id": "kpb10",
+  "pertanyaan": "Dalam pembagian tugas, Anda mendapat bagian yang sumbangannya paling sulit terlihat, sementara rekan lain mendapat bagian yang lebih menonjol.",
+  "pilihan": [
+   "Meminta bertukar bagian agar sumbangan Anda lebih terlihat oleh pimpinan",
+   "Mengerjakan bagian itu sambil menunggu kesempatan mendapat bagian yang lebih menonjol",
+   "Mengerjakan bagian itu sebaik mungkin karena keberhasilan pekerjaan bergantung pada seluruh bagiannya",
+   "Mengeluhkan pembagian itu kepada rekan satu tim"
+  ]
+ },
+ {
+  "id": "kpb11",
+  "pertanyaan": "Seorang rekan berulang kali menanggapi pertanyaan kerja Anda dengan nada meremehkan dan tidak sabar.",
+  "pilihan": [
+   "Membalas dengan nada yang sama agar ia menyadari akibat perilakunya",
+   "Membicarakannya secara pribadi dengan tenang, dengan fokus pada cara kerja sama yang lebih baik",
+   "Menghentikan kerja sama dengannya tanpa penjelasan",
+   "Menyampaikan keluhan tentang sikapnya di depan anggota tim yang lain"
+  ]
+ },
+ {
+  "id": "kpb12",
+  "pertanyaan": "Anda menemukan kabel listrik yang terkelupas di area kerja yang biasa dilewati banyak orang.",
+  "pilihan": [
+   "Mengingatkan rekan-rekan agar berhati-hati tanpa memperbaiki sumber bahayanya",
+   "Memindahkan kabel itu sendiri tanpa memberi tanda kepada orang lain",
+   "Memberi tanda peringatan di area itu dan melaporkannya agar diperbaiki sebelum ada yang terluka",
+   "Membiarkannya karena bukan bagian dari pekerjaan Anda"
+  ]
+ },
+ {
+  "id": "kpb13",
+  "pertanyaan": "Seorang rekan meminta Anda menandatangani daftar hadir untuknya karena ia datang terlambat.",
+  "pilihan": [
+   "Menandatanganinya sekali saja agar hubungan kerja tetap baik",
+   "Menolak permintaan itu dengan sopan dan menyarankannya menyampaikan alasannya secara terbuka kepada pimpinan",
+   "Menandatanganinya untuknya karena hal itu tidak merugikan siapa pun",
+   "Membiarkan daftar itu tanpa menyinggung masalahnya sama sekali"
+  ]
+ },
+ {
+  "id": "kpb14",
+  "pertanyaan": "Seorang yang mengaku keluarga pengguna layanan meminta data pribadi pengguna tersebut, padahal ia tidak membawa surat kuasa.",
+  "pilihan": [
+   "Memberikan sebagian data saja agar tetap membantu tanpa melanggar terlalu jauh",
+   "Meminta ia menjelaskan alasannya lebih dulu, lalu memberikan data itu jika alasannya masuk akal",
+   "Menyebutkan bahwa data itu memang ada tanpa memperlihatkan isinya",
+   "Menolak memberikan data itu dan menjelaskan bahwa permintaannya harus diajukan melalui prosedur resmi"
+  ]
+ },
+ {
+  "id": "kpb15",
+  "pertanyaan": "Ketika menyiapkan bahan rapat, Anda menemukan satu data penting yang belum diminta, tetapi jelas akan dibutuhkan dalam pembahasan.",
+  "pilihan": [
+   "Menyiapkan hanya data yang diminta agar tidak dianggap menambah beban",
+   "Menunggu sampai data itu benar-benar diminta sebelum menyiapkannya",
+   "Menyiapkan data itu sekalian dan memberi catatan singkat bahwa datanya tersedia bila diperlukan",
+   "Menyisipkan data itu tanpa keterangan sehingga menyulitkan pembaca memahami tambahannya"
+  ]
+ },
+ {
+  "id": "kpb16",
+  "pertanyaan": "Seorang pengguna layanan menyampaikan kritik keras terhadap pelayanan Anda di depan orang lain, padahal sebagian kritik itu tidak sesuai fakta.",
+  "pilihan": [
+   "Membantah langsung agar penilaian orang lain terhadap Anda tidak tercemar",
+   "Mendengarkan sampai selesai dan menanggapinya dengan tenang, lalu menjelaskan fakta yang sebenarnya tanpa berdebat di depan umum",
+   "Meninggalkan tempat layanan sampai ia selesai berbicara",
+   "Menerima seluruh tuduhan tanpa menjelaskan fakta apa pun"
+  ]
+ },
+ {
+  "id": "kpb17",
+  "pertanyaan": "Seorang pengguna layanan tidak mampu menjelaskan kebutuhannya dengan jelas karena gugup dan terburu-buru.",
+  "pilihan": [
+   "Memintanya kembali setelah menyiapkan keterangan yang lengkap",
+   "Membantunya dengan pertanyaan pemandu yang sederhana dan sabar sampai kebutuhannya dapat dipahami",
+   "Meminta rekan yang lebih berpengalaman melayaninya",
+   "Melayaninya berdasarkan dugaan Anda sendiri terhadap kebutuhannya"
+  ]
+ },
+ {
+  "id": "kpb18",
+  "pertanyaan": "Sebuah rapat selesai tanpa hasil tertulis tentang siapa mengerjakan apa dan kapan batas waktunya.",
+  "pilihan": [
+   "Mengusulkan agar hasil rapat dicatat lengkap dengan penanggung jawab dan tenggat waktunya",
+   "Mengandalkan ingatan peserta rapat dengan cara saling mengingatkan",
+   "Mencatat untuk diri sendiri tanpa membagikannya kepada anggota tim",
+   "Menyerahkan pencatatan itu kepada orang yang biasanya mengerjakannya"
+  ]
+ },
+ {
+  "id": "kpb19",
+  "pertanyaan": "Seorang pengguna layanan mengeluh kepada Anda tentang sikap rekan kerja Anda, bukan tentang hasil pekerjaannya.",
+  "pilihan": [
+   "Mendengarkan keluhannya dengan serius dan menyampaikannya kepada rekan tersebut secara pribadi untuk ditindaklanjuti",
+   "Membela rekan Anda di depan pengguna sebelum mengetahui duduk perkaranya",
+   "Menyampaikan keluhan itu di grup tim agar semua anggota mengetahuinya",
+   "Meminta pengguna menyampaikan sendiri keluhannya kepada rekan tersebut"
+  ]
+ },
+ {
+  "id": "kpb20",
+  "pertanyaan": "Anda diminta menandatangani berita acara pemeriksaan yang sebenarnya tidak Anda saksikan sendiri.",
+  "pilihan": [
+   "Menandatanganinya karena sudah menjadi kebiasaan di unit tersebut",
+   "Menandatanganinya sambil mencatat di bagian bawah bahwa Anda tidak hadir",
+   "Menolak menandatanganinya dan menjelaskan bahwa tanda tangan hanya untuk hal yang benar-benar Anda saksikan",
+   "Meminta rekan yang hadir menandatangani sebagai pengganti Anda"
+  ]
+ },
+ {
+  "id": "kpb21",
+  "pertanyaan": "Atasan sering mengubah prioritas pekerjaan Anda di tengah jalan, sementara pekerjaan sebelumnya belum tuntas.",
+  "pilihan": [
+   "Mencatat setiap perubahan prioritas, mengonfirmasi mana yang terbaru, dan menyesuaikan rencana kerja Anda",
+   "Mengerjakan semua permintaan sesuai urutan kedatangannya tanpa konfirmasi",
+   "Menyelesaikan pekerjaan lama sampai tuntas sebelum menyentuh permintaan baru",
+   "Meminta rekan lain menangani permintaan baru itu agar rencana Anda tidak terganggu"
+  ]
+ },
+ {
+  "id": "kpb22",
+  "pertanyaan": "Target kerja tim Anda naik dua kali lipat dari periode sebelumnya, sedangkan jumlah anggota tim tidak bertambah.",
+  "pilihan": [
+   "Menerima target itu tanpa pembahasan agar tidak dianggap tidak mampu",
+   "Menolak target itu dengan alasan jumlah anggota tidak sebanding dengan beban",
+   "Menambah jam kerja setiap hari tanpa mengevaluasi apakah target itu mungkin dicapai",
+   "Mengidentifikasi pekerjaan yang paling berdampak, menyusun pembagian tugas yang realistis, dan menyampaikan perhitungan itu kepada atasan"
+  ]
+ }
+]

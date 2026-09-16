@@ -150,6 +150,65 @@ tkw/numerik yang butuh audit satu per satu.
 
 ---
 
+## 3b. Progres nyata (16 Sep 2026, lanjutan)
+
+**Tes Gambar & Visual: 80 → 141 soal.** 61 soal baru dibuat dengan
+`tools/buat-soal-gambar.py` (delapan jenis: deret titik, hitung bentuk,
+jumlah sisi bangun, jumlah sel kisi, titik sudut bertanda, garis diagonal,
+warna kotak ke-n, sudut jarum jam). Setiap soal menyimpan field `verifikasi`
+yang hanya menyatakan ATURAN polanya; kuncinya dihitung ulang dari isi SVG oleh
+`tools/verifikasi-gambar.py` (pemeriksa generik baru).
+
+Bukti yang sudah dijalankan:
+
+```
+tools/verifikasi-soal.py  -> kunci Tes Gambar cocok dengan isi gambarnya (80 soal diperiksa otomatis)
+                             (sebelumnya 19; pagar P9 menuntut minimal 30)
+uji rusak (kunci digeser) -> 8 dari 8 jenis pemeriksa MENDETEKSI kesalahan
+uji peramban              -> 61 gambar baru semuanya ter-decode, tampil 4 opsi, pembahasan terbuka, 0 galat JS
+tools/peraturan-mutu.py   -> SEMUA PERATURAN DIPATUHI (total bank 1286 soal)
+```
+
+Sisa kategori masih dikerjakan: **verbal (100 → 140)** dan
+**kepribadian (113 → 135)**. Soal dua kategori ini bersifat hafalan/situasional,
+jadi wajib melalui dua gelombang pemeriksaan (pemeriksa kedua menentukan
+jawabannya sendiri lebih dulu) sebelum masuk bank.
+
+### 3c. Progres lanjutan — ketiga kategori selesai (total bank 1.348 soal)
+
+| kategori | sebelum | sesudah | cara | pemeriksaan |
+|---|---|---|---|---|
+| Tes Gambar & Visual | 80 | **141** | generator 8 jenis, kunci dihitung dari gambar | 80 soal terverifikasi mesin (dulu 19) |
+| Kemampuan Verbal | 100 | **140** | 40 soal baru (analogi, sinonim, antonim, hubungan kata, baku, kalimat efektif, bacaan, idiom) | gelombang 2: 39/40 sepakat; sisa 1 soal sudah diganti di versi baru |
+| Tes Kepribadian Situasional | 113 | **135** | 22 soal situasional berbasis rubrik | gelombang 2: 22/22 sepakat |
+
+Hasil pemeriksaan gelombang kedua (pemeriksa independen menjawab tanpa melihat kunci):
+
+```
+verbal       39 dari 40 sama dengan kunci tertulis (yang berbeda adalah soal yang
+             memang sudah diganti sesudah pemeriksa membacanya)
+kepribadian  22 dari 22 sama dengan kunci tertulis
+```
+
+Temuan yang langsung ditindaklanjuti dari pemeriksaan itu:
+
+- **4 soal verbal ditandai berpotensi ambigu** (PETANI:SAWAH dengan pengecoh alat,
+  antonim TERSURAT, soal kelompok alat kerja, penulisan "karisma") — tiga di antaranya
+  saya tulis ulang agar pengecohnya tidak lagi bisa dibela, satu (karisma) memang sudah
+  baku menurut KBBI sehingga dibiarkan.
+- **1 soal kepribadian pengecohnya kembar** dengan opsi lain sehingga distraktornya
+  hilang — sudah diganti dengan opsi yang berbeda tajam.
+- **1 soal analogi pengganti saya sendiri bertabrakan dengan soal lama** ("GURU : MURID
+  = PELATIH"), ketahuan oleh pemeriksa duplikasi otomatis, lalu diganti lagi. Pelajaran:
+  setiap kali mengganti soal, jalankan pemeriksa duplikasi terhadap seluruh bank — bukan
+  hanya terhadap soal baru.
+
+Perkakas baru: `tools/buat-soal-gambar.py` (pembuat soal bergambar),
+`tools/sisip-soal-baru.py` (penyisip draf ke bank + pemicu pecah-data),
+pemeriksa generik di `tools/verifikasi-gambar.py`, dan pemeriksa duplikasi.
+
+---
+
 ## 4. Pekerjaan berikutnya: supaya latihan benar-benar mengukur, bukan hafalan
 
 1. **Kesulitan berjenjang + mode adaptif.** Soal diberi tingkat 1-3; jawaban benar

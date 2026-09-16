@@ -1,0 +1,310 @@
+[
+ {
+  "id": "kpb1",
+  "pertanyaan": "Beberapa hari setelah sebuah permohonan diselesaikan, pengguna layanan melapor bahwa isi berkas yang Anda periksa ternyata keliru.",
+  "pilihan": [
+   "Mengakui kekeliruan itu, segera memperbaiki berkasnya, dan menyampaikan permintaan maaf serta penjelasan langkah perbaikan",
+   "Menjelaskan bahwa kekeliruan seperti itu biasa terjadi pada permohonan yang rumit",
+   "Menunjuk bagian lain yang menyerahkan berkas sebagai penyebab kekeliruannya",
+   "Memperbaiki berkasnya tanpa memberi tahu pengguna agar tidak menimbulkan keluhan"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Mengakui kekeliruan itu, segera memperbaiki berkasnya, dan menyampaikan permintaan maaf serta penjelasan langkah perbaikan\nPilihan ini paling tepat karena menanggung kekeliruan sekaligus memperbaiki dampaknya bagi pengguna. Membandingkannya dengan kesalahan yang dianggap umum atau menunjuk pihak lain hanya memindahkan tanggung jawab, sedangkan memperbaiki diam-diam membuat pengguna tidak pernah tahu apa yang diperbaiki dan mengapa.\nINGAT: Salah sendiri: akui, perbaiki, jelaskan. Jangan sembunyikan perbaikannya.",
+  "topik": "pelayanan",
+  "rubrik": "Mengukur akuntabilitas pelayanan: keberanian mengakui kekeliruan dan menuntaskan perbaikan di hadapan pengguna."
+ },
+ {
+  "id": "kpb2",
+  "pertanyaan": "Di tengah presentasi penting, seorang peserta mengajukan pertanyaan teknis yang jawabannya tidak Anda kuasai.",
+  "pilihan": [
+   "Menjawab berdasarkan perkiraan agar presentasi tetap terlihat meyakinkan",
+   "Mengalihkan pertanyaan itu kepada peserta lain yang dianggap lebih menguasai",
+   "Mengganti pokok bahasan agar pertanyaan tersebut tidak berlanjut",
+   "Mengakui dengan tenang bahwa Anda perlu memeriksa datanya lebih dulu, mencatat pertanyaan itu, dan berjanji memberi jawaban pada waktu yang disepakati"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Mengakui dengan tenang bahwa Anda perlu memeriksa datanya lebih dulu, mencatat pertanyaan itu, dan berjanji memberi jawaban pada waktu yang disepakati\nJawaban ini paling tepat karena menjaga kejujuran sekaligus mengendalikan suasana dengan menetapkan kapan jawaban akan diberikan. Mengira-ngira berisiko menyebarkan informasi salah, melempar pertanyaan ke orang lain menghindari tanggung jawab, dan mengganti topik membuat peserta kehilangan kepercayaan pada isi presentasi.\nINGAT: Tidak tahu itu wajar; mengarang jawaban itu yang merusak kepercayaan.",
+  "topik": "tekanan",
+  "rubrik": "Mengukur kejujuran intelektual dan pengendalian diri saat terdesak di depan banyak orang."
+ },
+ {
+  "id": "kpb3",
+  "pertanyaan": "Anda menerima kabar bahwa seorang rekan menceritakan hal buruk tentang Anda kepada orang lain di tempat kerja.",
+  "pilihan": [
+   "Menanyakan langsung kepada rekan itu dengan tenang untuk memastikan duduk perkaranya sebelum menarik kesimpulan",
+   "Membalas dengan menceritakan hal buruk tentangnya kepada orang lain",
+   "Menjauhinya tanpa penjelasan sampai ia menyadari kesalahannya",
+   "Membuka masalah itu di grup percakapan tim agar semua orang mengetahuinya"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Menanyakan langsung kepada rekan itu dengan tenang untuk memastikan duduk perkaranya sebelum menarik kesimpulan\nKlarifikasi langsung dan tenang adalah cara paling adil karena kabar yang diterima bisa saja tidak utuh atau keliru. Membalas sama-sama merusak, menjauh tanpa penjelasan meninggalkan masalah tanpa penyelesaian, dan mengangkatnya ke forum umum memperbesar konflik sebelum faktanya jelas.\nINGAT: Sebelum menuduh, tanyakan dulu kepada orang yang bersangkutan.",
+  "topik": "konflik",
+  "rubrik": "Mengukur cara mengelola konflik interpersonal melalui klarifikasi langsung, bukan pembalasan atau penghindaran."
+ },
+ {
+  "id": "kpb4",
+  "pertanyaan": "Atasan menyampaikan arahan secara lisan dengan cepat, sementara Anda harus segera memulai pekerjaan pada hari itu.",
+  "pilihan": [
+   "Mengulang kembali pemahaman Anda tentang arahan itu dan meminta konfirmasi sebelum mulai bekerja",
+   "Menanyakan kepada rekan apa yang biasanya dimaksud atasan dalam situasi serupa",
+   "Bekerja sesuai tafsiran sendiri lalu memperbaikinya setelah ada koreksi",
+   "Menunggu atasan menanyakan hasilnya sebelum menjelaskan tafsiran Anda"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Mengulang kembali pemahaman Anda tentang arahan itu dan meminta konfirmasi sebelum mulai bekerja\nMengulang pemahaman lalu meminta konfirmasi adalah cara paling aman karena kesalahan tafsir terdeteksi sebelum pekerjaan berjalan jauh. Bertanya kepada rekan bukan sumber yang pasti, bekerja dengan dugaan berisiko mengulang dari awal, dan menunggu membuat waktu terbuang tanpa kepastian.\nINGAT: Arahan belum jelas: ulangi pemahamanmu, minta konfirmasi, baru mulai.",
+  "topik": "atasan",
+  "rubrik": "Mengukur kecermatan dan kesediaan mengklarifikasi sebelum bertindak."
+ },
+ {
+  "id": "kpb5",
+  "pertanyaan": "Saat menghitung ulang uang kas, Anda menemukan kelebihan jumlah yang belum tercatat pada laporan hari itu.",
+  "pilihan": [
+   "Menyimpannya dahulu untuk menutup kemungkinan kekurangan pada hari berikutnya",
+   "Membagikan kelebihan itu kepada rekan satu tim karena jumlahnya kecil",
+   "Mencatat temuan itu pada berita acara dan melaporkannya agar selisihnya ditelusuri",
+   "Membiarkannya tanpa dicatat karena pengecekan bukan bagian tugas Anda"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Mencatat temuan itu pada berita acara dan melaporkannya agar selisihnya ditelusuri\nMencatat dan melaporkan selisih menjaga akuntabilitas serta memungkinkan penyebabnya ditelusuri. Menyimpan untuk cadangan, membagikan, atau membiarkannya tanpa catatan sama-sama membuat laporan keuangan tidak lagi dapat dipercaya dan menyulitkan penelusuran bila muncul masalah.\nINGAT: Uang tidak pernah abu-abu: temukan, catat, laporkan.",
+  "topik": "integritas",
+  "rubrik": "Mengukur integritas administrasi melalui keterbukaan mencatat selisih keuangan."
+ },
+ {
+  "id": "kpb6",
+  "pertanyaan": "Sebelum pekerjaan dimulai, Anda menemukan satu alat pelindung yang rusak dan tidak layak dipakai, sedangkan alat penggantinya belum tersedia.",
+  "pilihan": [
+   "Tetap memakainya karena hanya bagian kecil yang rusak",
+   "Menghentikan penggunaan alat itu dan melaporkan kondisi perlengkapan agar diganti sebelum pekerjaan dimulai",
+   "Meminjam alat milik rekan agar pekerjaan tetap berjalan pada hari itu",
+   "Melanjutkan pekerjaan tanpa pelindung sambil mengajukan penggantian untuk keesokan harinya"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Menghentikan penggunaan alat itu dan melaporkan kondisi perlengkapan agar diganti sebelum pekerjaan dimulai\nMenghentikan pemakaian dan melaporkan adalah langkah yang benar ketika alat pelindung tidak layak. Memakai alat yang rusak, meminjam peralatan milik orang lain, atau bekerja tanpa pelindung sama-sama mempertaruhkan keselamatan diri sendiri dan orang di sekitar.\nINGAT: Alat pelindung tidak layak berarti pekerjaan belum boleh dimulai.",
+  "topik": "keselamatan",
+  "rubrik": "Mengukur prioritas keselamatan ketika berhadapan dengan tekanan untuk segera menyelesaikan pekerjaan."
+ },
+ {
+  "id": "kpb7",
+  "pertanyaan": "Seorang pengguna layanan meminta permohonannya didahulukan karena mengaku memiliki kenalan di bagian lain, sedangkan pengguna lain menunggu sesuai antrean.",
+  "pilihan": [
+   "Mempercepat permohonannya agar tidak menimbulkan keributan dengan pihak lain",
+   "Mengarahkannya kepada kenalan yang disebutkan agar urusannya bisa diselesaikan",
+   "Memintanya menunggu tanpa penjelasan sampai seluruh antrean selesai",
+   "Menjelaskan prosedur dan urutan antrean dengan sopan, serta menolak mempercepat di luar ketentuan"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Menjelaskan prosedur dan urutan antrean dengan sopan, serta menolak mempercepat di luar ketentuan\nMenjaga antrean sesuai ketentuan menunjukkan pelayanan yang setara bagi semua orang. Mempercepat karena tekanan, mengarahkan ke jalur pribadi, atau membiarkan pengguna tanpa penjelasan sama-sama melanggar prinsip pelayanan yang adil.\nINGAT: Pelayanan setara berarti tidak ada jalur khusus di luar ketentuan.",
+  "topik": "pelayanan",
+  "rubrik": "Mengukur keadilan pelayanan dan keteguhan menjaga prosedur di bawah tekanan."
+ },
+ {
+  "id": "kpb8",
+  "pertanyaan": "Sistem kerja yang biasa Anda gunakan tiba-tiba tidak dapat diakses ketika pekerjaan sedang padat, sementara hasil pekerjaan Anda ditunggu pihak lain.",
+  "pilihan": [
+   "Berhenti bekerja dan menunggu sampai sistem pulih sepenuhnya, tanpa memberi tahu pihak yang menunggu",
+   "Menyalahkan gangguan sistem kepada pihak yang menunggu, lalu menunda pekerjaan itu tanpa langkah alternatif",
+   "Memakai akun milik rekan agar pekerjaan Anda tetap dapat diselesaikan hari itu",
+   "Memastikan apakah gangguan bersifat luas, memberi tahu pihak yang menunggu hasil pekerjaan, dan menjalankan langkah alternatif yang diizinkan"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Memastikan apakah gangguan bersifat luas, memberi tahu pihak yang menunggu hasil pekerjaan, dan menjalankan langkah alternatif yang diizinkan\nLangkah ini paling tepat karena menangani kendala sekaligus menjaga komunikasi dengan pihak yang terdampak. Berhenti bekerja tanpa memberi tahu, atau menyalahkan sistem sambil menunda tanpa langkah alternatif, membuat pekerjaan tertunda dan pihak lain kehilangan kepastian; memakai akun rekan melanggar aturan dan menimbulkan risiko baru.\nINGAT: kendala teknis: pastikan penyebabnya, komunikasikan dampaknya, pakai jalur alternatif yang sah.",
+  "topik": "tekanan",
+  "rubrik": "Mengukur ketenangan dan komunikasi saat menghadapi hambatan di luar kendali."
+ },
+ {
+  "id": "kpb9",
+  "pertanyaan": "Seorang pemasok menawarkan hadiah pribadi kepada Anda ketika proses pengadaan sedang berjalan.",
+  "pilihan": [
+   "Menerimanya karena penilaian Anda tetap dilakukan secara objektif",
+   "Menolak hadiah itu dengan sopan dan melaporkan tawaran tersebut sesuai aturan yang berlaku",
+   "Menunda jawabannya dan memutuskan setelah proses pengadaan selesai",
+   "Meminta pemasok mengalihkan hadiah itu untuk kegiatan tim agar tidak mencurigakan"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Menolak hadiah itu dengan sopan dan melaporkan tawaran tersebut sesuai aturan yang berlaku\nMenolak sekaligus melaporkan mencegah konflik kepentingan muncul sejak awal. Menerima dengan alasan apa pun tetap mengganggu objektivitas penilaian, menunda keputusan membuka celah tekanan, dan mengalihkan hadiah ke kegiatan tim hanya memindahkan persoalan, bukan menyelesaikannya.\nINGAT: Hadiah dari pihak yang sedang dinilai bukan hadiah, melainkan ujian.",
+  "topik": "integritas",
+  "rubrik": "Mengukur kewaspadaan terhadap konflik kepentingan dalam proses kerja."
+ },
+ {
+  "id": "kpb10",
+  "pertanyaan": "Dalam pembagian tugas, Anda mendapat bagian yang sumbangannya paling sulit terlihat, sementara rekan lain mendapat bagian yang lebih menonjol.",
+  "pilihan": [
+   "Meminta bertukar bagian agar sumbangan Anda lebih terlihat oleh pimpinan",
+   "Mengerjakan bagian itu sambil menunggu kesempatan mendapat bagian yang lebih menonjol",
+   "Mengerjakan bagian itu sebaik mungkin karena keberhasilan pekerjaan bergantung pada seluruh bagiannya",
+   "Mengeluhkan pembagian itu kepada rekan satu tim"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Mengerjakan bagian itu sebaik mungkin karena keberhasilan pekerjaan bergantung pada seluruh bagiannya\nFokus pada keberhasilan bersama menunjukkan kesiapan bekerja tanpa mencari panggung. Meminta bertukar karena soal terlihat, menunggu kesempatan lain, dan mengeluh membuat pekerjaan dijalankan dengan hati yang tidak utuh dan mengganggu suasana tim.\nINGAT: Kepentingan pekerjaan lebih dahulu daripada keinginan terlihat.",
+  "topik": "kerja-sama",
+  "rubrik": "Mengukur kesadaran kolektif dan kesediaan bekerja tanpa sorotan."
+ },
+ {
+  "id": "kpb11",
+  "pertanyaan": "Seorang rekan berulang kali menanggapi pertanyaan kerja Anda dengan nada meremehkan dan tidak sabar.",
+  "pilihan": [
+   "Membalas dengan nada yang sama agar ia menyadari akibat perilakunya",
+   "Membicarakannya secara pribadi dengan tenang, dengan fokus pada cara kerja sama yang lebih baik",
+   "Menghentikan kerja sama dengannya tanpa penjelasan",
+   "Menyampaikan keluhan tentang sikapnya di depan anggota tim yang lain"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Membicarakannya secara pribadi dengan tenang, dengan fokus pada cara kerja sama yang lebih baik\nMembicarakannya pribadi dan tenang paling berpeluang menyelesaikan akar masalah tanpa mempermalukan siapa pun. Membalas meninggikan konflik, menghentikan kerja sama menghambat pekerjaan, dan mengeluh di depan tim merusak iklim kerja tanpa memberi perbaikan.\nINGAT: Soal perilaku orang lain: bicarakan empat mata, bukan di depan umum.",
+  "topik": "konflik",
+  "rubrik": "Mengukur kematangan menyampaikan ketidaknyamanan interpersonal secara langsung dan pantas."
+ },
+ {
+  "id": "kpb12",
+  "pertanyaan": "Anda menemukan kabel listrik yang terkelupas di area kerja yang biasa dilewati banyak orang.",
+  "pilihan": [
+   "Mengingatkan rekan-rekan agar berhati-hati tanpa memperbaiki sumber bahayanya",
+   "Memindahkan kabel itu sendiri tanpa memberi tanda kepada orang lain",
+   "Memberi tanda peringatan di area itu dan melaporkannya agar diperbaiki sebelum ada yang terluka",
+   "Membiarkannya karena bukan bagian dari pekerjaan Anda"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Memberi tanda peringatan di area itu dan melaporkannya agar diperbaiki sebelum ada yang terluka\nMemberi tanda sekaligus melaporkan mengendalikan bahaya untuk semua orang, bukan hanya untuk Anda. Sekadar mengingatkan, memindahkan sendiri tanpa tanda, atau membiarkan bahaya itu tetap ada sama-sama meninggalkan risiko yang dapat mencelakai orang lain.\nINGAT: Menemukan bahaya: tandai, laporkan, jangan biarkan menunggu.",
+  "topik": "keselamatan",
+  "rubrik": "Mengukur kepedulian pada keselamatan lingkungan kerja dan tindakan pencegahan."
+ },
+ {
+  "id": "kpb13",
+  "pertanyaan": "Seorang rekan meminta Anda menandatangani daftar hadir untuknya karena ia datang terlambat.",
+  "pilihan": [
+   "Menandatanganinya sekali saja agar hubungan kerja tetap baik",
+   "Menolak permintaan itu dengan sopan dan menyarankannya menyampaikan alasannya secara terbuka kepada pimpinan",
+   "Menandatanganinya untuknya karena hal itu tidak merugikan siapa pun",
+   "Membiarkan daftar itu tanpa menyinggung masalahnya sama sekali"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Menolak permintaan itu dengan sopan dan menyarankannya menyampaikan alasannya secara terbuka kepada pimpinan\nMenolak sambil menunjukkan jalan yang benar menjaga integritas tanpa menutup pintu bagi rekan. Menandatangani dengan alasan apa pun membuat catatan kehadiran tidak dapat dipercaya, sedangkan diam saja membiarkan kebiasaan itu berlanjut.\nINGAT: Tanda tangan adalah pernyataan, bukan pertolongan.",
+  "topik": "integritas",
+  "rubrik": "Mengukur keteguhan integritas administratif di bawah tekanan hubungan pertemanan."
+ },
+ {
+  "id": "kpb14",
+  "pertanyaan": "Seorang yang mengaku keluarga pengguna layanan meminta data pribadi pengguna tersebut, padahal ia tidak membawa surat kuasa.",
+  "pilihan": [
+   "Memberikan sebagian data saja agar tetap membantu tanpa melanggar terlalu jauh",
+   "Meminta ia menjelaskan alasannya lebih dulu, lalu memberikan data itu jika alasannya masuk akal",
+   "Menyebutkan bahwa data itu memang ada tanpa memperlihatkan isinya",
+   "Menolak memberikan data itu dan menjelaskan bahwa permintaannya harus diajukan melalui prosedur resmi"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Menolak memberikan data itu dan menjelaskan bahwa permintaannya harus diajukan melalui prosedur resmi\nData pribadi hanya dapat diberikan melalui jalur yang sah dan terverifikasi. Memberikan sebagian, memutuskan sendiri berdasarkan alasan lisan, atau bahkan mengonfirmasi keberadaan data sama-sama membuka risiko penyalahgunaan informasi.\nINGAT: Data pribadi hanya keluar lewat jalur resmi, apa pun alasannya.",
+  "topik": "integritas",
+  "rubrik": "Mengukur kepatuhan perlindungan data dan ketahanan terhadap permintaan yang tidak berwenang."
+ },
+ {
+  "id": "kpb15",
+  "pertanyaan": "Ketika menyiapkan bahan rapat, Anda menemukan satu data penting yang belum diminta, tetapi jelas akan dibutuhkan dalam pembahasan.",
+  "pilihan": [
+   "Menyiapkan hanya data yang diminta agar tidak dianggap menambah beban",
+   "Menunggu sampai data itu benar-benar diminta sebelum menyiapkannya",
+   "Menyiapkan data itu sekalian dan memberi catatan singkat bahwa datanya tersedia bila diperlukan",
+   "Menyisipkan data itu tanpa keterangan sehingga menyulitkan pembaca memahami tambahannya"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Menyiapkan data itu sekalian dan memberi catatan singkat bahwa datanya tersedia bila diperlukan\nMenyiapkan lebih awal disertai catatan singkat menolong jalannya pembahasan tanpa membingungkan. Menahan diri karena takut dinilai berlebihan atau menunggu sampai diminta membuat keputusan berjalan lambat, sedangkan menyisipkan data tanpa keterangan mengganggu pemahaman pembaca.\nINGAT: Proaktif berarti menyiapkan yang akan dibutuhkan, bukan sekadar menuntaskan yang diminta.",
+  "topik": "inisiatif",
+  "rubrik": "Mengukur inisiatif yang tetap rapi dan tidak mengganggu pekerjaan pihak lain."
+ },
+ {
+  "id": "kpb16",
+  "pertanyaan": "Seorang pengguna layanan menyampaikan kritik keras terhadap pelayanan Anda di depan orang lain, padahal sebagian kritik itu tidak sesuai fakta.",
+  "pilihan": [
+   "Membantah langsung agar penilaian orang lain terhadap Anda tidak tercemar",
+   "Mendengarkan sampai selesai dan menanggapinya dengan tenang, lalu menjelaskan fakta yang sebenarnya tanpa berdebat di depan umum",
+   "Meninggalkan tempat layanan sampai ia selesai berbicara",
+   "Menerima seluruh tuduhan tanpa menjelaskan fakta apa pun"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Mendengarkan sampai selesai dan menanggapinya dengan tenang, lalu menjelaskan fakta yang sebenarnya tanpa berdebat di depan umum\nMendengar lalu meluruskan fakta dengan tenang menjaga wibawa layanan sekaligus memperbaiki informasi yang keliru. Membantah di depan umum memancing keributan, meninggalkan tempat menghindari tanggung jawab, dan menerima tuduhan yang salah membuat informasi keliru terus beredar.\nINGAT: Hormati keluhannya, luruskan faktanya, jangan berdebat di depan orang lain.",
+  "topik": "pelayanan",
+  "rubrik": "Mengukur pengendalian diri dalam pelayanan dan kemampuan meluruskan fakta tanpa konflik terbuka."
+ },
+ {
+  "id": "kpb17",
+  "pertanyaan": "Seorang pengguna layanan tidak mampu menjelaskan kebutuhannya dengan jelas karena gugup dan terburu-buru.",
+  "pilihan": [
+   "Memintanya kembali setelah menyiapkan keterangan yang lengkap",
+   "Membantunya dengan pertanyaan pemandu yang sederhana dan sabar sampai kebutuhannya dapat dipahami",
+   "Meminta rekan yang lebih berpengalaman melayaninya",
+   "Melayaninya berdasarkan dugaan Anda sendiri terhadap kebutuhannya"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Membantunya dengan pertanyaan pemandu yang sederhana dan sabar sampai kebutuhannya dapat dipahami\nPertanyaan pemandu membantu pengguna menyampaikan kebutuhan sehingga layanan yang diberikan tepat sasaran. Meminta pulang, mengalihkan ke rekan lain, atau menebak kebutuhannya berpotensi menghasilkan pelayanan yang salah dan menambah beban pengguna.\nINGAT: Pengguna yang gugup dibantu dengan pertanyaan, bukan dinilai.",
+  "topik": "pelayanan",
+  "rubrik": "Mengukur empati pelayanan dan keterampilan menggali kebutuhan pengguna."
+ },
+ {
+  "id": "kpb18",
+  "pertanyaan": "Sebuah rapat selesai tanpa hasil tertulis tentang siapa mengerjakan apa dan kapan batas waktunya.",
+  "pilihan": [
+   "Mengusulkan agar hasil rapat dicatat lengkap dengan penanggung jawab dan tenggat waktunya",
+   "Mengandalkan ingatan peserta rapat dengan cara saling mengingatkan",
+   "Mencatat untuk diri sendiri tanpa membagikannya kepada anggota tim",
+   "Menyerahkan pencatatan itu kepada orang yang biasanya mengerjakannya"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Mengusulkan agar hasil rapat dicatat lengkap dengan penanggung jawab dan tenggat waktunya\nUsulan mencatat penanggung jawab dan tenggat membuat kesepakatan terukur dan mencegah tugas terlewat. Mengandalkan ingatan mudah gagal, catatan pribadi tidak menolong tim, dan menyerahkan begitu saja belum menjamin pencatatan itu benar-benar dilakukan.\nINGAT: Kesepakatan tanpa catatan mudah menguap.",
+  "topik": "inisiatif",
+  "rubrik": "Mengukur inisiatif memperjelas tanggung jawab agar pekerjaan berjalan tertib."
+ },
+ {
+  "id": "kpb19",
+  "pertanyaan": "Seorang pengguna layanan mengeluh kepada Anda tentang sikap rekan kerja Anda, bukan tentang hasil pekerjaannya.",
+  "pilihan": [
+   "Mendengarkan keluhannya dengan serius dan menyampaikannya kepada rekan tersebut secara pribadi untuk ditindaklanjuti",
+   "Membela rekan Anda di depan pengguna sebelum mengetahui duduk perkaranya",
+   "Menyampaikan keluhan itu di grup tim agar semua anggota mengetahuinya",
+   "Meminta pengguna menyampaikan sendiri keluhannya kepada rekan tersebut"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Mendengarkan keluhannya dengan serius dan menyampaikannya kepada rekan tersebut secara pribadi untuk ditindaklanjuti\nMendengar dengan serius lalu menyampaikannya secara pribadi menjaga mutu pelayanan sekaligus memberi kesempatan rekan memperbaiki diri. Membela sebelum tahu fakta mengabaikan pengguna, menyebarkan di grup mempermalukan rekan, dan melempar keluhan ke pengguna membuat masalah tidak selesai.\nINGAT: Terima keluhannya, antar kepada orangnya, jangan ke kerumunan.",
+  "topik": "pelayanan",
+  "rubrik": "Mengukur keseimbangan antara kepuasan pengguna dan pembinaan rekan kerja."
+ },
+ {
+  "id": "kpb20",
+  "pertanyaan": "Anda diminta menandatangani berita acara pemeriksaan yang sebenarnya tidak Anda saksikan sendiri.",
+  "pilihan": [
+   "Menandatanganinya karena sudah menjadi kebiasaan di unit tersebut",
+   "Menandatanganinya sambil mencatat di bagian bawah bahwa Anda tidak hadir",
+   "Menolak menandatanganinya dan menjelaskan bahwa tanda tangan hanya untuk hal yang benar-benar Anda saksikan",
+   "Meminta rekan yang hadir menandatangani sebagai pengganti Anda"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Menolak menandatanganinya dan menjelaskan bahwa tanda tangan hanya untuk hal yang benar-benar Anda saksikan\nMenolak tanda tangan atas hal yang tidak disaksikan menjaga keabsahan dokumen. Mengikuti kebiasaan atau menambahkan catatan kecil tetap berarti mengesahkan keterangan yang tidak Anda ketahui, sedangkan mengalihkan tanda tangan kepada orang lain justru memperluas masalah.\nINGAT: Tanda tangan hanya untuk apa yang benar-benar kamu saksikan.",
+  "topik": "integritas",
+  "rubrik": "Mengukur integritas dokumen dan keberanian menolak permintaan yang tidak sah."
+ },
+ {
+  "id": "kpb21",
+  "pertanyaan": "Atasan sering mengubah prioritas pekerjaan Anda di tengah jalan, sementara pekerjaan sebelumnya belum tuntas.",
+  "pilihan": [
+   "Mencatat setiap perubahan prioritas, mengonfirmasi mana yang terbaru, dan menyesuaikan rencana kerja Anda",
+   "Mengerjakan semua permintaan sesuai urutan kedatangannya tanpa konfirmasi",
+   "Menyelesaikan pekerjaan lama sampai tuntas sebelum menyentuh permintaan baru",
+   "Meminta rekan lain menangani permintaan baru itu agar rencana Anda tidak terganggu"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Mencatat setiap perubahan prioritas, mengonfirmasi mana yang terbaru, dan menyesuaikan rencana kerja Anda\nMencatat dan mengonfirmasi prioritas terbaru mencegah pekerjaan berjalan ke arah yang sudah tidak relevan. Mengerjakan sesuai urutan datang, bertahan pada pekerjaan lama, atau memindahkan tugas ke orang lain membuat satuan kerja kehilangan kendali atas prioritasnya.\nINGAT: Prioritas berubah: konfirmasi yang terbaru, jangan menebak.",
+  "topik": "atasan",
+  "rubrik": "Mengukur kemampuan mengelola pekerjaan di bawah prioritas yang bergeser."
+ },
+ {
+  "id": "kpb22",
+  "pertanyaan": "Target kerja tim Anda naik dua kali lipat dari periode sebelumnya, sedangkan jumlah anggota tim tidak bertambah.",
+  "pilihan": [
+   "Menerima target itu tanpa pembahasan agar tidak dianggap tidak mampu",
+   "Menolak target itu dengan alasan jumlah anggota tidak sebanding dengan beban",
+   "Menambah jam kerja setiap hari tanpa mengevaluasi apakah target itu mungkin dicapai",
+   "Mengidentifikasi pekerjaan yang paling berdampak, menyusun pembagian tugas yang realistis, dan menyampaikan perhitungan itu kepada atasan"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Mengidentifikasi pekerjaan yang paling berdampak, menyusun pembagian tugas yang realistis, dan menyampaikan perhitungan itu kepada atasan\nPilihan ini menggabungkan kesediaan menerima tantangan dengan perhitungan yang jujur, sehingga atasan dapat mengambil keputusan berbasis data. Menerima tanpa pembahasan atau menolak langsung sama-sama menutup peluang mencari jalan tengah, sedangkan menambah jam kerja terus-menerus tanpa evaluasi menguras tim tanpa arah.\nINGAT: Target berat dijawab dengan rencana dan hitungan, bukan dengan diam atau menyerah.",
+  "topik": "tekanan",
+  "rubrik": "Mengukur kesediaan menerima tantangan sekaligus kejujuran menyampaikan keterbatasan."
+ }
+]

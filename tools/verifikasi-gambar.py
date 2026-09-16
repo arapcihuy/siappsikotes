@@ -42,8 +42,131 @@ def _sudut_poligon(svg):
     return len([p for p in m.group(1).split(' ') if p.strip()])
 
 
+def _periksa_generik(q):
+    """Pemeriksa untuk soal gambar hasil tools/buat-soal-gambar.py.
+
+    ATURAN (bukan kunci) diambil dari field `verifikasi`; nilainya selalu
+    dihitung ulang dari isi SVG, jadi kalau gambarnya salah, pemeriksaan gagal.
+    """
+    v = q.get('verifikasi')
+    if not v or not q.get('gambar'):
+        return None
+    try:
+        svg = _svg(q)
+    except Exception as e:
+        return (False, 'gambar tidak bisa dibaca: %s' % str(e)[:60])
+    kunci = str(q['pilihan'][q['jawaban']])
+    jenis = v.get('jenis')
+
+    if jenis == 'titik-deret':
+        kotak = _kotak_dalam(svg)[:3]
+        if len(kotak) < 3:
+            return (False, 'kotak pada gambar hanya %d' % len(kotak))
+        isi = [_titik_dalam_kotak(svg, a, b) for a, b in kotak]
+        pola = v.get('pola')
+        a0, a1, a2 = isi
+        if pola == 'tambah':
+            d = a1 - a0
+            harap = a2 + d if d == a2 - a1 else None
+        elif pola == 'kali2':
+            harap = a2 * 2 if a1 == a0 * 2 and a2 == a1 * 2 else None
+        elif pola == 'kuadrat':
+            harap = 16 if isi == [1, 4, 9] else None
+        elif pola == 'genap':
+            harap = a2 + 2 if a1 == a0 + 2 and a2 == a1 + 2 else None
+        elif pola == 'triangular':
+            harap = 10 if isi == [1, 3, 6] else None
+        elif pola == 'fibonacci':
+            harap = a2 + a1 if a2 == a0 + a1 else None
+        elif pola == 'tambah3':
+            harap = a2 + 3 if a1 == a0 + 3 and a2 == a1 + 3 else None
+        else:
+            harap = None
+        if harap is None:
+            return (False, 'pola %s tidak cocok dengan isi kotak %s' % (pola, isi))
+        return (kunci == str(harap), 'titik per kotak %s, pola %s -> %d, kunci %s' % (isi, pola, harap, kunci))
+
+    if jenis == 'hitung-bentuk':
+        bentuk, warna = v.get('bentuk'), v.get('warna')
+        n = 0
+        if bentuk == 'lingkaran':
+            for m in re.finditer(r"<circle cx='[\d.]+' cy='[\d.]+' r='([\d.]+)' fill='(#[0-9a-fA-F]{6})'", svg):
+                if float(m.group(1)) > 5 and m.group(2).lower() == warna.lower():
+                    n += 1
+        elif bentuk == 'kotak':
+            for m in re.finditer(r"<rect x='[\d.]+' y='[\d.]+' width='([\d.]+)' height='[\d.]+' fill='(#[0-9a-fA-F]{6})'", svg):
+                if float(m.group(1)) < 280 and m.group(2).lower() == warna.lower():
+                    n += 1
+        else:
+            for m in re.finditer(r"<polygon points='([^']+)' fill='(#[0-9a-fA-F]{6})'", svg):
+                if len([p for p in m.group(1).split(' ') if p.strip()]) == 3 and m.group(2).lower() == warna.lower():
+                    n += 1
+        return (kunci == str(n), '%d %s warna %s di gambar, kunci %s' % (n, bentuk, warna, kunci))
+
+    if jenis == 'sisi-poligon':
+        m = re.search(r"<polygon points='([^']+)'", svg)
+        if not m:
+            return (False, 'tidak ada poligon di gambar')
+        sisi = len([p for p in m.group(1).split(' ') if p.strip()])
+        nama = {3: 'Segitiga', 4: 'Persegi', 5: 'Segi lima', 6: 'Segi enam', 7: 'Segi tujuh',
+                8: 'Segi delapan', 9: 'Segi sembilan', 10: 'Segi sepuluh'}
+        cocok = kunci in (str(sisi), nama.get(sisi))
+        return (cocok, 'poligon %d sisi, kunci %s' % (sisi, kunci))
+
+    if jenis == 'sel-kisi':
+        tegak = len(re.findall(r"<line x1='([\d.]+)' y1='[\d.]+' x2='\1'", svg))
+        datar = len(re.findall(r"<line x1='[\d.]+' y1='([\d.]+)' x2='[\d.]+' y2='\1'", svg))
+        sel = (tegak - 1) * (datar - 1) if tegak > 1 and datar > 1 else 0
+        return (kunci == str(sel), 'kisi %dx%d = %d sel, kunci %s' % (tegak - 1, datar - 1, sel, kunci))
+
+    if jenis == 'titik-sudut':
+        m = re.search(r"<polygon points='([^']+)'", svg)
+        if not m:
+            return (False, 'tidak ada poligon di gambar')
+        sisi = len([p for p in m.group(1).split(' ') if p.strip()])
+        bulatan = len(re.findall(r"<circle [^>]*r='5'", svg))
+        return (kunci == str(bulatan) and bulatan == sisi,
+                'poligon %d sisi dengan %d bulatan penanda, kunci %s' % (sisi, bulatan, kunci))
+
+    if jenis == 'diagonal':
+        m = re.search(r"<polygon points='([^']+)'", svg)
+        sisi = len([p for p in m.group(1).split(' ') if p.strip()]) if m else 0
+        garis = len(re.findall(r'<line', svg))
+        resmi = sisi * (sisi - 3) // 2
+        return (kunci == str(garis) and garis == resmi,
+                'bangun %d sisi, %d garis diagonal di gambar (rumus %d), kunci %s' % (sisi, garis, resmi, kunci))
+
+    if jenis == 'warna-ke-n':
+        warna = re.findall(r"<rect x='[\d.]+' y='[\d.]+' width='30' height='60' fill='(#[0-9a-fA-F]{6})'", svg)
+        peta = {'#e45b5b': 'Merah', '#ffd700': 'Kuning', '#22cc4a': 'Hijau', '#2b6cb0': 'Biru'}
+        ke = int(v.get('ke', 0))
+        if len(warna) < ke:
+            return (False, 'kotak berwarna hanya %d, diminta ke-%d' % (len(warna), ke))
+        nyata = peta.get(warna[ke - 1].lower(), warna[ke - 1])
+        return (kunci == nyata, 'warna kotak ke-%d = %s, kunci %s' % (ke, nyata, kunci))
+
+    if jenis == 'sudut-jam':
+        jarum = []
+        for m in re.finditer(r"<line x1='([\d.]+)' y1='([\d.]+)' x2='([\d.]+)' y2='([\d.]+)'[^>]*stroke-width='(\d+)'", svg):
+            x1, y1, x2, y2 = map(float, m.groups()[:4])
+            if abs(x1 - 265) < 2 and abs(y1 - 110) < 2:      # jarum mulai dari pusat jam
+                import math
+                jarum.append(math.degrees(math.atan2(y2 - y1, x2 - x1)) % 360)
+        if len(jarum) != 2:
+            return (False, 'jarum jam terdeteksi %d (harus 2)' % len(jarum))
+        selisih = abs(jarum[0] - jarum[1]) % 360
+        sudut = int(round(min(selisih, 360 - selisih)))
+        angka = ''.join(ch for ch in kunci if ch.isdigit())
+        return (angka == str(sudut), 'sudut dari gambar %d derajat, kunci %s' % (sudut, kunci))
+
+    return None
+
+
 def periksa(q):
     """Kembalikan (ok, keterangan) untuk satu soal bergambar."""
+    generik = _periksa_generik(q)
+    if generik is not None:
+        return generik
     svg = _svg(q)
     kunci = q['pilihan'][q['jawaban']]
     qid = q['id']

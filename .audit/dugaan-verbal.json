@@ -1,0 +1,282 @@
+[
+ {
+  "id": "vb1",
+  "dugaan": "Kereta",
+  "alasan": "Masinis mengemudikan kereta, sebagaimana kapten mengemudikan kapal.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb2",
+  "dugaan": "Laut",
+  "alasan": "Nelayan bekerja di laut sebagaimana petani bekerja di sawah (relasi pekerja:tempat kerja).",
+  "keyakinan": "tinggi",
+  "catatan": "AMBIGU RINGAN: 'Jaring' juga dapat dipertahankan (pola pekerja:alat kerja), tetapi pola pekerja:tempat kerja lebih utama pada pasangan pertama, sehingga 'Laut' paling tepat."
+ },
+ {
+  "id": "vb3",
+  "dugaan": "Memotong",
+  "alasan": "Pensil digunakan untuk menulis, pisau digunakan untuk memotong (alat:kegunaan).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb4",
+  "dugaan": "Suhu",
+  "alasan": "Jam mengukur waktu, termometer mengukur suhu (alat:objek yang diukur).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb5",
+  "dugaan": "Bangunan",
+  "alasan": "Akar menopang tumbuhan, pondasi menopang bangunan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb6",
+  "dugaan": "Piala",
+  "alasan": "Pahlawan mendapat medali, juara mendapat piala (penghargaan yang diterima).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb7",
+  "dugaan": "Payung",
+  "alasan": "Selimut dipakai saat dingin, payung dipakai saat hujan (benda penangkal keadaan).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb8",
+  "dugaan": "Atlet",
+  "alasan": "Guru membimbing murid, pelatih membimbing atlet.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb9",
+  "dugaan": "Mampu",
+  "alasan": "Sanggup bersinonim dengan mampu.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb10",
+  "dugaan": "Mutlak",
+  "alasan": "Absolut = mutlak (KBBI).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb11",
+  "dugaan": "Pemurah",
+  "alasan": "Dermawan = orang yang suka memberi/murah hati = pemurah.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb12",
+  "dugaan": "Takut",
+  "alasan": "Gentar berarti takut/khawatir (KBBI).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb13",
+  "dugaan": "Bersemangat",
+  "alasan": "Antusias = bersemangat, bergairah.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb14",
+  "dugaan": "Pasti",
+  "alasan": "Niscaya = pasti, tentu (KBBI).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb15",
+  "dugaan": "Hemat",
+  "alasan": "Boros (suka menghamburkan) berantonim dengan hemat (berhati-hati dalam membelanjakan).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb16",
+  "dugaan": "Abadi",
+  "alasan": "Sementara = tidak kekal; antonimnya abadi/kekal.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb17",
+  "dugaan": "Miskin",
+  "alasan": "Makmur = berkecukupan; antonimnya miskin.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb18",
+  "dugaan": "Renggang",
+  "alasan": "Tegang (kencang, tidak kendur) berantonim dengan renggang/longgar.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb19",
+  "dugaan": "Tersirat",
+  "alasan": "Tersurat (tertulis secara jelas) berantonim dengan tersirat (tersembunyi di balik yang tertulis).",
+  "keyakinan": "sedang",
+  "catatan": "AMBIGU RINGAN: 'Tertulis' bisa dianggap lawan 'tersurat' bila dimaknai sangat harfiah, tetapi pasangan antonim baku dalam KBBI/pemakaian bahasa adalah tersurat-tersirat."
+ },
+ {
+  "id": "vb20",
+  "dugaan": "Tunggal",
+  "alasan": "Majemuk (gabungan/berbilang) berantonim dengan tunggal.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb21",
+  "dugaan": "Cemara",
+  "alasan": "Melati, anggrek, dan mawar adalah bunga; cemara adalah pohon (bukan bunga).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb22",
+  "dugaan": "Rabu",
+  "alasan": "Januari, Maret, dan Juli adalah nama bulan; Rabu adalah nama hari.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb23",
+  "dugaan": "Cangkul",
+  "alasan": "Gergaji, palu, dan obeng adalah alat pertukangan/perkakas; cangkul adalah alat pertanian.",
+  "keyakinan": "sedang",
+  "catatan": "AMBIGU RINGAN: keempatnya sama-sama 'alat kerja', jadi pembedaan bergantung pada kategori (pertukangan vs pertanian); 'Cangkul' tetap paling menyimpang."
+ },
+ {
+  "id": "vb24",
+  "dugaan": "Bukit",
+  "alasan": "Sungai, danau, dan rawa adalah perairan; bukit adalah bentang daratan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb25",
+  "dugaan": "aktivitas",
+  "alasan": "KBBI: baku 'aktivitas' (bukan 'kwalitas' -> kualitas, 'sekertaris' -> sekretaris, 'pasport' -> paspor).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb26",
+  "dugaan": "khawatir",
+  "alasan": "Baku 'khawatir'; 'kuatir' tidak baku, 'frekwensi' -> frekuensi, 'silakkan' -> silakan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb27",
+  "dugaan": "telepon",
+  "alasan": "Baku 'telepon'; 'telpon' tidak baku, 'komplek' -> kompleks, 'subyek' -> subjek.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb28",
+  "dugaan": "karisma",
+  "alasan": "KBBI memasukkan 'karisma' sebagai bentuk baku (padanan 'kharisma' tidak dipakai sebagai bentuk baku); 'ijasah' -> ijazah, 'coklat' -> cokelat, 'himbau' -> imbau.",
+  "keyakinan": "sedang",
+  "catatan": "AMBIGU RINGAN: sebagian orang menganggap 'kharisma' bentuk sah, tetapi lema KBBI adalah 'karisma'; tiga opsi lain jelas tidak baku."
+ },
+ {
+  "id": "vb29",
+  "dugaan": "Para peserta diharapkan hadir tepat waktu.",
+  "alasan": "Paling ringkas dan tidak berlebihan; opsi lain memakai kata mubazir ('agar supaya', 'diharapkan-harapkan', 'setiap para').",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb30",
+  "dugaan": "Rapat itu membahas tentang masalah keamanan markas.",
+  "alasan": "'Membahas' sudah bermakna 'berbicara tentang', sehingga penambahan 'tentang' membuat pemakaian kata berlebihan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb31",
+  "dugaan": "Manfaat latihan fisik pagi beserta pengaturan jadwalnya.",
+  "alasan": "Kalimat utama membahas manfaat latihan fisik pagi, ditutup keterangan jadwal yang disusun berjenjang.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb32",
+  "dugaan": "Pada hari Sabtu jam layanan lebih singkat daripada hari kerja.",
+  "alasan": "Bacaan menyatakan hari kerja sampai 20.00, Sabtu hanya sampai 15.00, Minggu tutup, batas peminjaman tujuh hari.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb33",
+  "dugaan": "Pemantauan udara dilakukan setiap hari.",
+  "alasan": "Bacaan menyebut pemantauan udara dua minggu sekali, jadi pernyataan 'setiap hari' tidak sesuai.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb34",
+  "dugaan": "Kebiasaan membaca laporan membantu ketepatan keputusan sehingga perlu dipupuk.",
+  "alasan": "Simpulan mencakup sebab (membantu ketepatan keputusan) dan saran penutup (perlu dipupuk sejak pendidikan dasar).",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb35",
+  "dugaan": "sangat dibatasi dan diawasi",
+  "alasan": "'Ketat' dalam konteks pengaturan pemakaian air berarti diawasi/dibatasi secara ketat.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb36",
+  "dugaan": "Menjelaskan manfaat kegiatan olahraga sore di markas.",
+  "alasan": "Seluruh isi bacaan memaparkan dampak positif olahraga sore bagi kebugaran, kesehatan, dan keakraban.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb37",
+  "dugaan": "Orang yang selalu disalahkan",
+  "alasan": "Ungkapan 'kambing hitam' = orang yang dijadikan tumpuan kesalahan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb38",
+  "dugaan": "Suka mencuri",
+  "alasan": "Ungkapan 'panjang tangan' = suka mencuri/mengambil milik orang lain.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb39",
+  "dugaan": "Orang yang gemar membaca",
+  "alasan": "Ungkapan 'kutu buku' = orang yang sangat gemar membaca.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "vb40",
+  "dugaan": "Sombong",
+  "alasan": "Ungkapan 'besar kepala' = sombong, angkuh, tidak mau mendengar orang lain.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ }
+]

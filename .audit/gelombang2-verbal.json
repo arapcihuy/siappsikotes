@@ -1,0 +1,402 @@
+[
+ {
+  "id": "vb1",
+  "pertanyaan": "KAPTEN : KAPAL = MASINIS : ...",
+  "pilihan": [
+   "Stasiun",
+   "Kereta",
+   "Rel",
+   "Tiket"
+  ]
+ },
+ {
+  "id": "vb2",
+  "pertanyaan": "PETANI : SAWAH = NELAYAN : ...",
+  "pilihan": [
+   "Jaring",
+   "Ikan",
+   "Laut",
+   "Kapal"
+  ]
+ },
+ {
+  "id": "vb3",
+  "pertanyaan": "PENSIL : MENULIS = PISAU : ...",
+  "pilihan": [
+   "Menajamkan",
+   "Memotong",
+   "Dapur",
+   "Besi"
+  ]
+ },
+ {
+  "id": "vb4",
+  "pertanyaan": "JAM : WAKTU = TERMOMETER : ...",
+  "pilihan": [
+   "Panas",
+   "Air",
+   "Dokter",
+   "Suhu"
+  ]
+ },
+ {
+  "id": "vb5",
+  "pertanyaan": "AKAR : TUMBUHAN = PONDASI : ...",
+  "pilihan": [
+   "Semen",
+   "Tanah",
+   "Bangunan",
+   "Tukang"
+  ]
+ },
+ {
+  "id": "vb6",
+  "pertanyaan": "PAHLAWAN : MEDALI = JUARA : ...",
+  "pilihan": [
+   "Lomba",
+   "Wasit",
+   "Peserta",
+   "Piala"
+  ]
+ },
+ {
+  "id": "vb7",
+  "pertanyaan": "DINGIN : SELIMUT = HUJAN : ...",
+  "pilihan": [
+   "Payung",
+   "Air",
+   "Mendung",
+   "Banjir"
+  ]
+ },
+ {
+  "id": "vb8",
+  "pertanyaan": "TELINGA : SUARA = MATA : ...",
+  "pilihan": [
+   "Kacamata",
+   "Cahaya",
+   "Warna",
+   "Bulu mata"
+  ]
+ },
+ {
+  "id": "vb9",
+  "pertanyaan": "Kata berikut yang bersinonim dengan SANGGUP adalah ...",
+  "pilihan": [
+   "Ragu",
+   "Malas",
+   "Lambat",
+   "Mampu"
+  ]
+ },
+ {
+  "id": "vb10",
+  "pertanyaan": "Sinonim kata ABSOLUT adalah ...",
+  "pilihan": [
+   "Sebagian",
+   "Sementara",
+   "Mutlak",
+   "Bersyarat"
+  ]
+ },
+ {
+  "id": "vb11",
+  "pertanyaan": "Padanan kata DERMAWAN adalah ...",
+  "pilihan": [
+   "Kikir",
+   "Sombong",
+   "Pemalas",
+   "Pemurah"
+  ]
+ },
+ {
+  "id": "vb12",
+  "pertanyaan": "Sinonim kata GENTAR adalah ...",
+  "pilihan": [
+   "Berani",
+   "Takut",
+   "Marah",
+   "Sedih"
+  ]
+ },
+ {
+  "id": "vb13",
+  "pertanyaan": "Kata ANTUSIAS sepadan maknanya dengan ...",
+  "pilihan": [
+   "Bersemangat",
+   "Bingung",
+   "Tenang",
+   "Lesu"
+  ]
+ },
+ {
+  "id": "vb14",
+  "pertanyaan": "Sinonim kata NISCAYA adalah ...",
+  "pilihan": [
+   "Mustahil",
+   "Sukar",
+   "Ragu",
+   "Pasti"
+  ]
+ },
+ {
+  "id": "vb15",
+  "pertanyaan": "Antonim kata BOROS adalah ...",
+  "pilihan": [
+   "Kaya",
+   "Mahal",
+   "Hemat",
+   "Banyak"
+  ]
+ },
+ {
+  "id": "vb16",
+  "pertanyaan": "Antonim kata SEMENTARA adalah ...",
+  "pilihan": [
+   "Mendadak",
+   "Rutin",
+   "Abadi",
+   "Cepat"
+  ]
+ },
+ {
+  "id": "vb17",
+  "pertanyaan": "Antonim kata MAKMUR adalah ...",
+  "pilihan": [
+   "Miskin",
+   "Aman",
+   "Bahagia",
+   "Ramai"
+  ]
+ },
+ {
+  "id": "vb18",
+  "pertanyaan": "Antonim kata TEGANG adalah ...",
+  "pilihan": [
+   "Berat",
+   "Rapuh",
+   "Padat",
+   "Renggang"
+  ]
+ },
+ {
+  "id": "vb19",
+  "pertanyaan": "Antonim kata TERSURAT adalah ...",
+  "pilihan": [
+   "Tersirat",
+   "Tertulis",
+   "Terkenal",
+   "Tersusun"
+  ]
+ },
+ {
+  "id": "vb20",
+  "pertanyaan": "Antonim kata MAJEMUK adalah ...",
+  "pilihan": [
+   "Campuran",
+   "Tunggal",
+   "Rumit",
+   "Utama"
+  ]
+ },
+ {
+  "id": "vb21",
+  "pertanyaan": "Manakah kata yang TIDAK termasuk kelompok yang sama dengan tiga kata lainnya?",
+  "pilihan": [
+   "Melati",
+   "Cemara",
+   "Anggrek",
+   "Mawar"
+  ]
+ },
+ {
+  "id": "vb22",
+  "pertanyaan": "Empat kata berikut tersedia; satu di antaranya tidak sekelompok. Kata manakah itu?",
+  "pilihan": [
+   "Januari",
+   "Maret",
+   "Juli",
+   "Rabu"
+  ]
+ },
+ {
+  "id": "vb23",
+  "pertanyaan": "Manakah kata yang tidak sejenis dengan kata lainnya?",
+  "pilihan": [
+   "Gergaji",
+   "Palu",
+   "Cangkul",
+   "Obeng"
+  ]
+ },
+ {
+  "id": "vb24",
+  "pertanyaan": "Manakah kata yang menyimpang dari kelompok kata berikut?",
+  "pilihan": [
+   "Sungai",
+   "Danau",
+   "Rawa",
+   "Bukit"
+  ]
+ },
+ {
+  "id": "vb25",
+  "pertanyaan": "Manakah kata berikut yang penulisannya BAKU menurut KBBI?",
+  "pilihan": [
+   "kwalitas",
+   "aktivitas",
+   "sekertaris",
+   "pasport"
+  ]
+ },
+ {
+  "id": "vb26",
+  "pertanyaan": "Kata berikut yang penulisannya BAKU adalah ...",
+  "pilihan": [
+   "kuatir",
+   "frekwensi",
+   "khawatir",
+   "silakkan"
+  ]
+ },
+ {
+  "id": "vb27",
+  "pertanyaan": "Empat kata berikut, tiga di antaranya tidak baku. Kata manakah yang baku?",
+  "pilihan": [
+   "telpon",
+   "telepon",
+   "komplek",
+   "subyek"
+  ]
+ },
+ {
+  "id": "vb28",
+  "pertanyaan": "Di antara kata berikut, manakah yang penulisannya sesuai KBBI?",
+  "pilihan": [
+   "karisma",
+   "ijasah",
+   "coklat",
+   "himbau"
+  ]
+ },
+ {
+  "id": "vb29",
+  "pertanyaan": "Manakah kalimat berikut yang paling efektif?",
+  "pilihan": [
+   "Para peserta diharapkan agar supaya hadir tepat waktu.",
+   "Para peserta diharapkan hadir tepat waktu.",
+   "Para peserta diharapkan-harapkan untuk hadir tepat waktu.",
+   "Setiap para peserta diharapkan hadir agar tepat waktu."
+  ]
+ },
+ {
+  "id": "vb30",
+  "pertanyaan": "Manakah kalimat berikut yang pemakaian katanya berlebihan?",
+  "pilihan": [
+   "Rapat itu membahas tentang masalah keamanan markas.",
+   "Rapat itu membahas masalah keamanan markas.",
+   "Rapat itu dihadiri seluruh komandan satuan.",
+   "Keputusan rapat disampaikan kepada seluruh anggota."
+  ]
+ },
+ {
+  "id": "vb31",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Latihan fisik pada pagi hari bukan sekadar rutinitas bagi prajurit. Kegiatan itu melatih daya tahan tubuh, menumbuhkan kedisiplinan, sekaligus mengasah kerja sama antaranggotanya. Karena manfaatnya berlapis itu, jadwal latihan pun disusun berjenjang mengikuti kemampuan setiap satuan.\" Ide pokok bacaan tersebut adalah ...",
+  "pilihan": [
+   "Manfaat latihan fisik pagi beserta pengaturan jadwalnya.",
+   "Jadwal latihan setiap satuan selalu sama.",
+   "Cara mempercepat lari jarak jauh.",
+   "Kewajiban tidur lebih awal bagi prajurit."
+  ]
+ },
+ {
+  "id": "vb32",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Perpustakaan satuan melayani peminjaman pada hari kerja pukul 08.00 sampai 20.00. Pada hari Sabtu layanan dibuka lebih singkat, yaitu sampai pukul 15.00, sedangkan pada hari Minggu dan hari besar nasional perpustakaan tutup. Anggota yang meminjam buku wajib mengembalikannya dalam tujuh hari.\" Pernyataan yang SESUAI dengan bacaan tersebut adalah ...",
+  "pilihan": [
+   "Pada hari Minggu perpustakaan tetap melayani peminjaman.",
+   "Batas pengembalian buku yang dipinjam adalah tiga hari.",
+   "Perpustakaan hanya melayani peminjaman pada hari besar nasional.",
+   "Pada hari Sabtu jam layanan lebih singkat daripada hari kerja."
+  ]
+ },
+ {
+  "id": "vb33",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Sejak tiga bulan terakhir, pos jaga di tepi pantai menambah satu pos baru. Penambahan itu dilakukan setelah pemantauan menunjukkan jalur masuk di sisi utara belum terawasi. Selain itu, jumlah anggota yang berjaga pada malam hari ditambah dari empat menjadi enam orang. Pemantauan dari udara dilakukan dua minggu sekali.\" Pernyataan berikut yang TIDAK sesuai dengan bacaan adalah ...",
+  "pilihan": [
+   "Jumlah anggota jaga malam bertambah dua orang.",
+   "Pos baru bertambah di tepi pantai.",
+   "Pemantauan udara dilakukan setiap hari.",
+   "Pemantauan udara dilakukan setiap dua minggu."
+  ]
+ },
+ {
+  "id": "vb34",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Membaca laporan bukan pekerjaan yang bisa diwakilkan sembarangan. Perwira yang terbiasa membaca laporan mengambil keputusan lebih cepat karena ia sudah mengenali pola keadaan di lapangan. Sebaliknya, keputusan yang diambil tanpa membaca laporan sering keliru karena hanya bersandar pada kabar dari mulut ke mulut. Karena itu, kebiasaan membaca laporan perlu dipupuk sejak pendidikan dasar keprajuritan.\" Simpulan bacaan tersebut adalah ...",
+  "pilihan": [
+   "Laporan selalu lebih benar daripada kabar dari mulut ke mulut dalam segala hal.",
+   "Kebiasaan membaca laporan membantu ketepatan keputusan sehingga perlu dipupuk.",
+   "Keputusan yang cepat hanya dapat diambil oleh perwira senior.",
+   "Pendidikan dasar keprajuritan tidak perlu mengajarkan kebiasaan membaca."
+  ]
+ },
+ {
+  "id": "vb35",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Persediaan air di markas mulai menipis pada musim kemarau panjang. Untuk mengatasinya, satuan membuat penampungan air hujan dan mengatur pemakaian air secara ketat. Setiap kompi mendapat jatah harian yang sama sehingga tidak ada kompi yang memakai air secara berlebihan.\" Kata 'ketat' dalam bacaan tersebut bermakna ...",
+  "pilihan": [
+   "sangat longgar",
+   "berlebihan",
+   "tidak bermanfaat",
+   "sangat dibatasi dan diawasi"
+  ]
+ },
+ {
+  "id": "vb36",
+  "pertanyaan": "Bacaan berikut untuk menjawab soal ini. \"Setiap sore, lapangan markas selalu ramai oleh anggota yang berlatih bola voli, bulu tangkis, dan lari. Kegiatan itu ternyata bukan sekadar mengisi waktu luang. Komandan menilai kebugaran anggota meningkat, jumlah anggota yang sakit menurun, dan hubungan antarsatuan menjadi lebih akrab setelah pertandingan rutin digelar.\" Tujuan penulis menyampaikan bacaan tersebut adalah ...",
+  "pilihan": [
+   "Mengajak pembaca menonton pertandingan bola voli.",
+   "Menyebutkan jadwal pertandingan antarsatuan.",
+   "Menjelaskan manfaat kegiatan olahraga sore di markas.",
+   "Menyatakan bahwa waktu luang harus diisi dengan bekerja."
+  ]
+ },
+ {
+  "id": "vb37",
+  "pertanyaan": "Makna ungkapan KAMBING HITAM adalah ...",
+  "pilihan": [
+   "Orang yang selalu disalahkan",
+   "Orang yang sangat pemberani",
+   "Orang yang pendiam",
+   "Orang yang suka menolong"
+  ]
+ },
+ {
+  "id": "vb38",
+  "pertanyaan": "Makna ungkapan PANJANG TANGAN adalah ...",
+  "pilihan": [
+   "Suka memberi",
+   "Suka mencuri",
+   "Sangat pemberani",
+   "Mudah tersinggung"
+  ]
+ },
+ {
+  "id": "vb39",
+  "pertanyaan": "Makna ungkapan KUTU BUKU adalah ...",
+  "pilihan": [
+   "Orang yang malas belajar",
+   "Orang yang suka melawak",
+   "Orang yang gemar membaca",
+   "Orang yang penakut"
+  ]
+ },
+ {
+  "id": "vb40",
+  "pertanyaan": "Makna ungkapan BESAR KEPALA adalah ...",
+  "pilihan": [
+   "Sombong",
+   "Pemurah",
+   "Pandai",
+   "Penakut"
+  ]
+ }
+]

@@ -1,0 +1,156 @@
+[
+ {
+  "id": "kpb1",
+  "dugaan": "Mengakui kekeliruan itu, segera memperbaiki berkasnya, dan menyampaikan permintaan maaf serta penjelasan langkah perbaikan",
+  "alasan": "Kesalahan yang menyangkut berkas pengguna harus diakui terbuka dan segera diperbaiki, bukan ditutupi atau dialihkan ke pihak lain.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb2",
+  "dugaan": "Mengakui dengan tenang bahwa Anda perlu memeriksa datanya lebih dulu, mencatat pertanyaan itu, dan berjanji memberi jawaban pada waktu yang disepakati",
+  "alasan": "Mengakui keterbatasan pengetahuan lebih terpercaya daripada mereka-reka jawaban, dan memberi tenggat jelas menjaga akuntabilitas.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb3",
+  "dugaan": "Menanyakan langsung kepada rekan itu dengan tenang untuk memastikan duduk perkaranya sebelum menarik kesimpulan",
+  "alasan": "Klarifikasi langsung dan pribadi mencegah salah paham, sekaligus menegakkan prinsip tidak menuduh tanpa bukti.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb4",
+  "dugaan": "Mengulang kembali pemahaman Anda tentang arahan itu dan meminta konfirmasi sebelum mulai bekerja",
+  "alasan": "Konfirmasi ulang memastikan pekerjaan tidak salah arah, dan lebih hemat waktu daripada memperbaiki hasil setelah salah tafsir.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb5",
+  "dugaan": "Mencatat temuan itu pada berita acara dan melaporkannya agar selisihnya ditelusuri",
+  "alasan": "Setiap selisih kas wajib tercatat dan ditelusuri agar tidak menjadi celah penyalahgunaan di kemudian hari.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb6",
+  "dugaan": "Menghentikan penggunaan alat itu dan melaporkan kondisi perlengkapan agar diganti sebelum pekerjaan dimulai",
+  "alasan": "Keselamatan adalah prioritas tertinggi dan tidak boleh dinegosiasikan dengan alasan target pekerjaan hari itu.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb7",
+  "dugaan": "Menjelaskan prosedur dan urutan antrean dengan sopan, serta menolak mempercepat di luar ketentuan",
+  "alasan": "Layanan harus setara bagi semua orang; memberi keistimewaan karena kedekatan melanggar asas keadilan dan aturan antrean.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb8",
+  "dugaan": "Memastikan apakah gangguan bersifat luas, memberi tahu pihak yang menunggu hasil pekerjaan, dan menjalankan langkah alternatif yang diizinkan",
+  "alasan": "Komunikasi kepada pihak yang menunggu plus langkah alternatif resmi menjaga pekerjaan tetap berjalan tanpa melanggar aturan.",
+  "keyakinan": "tinggi",
+  "catatan": "Opsi 1 dan opsi 2 hampir sama isinya (menunggu tanpa memberi tahu) sehingga keduanya berfungsi sebagai satu distraktor yang sama; ini cacat pengecoh, bukan ambiguitas kunci."
+ },
+ {
+  "id": "kpb9",
+  "dugaan": "Menolak hadiah itu dengan sopan dan melaporkan tawaran tersebut sesuai aturan yang berlaku",
+  "alasan": "Gratifikasi dari pihak yang sedang mengikuti proses pengadaan adalah konflik kepentingan dan wajib dilaporkan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb10",
+  "dugaan": "Mengerjakan bagian itu sebaik mungkin karena keberhasilan pekerjaan bergantung pada seluruh bagiannya",
+  "alasan": "Orientasi pada keberhasilan tugas mengalahkan kebutuhan pribadi untuk terlihat menonjol di mata pimpinan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb11",
+  "dugaan": "Membicarakannya secara pribadi dengan tenang, dengan fokus pada cara kerja sama yang lebih baik",
+  "alasan": "Menegur secara pribadi dan berorientasi solusi menyelesaikan akar masalah tanpa mempermalukan atau memperkeruh suasana tim.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb12",
+  "dugaan": "Memberi tanda peringatan di area itu dan melaporkannya agar diperbaiki sebelum ada yang terluka",
+  "alasan": "Bahaya nyata di area umum harus diisolasi/ditandai segera dan dilaporkan, bukan hanya diingatkan secara lisan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb13",
+  "dugaan": "Menolak permintaan itu dengan sopan dan menyarankannya menyampaikan alasannya secara terbuka kepada pimpinan",
+  "alasan": "Menandatangani daftar hadir orang lain adalah pemalsuan kehadiran; penolakan tetap disampaikan dengan cara yang menjaga hubungan kerja.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb14",
+  "dugaan": "Menolak memberikan data itu dan menjelaskan bahwa permintaannya harus diajukan melalui prosedur resmi",
+  "alasan": "Data pribadi pihak lain hanya boleh dibuka sesuai prosedur dan dasar kewenangan yang sah, bukan karena hubungan keluarga.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb15",
+  "dugaan": "Menyiapkan data itu sekalian dan memberi catatan singkat bahwa datanya tersedia bila diperlukan",
+  "alasan": "Prakarsa menyiapkan data yang jelas akan dibutuhkan memperlancar rapat, dan catatan singkat menjaga agar tidak dianggap keluar dari permintaan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb16",
+  "dugaan": "Mendengarkan sampai selesai dan menanggapinya dengan tenang, lalu menjelaskan fakta yang sebenarnya tanpa berdebat di depan umum",
+  "alasan": "Mendengar penuh lalu mengklarifikasi fakta secara tenang melindungi pengguna layanan dari rasa dipermalukan dan menjaga kredibilitas pelayanan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb17",
+  "dugaan": "Membantunya dengan pertanyaan pemandu yang sederhana dan sabar sampai kebutuhannya dapat dipahami",
+  "alasan": "Tugas pelayanan adalah memudahkan pengguna yang gugup, bukan memindahkan bebannya kembali kepadanya atau menebak-nebak.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb18",
+  "dugaan": "Mengusulkan agar hasil rapat dicatat lengkap dengan penanggung jawab dan tenggat waktunya",
+  "alasan": "Kesepakatan tanpa penanggung jawab dan tenggat tidak dapat dieksekusi maupun dipertanggungjawabkan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb19",
+  "dugaan": "Mendengarkan keluhannya dengan serius dan menyampaikannya kepada rekan tersebut secara pribadi untuk ditindaklanjuti",
+  "alasan": "Keluhan pengguna layanan tetap dihargai, namun disampaikan lewat jalur yang tepat yaitu langsung ke rekan bersangkutan secara pribadi.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb20",
+  "dugaan": "Menolak menandatanganinya dan menjelaskan bahwa tanda tangan hanya untuk hal yang benar-benar Anda saksikan",
+  "alasan": "Berita acara adalah pernyataan kesaksian; membubuhkan tanda tangan atas peristiwa yang tidak disaksikan tetap merupakan keterangan yang tidak benar.",
+  "keyakinan": "sedang",
+  "catatan": "Opsi 'menandatangani sambil mencatat bahwa Anda tidak hadir' juga bisa dianggap dapat diterima karena tidak menutupi ketidakhadiran, sehingga dua opsi berpotensi sama-sama dianggap tepat bergantung bobot yang diberikan pada kelancaran administrasi vs. keutuhan kesaksian; opsi yang dipilih tetap yang menolak."
+ },
+ {
+  "id": "kpb21",
+  "dugaan": "Mencatat setiap perubahan prioritas, mengonfirmasi mana yang terbaru, dan menyesuaikan rencana kerja Anda",
+  "alasan": "Konfirmasi prioritas terbaru mencegah pekerjaan salah urutan, sementara pencatatan menjaga jejak arahan dan komunikasi dengan atasan.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ },
+ {
+  "id": "kpb22",
+  "dugaan": "Mengidentifikasi pekerjaan yang paling berdampak, menyusun pembagian tugas yang realistis, dan menyampaikan perhitungan itu kepada atasan",
+  "alasan": "Merespons target berat dengan perhitungan dan usulan kerja yang terukur lebih profesional daripada menerima pasrah, menolak mentah-mentah, atau menambah jam kerja tanpa arah.",
+  "keyakinan": "tinggi",
+  "catatan": ""
+ }
+]

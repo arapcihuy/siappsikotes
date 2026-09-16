@@ -1,0 +1,1170 @@
+[
+ {
+  "id": "tgb1",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "5",
+   "6",
+   "4",
+   "7"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 5\nTiap kotak = jumlah dua kotak sebelumnya, jadi isi kotak ke-4 adalah 5 titik. Hitungannya: 1 -> 2 -> 3 -> 5.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nMjcwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nNDAwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtZGFzaGFycmF5PSc2IDQnLz48dGV4dCB4PSc0NjAnIHk9Jzg1JyBmb250LXNpemU9JzQwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjMTExMTExJz4/PC90ZXh0Pjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "fibonacci",
+   "kotak": 3,
+   "harap": 5
+  }
+ },
+ {
+  "id": "tgb2",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "9",
+   "7",
+   "10",
+   "8"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 8\nTiap kotak = jumlah dua kotak sebelumnya, jadi isi kotak ke-4 adalah 8 titik. Hitungannya: 2 -> 3 -> 5 -> 8.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzI3MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScyODUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nNDAwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtZGFzaGFycmF5PSc2IDQnLz48dGV4dCB4PSc0NjAnIHk9Jzg1JyBmb250LXNpemU9JzQwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjMTExMTExJz4/PC90ZXh0Pjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "fibonacci",
+   "kotak": 3,
+   "harap": 8
+  }
+ },
+ {
+  "id": "tgb3",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "15",
+   "18",
+   "16",
+   "17"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 16\nIsi kotak adalah bilangan kuadrat (1, 4, 9), jadi isi kotak ke-4 adalah 16 titik. Hitungannya: 1 -> 4 -> 9 -> 16.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48cmVjdCB4PScyNzAnIHk9JzIwJyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzExMCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScyODUnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzExJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMzNycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczNjMnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzYzJyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzkyJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48cmVjdCB4PSc0MDAnIHk9JzIwJyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzExMCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1kYXNoYXJyYXk9JzYgNCcvPjx0ZXh0IHg9JzQ2MCcgeT0nODUnIGZvbnQtc2l6ZT0nNDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyMxMTExMTEnPj88L3RleHQ+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "kuadrat",
+   "kotak": 3,
+   "harap": 16
+  }
+ },
+ {
+  "id": "tgb4",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "12",
+   "10",
+   "11",
+   "9"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 10\nBilangan triangular (1, 3, 6 = 1, 1+2, 1+2+3), jadi isi kotak ke-4 adalah 10 titik. Hitungannya: 1 -> 3 -> 6 -> 10.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzI3MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScyODUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzExJyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzQwMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWRhc2hhcnJheT0nNiA0Jy8+PHRleHQgeD0nNDYwJyB5PSc4NScgZm9udC1zaXplPSc0MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nIzExMTExMSc+PzwvdGV4dD48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "triangular",
+   "kotak": 3,
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb5",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "13",
+   "14",
+   "12",
+   "15"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 13\nTiap kotak = jumlah dua kotak sebelumnya, jadi isi kotak ke-4 adalah 13 titik. Hitungannya: 3 -> 5 -> 8 -> 13.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9Jzc3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxNTUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nMjcwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzYzJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48cmVjdCB4PSc0MDAnIHk9JzIwJyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzExMCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1kYXNoYXJyYXk9JzYgNCcvPjx0ZXh0IHg9JzQ2MCcgeT0nODUnIGZvbnQtc2l6ZT0nNDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyMxMTExMTEnPj88L3RleHQ+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "fibonacci",
+   "kotak": 3,
+   "harap": 13
+  }
+ },
+ {
+  "id": "tgb6",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "12",
+   "10",
+   "13",
+   "11"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 11\nDeret bertambah 3 tiap kotak, jadi isi kotak ke-4 adalah 11 titik. Hitungannya: 2 -> 5 -> 8 -> 11.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxNTUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nMjcwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzYzJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48cmVjdCB4PSc0MDAnIHk9JzIwJyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzExMCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1kYXNoYXJyYXk9JzYgNCcvPjx0ZXh0IHg9JzQ2MCcgeT0nODUnIGZvbnQtc2l6ZT0nNDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyMxMTExMTEnPj88L3RleHQ+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah3",
+   "kotak": 3,
+   "harap": 11
+  }
+ },
+ {
+  "id": "tgb7",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "6",
+   "9",
+   "7",
+   "8"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 7\nDeret bertambah 2 tiap kotak, jadi isi kotak ke-4 adalah 7 titik. Hitungannya: 1 -> 3 -> 5 -> 7.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzI3MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScyODUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nNDAwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtZGFzaGFycmF5PSc2IDQnLz48dGV4dCB4PSc0NjAnIHk9Jzg1JyBmb250LXNpemU9JzQwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjMTExMTExJz4/PC90ZXh0Pjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah",
+   "kotak": 3,
+   "harap": 7
+  }
+ },
+ {
+  "id": "tgb8",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "8",
+   "6",
+   "7",
+   "5"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 6\nDeret bertambah 1 tiap kotak, jadi isi kotak ke-4 adalah 6 titik. Hitungannya: 3 -> 4 -> 5 -> 6.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9Jzc3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48cmVjdCB4PScyNzAnIHk9JzIwJyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzExMCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScyODUnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzExJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMzNycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczNjMnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzQwMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWRhc2hhcnJheT0nNiA0Jy8+PHRleHQgeD0nNDYwJyB5PSc4NScgZm9udC1zaXplPSc0MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nIzExMTExMSc+PzwvdGV4dD48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah",
+   "kotak": 3,
+   "harap": 6
+  }
+ },
+ {
+  "id": "tgb9",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "12",
+   "13",
+   "11",
+   "14"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 12\nDeret bertambah 3 tiap kotak, jadi isi kotak ke-4 adalah 12 titik. Hitungannya: 3 -> 6 -> 9 -> 12.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9Jzc3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxNTUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMTgxJyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzI3MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzM2MycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScyODUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzExJyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMzNycgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczNjMnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nOTInIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzQwMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWRhc2hhcnJheT0nNiA0Jy8+PHRleHQgeD0nNDYwJyB5PSc4NScgZm9udC1zaXplPSc0MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nIzExMTExMSc+PzwvdGV4dD48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah3",
+   "kotak": 3,
+   "harap": 12
+  }
+ },
+ {
+  "id": "tgb10",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "5",
+   "3",
+   "6",
+   "4"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 4\nDeret bertambah 1 tiap kotak, jadi isi kotak ke-4 adalah 4 titik. Hitungannya: 1 -> 2 -> 3 -> 4.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nMjcwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nNDAwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtZGFzaGFycmF5PSc2IDQnLz48dGV4dCB4PSc0NjAnIHk9Jzg1JyBmb250LXNpemU9JzQwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjMTExMTExJz4/PC90ZXh0Pjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah",
+   "kotak": 3,
+   "harap": 4
+  }
+ },
+ {
+  "id": "tgb11",
+  "pertanyaan": "Perhatikan deret kotak bergambar. Berapa titik yang seharusnya ada di kotak bertanda tanya?",
+  "pilihan": [
+   "8",
+   "11",
+   "9",
+   "10"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 9\nDeret bertambah 2 tiap kotak, jadi isi kotak ke-4 adalah 9 titik. Hitungannya: 3 -> 5 -> 7 -> 9.\nINGAT: hitung isi tiap kotak dulu, lalu tentukan selisih antar kotak.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTUwJyB2aWV3Qm94PScwIDAgNTMwIDE1MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNTAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzUxJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9Jzc3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzE0MCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE1NScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxODEnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMjA3JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzIzMycgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PScxNTUnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PHJlY3QgeD0nMjcwJyB5PScyMCcgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjg1JyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzMxMScgY3k9JzQwJyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMzcnIGN5PSc0MCcgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzYzJyBjeT0nNDAnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxjaXJjbGUgY3g9JzI4NScgY3k9JzY2JyByPSc0LjAnIGZpbGw9JyMxMTExMTEnLz48Y2lyY2xlIGN4PSczMTEnIGN5PSc2Nicgcj0nNC4wJyBmaWxsPScjMTExMTExJy8+PGNpcmNsZSBjeD0nMzM3JyBjeT0nNjYnIHI9JzQuMCcgZmlsbD0nIzExMTExMScvPjxyZWN0IHg9JzQwMCcgeT0nMjAnIHdpZHRoPScxMjAnIGhlaWdodD0nMTEwJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWRhc2hhcnJheT0nNiA0Jy8+PHRleHQgeD0nNDYwJyB5PSc4NScgZm9udC1zaXplPSc0MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nIzExMTExMSc+PzwvdGV4dD48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "titik-deret",
+   "pola": "tambah",
+   "kotak": 3,
+   "harap": 9
+  }
+ },
+ {
+  "id": "tgb12",
+  "pertanyaan": "Berapa jumlah segitiga berwarna merah pada gambar?",
+  "pilihan": [
+   "28",
+   "20",
+   "21",
+   "19"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 20\nHitung satu per satu bentuk segitiga berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2Ni4wLDExNS4wIDI3Ny4zLDEzNC41IDI1NC43LDEzNC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNDI5LjAsNTUuMCA0NDAuMyw3NC41IDQxNy43LDc0LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScxMjguMCwxMTkuMCAxMzkuMywxMzguNSAxMTYuNywxMzguNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ2MS4wLDEyMi4wIDQ3Mi4zLDE0MS41IDQ0OS43LDE0MS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzIuMCwxMzguMCA0My4zLDE1Ny41IDIwLjcsMTU3LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNTYuMCw4NC4wIDM2Ny4zLDEwMy41IDM0NC43LDEwMy41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTkyLjAsMTExLjAgMjAzLjMsMTMwLjUgMTgwLjcsMTMwLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc0Mi4wLDM0LjAgNTMuMyw1My41IDMwLjcsNTMuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzExMy4wLDMyLjAgMTI0LjMsNTEuNSAxMDEuNyw1MS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNDEzLjAsMTYxLjAgNDI0LjMsMTgwLjUgNDAxLjcsMTgwLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyMjUuMCw0Ny4wIDIzNi4zLDY2LjUgMjEzLjcsNjYuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzM1Ni4wLDE0Mi4wIDM2Ny4zLDE2MS41IDM0NC43LDE2MS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzg3LjAsMjIuMCAzOTguMyw0MS41IDM3NS43LDQxLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc0OTEuMCw1Ny4wIDUwMi4zLDc2LjUgNDc5LjcsNzYuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzEyMC4wLDc1LjAgMTMxLjMsOTQuNSAxMDguNyw5NC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzA3LjAsMTY5LjAgMzE4LjMsMTg4LjUgMjk1LjcsMTg4LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScxNTQuMCw0Mi4wIDE2NS4zLDYxLjUgMTQyLjcsNjEuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzUwMC4wLDE2OS4wIDUxMS4zLDE4OC41IDQ4OC43LDE4OC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nODcuMCw5OC4wIDk4LjMsMTE3LjUgNzUuNywxMTcuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzI4MC4wLDIwLjAgMjkxLjMsMzkuNSAyNjguNywzOS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxyZWN0IHg9JzIwNScgeT0nMTcxJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PSczNDUnIGN5PSc0NCcgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PSc4MCcgY3k9JzE2OScgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48cmVjdCB4PSczMDEnIHk9JzkyJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PScyODInIGN5PSc3NCcgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48cmVjdCB4PScxNzYnIHk9JzE5JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PScyMjgnIGN5PScxMDEnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PHJlY3QgeD0nMjUnIHk9JzgyJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#c0392b",
+   "harap": 20
+  }
+ },
+ {
+  "id": "tgb13",
+  "pertanyaan": "Berapa jumlah kotak berwarna merah pada gambar?",
+  "pilihan": [
+   "21",
+   "22",
+   "20",
+   "24"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 21\nHitung satu per satu bentuk kotak berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PSczMycgeT0nMjEnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzM2NycgeT0nMTE3JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScyMTMnIHk9JzE0Mycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nMjAxJyB5PScyOCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nNDIwJyB5PSc3OCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nNDM3JyB5PScxNjMnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzEzMicgeT0nNTUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzMwNycgeT0nMTU1JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc0NjUnIHk9Jzg3JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc0NzknIHk9JzEzMicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nMzExJyB5PSc3OCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nMjAzJyB5PScxMDEnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzE1NycgeT0nMjAnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzM3NScgeT0nMTU5JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc0NjYnIHk9JzQwJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc5MScgeT0nMTI1JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc0MDEnIHk9JzMzJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScyNDQnIHk9JzgzJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScyNTUnIHk9JzM0JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScyMCcgeT0nMTEyJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScxNTUnIHk9JzE2Nycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHBvbHlnb24gcG9pbnRzPSczMTQuMCwzNC4wIDMyNS4zLDUzLjUgMzAyLjcsNTMuNScgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScxMzUnIGN5PScxMDgnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PHBvbHlnb24gcG9pbnRzPSc4OS4wLDY1LjAgMTAwLjMsODQuNSA3Ny43LDg0LjUnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "kotak",
+   "warna": "#c0392b",
+   "harap": 21
+  }
+ },
+ {
+  "id": "tgb14",
+  "pertanyaan": "Berapa jumlah kotak berwarna hijau pada gambar?",
+  "pilihan": [
+   "14",
+   "12",
+   "17",
+   "13"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 13\nHitung satu per satu bentuk kotak berwarna hijau pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxMzMnIHk9JzEwNCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nMzQ4JyB5PScxNzknIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzFmOTI1NCcvPjxyZWN0IHg9JzQzNicgeT0nMTc1JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PSczOTInIHk9JzE2NCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nMjc4JyB5PScxMzcnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzFmOTI1NCcvPjxyZWN0IHg9JzQ0NScgeT0nNjEnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzFmOTI1NCcvPjxyZWN0IHg9JzEwNCcgeT0nMTY4JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PScxOTgnIHk9JzE2OCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nNDEnIHk9JzU4JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PScyNDMnIHk9JzEwMicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nNDcxJyB5PSczMCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nMzEwJyB5PSc0Nicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nMzkzJyB5PSc3MScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHBvbHlnb24gcG9pbnRzPScyOTIuMCw3Mi4wIDMwMy4zLDkxLjUgMjgwLjcsOTEuNScgZmlsbD0nI2Q0YTAxNycgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzkwLjAsMjEuMCAxMDEuMyw0MC41IDc4LjcsNDAuNScgZmlsbD0nI2Q0YTAxNycgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScyODInIGN5PSc0Nicgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48cG9seWdvbiBwb2ludHM9JzI3NS4wLDE3Ny4wIDI4Ni4zLDE5Ni41IDI2My43LDE5Ni41JyBmaWxsPScjZDRhMDE3JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "kotak",
+   "warna": "#1f9254",
+   "harap": 13
+  }
+ },
+ {
+  "id": "tgb15",
+  "pertanyaan": "Berapa jumlah segitiga berwarna biru pada gambar?",
+  "pilihan": [
+   "9",
+   "15",
+   "10",
+   "11"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 10\nHitung satu per satu bentuk segitiga berwarna biru pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzMyNC4wLDExNy4wIDMzNS4zLDEzNi41IDMxMi43LDEzNi41JyBmaWxsPScjMmI2Y2IwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzM0LjAsMTkuMCAzNDUuMywzOC41IDMyMi43LDM4LjUnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNy4wLDM3LjAgNDguMyw1Ni41IDI1LjcsNTYuNScgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzM5Mi4wLDE0MC4wIDQwMy4zLDE1OS41IDM4MC43LDE1OS41JyBmaWxsPScjMmI2Y2IwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjA5LjAsMTU1LjAgMjIwLjMsMTc0LjUgMTk3LjcsMTc0LjUnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyNzYuMCwxNDUuMCAyODcuMywxNjQuNSAyNjQuNywxNjQuNScgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzEwNy4wLDc1LjAgMTE4LjMsOTQuNSA5NS43LDk0LjUnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyMTguMCw0OC4wIDIyOS4zLDY3LjUgMjA2LjcsNjcuNScgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzM3Ni4wLDMxLjAgMzg3LjMsNTAuNSAzNjQuNyw1MC41JyBmaWxsPScjMmI2Y2IwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjA1LjAsOTIuMCAyMTYuMywxMTEuNSAxOTMuNywxMTEuNScgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cmVjdCB4PScxMjUnIHk9JzQwJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0NzYnIGN5PSc4Nycgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PScyNzMnIGN5PSc0OScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PSc0MjcnIHk9JzkyJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PSc5NCcgeT0nMTMwJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#2b6cb0",
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb16",
+  "pertanyaan": "Berapa jumlah lingkaran berwarna merah pada gambar?",
+  "pilihan": [
+   "12",
+   "7",
+   "8",
+   "6"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 7\nHitung satu per satu bentuk lingkaran berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScxMzQnIGN5PScxNTAnIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjI5JyBjeT0nMTE3JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMwMCcgY3k9JzE3Micgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSc0NTAnIGN5PScxODcnIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nNDAzJyBjeT0nMTMwJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzQ5JyBjeT0nMTM0JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzExMicgY3k9Jzg1JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxwb2x5Z29uIHBvaW50cz0nNDYwLjAsOTAuMCA0NzEuMywxMDkuNSA0NDguNywxMDkuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQwMy4wLDc0LjAgNDE0LjMsOTMuNSAzOTEuNyw5My41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzIxLjAsODYuMCAzMzIuMywxMDUuNSAzMDkuNywxMDUuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cmVjdCB4PSc0ODgnIHk9JzE3MScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PHJlY3QgeD0nMjQ5JyB5PScxNjYnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzFmOTI1NCcvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "lingkaran",
+   "warna": "#c0392b",
+   "harap": 7
+  }
+ },
+ {
+  "id": "tgb17",
+  "pertanyaan": "Berapa jumlah lingkaran berwarna hijau pada gambar?",
+  "pilihan": [
+   "13",
+   "14",
+   "12",
+   "20"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 13\nHitung satu per satu bentuk lingkaran berwarna hijau pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScxODAnIGN5PSczNCcgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PScyNjknIGN5PSc2NScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc4NCcgY3k9JzEzOCcgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0NDMnIGN5PSc0Micgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSczNzQnIGN5PScxNDAnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nMTU3JyBjeT0nNjcnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nMTUzJyBjeT0nMTQ0JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzE5NScgY3k9JzE4NScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSczMDknIGN5PSczOCcgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PScxMTInIGN5PScxMDAnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nMzIyJyBjeT0nMTg5JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzQ3NicgY3k9JzE2OScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PScyMDUnIGN5PScxMjUnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PHBvbHlnb24gcG9pbnRzPScyNzguMCw5OC4wIDI4OS4zLDExNy41IDI2Ni43LDExNy41JyBmaWxsPScjZDRhMDE3JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxyZWN0IHg9JzI1MCcgeT0nMTQxJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48cG9seWdvbiBwb2ludHM9JzM0NS4wLDc1LjAgMzU2LjMsOTQuNSAzMzMuNyw5NC41JyBmaWxsPScjZDRhMDE3JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxyZWN0IHg9JzQ3NScgeT0nMTAwJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48cG9seWdvbiBwb2ludHM9JzY2LjAsODUuMCA3Ny4zLDEwNC41IDU0LjcsMTA0LjUnIGZpbGw9JyNkNGEwMTcnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScxMTMuMCwxNzEuMCAxMjQuMywxOTAuNSAxMDEuNywxOTAuNScgZmlsbD0nI2Q0YTAxNycgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzY2LjAsMjUuMCA3Ny4zLDQ0LjUgNTQuNyw0NC41JyBmaWxsPScjZDRhMDE3JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "lingkaran",
+   "warna": "#1f9254",
+   "harap": 13
+  }
+ },
+ {
+  "id": "tgb18",
+  "pertanyaan": "Berapa jumlah segitiga berwarna merah pada gambar?",
+  "pilihan": [
+   "17",
+   "15",
+   "22",
+   "16"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 16\nHitung satu per satu bentuk segitiga berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzExOC4wLDg0LjAgMTI5LjMsMTAzLjUgMTA2LjcsMTAzLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyOTMuMCwzOC4wIDMwNC4zLDU3LjUgMjgxLjcsNTcuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzU1LjAsMTUzLjAgNjYuMywxNzIuNSA0My43LDE3Mi41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjQ3LjAsNTIuMCAyNTguMyw3MS41IDIzNS43LDcxLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczMTIuMCwxMzMuMCAzMjMuMywxNTIuNSAzMDAuNywxNTIuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ0NS4wLDEyMi4wIDQ1Ni4zLDE0MS41IDQzMy43LDE0MS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nODguMCw0My4wIDk5LjMsNjIuNSA3Ni43LDYyLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczODYuMCw1Mi4wIDM5Ny4zLDcxLjUgMzc0LjcsNzEuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ4Ny4wLDE2Ni4wIDQ5OC4zLDE4NS41IDQ3NS43LDE4NS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNDM3LjAsNTcuMCA0NDguMyw3Ni41IDQyNS43LDc2LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNzEuMCwxMjguMCAzODIuMywxNDcuNSAzNTkuNywxNDcuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzE3My4wLDc1LjAgMTg0LjMsOTQuNSAxNjEuNyw5NC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNDk1LjAsODEuMCA1MDYuMywxMDAuNSA0ODMuNywxMDAuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzIwMC4wLDQ1LjAgMjExLjMsNjQuNSAxODguNyw2NC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzUxLjAsMjIuMCAzNjIuMyw0MS41IDMzOS43LDQxLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScxNjEuMCwxMzEuMCAxNzIuMywxNTAuNSAxNDkuNywxNTAuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScyODUnIGN5PSc5NCcgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PSc0MTYnIGN5PScxOTAnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PGNpcmNsZSBjeD0nMjcwJyBjeT0nMTM1JyByPScxMScgZmlsbD0nI2Q0YTAxNycvPjxyZWN0IHg9JzEwOCcgeT0nMTI4JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PScyMjgnIGN5PScxNTYnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PGNpcmNsZSBjeD0nMzMnIGN5PSc5NScgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#c0392b",
+   "harap": 16
+  }
+ },
+ {
+  "id": "tgb19",
+  "pertanyaan": "Berapa jumlah kotak berwarna biru pada gambar?",
+  "pilihan": [
+   "17",
+   "22",
+   "18",
+   "19"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 18\nHitung satu per satu bentuk kotak berwarna biru pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScxNDknIHk9JzcwJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PScxMzEnIHk9JzEwNicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nNzQnIHk9JzE1Mycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMjEzJyB5PScxNzInIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzI3NScgeT0nMTczJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PSczNScgeT0nMTYzJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PScyMTQnIHk9JzEyNycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMzA4JyB5PSc0MScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMjMyJyB5PSc0OScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMzU1JyB5PScxNTMnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzMwMCcgeT0nOTUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzEwNScgeT0nNzUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzM5NycgeT0nNTUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzMwJyB5PScxMTQnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzEyNicgeT0nMTczJyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PSc0MDInIHk9JzE2Nycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nNDMxJyB5PScyNycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMzY1JyB5PScxMTMnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxjaXJjbGUgY3g9JzQ4NCcgY3k9JzM3JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzQ3JyBjeT0nNjQnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PHBvbHlnb24gcG9pbnRzPScyMDMuMCwyNy4wIDIxNC4zLDQ2LjUgMTkxLjcsNDYuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ2NS4wLDE0Ny4wIDQ3Ni4zLDE2Ni41IDQ1My43LDE2Ni41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "kotak",
+   "warna": "#2b6cb0",
+   "harap": 18
+  }
+ },
+ {
+  "id": "tgb20",
+  "pertanyaan": "Berapa jumlah lingkaran berwarna hijau pada gambar?",
+  "pilihan": [
+   "20",
+   "14",
+   "15",
+   "13"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 14\nHitung satu per satu bentuk lingkaran berwarna hijau pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNDYnIGN5PScxNzInIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nNDA5JyBjeT0nMTE0JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzE1MScgY3k9JzEyNCcgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0OTknIGN5PSc3OScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSczMCcgY3k9Jzc3JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzI1NicgY3k9Jzk5JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzE0MCcgY3k9JzM4JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzI4MycgY3k9JzQ3JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzE4OCcgY3k9JzE1Nicgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0MjAnIGN5PSczNScgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0NzInIGN5PSc0Nicgcj0nMTEnIGZpbGw9JyMxZjkyNTQnLz48Y2lyY2xlIGN4PSc0NTcnIGN5PScxMTQnIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nNDMnIGN5PScxMzknIHI9JzExJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nMzI3JyBjeT0nMTEwJyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxyZWN0IHg9JzcyJyB5PScxMDknIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzgyJyB5PSc0OScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHBvbHlnb24gcG9pbnRzPSc0NDUuMCwxNTUuMCA0NTYuMywxNzQuNSA0MzMuNywxNzQuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzMwMy4wLDE3Ny4wIDMxNC4zLDE5Ni41IDI5MS43LDE5Ni41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxyZWN0IHg9JzMxNycgeT0nNTgnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzM1NycgeT0nNDUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "lingkaran",
+   "warna": "#1f9254",
+   "harap": 14
+  }
+ },
+ {
+  "id": "tgb21",
+  "pertanyaan": "Berapa jumlah segitiga berwarna merah pada gambar?",
+  "pilihan": [
+   "14",
+   "15",
+   "13",
+   "20"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 14\nHitung satu per satu bentuk segitiga berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzMyNy4wLDc3LjAgMzM4LjMsOTYuNSAzMTUuNyw5Ni41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNTMuMCwyNi4wIDY0LjMsNDUuNSA0MS43LDQ1LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc1NC4wLDE0My4wIDY1LjMsMTYyLjUgNDIuNywxNjIuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzIwNy4wLDI5LjAgMjE4LjMsNDguNSAxOTUuNyw0OC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjU2LjAsMzIuMCAyNjcuMyw1MS41IDI0NC43LDUxLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyMzEuMCw2OC4wIDI0Mi4zLDg3LjUgMjE5LjcsODcuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ4My4wLDE3My4wIDQ5NC4zLDE5Mi41IDQ3MS43LDE5Mi41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzI2LjAsMTU3LjAgMzM3LjMsMTc2LjUgMzE0LjcsMTc2LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc0OTAuMCwxMTkuMCA1MDEuMywxMzguNSA0NzguNywxMzguNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQyMy4wLDE2Ni4wIDQzNC4zLDE4NS41IDQxMS43LDE4NS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNzcuMCw2MS4wIDg4LjMsODAuNSA2NS43LDgwLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNi4wLDc5LjAgNDcuMyw5OC41IDI0LjcsOTguNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzE1My4wLDE2OC4wIDE2NC4zLDE4Ny41IDE0MS43LDE4Ny41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTYyLjAsMjkuMCAxNzMuMyw0OC41IDE1MC43LDQ4LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMTIyJyBjeT0nMTMyJyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzQwNicgY3k9JzU0JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxjaXJjbGUgY3g9JzkxJyBjeT0nMTg3JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjxyZWN0IHg9JzM5MCcgeT0nMTA2JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMxZjkyNTQnLz48cmVjdCB4PScxODQnIHk9JzE3Nycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMWY5MjU0Jy8+PGNpcmNsZSBjeD0nMTYzJyBjeT0nMTM4JyByPScxMScgZmlsbD0nIzFmOTI1NCcvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#c0392b",
+   "harap": 14
+  }
+ },
+ {
+  "id": "tgb22",
+  "pertanyaan": "Berapa jumlah lingkaran berwarna merah pada gambar?",
+  "pilihan": [
+   "12",
+   "10",
+   "14",
+   "11"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 11\nHitung satu per satu bentuk lingkaran berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PSc1MDAnIGN5PSc3NScgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczOTgnIGN5PSc4Micgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSc0NDEnIGN5PScxODMnIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nNzgnIGN5PScxMjInIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjQ1JyBjeT0nMTExJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzExNycgY3k9JzgxJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzIyOScgY3k9JzE1NCcgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScyODYnIGN5PSc3Mycgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSc0MjUnIGN5PSczNScgcj0nMTEnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczMDcnIGN5PScxNzcnIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nNDY1JyBjeT0nMTUwJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzE2NycgeT0nMjInIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2Q0YTAxNycvPjxyZWN0IHg9JzY3JyB5PSczNycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjZDRhMDE3Jy8+PHJlY3QgeD0nMzQwJyB5PScxMTYnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2Q0YTAxNycvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "lingkaran",
+   "warna": "#c0392b",
+   "harap": 11
+  }
+ },
+ {
+  "id": "tgb23",
+  "pertanyaan": "Berapa jumlah segitiga berwarna merah pada gambar?",
+  "pilihan": [
+   "16",
+   "22",
+   "17",
+   "18"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 17\nHitung satu per satu bentuk segitiga berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzM4NC4wLDEyOC4wIDM5NS4zLDE0Ny41IDM3Mi43LDE0Ny41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNzMuMCwxNTcuMCA4NC4zLDE3Ni41IDYxLjcsMTc2LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNDMuMCwxNDMuMCAzNTQuMywxNjIuNSAzMzEuNywxNjIuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ0NS4wLDEyOS4wIDQ1Ni4zLDE0OC41IDQzMy43LDE0OC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nNTUuMCw5Mi4wIDY2LjMsMTExLjUgNDMuNywxMTEuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzMxOC4wLDI5LjAgMzI5LjMsNDguNSAzMDYuNyw0OC41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTUwLjAsNDYuMCAxNjEuMyw2NS41IDEzOC43LDY1LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc1MDAuMCwxNzAuMCA1MTEuMywxODkuNSA0ODguNywxODkuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzE5NC4wLDIyLjAgMjA1LjMsNDEuNSAxODIuNyw0MS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzk5LjAsNTQuMCA0MTAuMyw3My41IDM4Ny43LDczLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyMDguMCw3OC4wIDIxOS4zLDk3LjUgMTk2LjcsOTcuNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzI2Ny4wLDI2LjAgMjc4LjMsNDUuNSAyNTUuNyw0NS41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMzA1LjAsNzcuMCAzMTYuMyw5Ni41IDI5My43LDk2LjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScxMjYuMCw3OS4wIDEzNy4zLDk4LjUgMTE0LjcsOTguNScgZmlsbD0nI2MwMzkyYicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ1OC4wLDE2OC4wIDQ2OS4zLDE4Ny41IDQ0Ni43LDE4Ny41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTU5LjAsMTYzLjAgMTcwLjMsMTgyLjUgMTQ3LjcsMTgyLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSczNDMuMCw5NC4wIDM1NC4zLDExMy41IDMzMS43LDExMy41JyBmaWxsPScjYzAzOTJiJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI0NScgY3k9JzExNScgcj0nMTEnIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PScxNjYnIGN5PScxMjEnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PHJlY3QgeD0nMjczJyB5PScxNjInIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2Q0YTAxNycvPjxjaXJjbGUgY3g9Jzc1JyBjeT0nMzgnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PHJlY3QgeD0nNDIxJyB5PSc3OScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjZDRhMDE3Jy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#c0392b",
+   "harap": 17
+  }
+ },
+ {
+  "id": "tgb24",
+  "pertanyaan": "Berapa jumlah segitiga berwarna hijau pada gambar?",
+  "pilihan": [
+   "21",
+   "14",
+   "15",
+   "13"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 14\nHitung satu per satu bentuk segitiga berwarna hijau pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzE1NS4wLDI1LjAgMTY2LjMsNDQuNSAxNDMuNyw0NC41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjI3LjAsNDIuMCAyMzguMyw2MS41IDIxNS43LDYxLjUnIGZpbGw9JyMxZjkyNTQnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc1OS4wLDEzMS4wIDcwLjMsMTUwLjUgNDcuNywxNTAuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzIzMS4wLDE0NS4wIDI0Mi4zLDE2NC41IDIxOS43LDE2NC41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTg1LjAsMTUzLjAgMTk2LjMsMTcyLjUgMTczLjcsMTcyLjUnIGZpbGw9JyMxZjkyNTQnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc3OS4wLDIyLjAgOTAuMyw0MS41IDY3LjcsNDEuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzkzLjAsMTY2LjAgMTA0LjMsMTg1LjUgODEuNywxODUuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzQ3LjAsNjcuMCA1OC4zLDg2LjUgMzUuNyw4Ni41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTIyLjAsNzQuMCAxMzMuMyw5My41IDExMC43LDkzLjUnIGZpbGw9JyMxZjkyNTQnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc0ODMuMCwyOS4wIDQ5NC4zLDQ4LjUgNDcxLjcsNDguNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzM1OC4wLDE1Ny4wIDM2OS4zLDE3Ni41IDM0Ni43LDE3Ni41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMTYxLjAsMTExLjAgMTcyLjMsMTMwLjUgMTQ5LjcsMTMwLjUnIGZpbGw9JyMxZjkyNTQnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPSc0MzIuMCwxNDUuMCA0NDMuMywxNjQuNSA0MjAuNywxNjQuNScgZmlsbD0nIzFmOTI1NCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cG9seWdvbiBwb2ludHM9JzI3OC4wLDE2My4wIDI4OS4zLDE4Mi41IDI2Ni43LDE4Mi41JyBmaWxsPScjMWY5MjU0JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzQzNScgY3k9JzQ1JyByPScxMScgZmlsbD0nI2Q0YTAxNycvPjxyZWN0IHg9JzQ1OCcgeT0nMTA5JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48cmVjdCB4PScxNjYnIHk9JzY3JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNkNGEwMTcnLz48Y2lyY2xlIGN4PSczODInIGN5PScxMjEnIHI9JzExJyBmaWxsPScjZDRhMDE3Jy8+PGNpcmNsZSBjeD0nMzIxJyBjeT0nMTI5JyByPScxMScgZmlsbD0nI2Q0YTAxNycvPjxjaXJjbGUgY3g9JzM3OCcgY3k9JzM1JyByPScxMScgZmlsbD0nI2Q0YTAxNycvPjxyZWN0IHg9JzMwNycgeT0nMjgnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2Q0YTAxNycvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "segitiga",
+   "warna": "#1f9254",
+   "harap": 14
+  }
+ },
+ {
+  "id": "tgb25",
+  "pertanyaan": "Berapa jumlah lingkaran berwarna biru pada gambar?",
+  "pilihan": [
+   "16",
+   "17",
+   "15",
+   "24"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 16\nHitung satu per satu bentuk lingkaran berwarna biru pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PSczOTQnIGN5PScxNjQnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMTgzJyBjeT0nMTM5JyByPScxMScgZmlsbD0nIzJiNmNiMCcvPjxjaXJjbGUgY3g9JzY0JyBjeT0nMTA4JyByPScxMScgZmlsbD0nIzJiNmNiMCcvPjxjaXJjbGUgY3g9JzEyMCcgY3k9JzEwMScgcj0nMTEnIGZpbGw9JyMyYjZjYjAnLz48Y2lyY2xlIGN4PSc0NjAnIGN5PScxNjMnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMzg2JyBjeT0nOTEnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMTYxJyBjeT0nODgnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMjM5JyBjeT0nMTI1JyByPScxMScgZmlsbD0nIzJiNmNiMCcvPjxjaXJjbGUgY3g9JzM1MCcgY3k9JzEyOScgcj0nMTEnIGZpbGw9JyMyYjZjYjAnLz48Y2lyY2xlIGN4PSc5NicgY3k9JzE3Micgcj0nMTEnIGZpbGw9JyMyYjZjYjAnLz48Y2lyY2xlIGN4PSczNDAnIGN5PScxNzcnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMjU0JyBjeT0nODQnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nNDQ4JyBjeT0nNzMnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMzAxJyBjeT0nODcnIHI9JzExJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nNDE2JyBjeT0nMTI4JyByPScxMScgZmlsbD0nIzJiNmNiMCcvPjxjaXJjbGUgY3g9JzEzNycgY3k9JzE0OScgcj0nMTEnIGZpbGw9JyMyYjZjYjAnLz48cG9seWdvbiBwb2ludHM9JzQwNC4wLDM3LjAgNDE1LjMsNTYuNSAzOTIuNyw1Ni41JyBmaWxsPScjZDRhMDE3JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxwb2x5Z29uIHBvaW50cz0nMjM4LjAsMTc0LjAgMjQ5LjMsMTkzLjUgMjI2LjcsMTkzLjUnIGZpbGw9JyNkNGEwMTcnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHJlY3QgeD0nNDQ3JyB5PScxMDgnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2Q0YTAxNycvPjxwb2x5Z29uIHBvaW50cz0nMTQyLjAsMTc3LjAgMTUzLjMsMTk2LjUgMTMwLjcsMTk2LjUnIGZpbGw9JyNkNGEwMTcnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHJlY3QgeD0nMTI4JyB5PSczMCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjZDRhMDE3Jy8+PHBvbHlnb24gcG9pbnRzPSc0NC4wLDE3My4wIDU1LjMsMTkyLjUgMzIuNywxOTIuNScgZmlsbD0nI2Q0YTAxNycgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48cmVjdCB4PSc0ODUnIHk9JzEyMicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjZDRhMDE3Jy8+PHJlY3QgeD0nNDgwJyB5PSc0OScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjZDRhMDE3Jy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "lingkaran",
+   "warna": "#2b6cb0",
+   "harap": 16
+  }
+ },
+ {
+  "id": "tgb26",
+  "pertanyaan": "Berapa jumlah kotak berwarna biru pada gambar?",
+  "pilihan": [
+   "12",
+   "10",
+   "18",
+   "11"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 11\nHitung satu per satu bentuk kotak berwarna biru pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PSczNjYnIHk9Jzc3JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PSczMjMnIHk9JzY2JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PSc0MjgnIHk9JzE3NScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMjUnIHk9Jzc3JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyMyYjZjYjAnLz48cmVjdCB4PSczMDInIHk9JzExNycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMjI0JyB5PSc5OCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nNDU3JyB5PSc4MScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nMzgzJyB5PScxNzEnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzEyMicgeT0nMjcnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nIzJiNmNiMCcvPjxyZWN0IHg9JzY3JyB5PSczNicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PHJlY3QgeD0nNzcnIHk9JzE1Micgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjMmI2Y2IwJy8+PGNpcmNsZSBjeD0nMTc2JyBjeT0nMTIwJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzI5MicgY3k9Jzg1JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9Jzg0JyBjeT0nMTAyJyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzIxMycgY3k9JzQ4JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjxwb2x5Z29uIHBvaW50cz0nNDU5LjAsMzMuMCA0NzAuMyw1Mi41IDQ0Ny43LDUyLjUnIGZpbGw9JyNjMDM5MmInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMzYzJyBjeT0nMzAnIHI9JzExJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMzIzJyBjeT0nMTg0JyByPScxMScgZmlsbD0nI2MwMzkyYicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "kotak",
+   "warna": "#2b6cb0",
+   "harap": 11
+  }
+ },
+ {
+  "id": "tgb27",
+  "pertanyaan": "Berapa jumlah kotak berwarna merah pada gambar?",
+  "pilihan": [
+   "9",
+   "13",
+   "10",
+   "11"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 10\nHitung satu per satu bentuk kotak berwarna merah pada gambar (jangan ikut menghitung bentuk lain): 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1.\nINGAT: tandai yang sudah dihitung supaya tidak menghitung dua kali.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PSczODEnIHk9JzE0OScgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nMjQ2JyB5PScxNTUnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzIzMCcgeT0nNDMnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzI1JyB5PSc4Nycgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nNDUxJyB5PScxNzcnIHdpZHRoPScyMicgaGVpZ2h0PScyMicgZmlsbD0nI2MwMzkyYicvPjxyZWN0IHg9JzIzMCcgeT0nMTA0JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PSc0MTgnIHk9JzI4JyB3aWR0aD0nMjInIGhlaWdodD0nMjInIGZpbGw9JyNjMDM5MmInLz48cmVjdCB4PScxNTYnIHk9JzEzNicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nMzIzJyB5PSc4NCcgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PHJlY3QgeD0nOTUnIHk9JzE3Nicgd2lkdGg9JzIyJyBoZWlnaHQ9JzIyJyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nNDY2JyBjeT0nMTAwJyByPScxMScgZmlsbD0nI2Q0YTAxNycvPjxwb2x5Z29uIHBvaW50cz0nMTE4LjAsNDUuMCAxMjkuMyw2NC41IDEwNi43LDY0LjUnIGZpbGw9JyNkNGEwMTcnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PHBvbHlnb24gcG9pbnRzPScyMTcuMCwxNzcuMCAyMjguMywxOTYuNSAyMDUuNywxOTYuNScgZmlsbD0nI2Q0YTAxNycgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "hitung-bentuk",
+   "bentuk": "kotak",
+   "warna": "#c0392b",
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb28",
+  "pertanyaan": "Bangun apa yang tergambar?",
+  "pilihan": [
+   "Persegi panjang",
+   "Segi sepuluh",
+   "Segi delapan",
+   "Lingkaran"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Segi sepuluh\nHitung titik sudut bangun pada gambar: ada 10 titik sudut, jadi bangunnya bersisi 10 (Segi sepuluh).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzE1LjAsNDEuMiAzNDUuOCw4My43IDM0NS44LDEzNi4zIDMxNS4wLDE3OC44IDI2NS4wLDE5NS4wIDIxNS4wLDE3OC44IDE4NC4yLDEzNi4zIDE4NC4yLDgzLjcgMjE1LjAsNDEuMicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb29",
+  "pertanyaan": "Bangun apa yang tergambar?",
+  "pilihan": [
+   "Segi enam",
+   "Segi tujuh",
+   "Lingkaran",
+   "Persegi panjang"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Segi enam\nHitung titik sudut bangun pada gambar: ada 6 titik sudut, jadi bangunnya bersisi 6 (Segi enam).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzM4LjYsNjcuNSAzMzguNiwxNTIuNSAyNjUuMCwxOTUuMCAxOTEuNCwxNTIuNSAxOTEuNCw2Ny41JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 6
+  }
+ },
+ {
+  "id": "tgb30",
+  "pertanyaan": "Berapa jumlah sisi bangun pada gambar?",
+  "pilihan": [
+   "8",
+   "6",
+   "9",
+   "7"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 7\nHitung titik sudut bangun pada gambar: ada 7 titik sudut, jadi bangunnya bersisi 7 (Segi tujuh).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzMxLjUsNTcuMCAzNDcuOSwxMjguOSAzMDEuOSwxODYuNiAyMjguMSwxODYuNiAxODIuMSwxMjguOSAxOTguNSw1Ny4wJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 7
+  }
+ },
+ {
+  "id": "tgb31",
+  "pertanyaan": "Berapa jumlah sisi bangun pada gambar?",
+  "pilihan": [
+   "9",
+   "12",
+   "10",
+   "11"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 10\nHitung titik sudut bangun pada gambar: ada 10 titik sudut, jadi bangunnya bersisi 10 (Segi sepuluh).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzE1LjAsNDEuMiAzNDUuOCw4My43IDM0NS44LDEzNi4zIDMxNS4wLDE3OC44IDI2NS4wLDE5NS4wIDIxNS4wLDE3OC44IDE4NC4yLDEzNi4zIDE4NC4yLDgzLjcgMjE1LjAsNDEuMicgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb32",
+  "pertanyaan": "Berapa jumlah sisi bangun pada gambar?",
+  "pilihan": [
+   "7",
+   "5",
+   "6",
+   "4"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 5\nHitung titik sudut bangun pada gambar: ada 5 titik sudut, jadi bangunnya bersisi 5 (Segi lima).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzQ1LjgsODMuNyAzMTUuMCwxNzguOCAyMTUuMCwxNzguOCAxODQuMiw4My43JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 5
+  }
+ },
+ {
+  "id": "tgb33",
+  "pertanyaan": "Berapa jumlah sisi bangun pada gambar?",
+  "pilihan": [
+   "9",
+   "10",
+   "8",
+   "11"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 9\nHitung titik sudut bangun pada gambar: ada 9 titik sudut, jadi bangunnya bersisi 9 (Segi sembilan).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzE5LjYsNDQuOSAzNDguNyw5NS4yIDMzOC42LDE1Mi41IDI5NC4xLDE4OS45IDIzNS45LDE4OS45IDE5MS40LDE1Mi41IDE4MS4zLDk1LjIgMjEwLjQsNDQuOScgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 9
+  }
+ },
+ {
+  "id": "tgb34",
+  "pertanyaan": "Berapa jumlah sisi bangun pada gambar?",
+  "pilihan": [
+   "9",
+   "7",
+   "10",
+   "8"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 8\nHitung titik sudut bangun pada gambar: ada 8 titik sudut, jadi bangunnya bersisi 8 (Segi delapan).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzI1LjEsNDkuOSAzNTAuMCwxMTAuMCAzMjUuMSwxNzAuMSAyNjUuMCwxOTUuMCAyMDQuOSwxNzAuMSAxODAuMCwxMTAuMCAyMDQuOSw0OS45JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 8
+  }
+ },
+ {
+  "id": "tgb35",
+  "pertanyaan": "Bangun apa yang tergambar?",
+  "pilihan": [
+   "Lingkaran",
+   "Persegi panjang",
+   "Segi lima",
+   "Segi enam"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Segi lima\nHitung titik sudut bangun pada gambar: ada 5 titik sudut, jadi bangunnya bersisi 5 (Segi lima).\nINGAT: jumlah sisi = jumlah titik sudut pada bangun tertutup.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzQ1LjgsODMuNyAzMTUuMCwxNzguOCAyMTUuMCwxNzguOCAxODQuMiw4My43JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sisi-poligon",
+   "harap": 5
+  }
+ },
+ {
+  "id": "tgb36",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "25",
+   "20",
+   "24",
+   "15"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 20\nKisi punya 4 kolom dan 5 baris sel, jadi jumlah sel = 4 x 5 = 20.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMjU1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScyNTUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMjU1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzUnIHkxPSczMCcgeDI9JzE3NScgeTI9JzI1NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIwJyB5MT0nMzAnIHgyPScyMjAnIHkyPScyNTUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMzAnIHgyPScyMjAnIHkyPSczMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPSc3NScgeDI9JzIyMCcgeTI9Jzc1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzEyMCcgeDI9JzIyMCcgeTI9JzEyMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScxNjUnIHgyPScyMjAnIHkyPScxNjUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMjEwJyB4Mj0nMjIwJyB5Mj0nMjEwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzI1NScgeDI9JzIyMCcgeTI9JzI1NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 20
+  }
+ },
+ {
+  "id": "tgb37",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "10",
+   "15",
+   "8",
+   "12"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 10\nKisi punya 5 kolom dan 2 baris sel, jadi jumlah sel = 5 x 2 = 10.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzUnIHkxPSczMCcgeDI9JzE3NScgeTI9JzEyMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIwJyB5MT0nMzAnIHgyPScyMjAnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzMwJyB4Mj0nMjY1JyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzMwJyB4Mj0nMjY1JyB5Mj0nMzAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nNzUnIHgyPScyNjUnIHkyPSc3NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScxMjAnIHgyPScyNjUnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 10
+  }
+ },
+ {
+  "id": "tgb38",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "15",
+   "8",
+   "16",
+   "12"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 12\nKisi punya 3 kolom dan 4 baris sel, jadi jumlah sel = 3 x 4 = 12.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMjEwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScyMTAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMjEwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzUnIHkxPSczMCcgeDI9JzE3NScgeTI9JzIxMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzE3NScgeTI9JzMwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9Jzc1JyB4Mj0nMTc1JyB5Mj0nNzUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMTIwJyB4Mj0nMTc1JyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzE2NScgeDI9JzE3NScgeTI9JzE2NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScyMTAnIHgyPScxNzUnIHkyPScyMTAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 12
+  }
+ },
+ {
+  "id": "tgb39",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "4",
+   "8",
+   "6",
+   "9"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 6\nKisi punya 3 kolom dan 2 baris sel, jadi jumlah sel = 3 x 2 = 6.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzUnIHkxPSczMCcgeDI9JzE3NScgeTI9JzEyMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzE3NScgeTI9JzMwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9Jzc1JyB4Mj0nMTc1JyB5Mj0nNzUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMTIwJyB4Mj0nMTc1JyB5Mj0nMTIwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 6
+  }
+ },
+ {
+  "id": "tgb40",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "10",
+   "25",
+   "30",
+   "20"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 25\nKisi punya 5 kolom dan 5 baris sel, jadi jumlah sel = 5 x 5 = 25.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMjU1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScyNTUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMjU1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzUnIHkxPSczMCcgeDI9JzE3NScgeTI9JzI1NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIwJyB5MT0nMzAnIHgyPScyMjAnIHkyPScyNTUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzMwJyB4Mj0nMjY1JyB5Mj0nMjU1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzMwJyB4Mj0nMjY1JyB5Mj0nMzAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nNzUnIHgyPScyNjUnIHkyPSc3NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScxMjAnIHgyPScyNjUnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMTY1JyB4Mj0nMjY1JyB5Mj0nMTY1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzIxMCcgeDI9JzI2NScgeTI9JzIxMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScyNTUnIHgyPScyNjUnIHkyPScyNTUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 25
+  }
+ },
+ {
+  "id": "tgb41",
+  "pertanyaan": "Berapa banyak kotak kecil pada kisi gambar?",
+  "pilihan": [
+   "8",
+   "10",
+   "4",
+   "12"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 8\nKisi punya 2 kolom dan 4 baris sel, jadi jumlah sel = 2 x 4 = 8.\nINGAT: hitung jumlah kolom dan baris, lalu kalikan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjYwJyB2aWV3Qm94PScwIDAgNTMwIDI2MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyNjAnIGZpbGw9JyNmZmZmZmYnLz48bGluZSB4MT0nNDAnIHkxPSczMCcgeDI9JzQwJyB5Mj0nMjEwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc4NScgeTE9JzMwJyB4Mj0nODUnIHkyPScyMTAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzEzMCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMjEwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzMwJyB4Mj0nMTMwJyB5Mj0nMzAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nNzUnIHgyPScxMzAnIHkyPSc3NScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nNDAnIHkxPScxMjAnIHgyPScxMzAnIHkyPScxMjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzQwJyB5MT0nMTY1JyB4Mj0nMTMwJyB5Mj0nMTY1JyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSc0MCcgeTE9JzIxMCcgeDI9JzEzMCcgeTI9JzIxMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sel-kisi",
+   "harap": 8
+  }
+ },
+ {
+  "id": "tgb42",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "7",
+   "5",
+   "8",
+   "6"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 6\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1 + 1 + 1, jadi titik sudutnya ada 6.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzM4LjYsNjcuNSAzMzguNiwxNTIuNSAyNjUuMCwxOTUuMCAxOTEuNCwxNTIuNSAxOTEuNCw2Ny41JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI2NS4wJyBjeT0nMjUuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMzOC42JyBjeT0nNjcuNScgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMzOC42JyBjeT0nMTUyLjUnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScyNjUuMCcgY3k9JzE5NS4wJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMTkxLjQnIGN5PScxNTIuNScgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzE5MS40JyBjeT0nNjcuNScgcj0nNScgZmlsbD0nI2MwMzkyYicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 6
+  }
+ },
+ {
+  "id": "tgb43",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "3",
+   "6",
+   "4",
+   "5"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 4\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1, jadi titik sudutnya ada 4.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzUwLjAsMTEwLjAgMjY1LjAsMTk1LjAgMTgwLjAsMTEwLjAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nMjY1LjAnIGN5PScyNS4wJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMzUwLjAnIGN5PScxMTAuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzI2NS4wJyBjeT0nMTk1LjAnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScxODAuMCcgY3k9JzExMC4wJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 4
+  }
+ },
+ {
+  "id": "tgb44",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "10",
+   "8",
+   "9",
+   "7"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 8\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1, jadi titik sudutnya ada 8.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzI1LjEsNDkuOSAzNTAuMCwxMTAuMCAzMjUuMSwxNzAuMSAyNjUuMCwxOTUuMCAyMDQuOSwxNzAuMSAxODAuMCwxMTAuMCAyMDQuOSw0OS45JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI2NS4wJyBjeT0nMjUuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMyNS4xJyBjeT0nNDkuOScgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzM1MC4wJyBjeT0nMTEwLjAnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczMjUuMScgY3k9JzE3MC4xJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjY1LjAnIGN5PScxOTUuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzIwNC45JyBjeT0nMTcwLjEnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScxODAuMCcgY3k9JzExMC4wJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjA0LjknIGN5PSc0OS45JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 8
+  }
+ },
+ {
+  "id": "tgb45",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "9",
+   "10",
+   "8",
+   "11"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 9\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1, jadi titik sudutnya ada 9.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzE5LjYsNDQuOSAzNDguNyw5NS4yIDMzOC42LDE1Mi41IDI5NC4xLDE4OS45IDIzNS45LDE4OS45IDE5MS40LDE1Mi41IDE4MS4zLDk1LjIgMjEwLjQsNDQuOScgZmlsbD0nbm9uZScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzInLz48Y2lyY2xlIGN4PScyNjUuMCcgY3k9JzI1LjAnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczMTkuNicgY3k9JzQ0LjknIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczNDguNycgY3k9Jzk1LjInIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczMzguNicgY3k9JzE1Mi41JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjk0LjEnIGN5PScxODkuOScgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzIzNS45JyBjeT0nMTg5LjknIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScxOTEuNCcgY3k9JzE1Mi41JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMTgxLjMnIGN5PSc5NS4yJyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjEwLjQnIGN5PSc0NC45JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 9
+  }
+ },
+ {
+  "id": "tgb46",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "8",
+   "6",
+   "9",
+   "7"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 7\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1 + 1 + 1 + 1, jadi titik sudutnya ada 7.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzMxLjUsNTcuMCAzNDcuOSwxMjguOSAzMDEuOSwxODYuNiAyMjguMSwxODYuNiAxODIuMSwxMjguOSAxOTguNSw1Ny4wJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI2NS4wJyBjeT0nMjUuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMzMS41JyBjeT0nNTcuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzM0Ny45JyBjeT0nMTI4LjknIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PSczMDEuOScgY3k9JzE4Ni42JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMjI4LjEnIGN5PScxODYuNicgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzE4Mi4xJyBjeT0nMTI4LjknIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScxOTguNScgY3k9JzU3LjAnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 7
+  }
+ },
+ {
+  "id": "tgb47",
+  "pertanyaan": "Berapa titik sudut yang ditandai pada gambar?",
+  "pilihan": [
+   "4",
+   "7",
+   "5",
+   "6"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 5\nSetiap titik sudut ditandai satu bulatan merah. Bulatan yang ada: 1 + 1 + 1 + 1 + 1, jadi titik sudutnya ada 5.\nINGAT: titik sudut = tempat dua sisi bertemu.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzQ1LjgsODMuNyAzMTUuMCwxNzguOCAyMTUuMCwxNzguOCAxODQuMiw4My43JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzI2NS4wJyBjeT0nMjUuMCcgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzM0NS44JyBjeT0nODMuNycgcj0nNScgZmlsbD0nI2MwMzkyYicvPjxjaXJjbGUgY3g9JzMxNS4wJyBjeT0nMTc4LjgnIHI9JzUnIGZpbGw9JyNjMDM5MmInLz48Y2lyY2xlIGN4PScyMTUuMCcgY3k9JzE3OC44JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PGNpcmNsZSBjeD0nMTg0LjInIGN5PSc4My43JyByPSc1JyBmaWxsPScjYzAzOTJiJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "titik-sudut",
+   "harap": 5
+  }
+ },
+ {
+  "id": "tgb48",
+  "pertanyaan": "Berapa jumlah garis diagonal pada bangun gambar?",
+  "pilihan": [
+   "6",
+   "2",
+   "3",
+   "1"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 2\nBangun bersisi 4, garis penghubung titik sudut yang bukan sisi = n(n-3)/2 = 4 x 1 / 2 = 2.\nINGAT: diagonal = garis dari satu titik sudut ke titik sudut lain yang tidak berdekatan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzUwLjAsMTEwLjAgMjY1LjAsMTk1LjAgMTgwLjAsMTEwLjAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NS4wJyB5MT0nMjUuMCcgeDI9JzI2NS4wJyB5Mj0nMTk1LjAnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzM1MC4wJyB5MT0nMTEwLjAnIHgyPScxODAuMCcgeTI9JzExMC4wJyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "diagonal",
+   "harap": 2
+  }
+ },
+ {
+  "id": "tgb49",
+  "pertanyaan": "Berapa jumlah garis diagonal pada bangun gambar?",
+  "pilihan": [
+   "14",
+   "15",
+   "13",
+   "21"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 14\nBangun bersisi 7, garis penghubung titik sudut yang bukan sisi = n(n-3)/2 = 7 x 4 / 2 = 14.\nINGAT: diagonal = garis dari satu titik sudut ke titik sudut lain yang tidak berdekatan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzMxLjUsNTcuMCAzNDcuOSwxMjguOSAzMDEuOSwxODYuNiAyMjguMSwxODYuNiAxODIuMSwxMjguOSAxOTguNSw1Ny4wJyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPSczNDcuOScgeTI9JzEyOC45JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPSczMDEuOScgeTI9JzE4Ni42JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPScyMjguMScgeTI9JzE4Ni42JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPScxODIuMScgeTI9JzEyOC45JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzEuNScgeTE9JzU3LjAnIHgyPSczMDEuOScgeTI9JzE4Ni42JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzEuNScgeTE9JzU3LjAnIHgyPScyMjguMScgeTI9JzE4Ni42JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzEuNScgeTE9JzU3LjAnIHgyPScxODIuMScgeTI9JzEyOC45JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzEuNScgeTE9JzU3LjAnIHgyPScxOTguNScgeTI9JzU3LjAnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzM0Ny45JyB5MT0nMTI4LjknIHgyPScyMjguMScgeTI9JzE4Ni42JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNDcuOScgeTE9JzEyOC45JyB4Mj0nMTgyLjEnIHkyPScxMjguOScgc3Ryb2tlPScjMmI2Y2IwJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQ3LjknIHkxPScxMjguOScgeDI9JzE5OC41JyB5Mj0nNTcuMCcgc3Ryb2tlPScjMmI2Y2IwJyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzAxLjknIHkxPScxODYuNicgeDI9JzE4Mi4xJyB5Mj0nMTI4LjknIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwMS45JyB5MT0nMTg2LjYnIHgyPScxOTguNScgeTI9JzU3LjAnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzIyOC4xJyB5MT0nMTg2LjYnIHgyPScxOTguNScgeTI9JzU3LjAnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "diagonal",
+   "harap": 14
+  }
+ },
+ {
+  "id": "tgb50",
+  "pertanyaan": "Berapa jumlah garis diagonal pada bangun gambar?",
+  "pilihan": [
+   "6",
+   "4",
+   "10",
+   "5"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 5\nBangun bersisi 5, garis penghubung titik sudut yang bukan sisi = n(n-3)/2 = 5 x 2 / 2 = 5.\nINGAT: diagonal = garis dari satu titik sudut ke titik sudut lain yang tidak berdekatan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzQ1LjgsODMuNyAzMTUuMCwxNzguOCAyMTUuMCwxNzguOCAxODQuMiw4My43JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPSczMTUuMCcgeTI9JzE3OC44JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPScyMTUuMCcgeTI9JzE3OC44JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNDUuOCcgeTE9JzgzLjcnIHgyPScyMTUuMCcgeTI9JzE3OC44JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNDUuOCcgeTE9JzgzLjcnIHgyPScxODQuMicgeTI9JzgzLjcnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMxNS4wJyB5MT0nMTc4LjgnIHgyPScxODQuMicgeTI9JzgzLjcnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "diagonal",
+   "harap": 5
+  }
+ },
+ {
+  "id": "tgb51",
+  "pertanyaan": "Berapa jumlah garis diagonal pada bangun gambar?",
+  "pilihan": [
+   "8",
+   "15",
+   "9",
+   "10"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 9\nBangun bersisi 6, garis penghubung titik sudut yang bukan sisi = n(n-3)/2 = 6 x 3 / 2 = 9.\nINGAT: diagonal = garis dari satu titik sudut ke titik sudut lain yang tidak berdekatan.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48cG9seWdvbiBwb2ludHM9JzI2NS4wLDI1LjAgMzM4LjYsNjcuNSAzMzguNiwxNTIuNSAyNjUuMCwxOTUuMCAxOTEuNCwxNTIuNSAxOTEuNCw2Ny41JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPSczMzguNicgeTI9JzE1Mi41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPScyNjUuMCcgeTI9JzE5NS4wJyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzI1LjAnIHgyPScxOTEuNCcgeTI9JzE1Mi41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzguNicgeTE9JzY3LjUnIHgyPScyNjUuMCcgeTI9JzE5NS4wJyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzguNicgeTE9JzY3LjUnIHgyPScxOTEuNCcgeTI9JzE1Mi41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzguNicgeTE9JzY3LjUnIHgyPScxOTEuNCcgeTI9JzY3LjUnIHN0cm9rZT0nIzJiNmNiMCcgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMzOC42JyB5MT0nMTUyLjUnIHgyPScxOTEuNCcgeTI9JzE1Mi41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczMzguNicgeTE9JzE1Mi41JyB4Mj0nMTkxLjQnIHkyPSc2Ny41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5NS4wJyB4Mj0nMTkxLjQnIHkyPSc2Ny41JyBzdHJva2U9JyMyYjZjYjAnIHN0cm9rZS13aWR0aD0nMicvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "diagonal",
+   "harap": 9
+  }
+ },
+ {
+  "id": "tgb52",
+  "pertanyaan": "Perhatikan urutan warna kotak. Apa warna kotak ke-11?",
+  "pilihan": [
+   "5",
+   "Kuning",
+   "Merah",
+   "Hijau"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: Kuning\nWarna berulang setiap 3 kotak (pola: Merah - Kuning - Hijau). Kotak ke-11: 11 : 3 bersisa 2, jadi warnanya sama dengan kotak ke-2, yaitu Kuning.\nINGAT: bagi nomor kotak dengan panjang pola; sisanya menunjuk warna ke berapa dalam pola.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTQwJyB2aWV3Qm94PScwIDAgNTMwIDE0MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNDAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScyMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2U0NWI1Yicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc1OCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc5NicgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScxMzQnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMTcyJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjZmZkNzAwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzIxMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScyNDgnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMjg2JyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjZmZkNzAwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzMyNCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSczNjInIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nNDAwJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjZmZkNzAwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "warna-ke-n",
+   "ke": 11,
+   "harap": "Kuning"
+  }
+ },
+ {
+  "id": "tgb53",
+  "pertanyaan": "Perhatikan urutan warna kotak. Apa warna kotak ke-10?",
+  "pilihan": [
+   "Biru",
+   "Kuning",
+   "Merah",
+   "Hijau"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: Biru\nWarna berulang setiap 4 kotak (pola: Kuning - Biru - Merah - Hijau). Kotak ke-10: 10 : 4 bersisa 2, jadi warnanya sama dengan kotak ke-2, yaitu Biru.\nINGAT: bagi nomor kotak dengan panjang pola; sisanya menunjuk warna ke berapa dalam pola.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTQwJyB2aWV3Qm94PScwIDAgNTMwIDE0MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNDAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScyMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc1OCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc5NicgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2U0NWI1Yicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScxMzQnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyMyMmNjNGEnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMTcyJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjZmZkNzAwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzIxMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScyNDgnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMjg2JyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjMjJjYzRhJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzMyNCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSczNjInIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "warna-ke-n",
+   "ke": 10,
+   "harap": "Biru"
+  }
+ },
+ {
+  "id": "tgb54",
+  "pertanyaan": "Perhatikan urutan warna kotak. Apa warna kotak ke-13?",
+  "pilihan": [
+   "Merah",
+   "Kuning",
+   "Biru",
+   "Hijau"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: Hijau\nWarna berulang setiap 4 kotak (pola: Hijau - Merah - Kuning - Biru). Kotak ke-13: 13 : 4 bersisa 1, jadi warnanya sama dengan kotak ke-1, yaitu Hijau.\nINGAT: bagi nomor kotak dengan panjang pola; sisanya menunjuk warna ke berapa dalam pola.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTQwJyB2aWV3Qm94PScwIDAgNTMwIDE0MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNDAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScyMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc1OCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2U0NWI1Yicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc5NicgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScxMzQnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyMyYjZjYjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMTcyJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjMjJjYzRhJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzIxMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2U0NWI1Yicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScyNDgnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNmZmQ3MDAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMjg2JyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjMmI2Y2IwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzMyNCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSczNjInIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nNDAwJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjZmZkNzAwJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzQzOCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzJiNmNiMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc0NzYnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyMyMmNjNGEnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "warna-ke-n",
+   "ke": 13,
+   "harap": "Hijau"
+  }
+ },
+ {
+  "id": "tgb55",
+  "pertanyaan": "Perhatikan urutan warna kotak. Apa warna kotak ke-10?",
+  "pilihan": [
+   "Kuning",
+   "5",
+   "Merah",
+   "Hijau"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: Merah\nWarna berulang setiap 3 kotak (pola: Merah - Hijau - Kuning). Kotak ke-10: 10 : 3 bersisa 1, jadi warnanya sama dengan kotak ke-1, yaitu Merah.\nINGAT: bagi nomor kotak dengan panjang pola; sisanya menunjuk warna ke berapa dalam pola.",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMTQwJyB2aWV3Qm94PScwIDAgNTMwIDE0MCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScxNDAnIGZpbGw9JyNmZmZmZmYnLz48cmVjdCB4PScyMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2U0NWI1Yicgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc1OCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nIzIyY2M0YScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSc5NicgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScxMzQnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMTcyJyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjMjJjYzRhJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzIxMCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PScyNDgnIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PHJlY3QgeD0nMjg2JyB5PSc0MCcgd2lkdGg9JzMwJyBoZWlnaHQ9JzYwJyBmaWxsPScjMjJjYzRhJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMScvPjxyZWN0IHg9JzMyNCcgeT0nNDAnIHdpZHRoPSczMCcgaGVpZ2h0PSc2MCcgZmlsbD0nI2ZmZDcwMCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzEnLz48cmVjdCB4PSczNjInIHk9JzQwJyB3aWR0aD0nMzAnIGhlaWdodD0nNjAnIGZpbGw9JyNlNDViNWInIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPScxJy8+PC9zdmc+",
+  "verifikasi": {
+   "jenis": "warna-ke-n",
+   "ke": 10,
+   "harap": "Merah"
+  }
+ },
+ {
+  "id": "tgb56",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "270°",
+   "90°",
+   "105°",
+   "75°"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 90°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 3 - 5,5 x 0| = 90.0 derajat. Sudut terkecilnya 90 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzMyMC4wJyB5Mj0nMTEwLjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPSc0Jy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI2NS4wJyB5Mj0nMzAuMCcgc3Ryb2tlPScjYzAzOTJiJyBzdHJva2Utd2lkdGg9JzMnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 3,
+   "menit": 0,
+   "harap": 90
+  }
+ },
+ {
+  "id": "tgb57",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "180°",
+   "195°",
+   "165°",
+   "184"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 180°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 6 - 5,5 x 0| = 180.0 derajat. Sudut terkecilnya 180 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI2NS4wJyB5Mj0nMTY1LjAnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPSc0Jy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI2NS4wJyB5Mj0nMzAuMCcgc3Ryb2tlPScjYzAzOTJiJyBzdHJva2Utd2lkdGg9JzMnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 6,
+   "menit": 0,
+   "harap": 180
+  }
+ },
+ {
+  "id": "tgb58",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "165°",
+   "135°",
+   "210°",
+   "150°"
+  ],
+  "jawaban": 3,
+  "pembahasan": "JAWABAN: 150°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 7 - 5,5 x 0| = 210.0 derajat (lebih dari 180, jadi dipakai 360 - 210.0). Sudut terkecilnya 150 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzIzNy41JyB5Mj0nMTU3LjYnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPSc0Jy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI2NS4wJyB5Mj0nMzAuMCcgc3Ryb2tlPScjYzAzOTJiJyBzdHJva2Utd2lkdGg9JzMnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 7,
+   "menit": 0,
+   "harap": 150
+  }
+ },
+ {
+  "id": "tgb59",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "105°",
+   "240°",
+   "120°",
+   "135°"
+  ],
+  "jawaban": 2,
+  "pembahasan": "JAWABAN: 120°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 4 - 5,5 x 0| = 120.0 derajat. Sudut terkecilnya 120 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzMxMi42JyB5Mj0nMTM3LjUnIHN0cm9rZT0nIzExMTExMScgc3Ryb2tlLXdpZHRoPSc0Jy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI2NS4wJyB5Mj0nMzAuMCcgc3Ryb2tlPScjYzAzOTJiJyBzdHJva2Utd2lkdGg9JzMnLz48L3N2Zz4=",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 4,
+   "menit": 0,
+   "harap": 120
+  }
+ },
+ {
+  "id": "tgb60",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "330°",
+   "30°",
+   "45°",
+   "15°"
+  ],
+  "jawaban": 1,
+  "pembahasan": "JAWABAN: 30°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 1 - 5,5 x 0| = 30.0 derajat. Sudut terkecilnya 30 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzI5Mi41JyB5Mj0nNjIuNCcgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzQnLz48bGluZSB4MT0nMjY1JyB5MT0nMTEwJyB4Mj0nMjY1LjAnIHkyPSczMC4wJyBzdHJva2U9JyNjMDM5MmInIHN0cm9rZS13aWR0aD0nMycvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 1,
+   "menit": 0,
+   "harap": 30
+  }
+ },
+ {
+  "id": "tgb61",
+  "pertanyaan": "Berapa besar sudut terkecil antara jarum jam dan jarum menit pada gambar?",
+  "pilihan": [
+   "60°",
+   "75°",
+   "45°",
+   "300°"
+  ],
+  "jawaban": 0,
+  "pembahasan": "JAWABAN: 60°\nRumus sudut jarum: |30 x jam - 5,5 x menit| = |30 x 10 - 5,5 x 0| = 300.0 derajat (lebih dari 180, jadi dipakai 360 - 300.0). Sudut terkecilnya 60 derajat.\nINGAT: jarum pendek bergerak juga karena menitnya, itu sebabnya 5,5 dipakai (bukan 6).",
+  "topik": "visual-gambar",
+  "gambar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MzAnIGhlaWdodD0nMjIwJyB2aWV3Qm94PScwIDAgNTMwIDIyMCc+PHJlY3QgeD0nMCcgeT0nMCcgd2lkdGg9JzUzMCcgaGVpZ2h0PScyMjAnIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PScyNjUnIGN5PScxMTAnIHI9Jzk1JyBmaWxsPSdub25lJyBzdHJva2U9JyMxMTExMTEnIHN0cm9rZS13aWR0aD0nMycvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzIyLjAnIHgyPScyNjUuMCcgeTI9JzMwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMzMuOCcgeDI9JzMwNS4wJyB5Mj0nNDAuNycgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPSc2Ni4wJyB4Mj0nMzM0LjMnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPSczNTMuMCcgeTE9JzExMC4wJyB4Mj0nMzQ1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMzQxLjInIHkxPScxNTQuMCcgeDI9JzMzNC4zJyB5Mj0nMTUwLjAnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzMwOS4wJyB5MT0nMTg2LjInIHgyPSczMDUuMCcgeTI9JzE3OS4zJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyNjUuMCcgeTE9JzE5OC4wJyB4Mj0nMjY1LjAnIHkyPScxOTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMjIxLjAnIHkxPScxODYuMicgeDI9JzIyNS4wJyB5Mj0nMTc5LjMnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzE4OC44JyB5MT0nMTU0LjAnIHgyPScxOTUuNycgeTI9JzE1MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScxNzcuMCcgeTE9JzExMC4wJyB4Mj0nMTg1LjAnIHkyPScxMTAuMCcgc3Ryb2tlPScjNjY2NjY2JyBzdHJva2Utd2lkdGg9JzInLz48bGluZSB4MT0nMTg4LjgnIHkxPSc2Ni4wJyB4Mj0nMTk1LjcnIHkyPSc3MC4wJyBzdHJva2U9JyM2NjY2NjYnIHN0cm9rZS13aWR0aD0nMicvPjxsaW5lIHgxPScyMjEuMCcgeTE9JzMzLjgnIHgyPScyMjUuMCcgeTI9JzQwLjcnIHN0cm9rZT0nIzY2NjY2Nicgc3Ryb2tlLXdpZHRoPScyJy8+PGxpbmUgeDE9JzI2NScgeTE9JzExMCcgeDI9JzIxNy40JyB5Mj0nODIuNScgc3Ryb2tlPScjMTExMTExJyBzdHJva2Utd2lkdGg9JzQnLz48bGluZSB4MT0nMjY1JyB5MT0nMTEwJyB4Mj0nMjY1LjAnIHkyPSczMC4wJyBzdHJva2U9JyNjMDM5MmInIHN0cm9rZS13aWR0aD0nMycvPjwvc3ZnPg==",
+  "verifikasi": {
+   "jenis": "sudut-jam",
+   "jam": 10,
+   "menit": 0,
+   "harap": 60
+  }
+ }
+]

@@ -19,6 +19,31 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUMBER = os.path.join(ROOT, 'data', 'soal.js')
 
 
+def ambil_tips(sisa):
+    """Ambil objek TIPS_DATA dari teks setelah objek SOAL_DATABASE.
+
+    Memakai pencocokan kurung kurawal, BUKAN regex yang bergantung baris baru:
+    berkas sumber bisa ditulis dalam satu baris panjang (mis. sesudah disisipi
+    soal baru), dan regex `\\n};` gagal di bentuk itu sehingga tips.js kosong.
+    """
+    kunci = 'const TIPS_DATA'
+    pos = sisa.find(kunci)
+    if pos < 0:
+        return '{}'
+    mulai = sisa.find('{', pos)
+    if mulai < 0:
+        return '{}'
+    depth = 0
+    for n, ch in enumerate(sisa[mulai:]):
+        if ch == '{':
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0:
+                return sisa[mulai:mulai + n + 1]
+    return '{}'
+
+
 def baca():
     raw = open(SUMBER, encoding='utf-8').read()
     i = raw.index('{', raw.index('SOAL_DATABASE'))
@@ -32,8 +57,7 @@ def baca():
                 db = json.loads(raw[i:i + n + 1])
                 sisa = raw[i + n + 1:]
                 break
-    m = re.search(r'const TIPS_DATA\s*=\s*(\{.*?\n\});', sisa, re.S)
-    tips = m.group(1) if m else '{}'
+    tips = ambil_tips(sisa)
     return db, tips
 
 
