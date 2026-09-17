@@ -48,6 +48,18 @@ return dbTarik().then(function () { return dbDorongSekarang(); });
 })
 .catch(function () { tampilkanStatusSinkron('Database tidak terjangkau sekarang; latihan tetap jalan.'); return false; });
 };
+// Mengakhiri sesi sinkron (dipakai tombol "Keluar dari Google"): cabut sesinya di server
+// bila asal diizinkan, lalu bersihkan sesi di perangkat. Tetap beres walau jaringan mati.
+window.dbKeluar = function () {
+var t = dbToken();
+__dbToken = null;
+try { localStorage.removeItem('tni_sesi_db'); } catch (e) {}
+if (!t || !(window.asalSinkronDiizinkan && window.asalSinkronDiizinkan())) return Promise.resolve(true);
+return fetch(AKUN_DB.api + '/api/keluar', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + t }
+}).then(function () { return true; }).catch(function () { return true; });
+};
 function dbToken() {
 if (__dbToken) return __dbToken;
 __dbToken = dbTokenTersimpan();

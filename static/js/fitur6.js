@@ -14,9 +14,16 @@ window.menuLainTerbuka = false;
 window.bukaMenuLain = function () {
 menuLainTerbuka = true;
 var isi = TAUTAN_LAIN.map(function (l) {
-return '<button class="menu-lain-item" onclick="menuLainTerbuka=false;' + l.f + '">' +
+return '<button class="menu-lain-item" onclick="tutupMenuLain();' + l.f + '">' +
 ic(l.ic, 15) + ' <span>' + escapeHtml(l.t) + '</span></button>';
 }).join('');
+// Bila sedang masuk dengan Google, beri jalan keluar yang jelas dari menu ini juga.
+try {
+if (typeof bacaAkunGoogle === 'function' && bacaAkunGoogle()) {
+isi += '<button class="menu-lain-item" onclick="tutupMenuLain();keluarGoogle()">' +
+ic('x-circle', 15) + ' <span>Keluar dari Google</span></button>';
+}
+} catch (e) {}
 var lama = document.getElementById('menuLain');
 if (lama) lama.remove();
 var d = document.createElement('div');

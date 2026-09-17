@@ -88,6 +88,7 @@ if (__gToken && window.google && google.accounts && google.accounts.oauth2) {
 google.accounts.oauth2.revoke(__gToken, function () {});
 }
 } catch (e) {}
+try { if (typeof dbKeluar === 'function') dbKeluar(); } catch (e) {}
 __gToken = null; __gAkun = null; simpanAkun(null);
 render();
 };

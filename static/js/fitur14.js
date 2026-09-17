@@ -118,14 +118,21 @@ if (S.page === 'akun') {
 m.innerHTML = renderAkun();
 return;
 }
-if (S.page === 'home' && !m.querySelector('.tautan-akun')) {
+if (S.page === 'home') {
 var kartu = m.querySelector('.profil');
 if (kartu) {
-var w = document.createElement('div');
+var w = kartu.querySelector('.tautan-akun');
+if (!w) {
+w = document.createElement('div');
 w.className = 'tautan-akun';
-w.innerHTML = '<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="navTo(\'akun\')">' +
-ic('user', 14) + ' Ruang belajar saya (bahan & kode)</button>';
 kartu.appendChild(w);
+}
+var adaAkun = false;
+try { adaAkun = (typeof bacaAkunGoogle === 'function') && !!bacaAkunGoogle(); } catch (e) {}
+w.innerHTML = '<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="navTo(\'akun\')">' +
+ic('user', 14) + ' Ruang belajar saya (bahan & kode)</button>' +
+(adaAkun ? '<button class="btn btn-ghost btn-sm" style="margin-top:10px;margin-left:8px" onclick="keluarGoogle()">' +
+ic('x-circle', 14) + ' Keluar dari Google</button>' : '');
 }
 }
 }

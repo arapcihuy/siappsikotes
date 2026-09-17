@@ -884,6 +884,33 @@ def main():
         cek(ad['adaKartuGoogle'] and ad['dinyatakanOpsional'],
             'kartu Google tampil di ruang belajar & dinyatakan opsional', ad)
 
+        print('== AD2. Jalan keluar saat sedang masuk (beranda & menu Lainnya) ==')
+        ad2 = page.evaluate("""() => {
+            const out = {};
+            // tiru keadaan "sedang masuk dengan Google"
+            localStorage.setItem('tni_google_akun', JSON.stringify({ email: 'uji@contoh.id', nama: 'Uji Google', foto: '', sub: '123' }));
+            navTo('home'); render();
+            out.diBeranda = !!document.querySelector('.tautan-akun [onclick*="keluarGoogle"]');
+            bukaMenuLain();
+            out.diMenu = !!document.querySelector('#menuLain [onclick*="keluarGoogle"]');
+            // item menu harus menutup overlay saat dipilih
+            const item = document.querySelector('#menuLain .menu-lain-item');
+            if (item) item.click();
+            out.menuTutupSetelahPilih = !document.getElementById('menuLain');
+            // tekan tombol keluar: akun harus benar-benar diputus dari perangkat
+            window.confirm = () => true;
+            navTo('home'); render();
+            const t = document.querySelector('.tautan-akun [onclick*="keluarGoogle"]');
+            if (t) t.click();
+            out.akunTerputus = !localStorage.getItem('tni_google_akun');
+            out.tombolHilang = !document.querySelector('.tautan-akun [onclick*="keluarGoogle"]');
+            return out;
+        }""")
+        cek(ad2['diBeranda'], 'saat masuk dengan Google: tombol Keluar tampil di beranda', ad2)
+        cek(ad2['diMenu'], 'saat masuk dengan Google: Keluar tersedia di menu Lainnya', ad2)
+        cek(ad2['menuTutupSetelahPilih'], 'menu Lainnya menutup sendiri setelah item dipilih', ad2)
+        cek(ad2['akunTerputus'] and ad2['tombolHilang'], 'menekan Keluar memutus akun dari perangkat & tombolnya hilang', ad2)
+
         print('== AE. Aktif: alur Drive dengan Google tiruan ==')
         ae = page.evaluate("""() => {
             const hasil = { panggilan: [], dipanggilMasuk: false };
