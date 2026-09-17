@@ -30,6 +30,24 @@ return dbTarik().then(function () { return dbDorongSekarang(); });
 })
 .catch(function () { tampilkanStatusSinkron('Database tidak terjangkau sekarang; latihan tetap jalan.'); return false; });
 };
+// Masuk memakai KODE AKSES: menyambung "ruang" progres milik kode itu di server.
+// Satu kode = satu ruang; kode berbeda = ruang berbeda, jadi progres tiap pengguna terpisah.
+window.dbMasukKode = function (kode) {
+if (!AKUN_DB.aktif || !kode) return Promise.resolve(false);
+return fetch(AKUN_DB.api + '/api/ruang/masuk', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ kode: String(kode).toUpperCase() })
+}).then(function (r) { return r.ok ? r.json() : null; })
+.then(function (j) {
+if (!j || !j.token) return false;
+__dbToken = j.token;
+try { localStorage.setItem('tni_sesi_db', j.token); } catch (e) {}
+tampilkanStatusSinkron('Progresmu tersimpan pada kode ini.');
+return dbTarik().then(function () { return dbDorongSekarang(); });
+})
+.catch(function () { tampilkanStatusSinkron('Database tidak terjangkau sekarang; latihan tetap jalan.'); return false; });
+};
 function dbToken() {
 if (__dbToken) return __dbToken;
 __dbToken = dbTokenTersimpan();
@@ -129,6 +147,18 @@ setAsli(k, v);
 if (kunci.indexOf(k) !== -1) jadwalkanDorong();
 };
 window.addEventListener('online', function () { if (dbsudahMasuk()) dbDorongSekarang(true); });
+// Sambung otomatis ke ruang kode dari kunjungan sebelumnya: bila ada kode tersimpan
+// (atau dibuka dengan kode pengembang) dan belum ada sesi, daftarkan sekali lagi.
+setTimeout(function () {
+try {
+if (dbTokenTersimpan()) return;
+var kode = '';
+try { kode = localStorage.getItem('tni_kode_akses') || ''; } catch (e) {}
+if (!kode && localStorage.getItem('tni_akses_pemilik') === '1' &&
+typeof AKSES !== 'undefined' && AKSES.kodePengembang) kode = AKSES.kodePengembang;
+if (kode && typeof window.dbMasukKode === 'function') window.dbMasukKode(kode);
+} catch (e) {}
+}, 1500);
 })();
 window.renderPemilik = function () {
 var t = dbToken();

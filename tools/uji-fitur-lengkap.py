@@ -813,7 +813,7 @@ def main():
             out.adaKolomTempel = !!document.getElementById('kodeSinkron');
             out.adaTombolSalin = !!document.querySelector('[onclick*="salinKode"]');
             out.adaTombolCadangan = !!document.querySelector('[onclick*="salinBerkas"]');
-            out.penjelasanTanpaServer = document.body.textContent.indexOf('tidak ada data pribadimu yang keluar') >= 0;
+            out.penjelasanTanpaServer = document.body.textContent.indexOf('penjelasan lengkapnya ada di kebijakan privasi') >= 0;
             out.adaTombolHapus = !!document.querySelector('[onclick*="hapusBahan"]') || !!document.querySelector('[onclick*="hapusSemuaBahan"]');
             // hapus satu jenis bahan (dengan dialog disetujui)
             window.confirm = () => true;
@@ -835,7 +835,7 @@ def main():
             'bahan belajar terdaftar & bisa dihapus pengguna', ab)
         cek(ab['adaKode'] and ab['adaKolomTempel'] and ab['adaTombolSalin'] and ab['adaTombolCadangan'],
             'kode ruang belajar bisa disalin, ditempel, dan dicadangkan', ab)
-        cek(ab['penjelasanTanpaServer'], 'dinyatakan jelas bahwa data tidak keluar dari perangkat', ab)
+        cek(ab['penjelasanTanpaServer'], 'cara penyimpanan data dijelaskan & menunjuk kebijakan privasi', ab)
         _js = open(os.path.join(ROOT, 'static', 'js', 'app.js'), encoding='utf-8').read()
         _akses = open(os.path.join(ROOT, 'static', 'js', 'akses.js'), encoding='utf-8').read()
         cek('gratis' not in _js.lower() and 'sekali bayar' in _js.lower() and AKSES_HARGA in _akses,

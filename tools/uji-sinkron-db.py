@@ -50,6 +50,7 @@ TIRUAN = """() => {
     window.__dikirim = [];
     const isiApi = {
         '/api/masuk': { token: 'sesi-uji-123', pengguna: { surel: 'pembeli@contoh.id' } },
+        '/api/ruang/masuk': { token: 'sesi-ruang-77', pengguna: { surel: 'kode:SPUJICOBAA4D3' } },
         '/api/saya': { progres: [{ kategori: 'tkw', benar: 11, salah: 4 }],
                        salah: [{ id_soal: 'w9' }],
                        bahan: [{ jenis: 'catatan', kunci: 'tni_wawancara', isi: '{"a":1}' }],
@@ -138,6 +139,25 @@ with sync_playwright() as p:
         ada_baris = False
     teks = page.evaluate("() => { const t = document.body.innerText.replace(/\\s+/g, ' '); const i = t.indexOf('Total pengguna'); return i < 0 ? t.slice(0, 110) : t.slice(i, i + 110); }")
     cek('dasbor pemilik memuat ringkasan pengguna dari database', dasbor_ok and ada_baris, teks)
+
+    # 4b. masuk dengan kode akses -> sesi ruang tersimpan, endpoint dipanggil, kiriman pakai sesi ruang
+    page.evaluate("() => { window.__dikirim.length = 0; window.dbMasukKode('SPUJICOBAA4D3'); }")
+    try:
+        page.wait_for_function("() => localStorage.getItem('tni_sesi_db') === 'sesi-ruang-77'", timeout=15000)
+        ruang_sesi = True
+    except Exception:
+        ruang_sesi = False
+    ruang_dipanggil = page.evaluate("() => (window.__dikirim || []).some(x => x.indexOf('/api/ruang/masuk|POST') === 0)")
+    try:
+        page.wait_for_function("() => (window.__dikirim || []).some(x => x.indexOf('/api/progres|POST') === 0 && x.indexOf('Bearer sesi-ruang-77') >= 0)", timeout=15000)
+        ruang_bearer = True
+    except Exception:
+        ruang_bearer = False
+    if RUSAK:
+        ruang_sesi = False
+    cek('kode akses menyambung ruang: sesi ruang tersimpan & progres ikut terkirim',
+        ruang_sesi and ruang_dipanggil and ruang_bearer,
+        {'sesi': ruang_sesi, 'panggil': ruang_dipanggil, 'bearer': ruang_bearer})
 
     # 5. jaringan mati -> hasil aman
     page.evaluate("""() => { window.__hasilOffline = 'menunggu';

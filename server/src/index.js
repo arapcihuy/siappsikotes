@@ -104,6 +104,39 @@ async function batasiLaju(env, ip, alamat, batas, jendelaDetik) {
   return { boleh: jumlah <= batas, jumlah, batas };
 }
 
+// Sidik kode akses — HARUS sama dengan sidikKode di static/js/fitur11.js dan tools/buat-kode.py.
+const KUNCI_KODE = ['siap', 'psikotes', '2026', 'kode'].join('|');
+function sidikKode(data) {
+  let h = 2166136261;
+  const s = String(data) + '#' + KUNCI_KODE;
+  for (let i = 0; i < s.length; i++) {
+    h = h ^ s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  const pos = h % 1679616;                // 36^4
+  const abjad = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let hasil = '';
+  let p = pos;
+  while (p > 0) { hasil = abjad.charAt(p % 36) + hasil; p = Math.floor(p / 36); }
+  while (hasil.length < 4) hasil = '0' + hasil;
+  return hasil;
+}
+
+// Membuka sesi baru: token dikirim ke klien, yang disimpan di database hanya hash-nya.
+async function bukaSesi(env, penggunaId, kini) {
+  const token = teksKeBase64url(crypto.getRandomValues(new Uint8Array(32))) + '.' + teksKeBase64url(crypto.getRandomValues(new Uint8Array(16)));
+  const hash = await sha256hex(token);
+  const kedaluwarsa = new Date(Date.now() + UMUR_SESI * 1000).toISOString();
+  await env.DB.prepare('INSERT INTO sesi (token_hash, pengguna, dibuat, kedaluwarsa) VALUES (?, ?, ?, ?)')
+    .bind(hash, penggunaId, kini, kedaluwarsa).run();
+  // Hapus sesi paling lama bila melebihi 5, dan bersihkan sesi kedaluwarsa.
+  await env.DB.prepare(
+    'DELETE FROM sesi WHERE pengguna = ? AND token_hash NOT IN (SELECT token_hash FROM sesi WHERE pengguna = ? ORDER BY dibuat DESC LIMIT 5)'
+  ).bind(penggunaId, penggunaId).run();
+  await env.DB.prepare('DELETE FROM sesi WHERE kedaluwarsa < ?').bind(kini).run();
+  return token;
+}
+
 function adalahPemilik(pengguna) {
   return PEMILIK.indexOf(pengguna.surel) !== -1;
 }
@@ -149,20 +182,37 @@ export default {
           'ON CONFLICT(id) DO UPDATE SET surel = excluded.surel, nama = excluded.nama, foto = excluded.foto, terakhir_aktif = excluded.terakhir_aktif'
         ).bind(orang.id, orang.surel, orang.nama, orang.foto, kini, kini).run();
 
-        const token = teksKeBase64url(crypto.getRandomValues(new Uint8Array(32))) + '.' + teksKeBase64url(crypto.getRandomValues(new Uint8Array(16)));
-        const hash = await sha256hex(token);
-        const kedaluwarsa = new Date(Date.now() + UMUR_SESI * 1000).toISOString();
-        await env.DB.prepare('INSERT INTO sesi (token_hash, pengguna, dibuat, kedaluwarsa) VALUES (?, ?, ?, ?)')
-          .bind(hash, orang.id, kini, kedaluwarsa).run();
-        // Hapus sesi paling lama bila melebihi 5, dan bersihkan sesi kedaluwarsa.
-        await env.DB.prepare(
-          'DELETE FROM sesi WHERE pengguna = ? AND token_hash NOT IN (SELECT token_hash FROM sesi WHERE pengguna = ? ORDER BY dibuat DESC LIMIT 5)'
-        ).bind(orang.id, orang.id).run();
-        await env.DB.prepare('DELETE FROM sesi WHERE kedaluwarsa < ?').bind(kini).run();
+        const token = await bukaSesi(env, orang.id, kini);
         await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
           .bind(orang.id, 'masuk', orang.surel, kini).run();
 
         return jawab({ token, pengguna: { id: orang.id, surel: orang.surel, nama: orang.nama, pemilik: adalahPemilik(orang) } }, 200, asal);
+      }
+
+      // ---- masuk dengan kode akses: satu ruang progres per kode (tanpa akun Google) ----
+      // Id ruang = turunan SHA-256 dari kode (kode mentah tidak dipakai sebagai id); kode
+      // dicatat di kolom surel sebagai penanda supaya pemilik bisa mengenali ruang per kode.
+      if (jalan === '/api/ruang/masuk' && request.method === 'POST') {
+        const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+        const laju = await batasiLaju(env, ip, 'ruang', 20, 60);   // maksimal 20 kali per menit per IP
+        if (!laju.boleh) return jawab({ pesan: 'terlalu banyak percobaan, coba lagi nanti' }, 429, asal);
+        const badan = await request.json().catch(() => ({}));
+        const kode = String(badan.kode || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+        if (kode.indexOf('SP') !== 0 || kode.length < 8 || kode.length > 44) {
+          return jawab({ pesan: 'kode tidak dikenali' }, 400, asal);
+        }
+        const isi = kode.slice(2, kode.length - 4);
+        if (sidikKode(isi) !== kode.slice(-4)) return jawab({ pesan: 'kode tidak cocok' }, 400, asal);
+        const id = 'kode:' + (await sha256hex(kode)).slice(0, 40);
+        const kini = new Date().toISOString();
+        await env.DB.prepare(
+          'INSERT INTO pengguna (id, surel, nama, foto, dibuat, terakhir_aktif) VALUES (?, ?, ?, ?, ?, ?) ' +
+          'ON CONFLICT(id) DO UPDATE SET terakhir_aktif = excluded.terakhir_aktif'
+        ).bind(id, 'kode:' + kode, 'Pengguna kode', '', kini, kini).run();
+        const token = await bukaSesi(env, id, kini);
+        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+          .bind(id, 'ruang', kode.slice(-6), kini).run();
+        return jawab({ token, pengguna: { id, surel: 'kode:' + kode, nama: 'Pengguna kode', pemilik: false } }, 200, asal);
       }
 
       // ---- keluar: cabut sesi ini (dan sesi lama yang menumpuk) ----

@@ -61,7 +61,7 @@ b.nama.replace(/'/g, '') + '\')">hapus</button></div></div>';
 return '<div class="card">' +
 '<div class="hari-head">' + ic('user', 16) + ' <strong>Ruang belajar saya</strong>' +
 '<span class="hari-tgl">' + (p.nama ? escapeHtml(p.nama) : 'tanpa nama') + '</span></div>' +
-'<div class="hari-sub">Semua bahan belajarmu tersimpan <strong>di perangkat ini</strong>, bukan di server kami. ' +
+'<div class="hari-sub">Semua bahan belajarmu tersimpan <strong>di perangkat ini</strong>. Bila kamu memakai kode akses, salinannya ikut tersimpan dengan kunci kodemu supaya bisa dilanjutkan dari perangkat lain. ' +
 'Tidak ada akun, tidak ada surel, dan tidak ada kata sandi yang perlu diingat.</div>' +
 (p.nama ? '' : '<button class="btn btn-secondary btn-sm" style="margin-top:10px" onclick="goHome()">Isi profil belajar dulu</button>') +
 '</div>' +
@@ -76,6 +76,7 @@ daftarBahan +
 '<span class="hari-tgl">untuk pindah perangkat</span></div>' +
 '<div class="hari-sub">Ini "akunmu" tanpa kata sandi. Simpan kodenya (mis. di catatan pribadi). ' +
 'Tempel kode ini di perangkat lain, dan seluruh bahan belajarmu ikut pindah. ' +
+'Bila memakai kode akses, progres juga otomatis tersimpan dengan kunci kode itu. ' +
 'Kode ini tidak dikirim ke mana pun dan tidak bisa dibaca orang lain tanpa kamu berikan.</div>' +
 '<textarea class="profil-input" id="kodeku" rows="3" style="width:100%;margin-top:8px" readonly>' + escapeHtml(kode) + '</textarea>' +
 '<div class="aksi-bar" style="margin-top:8px">' +
@@ -90,11 +91,12 @@ ic('check', 14) + ' Pakai kode ini</button>' +
 '</div>' +
 '<div class="card">' +
 '<div class="hari-head">' + ic('shield', 16) + ' <strong>Kenapa tidak pakai akun biasa</strong></div>' +
-'<div class="hari-sub">Akun dengan surel dan kata sandi mengharuskan kami menyimpan datamu di server: ' +
-'ada biaya bulanan, dan ada kewajiban pelindungan data pribadi. Dengan cara ini, <strong>tidak ada data ' +
-'pribadimu yang keluar dari perangkatmu</strong> — dan latihan tetap bisa dipakai walau internet mati.</div>' +
-'<div class="hari-sub" style="margin-top:8px">Kalau nanti diperlukan ruang belajar yang otomatis tersimpan ' +
-'online, itu akan diumumkan lebih dulu berikut perubahan kebijakan privasinya.</div>' +
+'<div class="hari-sub">Kode akses menggantikan akun: tidak ada surel, tidak ada kata sandi, dan tidak ada ' +
+'yang perlu didaftarkan. Bahan belajarmu tersimpan dengan kunci kodemu supaya bisa dilanjutkan dari ' +
+'perangkat lain — penjelasan lengkapnya ada di kebijakan privasi. Latihan tetap bisa dipakai walau ' +
+'internet mati.</div>' +
+'<div class="hari-sub" style="margin-top:8px">Kalau cara penyimpanan data berubah, kami umumkan lebih dulu ' +
+'dan catatannya selalu ada di halaman kebijakan privasi.</div>' +
 '<div class="aksi-bar" style="margin-top:10px">' +
 '<button class="btn btn-ghost btn-sm" onclick="window.open(\'privasi/\',\'_blank\')">Baca kebijakan privasi</button>' +
 '</div>' +

@@ -41,6 +41,16 @@ try { return JSON.parse(localStorage.getItem('tni_pembelian') || 'null'); } catc
 function rupiahKomersial(n) {
 return 'Rp ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
+// Sesudah kode diterima: sambungkan ruang progres milik kode itu (bila server tersedia),
+// lalu muat ulang. Halaman tetap dimuat ulang walau sinkronisasi lambat atau gagal.
+function bukaRuangKode(kode) {
+var tunggu = Promise.resolve();
+try {
+if (typeof dbMasukKode === 'function') tunggu = Promise.resolve(dbMasukKode(kode)).catch(function () {});
+} catch (e) {}
+Promise.race([tunggu, new Promise(function (r) { setTimeout(r, 2500); })])
+.then(function () { location.reload(); }, function () { location.reload(); });
+}
 window.terapkanKodeAkses = function () {
 var el = document.getElementById('kodeAksesGerbang');
 var st = document.getElementById('statusGerbang');
@@ -49,7 +59,7 @@ if (!kode) { if (st) st.textContent = 'Masukkan kode aksesmu dulu.'; return; }
 if (AKSES.kodePengembang && kode === String(AKSES.kodePengembang).toUpperCase()) {
 try { localStorage.setItem('tni_akses_pemilik', '1'); } catch (e) {}
 if (st) st.textContent = 'Kode pengembang diterima. Membuka seluruh aplikasi...';
-setTimeout(function () { location.reload(); }, 700);
+bukaRuangKode(kode);
 return;
 }
 var sah = false;
@@ -67,7 +77,7 @@ tanggal: new Date().toISOString(), produk: 'Akses penuh SiapPsikotes + Laporan L
 } catch (e) {}
 if (st) st.textContent = 'Kode sah. Membuka seluruh aplikasi...';
 try { if (typeof googleMasuk === 'function' && googleMasuk() && typeof googleKirimKeDrive === 'function') googleKirimKeDrive(false); } catch (e) {}
-setTimeout(function () { location.reload(); }, 700);
+bukaRuangKode(kode);
 } else if (st) {
 var wa = (typeof BAYAR !== 'undefined' && BAYAR.whatsapp) ? String(BAYAR.whatsapp).replace(/[^0-9]/g, '') : '';
 st.innerHTML = 'Kode tidak dikenali. Periksa penulisannya' + (wa
