@@ -1062,11 +1062,20 @@ def main():
             out.pemilikGoogleDikenali = adalahPemilik() && punyaAkses();
             localStorage.removeItem('tni_google_akun');
 
-            // kode pengembang membuka pemilik
+            // kode pengembang membuka pemilik.
+            // Catatan: menekan kode juga menyambung "ruang kode" lalu memuat ulang halaman
+            // (menunggu sinkronisasi, hingga 2,5 dtk). Muat ulang itu bisa mendarat di tengah
+            // rangkaian uji (penyebab "context destroyed"), jadi pemicunya dinetralkan di sini;
+            // jalur sinkronisasi ruang kode diuji tersendiri di tools/uji-sinkron-db.py.
             const el = document.getElementById('kodeAksesGerbang');
             if (el) el.value = AKSES.kodePengembang;
+            const simpanBukaRuang = window.bukaRuangKode;
+            let ruangDipanggil = false;
+            window.bukaRuangKode = function () { ruangDipanggil = true; };
             terapkanKodeAkses();
             out.kodePengembangMembuka = localStorage.getItem('tni_akses_pemilik') === '1';
+            out.ruangDisambung = ruangDipanggil;
+            window.bukaRuangKode = simpanBukaRuang;
 
             // kode asal-asalan TIDAK membuka
             localStorage.removeItem('tni_akses_pemilik');
@@ -1089,8 +1098,8 @@ def main():
             'pengunjung terkunci: layar MASUK tampil & kolom kode akses tersedia', aj)
         cek(aj['materiTidakMulai'], 'materi tidak bisa dimulai sebelum membeli', aj)
         cek(aj['pemilikGoogleDikenali'], 'akun Google pemilik dikenali otomatis', aj)
-        cek(aj['kodePengembangMembuka'] and aj['kodePalsuDitolak'],
-            'kode pengembang membuka; kode palsu ditolak', aj)
+        cek(aj['kodePengembangMembuka'] and aj['kodePalsuDitolak'] and aj['ruangDisambung'],
+            'kode pengembang membuka (menyambung ruang kode); kode palsu ditolak', aj)
 
 
         print('== AK. Gerbang aplikasi = layar MASUK (belanja dipindah ke halaman arahan) ==')
