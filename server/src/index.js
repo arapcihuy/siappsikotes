@@ -321,6 +321,23 @@ export default {
         return jawab({ ok: true }, 200, asal);
       }
 
+      // ---- hapus satu bahan belajar ----
+      if (jalan === '/api/bahan/hapus' && request.method === 'POST') {
+        if (!saya) return perluMasuk();
+        const b = await request.json().catch(() => ({}));
+        const kunci = String(b.kunci || '').slice(0, 80);
+        if (!kunci) return jawab({ pesan: 'kunci wajib' }, 400, asal);
+        await env.DB.prepare('DELETE FROM bahan WHERE pengguna = ? AND kunci = ?').bind(saya.id, kunci).run();
+        return jawab({ ok: true }, 200, asal);
+      }
+
+      // ---- hapus semua bahan belajar ----
+      if (jalan === '/api/bahan/semua/hapus' && request.method === 'POST') {
+        if (!saya) return perluMasuk();
+        await env.DB.prepare('DELETE FROM bahan WHERE pengguna = ?').bind(saya.id).run();
+        return jawab({ ok: true }, 200, asal);
+      }
+
       // ---- simpan pembelian (kode akses) agar tidak hilang saat ganti perangkat ----
       if (jalan === '/api/pembelian' && request.method === 'POST') {
         if (!saya) return perluMasuk();

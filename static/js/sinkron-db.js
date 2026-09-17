@@ -10,7 +10,8 @@ var __dbSedangDorong = false;
 function dbKunci() {
 return ['tni_prog', 'tni_wrong', 'tni_scores', 'tni_to_total', 'tni_harian',
 'tni_iq_log', 'tni_iq_meta', 'tni_iq_nb', 'tni_iq_sesi', 'tni_jalur_mulai', 'tni_psi_progress',
-'tni_soal_riwayat', 'tni_kode_akses', 'tni_pembelian', 'tni_laporan_bayar'];
+'tni_soal_riwayat', 'tni_kode_akses', 'tni_pembelian', 'tni_laporan_bayar',
+'tni_wawancara', 'tni_hafal', 'tni_profil', 'tni_soal_stat', 'tni_gambar_riwayat', 'tni_laporan'];
 }
 window.dbTokenTersimpan = function () {
 try { return localStorage.getItem('tni_sesi_db') || ''; } catch (e) { return ''; }
@@ -64,6 +65,21 @@ method: 'POST',
 headers: { 'Authorization': 'Bearer ' + t }
 }).then(function () { return true; }).catch(function () { return true; });
 };
+window.dbHapusBahan = function (kunci) {
+var t = dbToken();
+if (!t || !(window.asalSinkronDiizinkan && window.asalSinkronDiizinkan())) return Promise.resolve(false);
+return fetch(AKUN_DB.api + '/api/bahan/hapus', {
+method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
+body: JSON.stringify({ kunci: kunci })
+}).catch(function () { return false; });
+};
+window.dbHapusSemuaBahan = function () {
+var t = dbToken();
+if (!t || !(window.asalSinkronDiizinkan && window.asalSinkronDiizinkan())) return Promise.resolve(false);
+return fetch(AKUN_DB.api + '/api/bahan/semua/hapus', {
+method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t }
+}).catch(function () { return false; });
+};
 function dbToken() {
 if (__dbToken) return __dbToken;
 __dbToken = dbTokenTersimpan();
@@ -84,13 +100,37 @@ return fetch(AKUN_DB.api + '/api/saya', { headers: { Authorization: 'Bearer ' + 
 .then(function (j) {
 if (!j) return false;
 var prog = {};
-(j.progres || []).forEach(function (x) { prog[x.kategori] = { benar: x.benar, salah: x.salah }; });
+try { prog = JSON.parse(localStorage.getItem('tni_prog') || '{}'); } catch (e) {}
+(j.progres || []).forEach(function (x) {
+var b = x.benar || 0;
+var s = x.salah || 0;
+var tot = (x.total !== undefined) ? x.total : (b + s);
+var lama = prog[x.kategori] || {};
+prog[x.kategori] = {
+total: Math.max(tot, lama.total || 0, (lama.benar || 0) + (lama.salah || 0)),
+benar: Math.max(b, lama.benar || 0),
+salah: Math.max(s, lama.salah || 0)
+};
+});
 if (Object.keys(prog).length) {
 try { localStorage.setItem('tni_prog', JSON.stringify(prog)); } catch (e) {}
 }
-var salah = (j.salah || []).map(function (x) { return x.id_soal; });
-if (salah.length) {
-try { localStorage.setItem('tni_wrong', JSON.stringify(salah)); } catch (e) {}
+var bankLama = {};
+try {
+var mentah = JSON.parse(localStorage.getItem('tni_wrong') || '{}');
+if (mentah && typeof mentah === 'object' && !Array.isArray(mentah)) bankLama = mentah;
+} catch (e) {}
+var hari = new Date().toISOString().slice(0, 10);
+(j.salah || []).forEach(function (x) {
+if (!x.id_soal) return;
+if (!bankLama[x.id_soal]) {
+bankLama[x.id_soal] = { s: x.jumlah || 1, b: 0, tahap: 0, j: hari, t: x.terakhir ? String(x.terakhir).slice(0, 10) : hari };
+} else {
+bankLama[x.id_soal].s = Math.max(bankLama[x.id_soal].s || 0, x.jumlah || 1);
+}
+});
+if (Object.keys(bankLama).length) {
+try { localStorage.setItem('tni_wrong', JSON.stringify(bankLama)); } catch (e) {}
 }
 (j.bahan || []).forEach(function (x) {
 try { localStorage.setItem(x.kunci, x.isi); } catch (e) {}
@@ -116,14 +156,17 @@ var prog = {};
 try { prog = JSON.parse(localStorage.getItem('tni_prog') || '{}'); } catch (e) {}
 Object.keys(prog).forEach(function (k) {
 var v = prog[k] || {};
+var b = typeof v.benar === 'number' ? v.benar : 0;
+var s = typeof v.salah === 'number' ? v.salah : Math.max(0, (typeof v.total === 'number' ? v.total : 0) - b);
 tugas.push(fetch(AKUN_DB.api + '/api/progres', {
 method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
-body: JSON.stringify({ kategori: k, benar: v.benar || 0, salah: v.salah || 0 })
+body: JSON.stringify({ kategori: k, benar: b, salah: s })
 }));
 });
-var salah = [];
-try { salah = JSON.parse(localStorage.getItem('tni_wrong') || '[]'); } catch (e) {}
-(Array.isArray(salah) ? salah : []).slice(0, 200).forEach(function (id) {
+var salahRaw = null;
+try { salahRaw = JSON.parse(localStorage.getItem('tni_wrong') || '{}'); } catch (e) {}
+var ids = Array.isArray(salahRaw) ? salahRaw : (salahRaw && typeof salahRaw === 'object' ? Object.keys(salahRaw) : []);
+ids.slice(0, 200).forEach(function (id) {
 tugas.push(fetch(AKUN_DB.api + '/api/salah', {
 method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
 body: JSON.stringify({ id_soal: String(id) })
@@ -138,10 +181,18 @@ method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'B
 body: JSON.stringify({ kode: kode, rujukan: (bel && bel.rujukan) || '', nominal: (bel && bel.nominal) || 0 })
 }));
 }
-// Sisa bahan belajar (nilai, log IQ, jalur, laporan) ikut dikirim per kunci, supaya
-// ruang akun benar-benar menjadi cadangan utuh — bukan hanya progres & pembelian.
+var pf = null;
+try { pf = JSON.parse(localStorage.getItem('tni_profil') || 'null'); } catch (e) {}
+if (pf && (pf.jalur || pf.target)) {
+tugas.push(fetch(AKUN_DB.api + '/api/profil', {
+method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
+body: JSON.stringify({ jalur: pf.jalur || '', target_tanggal: pf.target || '' })
+}));
+}
+// Sisa bahan belajar (nilai, log IQ, jalur, laporan, profil, wawancara, dsb.) ikut dikirim per kunci
 ['tni_scores', 'tni_to_total', 'tni_harian', 'tni_iq_log', 'tni_iq_meta', 'tni_iq_nb',
-'tni_iq_sesi', 'tni_jalur_mulai', 'tni_psi_progress', 'tni_soal_riwayat', 'tni_laporan_bayar']
+'tni_iq_sesi', 'tni_jalur_mulai', 'tni_psi_progress', 'tni_soal_riwayat', 'tni_laporan_bayar',
+'tni_wawancara', 'tni_hafal', 'tni_profil', 'tni_soal_stat', 'tni_gambar_riwayat', 'tni_laporan']
 .forEach(function (k) {
 var v = null;
 try { v = localStorage.getItem(k); } catch (e) {}

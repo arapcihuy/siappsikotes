@@ -864,7 +864,10 @@ tni_iq_meta: loadIqMeta(),
 tni_iq_nb: loadIqNb(),
 tni_iq_sesi: loadIqSesi(),
 tni_to_total: loadToTotal(),
-tni_psi_progress: (function(){ try { return JSON.parse(localStorage.getItem('tni_psi_progress')||'[]'); } catch(e){ return []; } })()
+tni_psi_progress: (function(){ try { return JSON.parse(localStorage.getItem('tni_psi_progress')||'[]'); } catch(e){ return []; } })(),
+tni_wrong: (function(){ try { return JSON.parse(localStorage.getItem('tni_wrong')||'{}'); } catch(e){ return {}; } })(),
+tni_harian: (function(){ try { return JSON.parse(localStorage.getItem('tni_harian')||'{}'); } catch(e){ return {}; } })(),
+tni_profil: (function(){ try { return JSON.parse(localStorage.getItem('tni_profil')||'{}'); } catch(e){ return {}; } })()
 };
 var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
 var url = URL.createObjectURL(blob);
@@ -964,6 +967,15 @@ localStorage.setItem('tni_iq_meta', JSON.stringify(cleanIqMeta));
 localStorage.setItem('tni_iq_nb', JSON.stringify(cleanIqNb));
 localStorage.setItem('tni_psi_progress', JSON.stringify(cleanPsi));
 localStorage.setItem('tni_to_total', String(Math.max(cleanScores.length, Number(json.tni_to_total) || 0)));
+if (json.tni_wrong && typeof json.tni_wrong === 'object' && !Array.isArray(json.tni_wrong)) {
+localStorage.setItem('tni_wrong', JSON.stringify(json.tni_wrong));
+}
+if (json.tni_harian && typeof json.tni_harian === 'object') {
+localStorage.setItem('tni_harian', JSON.stringify(json.tni_harian));
+}
+if (json.tni_profil && typeof json.tni_profil === 'object') {
+localStorage.setItem('tni_profil', JSON.stringify(json.tni_profil));
+}
 updateHeaderStats();
 alert('Data backup terverifikasi aman & berhasil dipulihkan!');
 render();
@@ -983,6 +995,7 @@ localStorage.removeItem('tni_iq_log');
 localStorage.removeItem('tni_iq_sesi');
 localStorage.removeItem('tni_iq_meta');
 localStorage.removeItem('tni_iq_nb');
+if (window.dbHapusSemuaBahan) window.dbHapusSemuaBahan();
 updateHeaderStats();
 render();
 }

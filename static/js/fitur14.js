@@ -37,12 +37,14 @@ return hasil;
 window.hapusBahan = function (kunci, nama) {
 if (!confirm('Hapus "' + nama + '"? Data ini tidak bisa dikembalikan.')) return;
 try { localStorage.removeItem(kunci); } catch (e) {}
+if (window.dbHapusBahan) window.dbHapusBahan(kunci);
 render();
 };
 window.hapusSemuaBahan = function () {
 if (!confirm('Hapus SELURUH data belajar di perangkat ini? Bahan belajarmu akan hilang semua.')) return;
 BAHAN_BELAJAR.forEach(function (b) { try { localStorage.removeItem(b.k); } catch (e) {} });
 try { localStorage.removeItem('tni_b5'); localStorage.removeItem('tni_jalur'); } catch (e) {}
+if (window.dbHapusSemuaBahan) window.dbHapusSemuaBahan();
 render();
 };
 window.renderAkun = function () {
