@@ -7,8 +7,9 @@
 #   3. Pemeriksaan sintaks seluruh JavaScript
 #   4. Merek & identitas (tanpa merek lama)
 #   5. Penyangkalan afiliasi di semua halaman publik
-#   6. Uji peramban seluruh fitur aplikasi
-#   7. Uji tampilan halaman pendukung (/mutu/, /beli/, /syarat/, /privasi/)
+#   6. Uji runtime aplikasi (9 kategori, gambar, tryout, dst - sama dengan CI)
+#   7. Uji peramban seluruh fitur aplikasi
+#   8. Uji tampilan halaman pendukung (/mutu/, /beli/, /syarat/, /privasi/)
 #
 # Kalau ada satu saja gagal, pengiriman DIBATALKAN. Ini mencegah kejadian
 # berulang: CI merah karena pemeriksaan yang sebenarnya bisa dijalankan lokal.
@@ -99,7 +100,18 @@ else
 fi
 
 echo
-echo "=== 6/7 UJI PERAMBAN (sama dengan CI) ==="
+echo "=== 6/8 UJI RUNTIME APLIKASI (sama dengan CI) ==="
+if [ "${1:-}" = "--cepat" ]; then
+  echo "  (dilewati karena --cepat - JANGAN kirim bila menambah atau mengubah fitur)"
+else
+  if ! $PY tools/uji-runtime.py; then
+    echo ">>> GAGAL: uji runtime tidak lulus"
+    GAGAL=1
+  fi
+fi
+
+echo
+echo "=== 7/8 UJI PERAMBAN SELURUH FITUR (sama dengan CI) ==="
 if [ "${1:-}" = "--cepat" ]; then
   echo "  (dilewati karena --cepat - JANGAN kirim bila menambah atau mengubah fitur)"
 else
@@ -110,7 +122,7 @@ else
 fi
 
 echo
-echo "=== 7/7 UJI TAMPILAN HALAMAN PENDUKUNG (/mutu/, /beli/, /syarat/, /privasi/) ==="
+echo "=== 8/8 UJI TAMPILAN HALAMAN PENDUKUNG (/mutu/, /beli/, /syarat/, /privasi/) ==="
 if [ "${1:-}" = "--cepat" ]; then
   echo "  (dilewati karena --cepat - jalankan bila menyentuh halaman pendukung)"
 else

@@ -46,7 +46,8 @@ return 'Rp ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 function bukaRuangKode(kode) {
 var tunggu = Promise.resolve();
 try {
-if (typeof dbMasukKode === 'function') tunggu = Promise.resolve(dbMasukKode(kode)).catch(function () {});
+var boleh = (typeof asalSinkronDiizinkan === 'function') ? asalSinkronDiizinkan() : true;
+if (boleh && typeof dbMasukKode === 'function') tunggu = Promise.resolve(dbMasukKode(kode)).catch(function () {});
 } catch (e) {}
 Promise.race([tunggu, new Promise(function (r) { setTimeout(r, 2500); })])
 .then(function () { location.reload(); }, function () { location.reload(); });

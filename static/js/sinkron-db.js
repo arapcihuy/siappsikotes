@@ -147,6 +147,17 @@ setAsli(k, v);
 if (kunci.indexOf(k) !== -1) jadwalkanDorong();
 };
 window.addEventListener('online', function () { if (dbsudahMasuk()) dbDorongSekarang(true); });
+// Sinkronisasi hanya diizinkan server dari asal tertentu (daftar ini HARUS sama dengan
+// SITUS di server/src/index.js). Dari asal lain - mis. peladen uji berport acak -
+// permintaannya pasti ditolak; lebih baik tidak dicoba sama sekali daripada
+// memunculkan galat CORS di konsol.
+window.asalSinkronDiizinkan = function () {
+try {
+var o = String(location.origin || '');
+return ['https://siappsikotes.my.id', 'https://www.siappsikotes.my.id', 'https://arapcihuy.github.io',
+'http://localhost:8000', 'http://127.0.0.1:8000'].indexOf(o) !== -1;
+} catch (e) { return false; }
+};
 // Sambung otomatis ke ruang kode dari kunjungan sebelumnya: bila ada kode tersimpan
 // (atau dibuka dengan kode pengembang) dan belum ada sesi, daftarkan sekali lagi.
 setTimeout(function () {
@@ -156,7 +167,7 @@ var kode = '';
 try { kode = localStorage.getItem('tni_kode_akses') || ''; } catch (e) {}
 if (!kode && localStorage.getItem('tni_akses_pemilik') === '1' &&
 typeof AKSES !== 'undefined' && AKSES.kodePengembang) kode = AKSES.kodePengembang;
-if (kode && typeof window.dbMasukKode === 'function') window.dbMasukKode(kode);
+if (kode && typeof window.dbMasukKode === 'function' && window.asalSinkronDiizinkan()) window.dbMasukKode(kode);
 } catch (e) {}
 }, 1500);
 })();
