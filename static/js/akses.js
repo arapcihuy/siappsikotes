@@ -7,7 +7,11 @@ kodePengembang: 'SPDEVPEMILIKB01J4S1',
 pesanGratis: false
 };
 window.bacaAkunGoogle = function () {
-try { return JSON.parse(localStorage.getItem('tni_google_akun') || 'null'); } catch (e) { return null; }
+try {
+var a = JSON.parse(localStorage.getItem('tni_google_akun') || 'null');
+// catatan tanpa surel sah (mis. sisa percobaan masuk yang gagal) dianggap belum masuk
+return a && a.email && a.email.indexOf('@') > 0 ? a : null;
+} catch (e) { return null; }
 };
 window.adalahPemilik = function () {
 var a = bacaAkunGoogle();

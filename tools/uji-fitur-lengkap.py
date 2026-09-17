@@ -999,6 +999,69 @@ def main():
         cek(any('upload/drive/v3/files' in a or 'drive/v3/files' in a for a in ae['alamat']),
             'salinan benar-benar dikirim ke Drive pengguna (endpoint benar)', ae['alamat'])
 
+        print('== AE2. Masuk tanpa id_token: email lewat userinfo, pemilik langsung masuk, Drive senyap ==')
+        ae2a = page.evaluate("""() => {
+            const simpanan = localStorage.getItem('tni_google_akun');
+            localStorage.setItem('tni_google_akun', JSON.stringify({ email: '(tanpa surel)', nama: '', foto: '', sub: '' }));
+            const hasil = { akunRusakDiabaikan: bacaAkunGoogle() === null && bacaAkunTersimpan() === null };
+            if (simpanan === null) localStorage.removeItem('tni_google_akun'); else localStorage.setItem('tni_google_akun', simpanan);
+            return hasil;
+        }""")
+        cek(ae2a['akunRusakDiabaikan'],
+            'catatan akun rusak "(tanpa surel)" diabaikan (gerbang tidak lagi menyebut akun hantu)', ae2a)
+
+        ae2b = page.evaluate("""() => {
+            const alamat = [];
+            AKUN_GOOGLE.aktif = true;
+            AKUN_GOOGLE.clientId = 'uji.apps.googleusercontent.com';
+            window.google = { accounts: { oauth2: {
+                initTokenClient: (cfg) => ({ requestAccessToken: () => {
+                    cfg.callback({ access_token: 'token-uji-2' });   // sengaja TANPA id_token (seperti sebagian peramban)
+                } }),
+                revoke: (t, cb) => cb && cb()
+            } } };
+            window.fetch = (u, o) => { alamat.push(String(u));
+                if (String(u).indexOf('oauth2/v3/userinfo') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ email: 'rasyidahmad180@gmail.com', name: 'Pemilik Uji', sub: '1' }) });
+                if (String(u).indexOf('drive/v3/files?spaces=appDataFolder') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({files:[]}) });
+                return Promise.resolve({ ok:true, text:()=>Promise.resolve(''), json:()=>Promise.resolve({id:'berkas-2'}) });
+            };
+            masukkanGoogle();
+            return new Promise((selesai) => setTimeout(() => {
+                const akun = JSON.parse(localStorage.getItem('tni_google_akun') || 'null');
+                selesai({
+                    emailBenar: !!(akun && akun.email === 'rasyidahmad180@gmail.com'),
+                    pakaiUserinfo: alamat.some(a => a.indexOf('oauth2/v3/userinfo') >= 0),
+                    pemilikMasuk: peranAkses() === 'pemilik' && punyaAkses(),
+                    gerbangHilang: !document.getElementById('kodeAksesGerbang')
+                });
+            }, 900));
+        }""")
+        cek(ae2b['emailBenar'] and ae2b['pakaiUserinfo'],
+            'masuk tanpa id_token: email dibaca lewat API userinfo, bukan "(tanpa surel)"', ae2b)
+        cek(ae2b['pemilikMasuk'] and ae2b['gerbangHilang'],
+            'login pemilik lewat Google: langsung masuk aplikasi tanpa terkunci', ae2b)
+
+        ae2c = page.evaluate("""() => new Promise((selesai) => {
+            const asliAlert = window.alert;
+            const dicatat = [];
+            window.alert = (m) => { dicatat.push(String(m)); };
+            const panggil = (senyap) => new Promise((selesaiDalam) => {
+                try { googleAmbilDariDrive(senyap); } catch (e) {}
+                setTimeout(selesaiDalam, 400);
+            });
+            panggil(true).then(() => {
+                const setelahSenyap = dicatat.slice();
+                return panggil(undefined).then(() => {
+                    window.alert = asliAlert;
+                    selesai({ senyap: setelahSenyap, manual: dicatat.slice() });
+                });
+            });
+        })""")
+        cek(len(ae2c['senyap']) == 0,
+            'pemulihan Drive otomatis (usai masuk): senyap, tanpa pesan mengganggu', ae2c)
+        cek(any('Belum ada cadangan' in m for m in ae2c['manual']),
+            'tombol "Pulihkan dari Drive" (manual) tetap memberi kabar bila belum ada cadangan', ae2c)
+
         print('== AF. Nonaktif kembali: tidak ada panggilan ke Google ==')
         af = page.evaluate("""() => {
             const alamat = [];

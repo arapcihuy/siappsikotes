@@ -18,7 +18,8 @@ return !!__gToken;
 function bacaAkunTersimpan() {
 try {
 var a = JSON.parse(localStorage.getItem('tni_google_akun') || 'null');
-return a && a.email ? a : null;
+// catatan tanpa surel sah (mis. sisa percobaan masuk yang gagal) dianggap belum masuk
+return a && a.email && a.email.indexOf('@') > 0 ? a : null;
 } catch (e) { return null; }
 }
 function simpanAkun(a) {
@@ -48,6 +49,38 @@ s.onerror = function () { gagal(new Error('skrip Google gagal dimuat')); };
 document.head.appendChild(s);
 });
 }
+function pakaiAkunGoogle(a, idToken) {
+__gAkun = a;
+simpanAkun(a);
+try { if (typeof dbMasuk === 'function') dbMasuk(idToken || ''); } catch (e) {}
+render();
+if (AKUN_GOOGLE.driveSync) {
+var sudahPunya = (typeof punyaAkses === 'function') && punyaAkses();
+if (!sudahPunya && typeof googleAmbilDariDrive === 'function') {
+googleAmbilDariDrive(true);
+} else {
+googleKirimKeDrive(true);
+}
+}
+}
+function selesaikanMasukGoogle(idToken) {
+var a = uraiTokenGoogle(idToken);
+if (a && a.email && a.email.indexOf('@') > 0) { pakaiAkunGoogle(a, idToken); return; }
+// Sebagian peramban tidak menyertakan id_token di alur token. Jangan menyerah:
+// baca profil dari API userinfo memakai token akses yang sudah kita pegang.
+fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + __gToken } })
+.then(function (r) { return r.ok ? r.json() : null; })
+.then(function (p) {
+if (p && p.email) {
+pakaiAkunGoogle({ email: p.email, nama: p.name || '', foto: p.picture || '', sub: p.sub || '' }, idToken);
+} else {
+alert('Masuk ke Google berhasil, tetapi email tidak terbaca. Coba lagi ya, atau pakai kode akses.');
+}
+})
+.catch(function () {
+alert('Tidak bisa membaca email dari Google sekarang. Coba lagi ya, atau pakai kode akses.');
+});
+}
 window.masukkanGoogle = function () {
 if (!googleSiap()) { alert('Fitur Masuk dengan Google belum diaktifkan pemilik.'); return; }
 muatSkripGoogle().then(function () {
@@ -58,19 +91,7 @@ prompt: 'consent',
 callback: function (jawab) {
 if (jawab && jawab.access_token) {
 __gToken = jawab.access_token;
-var a = uraiTokenGoogle(jawab.id_token || '');
-__gAkun = a || { email: '(tanpa surel)', nama: '', foto: '', sub: '' };
-simpanAkun(__gAkun);
-try { if (typeof dbMasuk === 'function') dbMasuk(jawab.id_token || ''); } catch (e) {}
-render();
-if (AKUN_GOOGLE.driveSync) {
-var sudahPunya = (typeof punyaAkses === 'function') && punyaAkses();
-if (!sudahPunya && typeof googleAmbilDariDrive === 'function') {
-googleAmbilDariDrive(true);
-} else {
-googleKirimKeDrive(true);
-}
-}
+selesaikanMasukGoogle(jawab.id_token || '');
 } else {
 alert('Masuk dibatalkan atau gagal. Bahan belajarmu tetap aman di perangkat ini.');
 }
@@ -159,17 +180,20 @@ try { localStorage.setItem(k, v); n++; } catch (e) {}
 });
 return { ok: n > 0, jumlah: n };
 };
-window.googleAmbilDariDrive = function () {
+window.googleAmbilDariDrive = function (senyap) {
 if (!googleMasuk()) { alert('Masuk dengan Google dulu.'); return; }
 cariBerkasCadangan().then(function (ada) {
-if (!ada) { alert('Belum ada cadangan di Drive untuk akun ini.'); return; }
+if (!ada) {
+// mode senyap (otomatis usai masuk akun) tidak boleh mengganggu dengan pesan ini
+if (!senyap) alert('Belum ada cadangan di Drive untuk akun ini.');
+return;
+}
 return fetch('https://www.googleapis.com/drive/v3/files/' + ada.id + '?alt=media', {
 headers: { Authorization: 'Bearer ' + __gToken }
 }).then(function (r) { return r.text(); }).then(function (teks) {
 var bundel = null;
 try { bundel = JSON.parse(teks).data; } catch (e) { bundel = teks; }
-if (!bundel) { alert('Cadangan tidak terbaca.'); return; }
-var senyap = (typeof arguments[0] === 'boolean') && arguments[0];
+if (!bundel) { if (!senyap) alert('Cadangan tidak terbaca.'); return; }
 if (!senyap && !confirm('Pulihkan bahan belajar dari Drive? Data di perangkat ini akan diganti.')) return;
 var hasil = window.terapkanBundel(bundel, senyap);
 if (hasil && hasil.ok) {
