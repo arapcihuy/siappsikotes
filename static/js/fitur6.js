@@ -24,6 +24,15 @@ isi += '<button class="menu-lain-item" onclick="tutupMenuLain();keluarGoogle()">
 ic('x-circle', 15) + ' <span>Keluar dari Google</span></button>';
 }
 } catch (e) {}
+// Bila akses di perangkat ini lewat kode (pembeli/pemilik), jalan keluarnya = kunci aplikasi.
+try {
+var adaKodeMenu = false;
+try { adaKodeMenu = (localStorage.getItem('tni_akses_pemilik') === '1') || !!localStorage.getItem('tni_kode_akses'); } catch (e2) {}
+if (adaKodeMenu && typeof punyaAkses === 'function' && punyaAkses()) {
+isi += '<button class="menu-lain-item" onclick="tutupMenuLain();tutupGerbangUlang()">' +
+ic('x-circle', 15) + ' <span>Kunci aplikasi (keluar)</span></button>';
+}
+} catch (e) {}
 var lama = document.getElementById('menuLain');
 if (lama) lama.remove();
 var d = document.createElement('div');

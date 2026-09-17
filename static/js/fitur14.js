@@ -129,10 +129,14 @@ kartu.appendChild(w);
 }
 var adaAkun = false;
 try { adaAkun = (typeof bacaAkunGoogle === 'function') && !!bacaAkunGoogle(); } catch (e) {}
+var adaKode = false;
+try { adaKode = (localStorage.getItem('tni_akses_pemilik') === '1') || !!localStorage.getItem('tni_kode_akses'); } catch (e) {}
 w.innerHTML = '<button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="navTo(\'akun\')">' +
 ic('user', 14) + ' Ruang belajar saya (bahan & kode)</button>' +
 (adaAkun ? '<button class="btn btn-ghost btn-sm" style="margin-top:10px;margin-left:8px" onclick="keluarGoogle()">' +
-ic('x-circle', 14) + ' Keluar dari Google</button>' : '');
+ic('x-circle', 14) + ' Keluar dari Google</button>' : '') +
+(adaKode ? '<button class="btn btn-ghost btn-sm" style="margin-top:10px;margin-left:8px" onclick="tutupGerbangUlang()">' +
+ic('x-circle', 14) + ' Kunci aplikasi (keluar)</button>' : '');
 }
 }
 }

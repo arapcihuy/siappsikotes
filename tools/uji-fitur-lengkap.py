@@ -904,12 +904,56 @@ def main():
             if (t) t.click();
             out.akunTerputus = !localStorage.getItem('tni_google_akun');
             out.tombolHilang = !document.querySelector('.tautan-akun [onclick*="keluarGoogle"]');
+            // akses lewat kode/pemilik tetap ada -> jalan keluarnya = "Kunci aplikasi (keluar)"
+            out.kunciBeranda = !!document.querySelector('.tautan-akun [onclick*="tutupGerbangUlang"]');
+            bukaMenuLain();
+            out.kunciMenu = !!document.querySelector('#menuLain [onclick*="tutupGerbangUlang"]');
+            tutupMenuLain();
             return out;
         }""")
         cek(ad2['diBeranda'], 'saat masuk dengan Google: tombol Keluar tampil di beranda', ad2)
         cek(ad2['diMenu'], 'saat masuk dengan Google: Keluar tersedia di menu Lainnya', ad2)
         cek(ad2['menuTutupSetelahPilih'], 'menu Lainnya menutup sendiri setelah item dipilih', ad2)
         cek(ad2['akunTerputus'] and ad2['tombolHilang'], 'menekan Keluar memutus akun dari perangkat & tombolnya hilang', ad2)
+        cek(ad2['kunciBeranda'], 'akses lewat kode: "Kunci aplikasi (keluar)" tampil di beranda', ad2)
+        cek(ad2['kunciMenu'], 'akses lewat kode: "Kunci aplikasi (keluar)" tersedia di menu Lainnya', ad2)
+
+        print('== AD3. Kunci aplikasi (akses lewat kode) benar-benar mengunci ==')
+        import time as _t
+        _p2 = browser.new_page(viewport={'width': 1200, 'height': 900})
+        _p2.on('dialog', lambda d: d.accept())
+        _p2.goto(url + '?kunci=1', wait_until='load', timeout=40000)
+        _p2.wait_for_function('() => window.DATA_SOAL_INDEX && window.DATA_SOAL_INDEX.total > 0', timeout=30000)
+        # beri akses lewat kode (tanpa init-script, supaya muat ulang benar-benar membersihkan penandanya)
+        _p2.evaluate("() => { try { localStorage.setItem('tni_akses_pemilik','1'); } catch (e) {} window.confirm = () => true; navTo('home'); render(); }")
+        _klik = False
+        _t0 = _t.time()
+        while _t.time() - _t0 < 30:
+            try:
+                if _p2.evaluate("""() => { const b = document.querySelector('.tautan-akun [onclick*="tutupGerbangUlang"]'); if (b) { b.click(); return true; } return false; }"""):
+                    _klik = True
+                    break
+            except Exception:
+                pass
+            _t.sleep(0.4)
+        _terkunci = False
+        _t0 = _t.time()
+        while _t.time() - _t0 < 30:
+            try:
+                if _p2.evaluate("() => (typeof punyaAkses === 'function') && punyaAkses() === false && !!document.getElementById('kodeAksesGerbang')"):
+                    _terkunci = True
+                    break
+            except Exception:
+                pass
+            _t.sleep(0.4)
+        try:
+            _bersih = _p2.evaluate("() => localStorage.getItem('tni_akses_pemilik') === null && localStorage.getItem('tni_kode_akses') === null && localStorage.getItem('tni_akses') === null")
+        except Exception:
+            _bersih = False
+        cek(_klik and _terkunci and _bersih,
+            'menekan "Kunci aplikasi": perangkat terkunci kembali & penanda akses dibersihkan',
+            {'klik': _klik, 'terkunci': _terkunci, 'bersih': _bersih})
+        _p2.close()
 
         print('== AE. Aktif: alur Drive dengan Google tiruan ==')
         ae = page.evaluate("""() => {
