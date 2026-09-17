@@ -1,0 +1,224 @@
+{
+ "slug": "contoh-soal-deret-angka",
+ "judul_tab": "Contoh Soal Deret Angka dan Jawabannya + Pembahasan",
+ "deskripsi": "32 contoh soal deret angka, huruf, dan numerik dengan jawabannya: pola beda tetap, geometri, bertingkat, fibonacci, plus cara cepat mengerjakan.",
+ "h1": "Contoh Soal Deret Angka dan Jawabannya (Cara Cepat Menemukan Pola)",
+ "dek": "Deret angka selesai dalam sepuluh detik kalau polanya terbaca, dan menghabiskan waktu kalau kamu menebak. Di halaman ini ada 32 soal latihan berpembahasan beserta urutan pemeriksaan pola yang bisa langsung kamu pakai.",
+ "kata_kunci": "contoh soal deret angka dan jawabannya",
+ "pembuka": [
+  "Deret angka adalah rangkaian bilangan yang disusun mengikuti aturan tertentu, dan kamu diminta menentukan bilangan berikutnya. Bentuk soalnya sederhana: empat sampai enam angka, empat pilihan jawaban, dan batas waktu yang sempit. Yang dinilai bukan kemampuan matematika tingkat lanjut, melainkan kecepatan melihat hubungan antar angka.",
+  "Halaman ini memuat 32 soal latihan: satu blok penalaran yang di dalamnya ada deret angka dan deret huruf, plus satu blok numerik untuk memanaskan kecepatan berhitung. Semua soal diambil apa adanya dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang, dan setiap butir punya pembahasan yang memuat langkah pengerjaannya, bukan hanya kuncinya.",
+  "Selain blok soal, ada tiga hal yang biasanya lebih menentukan hasil: daftar pola yang paling sering muncul, urutan pemeriksaan supaya pola cepat terbaca, dan kesalahan umum yang membuat waktu terbuang. Semuanya bisa dibaca berurutan, atau langsung lompat ke blok soal kalau kamu datang untuk berlatih."
+ ],
+ "bagian": [
+  {
+   "h2": "Apa itu deret angka dan di mana soalnya muncul",
+   "isi": [
+    "Deret angka muncul di tes kemampuan numerik, tes IQ praktik, dan sebagian seleksi sekolah kedinasan maupun seleksi kerja. Namanya bisa berbeda antar penyelenggara - deret bilangan, barisan angka, atau pola bilangan - tetapi yang diukur sama: kecepatan mengenali aturan yang tersembunyi di balik urutan angka.",
+    "Formatnya hampir selalu pilihan ganda dengan empat opsi. Kalkulator umumnya tidak diperbolehkan, sehingga kertas coret menjadi alat bantu utama. Karena itu kebiasaan menulis selisih antar suku di atas angkanya lebih menentukan daripada kecepatan berhitung di kepala.",
+    "Satu hal yang perlu dipahami sejak awal: deret angka bukan soal hafalan. Tidak ada daftar jawaban yang bisa dipelajari, karena setiap deret punya aturannya sendiri. Yang bisa dilatih adalah cara memeriksa dan kecepatan mengenali pola, dan keduanya terbentuk dari pengulangan pendek yang sering."
+   ],
+   "poin": [
+    "Umumnya empat sampai enam suku ditampilkan, lalu kamu diminta meneruskan satu atau dua suku berikutnya.",
+    "Sebagian soal meminta suku yang hilang di tengah, bukan suku terakhir, jadi baca pertanyaannya sampai selesai.",
+    "Ada juga deret huruf dan campuran huruf-angka yang memakai logika sama seperti deret bilangan.",
+    "Aturan penilaian berbeda antar seleksi, jadi bacalah instruksi di hari pelaksanaan sebelum memutuskan menebak."
+   ],
+   "catatan": "Kalau sebuah deret terasa sulit, penyebabnya hampir selalu bukan angkanya, melainkan polanya yang belum terbaca. Karena itu latihan deret angka lebih tepat dipandang sebagai latihan mengenali pola, bukan latihan berhitung."
+  },
+  {
+   "h2": "Pola deret angka yang paling sering muncul",
+   "isi": [
+    "Dari sekian banyak variasi, ada delapan pola yang paling sering dipakai penyusun soal. Menghafal contohnya tidak membuat kamu cepat, tetapi mengenali bentuknya membantu: begitu selisih antar suku menyerupai salah satu baris di bawah, arah pemeriksaanmu menjadi jelas.",
+    "Cara memakainya sederhana. Tulis deret yang sedang kamu kerjakan di kertas coret, tuliskan selisih antar suku di bawahnya, lalu bandingkan dengan kolom ciri pada tabel. Kalau tidak ada yang cocok, lanjut ke pemeriksaan berikutnya - jangan menebak satu pola lebih dari beberapa detik."
+   ],
+   "tabel": {
+    "kepala": [
+     "Pola",
+     "Ciri yang terlihat",
+     "Contoh"
+    ],
+    "baris": [
+     [
+      "Beda tetap (aritmetika)",
+      "Selisih antar suku selalu sama",
+      "4, 9, 14, 19, 24 (selisih +5)"
+     ],
+     [
+      "Perkalian tetap (geometri)",
+      "Tiap suku dikali atau dibagi angka yang sama",
+      "3, 6, 12, 24, 48 (dikali 2)"
+     ],
+     [
+      "Selisih bertingkat",
+      "Selisih antar suku naik atau turun secara teratur",
+      "2, 5, 10, 17, 26 (selisih +3, +5, +7, +9)"
+     ],
+     [
+      "Jumlah dua suku sebelumnya",
+      "Tiap suku adalah hasil penjumlahan dua suku di depannya",
+      "2, 3, 5, 8, 13, 21"
+     ],
+     [
+      "Selang-seling (dua deret bergantian)",
+      "Suku ganjil dan suku genap mengikuti aturan masing-masing",
+      "7, 20, 10, 40, 13, 80 (ganjil +3, genap dikali 2)"
+     ],
+     [
+      "Bilangan kuadrat dan pangkat",
+      "Angkanya berada di sekitar hasil kuadrat, misalnya 49, 64, 81",
+      "1, 4, 9, 16, 25 (bilangan kuadrat)"
+     ],
+     [
+      "Dua operasi bergantian",
+      "Dikali lalu dikurangi, berulang secara tetap",
+      "5, 10, 8, 16, 14 (dikali 2, dikurangi 2)"
+     ],
+     [
+      "Bilangan prima",
+      "Semua suku adalah bilangan prima berurutan",
+      "2, 3, 5, 7, 11, 13"
+     ]
+    ]
+   },
+   "catatan": "Contoh pada tabel adalah ilustrasi pola, bukan soal yang harus dijawab. Deret di tes bisa memadukan dua pola sekaligus - misalnya selisih bertingkat pada suku ganjil dan perkalian tetap pada suku genap - jadi periksa selalu tiga suku terakhir sebelum memastikan pilihan."
+  },
+  {
+   "h2": "Contoh soal deret angka dan deret huruf dari blok penalaran",
+   "isi": [
+    "Bank soal SiapPsikotes menempatkan deret angka dan deret huruf di kategori penalaran, bersama soal silogisme, sandi, dan urutan. Karena itu blok 20 soal berikut memuat campurannya: sebagian butir meminta kamu meneruskan deret angka atau deret huruf, sebagian lagi menguji cara berpikir yang sama, yaitu mencari aturan yang tetap dari informasi yang diberikan.",
+    "Semua soal ditampilkan utuh tanpa diubah. Kerjakan dulu sebelum membuka jawaban, dan pasang batas waktu sekitar 40 detik per butir. Kalau melewati batas itu, tandai soalnya, pilih jawaban yang paling masuk akal, lalu lanjut.",
+    "Setiap butir menyertakan pembahasan yang memuat langkah pengerjaannya, termasuk alasan mengapa satu opsi lebih tepat daripada opsi yang lain."
+   ],
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 20
+   },
+   "catatan": "Cara memakai pembahasan: setelah menjawab, bandingkan langkahmu dengan langkah pada pembahasan, bukan hanya hasil akhirnya. Kalau jawabanmu benar tetapi caranya berbeda, tetap baca pembahasannya - kadang pilihanmu tepat karena kebetulan."
+  },
+  {
+   "h2": "Latihan tambahan: 12 soal kemampuan numerik",
+   "isi": [
+    "Blok berikut berisi soal hitung cepat dan aritmetika dasar: penjumlahan berlapis, perkalian dan pembagian, pecahan, desimal, persen, akar, serta FPB dan KPK. Deret angka jarang menuntut hitungan seberat itu, tetapi kecepatan berhitung tetap berpengaruh - terutama saat kamu menguji dugaan pola pada tiga suku terakhir.",
+    "Pakai blok ini sebagai pemanasan berwaktu. Kalau waktu per butirmu sudah di bawah 30 detik, bagian tersulit dari tes numerik biasanya bukan lagi hitungannya, melainkan pengenalan polanya."
+   ],
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 12
+   }
+  },
+  {
+   "h2": "Cara cepat mengerjakan deret angka",
+   "isi": [
+    "Kecepatan pada soal deret angka hampir seluruhnya ditentukan urutan pemeriksaan. Orang yang menebak pola secara acak memeriksa lima hal sekaligus; orang yang memakai urutan tetap memeriksa satu hal pada satu waktu dan tahu kapan harus pindah.",
+    "Urutan berikut bekerja untuk sebagian besar deret yang muncul di latihan. Pakai terus sampai menjadi kebiasaan, karena di hari tes kamu tidak punya waktu untuk memilih strategi."
+   ],
+   "poin": [
+    "Tuliskan selisih antar suku yang berdekatan. Beda tetap dan selisih bertingkat langsung terbaca di langkah ini, dan langkah ini paling sedikit memakan waktu.",
+    "Kalau selisihnya tidak tetap, periksa selisih kedua - yaitu selisih dari selisih tadi. Selisih yang berubah dengan pola teratur menandakan deret bertingkat.",
+    "Bandingkan angkanya dengan bilangan kuadrat terdekat: 36, 49, 64, 81, 100. Angka yang selalu berjarak tetap dari kuadrat menandakan pola pangkat yang digeser.",
+    "Pisahkan suku ganjil dan suku genap, lalu periksa aturan masing-masing. Deret selang-seling tampak kacau sampai kedua bagiannya dipisahkan.",
+    "Periksa hubungan antarsuku: apakah tiap suku hasil penjumlahan dua suku sebelumnya, hasil perkalian tetap, atau perkalian yang bergantian dengan pengurangan.",
+    "Untuk deret huruf, ubah dulu hurufnya menjadi nomor urut A sampai Z. Setelah berbentuk angka, deret huruf dikerjakan dengan cara yang sama seperti deret bilangan.",
+    "Uji polanya pada tiga suku terakhir. Kalau tidak cocok di salah satu suku, berarti polanya belum benar - jangan langsung memilih opsi yang angkanya mirip."
+   ],
+   "catatan": "Tetapkan batas kesabaran sebelum mulai: sekitar 40 detik per deret saat latihan. Soal deret bisa memakan waktu tanpa batas, sedangkan modal utamamu di tes numerik adalah waktu untuk butir berikutnya. Pola yang belum terbaca hari ini biasanya terbaca lebih cepat setelah kamu melatih beberapa deret setiap hari."
+  },
+  {
+   "h2": "Bedanya deret angka, hitung cepat, dan aritmetika",
+   "isi": [
+    "Tiga hal ini sering dianggap satu, padahal latihannya berbeda. Deret angka menuntut pengenalan pola, hitung cepat menuntut kecepatan operasi dasar, dan aritmetika soal cerita menuntut ketelitian menerjemahkan kalimat menjadi hitungan.",
+    "Memisahkannya membantu menyusun latihan. Kalau langkahmu benar tetapi terlalu lambat, yang perlu dilatih hitung cepat. Kalau kamu sering salah arah sejak awal, yang perlu dilatih pengenalan pola. Dua kemampuan itu jarang maju bersamaan, jadi ukur keduanya secara terpisah."
+   ]
+  },
+  {
+   "h2": "Kesalahan umum saat mengerjakan deret angka",
+   "isi": [
+    "Sebagian besar kesalahan pada bagian ini bukan karena tidak bisa, melainkan karena kebiasaan yang terbawa dari latihan tanpa batas waktu. Tujuh hal berikut paling sering muncul sekaligus paling mudah diperbaiki."
+   ],
+   "poin": [
+    "Menebak pola tanpa menghitung selisih lebih dulu. Satu langkah sederhana itu sering menyelesaikan deret yang tampak rumit.",
+    "Menganggap polanya berlaku sampai akhir padahal berubah di tengah. Periksa ulang pada tiga suku terakhir.",
+    "Berhenti terlalu lama di satu deret. Tandai, lanjut ke butir berikutnya, dan kembali setelah soal yang mudah selesai.",
+    "Menghitung di kepala untuk deret bertingkat, lalu keliru di langkah kedua. Tulis hasil antara di kertas coret.",
+    "Lupa membaca pertanyaan: sebagian soal meminta suku yang hilang di tengah, bukan suku berikutnya.",
+    "Membuka pembahasan sebelum mencoba. Latihannya berubah menjadi kegiatan membaca, dan hasilnya tidak terbawa ke hari tes.",
+    "Tidak mencatat penyebab kesalahan, sehingga deret dengan pola yang sama tetap salah pada latihan berikutnya."
+   ],
+   "catatan": "Kesalahan yang paling mahal adalah membiarkan satu deret mengambil jatah waktu dua butir. Menandai soal lalu melanjutkan bukan menyerah, melainkan cara menjaga nilai keseluruhan."
+  },
+  {
+   "h2": "Tips latihan deret angka yang terukur",
+   "isi": [
+    "Sepuluh menit sehari memberi hasil lebih baik daripada tiga jam sekali seminggu. Pengenalan pola terbentuk dari pengulangan pendek yang sering, bukan dari satu sesi panjang yang melelahkan.",
+    "Agar latihanmu terukur, catat dua hal setiap sesi: jumlah jawaban benar dan waktu yang dipakai. Kecepatan biasanya naik lebih dulu daripada jumlah benar, dan itu pertanda bagus. Bandingkan catatanmu setiap akhir minggu, bukan setiap hari, karena selisih sehari ke sehari tidak berarti apa-apa."
+   ],
+   "poin": [
+    "Menit 1-2: kerjakan sepuluh deret, cukup sampai polanya ketemu tanpa mencari jawaban akhir.",
+    "Menit 3-6: satu blok berisi 5-8 soal dengan batas 40 detik per butir.",
+    "Menit 7-8: periksa pembahasan, lalu catat soal yang salah beserta penyebabnya.",
+    "Menit 9-10: ulangi dua soal yang paling sering salah, dari ingatan, tanpa melihat pembahasan.",
+    "Sekali seminggu: kerjakan satu sesi penuh tanpa jeda untuk melatih ketahanan konsentrasi."
+   ],
+   "catatan": "Pilih jam saat kamu masih segar; berlatih berhitung setelah lelah hasilnya jauh lebih kecil dan sering membuat kesimpulan yang keliru tentang kemampuan sendiri. Kalau satu hari terlewat, lanjutkan saja besoknya - yang merusak kebiasaan bukan hari yang bolong, melainkan dua minggu tanpa latihan."
+  }
+ ],
+ "faq": [
+  {
+   "t": "Apakah ada rumus khusus untuk menyelesaikan deret angka?",
+   "j": "Tidak ada satu rumus yang berlaku untuk semua deret. Yang ada adalah urutan pemeriksaan: hitung selisih antar suku, periksa selisih kedua, bandingkan dengan bilangan kuadrat terdekat, lalu pisahkan suku ganjil dan genap. Urutan ini bekerja untuk sebagian besar pola, dan lebih cepat daripada menebak pola secara acak."
+  },
+  {
+   "t": "Berapa lama waktu yang wajar untuk satu soal deret angka?",
+   "j": "Sekitar 30 sampai 45 detik per butir saat latihan, tergantung panjang deretnya. Jumlah soal dan lama waktu setiap sesi berbeda antar penyelenggara, jadi yang bisa kamu siapkan adalah kecepatannya: kalau satu deret melewati 40 detik, tandai dan lanjut, lalu kembali di akhir kalau masih ada waktu."
+  },
+  {
+   "t": "Bagaimana cara mengerjakan deret huruf dan deret yang memakai pecahan?",
+   "j": "Deret huruf diubah dulu menjadi nomor urut A sama dengan 1 sampai Z sama dengan 26, lalu selisih antar nomornya dicari seperti pada deret angka - contohnya B, E, H, K, N berselisih tetap +3 sehingga huruf berikutnya Q. Deret yang memakai pecahan atau desimal juga bukan jenis terpisah: samakan dulu penyebutnya, lalu periksa selisihnya dengan cara yang sama."
+  },
+  {
+   "t": "Bagaimana kalau polanya tidak terbaca sama sekali?",
+   "j": "Pilih jawaban yang paling masuk akal, tandai nomor soalnya, lalu lanjut. Kalau aturan penilaian memakai pengurangan nilai untuk jawaban salah, baca instruksinya sebelum menebak. Hindari satu kebiasaan: bertahan di satu deret sampai waktu habis, karena soal berikutnya biasanya lebih mudah dan nilainya sama."
+  },
+  {
+   "t": "Apakah soal di halaman ini berasal dari seleksi tertentu?",
+   "j": "Tidak. Seluruh soal di SiapPsikotes adalah karya penyusun sendiri untuk keperluan latihan, bukan kumpulan soal dari seleksi mana pun. Yang dilatih di sini adalah kecepatan mengenali pola dan ketelitian berhitung, bukan hafalan kunci jawaban."
+  },
+  {
+   "t": "Apa bedanya 40 soal di halaman contoh dan materi di dalam aplikasi?",
+   "j": "Di halaman contoh tersedia 40 soal berpembahasan yang bisa dicoba gratis tanpa akun. Materi di dalam aplikasi latihan berbayar: akses penuh untuk 9 jenis tes, lengkap dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar - bukan langganan, jadi tidak ada tagihan berulang. Kode dikirim manual dengan target maksimal 6 jam pada jam kerja (08.00-21.00 WIB)."
+  }
+ ],
+ "penutup": [
+  "Deret angka menuntut dua hal yang keduanya bisa dilatih: kecepatan melihat pola, dan keberanian meninggalkan soal yang belum terbaca. Kerjakan blok soal di halaman ini berulang kali sampai langkah pemeriksaannya terasa biasa, lalu ukur lagi kecepatanmu.",
+  "Kalau ingin mencoba lebih dulu, 40 soal berpembahasan bisa dikerjakan gratis tanpa akun di halaman contoh. Untuk latihan penuh, akses ke dalam aplikasi latihan - mencakup seluruh bank soal untuk 9 jenis tes beserta pembahasan dan Laporan Lengkap - berharga Rp 39.000 sekali bayar, bukan langganan. Harga dapat berubah sewaktu-waktu untuk pembelian baru, dan kode akses dikirim manual dengan target maksimal 6 jam pada jam kerja (08.00-21.00 WIB).",
+  "Catatan kejujuran: SiapPsikotes bukan situs resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah maupun perusahaan mana pun. Seluruh soal adalah karya penyusun sendiri untuk latihan, diperiksa dengan pedoman mutu yang dapat diperiksa ulang. Pembelian tidak menjamin kelulusan seleksi apa pun, dan hasil seleksi bergantung pada usaha serta persiapanmu sendiri."
+ ],
+ "tautan": [
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Buka aplikasi latihan",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Harga dan cara beli",
+   "url": "/beli/"
+  },
+  {
+   "teks": "Mutu dan bukti pemeriksaan soal",
+   "url": "/mutu/"
+  },
+  {
+   "teks": "Contoh soal psikotes matematika dan jawabannya",
+   "url": "/contoh-soal-psikotes-matematika/"
+  },
+  {
+   "teks": "Contoh soal psikotes kerja dan jawabannya",
+   "url": "/contoh-soal-psikotes-kerja/"
+  }
+ ],
+ "diperbarui": "17 September 2026"
+}

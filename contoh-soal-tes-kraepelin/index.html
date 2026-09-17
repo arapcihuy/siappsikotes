@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0f18">
+<title>Contoh Soal Tes Kraepelin: Cara Mengerjakannya | SiapPsikotes</title>
+<meta name="description" content="Cara mengerjakan tes Kraepelin langkah demi langkah: aturan menulis jawaban, ritme kolom, kecepatan vs ketelitian, plus soal latihan berpembahasan.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://siappsikotes.my.id/contoh-soal-tes-kraepelin/">
+<meta property="og:title" content="Contoh Soal Tes Kraepelin: Cara Mengerjakannya | SiapPsikotes">
+<meta property="og:description" content="Cara mengerjakan tes Kraepelin langkah demi langkah: aturan menulis jawaban, ritme kolom, kecepatan vs ketelitian, plus soal latihan berpembahasan.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://siappsikotes.my.id/contoh-soal-tes-kraepelin/">
+<meta property="og:image" content="https://siappsikotes.my.id/og-image.png">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="SiapPsikotes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
+<link rel="manifest" href="../manifest.json">
+<style>
+  /* ============ desain halaman pendukung — satu keluarga dengan beranda (navy + emas) ============ */
+  :root {
+    --bg:#0a0f18; --surface:#121a28; --surface2:#172133;
+    --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+    --text:#eaf1f8; --muted:#b3c0d1; --isi:#c9d5e3;
+    --gold:#e6c552; --gold-dark:#c9a227; --blue:#6db3ff; --ok:#4ade80;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body {
+    margin:0; color:var(--text);
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(230,197,82,.11), transparent 62%),
+      radial-gradient(760px 400px at 94% 1%, rgba(109,179,255,.08), transparent 62%),
+      var(--bg);
+    background-repeat:no-repeat;
+    font:16.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 22px; }
+  .wrap.sempit { max-width:780px; }
+  h1 { font-size:clamp(28px,4.4vw,38px); line-height:1.15; letter-spacing:-1px; font-weight:800; margin:0 0 6px; }
+  .berlaku { color:var(--muted); font-size:14.5px; margin:10px 0 22px; }
+  hr { border:0; border-top:1px solid var(--line); margin:30px 0; }
+  a { color:var(--blue); }
+  main a { text-decoration:underline; text-underline-offset:2px; text-decoration-color:rgba(109,179,255,.45); }
+  main a:hover { text-decoration-color:var(--gold); color:var(--gold); }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:6px; }
+  .lewati { position:absolute; left:-9999px; background:var(--gold); color:#1a1405; font-weight:700;
+    padding:10px 16px; border-radius:0 0 10px 0; z-index:30; }
+  .lewati:focus { left:0; top:0; }
+
+  /* ---------- kepala ---------- */
+  header { border-bottom:1px solid var(--line); background:rgba(10,15,24,.86);
+    position:sticky; top:0; z-index:10; backdrop-filter:blur(10px); }
+  .kepala { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 22px; }
+  .merek { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:-.2px;
+    color:var(--text); text-decoration:none; }
+  .merek img { width:30px; height:30px; border-radius:8px; display:block; }
+  .kepala nav { display:flex; align-items:center; gap:22px; font-size:14.5px; }
+  .kepala nav a { text-decoration:none; }
+  .kepala nav a:not(.tombol) { color:var(--muted); }
+  .kepala nav a:not(.tombol):hover { color:var(--text); }
+  .kepala nav a[aria-current="page"] { color:var(--gold); font-weight:700; }
+
+  /* ---------- pita kepala ---------- */
+  main { padding-bottom:8px; }
+  .pita {
+    margin:26px 0 22px; padding:30px 28px 28px; border-radius:20px;
+    border:1px solid rgba(230,197,82,.28);
+    background:linear-gradient(150deg, rgba(230,197,82,.16), rgba(230,197,82,.04) 46%, rgba(23,33,51,.55));
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+  }
+  .lencana { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.1em;
+    text-transform:uppercase; color:#1a1405; background:linear-gradient(180deg,#f5c542,var(--gold-dark));
+    padding:6px 12px; border-radius:999px; margin-bottom:14px; }
+  .pita h1 { margin:0 0 12px; font-size:clamp(28px,4.6vw,40px); line-height:1.14;
+    letter-spacing:-1.1px; font-weight:800; }
+  .pita .dek { margin:0; color:#c3cfdd; font-size:clamp(16px,1.9vw,18px); max-width:44em; }
+  .aksi { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+
+  /* ---------- tombol ---------- */
+  .tombol { display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    min-height:48px; padding:13px 22px; border-radius:12px; text-decoration:none;
+    font-weight:700; font-size:16px; border:1px solid rgba(0,0,0,.14);
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark)); color:#1a1405;
+    box-shadow:0 10px 24px rgba(201,162,39,.22); transition:filter .18s ease, transform .18s ease; }
+  .tombol:hover { filter:brightness(1.06); transform:translateY(-1px); color:#1a1405; }
+  .tombol.sekunder { background:#1e2a3d; color:var(--text); border-color:rgba(255,255,255,.28);
+    box-shadow:0 6px 16px rgba(0,0,0,.22); font-weight:600; }
+  .tombol.sekunder:hover { border-color:var(--gold); color:var(--gold); }
+  .tombol.kecil { min-height:38px; padding:8px 14px; font-size:14px; border-radius:10px; }
+  button.tombol { font-family:inherit; cursor:pointer; }
+
+  /* ---------- strip angka ---------- */
+  .angka-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:12px; margin:0 0 24px; }
+  .angka-strip div { border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.008)); }
+  .angka-strip b { display:block; font-size:26px; line-height:1.2; color:var(--gold); letter-spacing:-.6px; }
+  .angka-strip span { font-size:12.5px; color:var(--muted); }
+
+  /* ---------- isi ---------- */
+  .lead { font-size:17.5px; color:var(--isi); margin:0 0 6px; }
+  .muted { color:var(--muted); font-size:14.5px; }
+  .catatan { color:var(--muted); font-size:14.5px; margin:10px 0 0; line-height:1.65; }
+  p { margin:12px 0; }
+  h2 { display:flex; gap:13px; align-items:baseline; font-size:clamp(20px,2.6vw,24px); line-height:1.3;
+    margin:44px 0 12px; padding-top:30px; border-top:1px solid var(--line);
+    letter-spacing:-.4px; font-weight:800; }
+  h2::before { content:""; flex:0 0 auto; width:4px; align-self:stretch; min-height:24px; border-radius:4px;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark)); }
+  h2:first-of-type { border-top:0; padding-top:0; }
+  h3 { font-size:17px; margin:24px 0 8px; letter-spacing:-.2px; }
+  ul, ol { padding-left:24px; margin:12px 0; }
+  li { margin:9px 0; }
+  li::marker { color:var(--gold); }
+  strong { color:var(--text); }
+
+  /* ---------- tanya-jawab ---------- */
+  details { border:1px solid var(--line); border-radius:14px; background:var(--surface);
+    margin:10px 0; overflow:hidden; }
+  details summary { display:flex; align-items:center; justify-content:space-between; gap:14px;
+    min-height:50px; padding:15px 18px; cursor:pointer; font-weight:700; list-style:none; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::after { content:""; flex:0 0 auto; width:9px; height:9px; margin-right:3px;
+    border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+    transform:rotate(45deg); transition:transform .2s ease; }
+  details[open] { border-color:rgba(230,197,82,.32); }
+  details[open] summary::after { transform:rotate(225deg); }
+  details > p, details > ul, details > ol { margin:0; padding:0 18px 16px; color:var(--isi); }
+
+  /* ---------- kaki ---------- */
+  footer { margin-top:56px; border-top:1px solid var(--line); padding:26px 0 48px;
+    color:var(--muted); font-size:14.5px; }
+  .tautan-kaki { display:flex; flex-wrap:wrap; gap:8px 20px; margin:0 0 16px; }
+  .tautan-kaki a { color:var(--blue); text-decoration:none; }
+  .tautan-kaki a:hover { color:var(--gold); }
+  footer p { margin:8px 0; }
+
+  /* ---------- khusus halaman beli ---------- */
+  .beli-dua { display:grid; gap:26px; grid-template-columns:300px 1fr; align-items:start; margin:8px 0 4px; }
+  @media (max-width:820px) { .beli-dua { grid-template-columns:1fr; } }
+  .qris-kotak { background:#fff; border-radius:16px; padding:14px;
+    border:1px solid rgba(230,197,82,.32); box-shadow:0 18px 38px rgba(0,0,0,.42); }
+  .qris-kotak img { width:100%; height:auto; display:block; border-radius:8px; }
+  .kartu-bayar { border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008)), var(--surface);
+    padding:18px 20px; margin:0 0 16px; }
+  .label { margin:0; font-size:12.5px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--muted); font-weight:700; }
+  .nominal { font-size:clamp(30px,5vw,38px); font-weight:800; color:var(--gold);
+    letter-spacing:-1px; line-height:1.15; margin:6px 0 4px; user-select:all; -webkit-user-select:all; }
+  .rujukan { font-size:20px; font-weight:800; color:var(--text); letter-spacing:.5px; margin:2px 0 0;
+    user-select:all; -webkit-user-select:all; }
+  .kode-baris { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:6px; }
+  .langkah { padding-left:22px; line-height:1.75; }
+  .langkah li { margin-bottom:8px; }
+  .langkah li::marker { color:var(--gold); font-weight:800; }
+  .percikan { display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; }
+  .percikan span { font-size:13.5px; color:var(--muted); border:1px solid var(--line2);
+    background:var(--surface); border-radius:999px; padding:6px 13px; }
+
+  @media (max-width:700px) {
+    .kepala { padding:12px 18px; gap:10px; }
+    .kepala nav a:not(.tombol) { display:none; }
+    .merek span { font-size:15.5px; }
+    .pita { padding:24px 20px 22px; border-radius:16px; margin:18px 0 18px; }
+    .angka-strip { grid-template-columns:repeat(2,1fr); }
+    h2 { margin-top:36px; padding-top:24px; }
+    .qris-kotak { padding:12px; }
+  }
+  @media (max-width:560px) {
+    /* tabel 2 kolom di layar sempit: tiap baris jadi kartu supaya kata tidak terpotong */
+    table.hasil thead { display:none; }
+    table.hasil tbody tr { display:block; padding:12px 14px 14px; border-bottom:1px solid var(--line); }
+    table.hasil tbody tr:last-child { border-bottom:0; }
+    table.hasil tbody td { display:block; width:auto; border:0; padding:2px 0; overflow-wrap:break-word; }
+    table.hasil tbody td:first-child { font-weight:700; color:var(--text); }
+    table.hasil tbody td:first-child::before { display:none; }
+    table.hasil tbody td::before { content:attr(data-label); display:block; margin:6px 0 1px;
+      font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+    table.hasil tbody tr:hover td { background:transparent; }
+    caption { padding-bottom:2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    * { transition:none !important; }
+  }
+  @media print {
+    body { background:#fff; color:#000; }
+    header, .lewati { display:none; }
+    .pita, .kartu-bayar, .angka-strip div, details { border-color:#bbb; background:#fff; box-shadow:none; }
+    .pita .dek, .muted, .catatan, .lead { color:#222; }
+    h2::before { background:#999; }
+    a { color:#000; }
+  }
+</style>
+<style>
+.artikel-kepala{max-width:760px}
+.artikel p{line-height:1.75}
+.daftar-isi{background:var(--surface2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 20px;margin:24px 0}
+.daftar-isi p{margin:0 0 8px;color:var(--muted);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+.daftar-isi ol{margin:0;padding-left:22px}
+.daftar-isi a{color:#e6c552;text-decoration:none}
+.daftar-isi a:hover{text-decoration:underline}
+.tanya{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px;margin:16px 0;background:var(--surface2)}
+.tanya-nomor{color:#e6c552;font-weight:700;margin-right:6px}
+.tanya-teks{margin:0 0 10px;font-weight:600;color:var(--text)}
+.tanya .pilih{list-style:upper-alpha;margin:0 0 10px;padding-left:24px;color:var(--isi)}
+.tanya .pilih li{margin:2px 0}
+.bahas{border-top:1px dashed rgba(255,255,255,.18);padding-top:10px}
+.bahas summary{cursor:pointer;color:#e6c552;font-weight:600}
+.bahas-isi{white-space:pre-line;margin:10px 0 0;color:var(--isi)}
+.artikel table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+.artikel th,.artikel td{border:1px solid rgba(255,255,255,.16);padding:9px 11px;text-align:left;color:var(--isi)}
+.artikel th{background:var(--surface2);color:var(--text)}
+.artikel .catatan{background:var(--surface2);border-left:3px solid #e6c552;padding:12px 16px;border-radius:0 10px 10px 0;margin:18px 0}
+.artikel .tautan-artikel{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+@media (max-width:560px){
+  .artikel table,.artikel thead,.artikel tbody,.artikel th,.artikel td,.artikel tr{display:block}
+  .artikel thead{display:none}
+  .artikel td{border:none;border-bottom:1px solid rgba(255,255,255,.12);padding:8px 0}
+  .artikel td::before{content:attr(data-label);display:block;color:var(--muted);font-size:.82rem;margin-bottom:2px}
+}
+</style>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Beranda",
+     "item": "https://siappsikotes.my.id/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Contoh Soal Tes Kraepelin dan Cara Mengerjakannya",
+     "item": "https://siappsikotes.my.id/contoh-soal-tes-kraepelin/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "headline": "Contoh Soal Tes Kraepelin dan Cara Mengerjakannya",
+   "description": "Cara mengerjakan tes Kraepelin langkah demi langkah: aturan menulis jawaban, ritme kolom, kecepatan vs ketelitian, plus soal latihan berpembahasan.",
+   "inLanguage": "id",
+   "mainEntityOfPage": "https://siappsikotes.my.id/contoh-soal-tes-kraepelin/",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "author": {
+    "@type": "Organization",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   },
+   "isPartOf": {
+    "@type": "WebSite",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Apa bedanya tes Kraepelin dan tes Pauli?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Keduanya tes berhitung cepat dengan lembar berisi kolom angka, dan perbedaan yang biasa disebut adalah tempo serta panjang lembarnya: Kraepelin bertempo lebih cepat dengan kolom yang lebih pendek, sedangkan Pauli memakai lembar lebih panjang dengan waktu kerja lebih lama. Karena pengaturan waktu dan bentuk lembar bisa berbeda antar penyelenggara, ikuti saja instruksi yang dibacakan di ruangan."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kalau hasil penjumlahan 14, angka apa yang saya tulis?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yang ditulis adalah 4, yaitu angka satuannya. Hasil 10 sampai 19 selalu ditulis satuannya saja: 10 menjadi 0, 12 menjadi 2, 15 menjadi 5, 18 menjadi 8. Hasil di bawah 10 ditulis utuh, misalnya 7 ditulis 7."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apakah saya boleh memakai kalkulator, jari, atau kertas coretan?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Alat bantu hitung umumnya tidak diperbolehkan; yang tersedia biasanya hanya pensil dan lembar tesnya. Menghitung dengan gerakan jari juga memperlambat dan bisa mengganggu peserta lain, jadi latih berhitung di kepala sejak sekarang. Instruksi pengawas di ruangan tetap menjadi acuan utama."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Berapa lama tes Kraepelin berlangsung dan berapa kolom yang harus diselesaikan?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Lama kerja dan jumlah kolom berbeda antar penyelenggara, dan tidak ada susunan yang berlaku untuk semua seleksi. Karena itu, jangan menyusun strategi berdasarkan dugaan jumlah kolom; yang bisa kamu latih adalah berpindah kolom tepat saat aba-aba berbunyi dan menjaga tempo tetap sampai tes selesai."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apakah lulus seleksi saya bergantung pada nilai tes Kraepelin saja?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tidak. Hasil seleksi ditentukan oleh penyelenggara melalui banyak tahap dan penilaian, bukan oleh satu tes berhitung. Yang bisa disiapkan di halaman ini adalah latihan agar kamu mengenali bentuk tes, aturan satuan, dan ritme kerjanya sebelum hari pelaksanaan."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apa bedanya 12 soal di halaman ini dengan materi di dalam aplikasi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Di halaman contoh tersedia 40 soal berpembahasan yang bisa dicoba gratis tanpa akun. Materi di dalam aplikasi berbayar memuat 1.225 soal untuk 9 jenis tes, termasuk Kraepelin dengan simulasi kolom angka, lengkap dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar - bukan langganan, jadi tidak ada tagihan berulang."
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+</head>
+<body>
+<a class="lewati" href="#isi">Langsung ke isi</a>
+
+<header>
+  <div class="wrap kepala">
+    <a class="merek" href="../"><img src="../static/icons/icon-192.png" alt="" width="30" height="30"><span>SiapPsikotes</span></a>
+    <nav aria-label="Halaman">
+      <a href="../psikotes/">Aplikasi latihan</a>
+      <a href="../contoh/">Contoh gratis</a>
+      <a href="../beli/">Harga</a>
+      <a href="../mutu/">Mutu</a>
+      <a class="tombol sekunder kecil" href="../beli/">Beli akses</a>
+    </nav>
+  </div>
+</header>
+
+<main id="isi" class="wrap artikel">
+
+  <section class="pita artikel-kepala">
+    <span class="lencana">Panduan</span>
+    <h1>Contoh Soal Tes Kraepelin dan Cara Mengerjakannya</h1>
+    <p class="dek">Tes Kraepelin tidak menguji kepintaran berhitung, melainkan cara kamu bekerja saat waktu terus berjalan. Yang dinilai adalah tempo yang tetap, tulisan yang rapi, dan keberanian melanjutkan setelah melakukan kesalahan kecil.</p>
+  </section>
+  <div class="daftar-isi">
+    <p>Isi halaman</p>
+    <ol>
+      <li><a href="#apa-yang-sebenarnya-diukur-dalam-tes-kraepelin">Apa yang sebenarnya diukur dalam tes Kraepelin</a></li>
+      <li><a href="#bentuk-lembar-dan-aturan-mengerjakannya">Bentuk lembar dan aturan mengerjakannya</a></li>
+      <li><a href="#cara-mengerjakan-kolom-angka-langkah-demi-langka">Cara mengerjakan kolom angka langkah demi langkah</a></li>
+      <li><a href="#aturan-menulis-jawaban-tulis-satuannya-saja">Aturan menulis jawaban: tulis satuannya saja</a></li>
+      <li><a href="#latihan-12-soal-tentang-tes-kraepelin">Latihan: 12 soal tentang tes Kraepelin</a></li>
+      <li><a href="#kecepatan-atau-ketelitian-mana-yang-lebih-menent">Kecepatan atau ketelitian: mana yang lebih menentukan</a></li>
+      <li><a href="#kesalahan-yang-sering-terjadi-saat-tes-kraepelin">Kesalahan yang sering terjadi saat tes Kraepelin</a></li>
+      <li><a href="#cara-berlatih-di-rumah-tanpa-alat-khusus">Cara berlatih di rumah tanpa alat khusus</a></li>
+    </ol>
+  </div>
+
+  <p>Contoh soal tes Kraepelin dan cara mengerjakannya dicari banyak orang menjelang seleksi kerja, sekolah kedinasan, atau tes psikologi. Tes ini sering disebut tes koran karena lembarnya lebar dan penuh angka. Tugasnya sederhana: menjumlahkan dua angka yang berdekatan, lalu menuliskan hasilnya. Yang membuatnya berat bukan hitungannya, melainkan waktu - aba-aba ganti kolom terus berbunyi sementara kolommu belum tentu selesai.</p>
+  <p>Di halaman ini kamu bisa mengerjakan 12 soal latihan tentang tes Kraepelin, diambil dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang. Setiap soal punya pembahasan yang bisa dibuka setelah kamu menjawab. Sebelum itu, ada penjelasan bentuk lembar, aturan menulis jawaban, ritme kerja, dan daftar kesalahan yang paling sering terjadi.</p>
+  <p>Urutannya begini: apa yang sebenarnya diukur, bentuk lembar dan aturannya, langkah mengerjakan kolom angka, aturan penulisan jawaban, blok soal latihan, kecepatan versus ketelitian, kesalahan yang sering terjadi, lalu rencana latihan singkat. Kalau kamu datang hanya untuk mencoba soal, lompat saja langsung ke blok latihan.</p>
+
+  <h2 id="apa-yang-sebenarnya-diukur-dalam-tes-kraepelin">Apa yang sebenarnya diukur dalam tes Kraepelin</h2>
+  <p>Tes Kraepelin berupa lembar berisi kolom-kolom angka satu digit. Kamu menjumlahkan dua angka yang berdekatan pada baris yang sama, menuliskan hasilnya di tempat yang ditunjukkan contoh, lalu berpindah satu langkah dan mengulanginya lagi. Pekerjaannya monoton, dan justru karena monoton itulah tes ini bisa memperlihatkan sesuatu: bagaimana kamu menjaga mutu kerja saat lelah dan tertekan waktu.</p>
+  <p>Nama tes ini dikaitkan dengan Emil Kraepelin, seorang psikiater Jerman yang memakai pekerjaan berhitung berulang untuk mengamati kerja mental. Yang dibaca pengawas bukan hanya seberapa banyak baris yang kamu selesaikan, tetapi bagaimana jumlah itu berubah dari kolom pertama sampai kolom terakhir. Kerja yang stabil cenderung lebih menggambarkan daya tahan daripada satu lonjakan cepat di awal yang tidak bisa dipertahankan.</p>
+  <p>Karena itu, tidak ada rumus yang bisa dihafal untuk tes ini. Yang bisa dilatih adalah kebiasaan: tempo yang tetap, tulisan yang cepat dibaca, dan keputusan untuk terus maju setelah salah. Empat hal itulah yang biasanya menjadi perhatian:</p>
+  <ul>
+    <li>Kecepatan kerja - seberapa banyak penjumlahan yang selesai dalam waktu yang tersedia.</li>
+    <li>Ketelitian - seberapa banyak dari penjumlahan itu yang ditulis dengan benar.</li>
+    <li>Konsistensi - apakah tempo kerjamu tetap dari kolom awal sampai kolom akhir.</li>
+    <li>Daya tahan - bagaimana hasilmu berubah saat lelah mulai terasa, dan apakah kamu bisa melanjutkan tanpa berhenti.</li>
+  </ul>
+  <div class="catatan"><p>Bobot dan cara penilaian berbeda antar penyelenggara, dan tidak ada satu susunan penilaian yang berlaku untuk semua seleksi. Karena itu, latihlah hal-hal yang ada di tanganmu: ritme yang tetap, tulisan yang rapi, dan kebiasaan tidak menghabiskan waktu untuk mengoreksi.</p></div>
+
+  <h2 id="bentuk-lembar-dan-aturan-mengerjakannya">Bentuk lembar dan aturan mengerjakannya</h2>
+  <p>Bentuk lembar tes Kraepelin bisa berbeda antar penyelenggara, tetapi bagian-bagian pentingnya hampir selalu sama. Intinya, kamu bekerja di dalam kolom, berpindah kolom mengikuti aba-aba, dan menulis hasil penjumlahan tanpa mengubah angka yang tercetak di lembar.</p>
+  <p>Tabel berikut merangkum hal-hal yang paling sering ditanyakan saat pertama kali melihat lembarnya:</p>
+  <table>
+    <thead><tr><th>Bagian</th><th>Yang perlu kamu tahu</th></tr></thead>
+    <tbody>
+    <tr><td data-label="Bagian">Isi lembar</td><td data-label="Yang perlu kamu tahu">Deretan angka satu digit yang tersusun dalam beberapa kolom; setiap kolom berisi banyak angka yang harus dijumlahkan berpasangan.</td></tr>
+    <tr><td data-label="Bagian">Tugas</td><td data-label="Yang perlu kamu tahu">Jumlahkan dua angka yang berdekatan pada baris yang sama, lalu tuliskan hasilnya pada tempat yang ditunjukkan contoh, di sela-sela kedua angka.</td></tr>
+    <tr><td data-label="Bagian">Angka yang dijumlahkan</td><td data-label="Yang perlu kamu tahu">Selalu angka yang tercetak di lembar, bukan angka hasil tulisanmu sendiri. Pandanganmu bergeser satu langkah setiap kali selesai menulis.</td></tr>
+    <tr><td data-label="Bagian">Arah mengerjakan</td><td data-label="Yang perlu kamu tahu">Mengikuti instruksi pengawas. Sebagian lembar dimulai dari baris paling bawah, sebagian dari atas - pastikan arahnya sejak awal.</td></tr>
+    <tr><td data-label="Bagian">Hasil 10 atau lebih</td><td data-label="Yang perlu kamu tahu">Yang ditulis hanya angka satuannya: 12 ditulis 2, 15 ditulis 5, 18 ditulis 8. Kalau hasilnya di bawah 10, tulis utuh.</td></tr>
+    <tr><td data-label="Bagian">Aba-aba ganti kolom</td><td data-label="Yang perlu kamu tahu">Saat tanda berbunyi atau pengawas memberi isyarat, pindah ke kolom berikutnya walau kolom sebelumnya belum selesai.</td></tr>
+    <tr><td data-label="Bagian">Alat</td><td data-label="Yang perlu kamu tahu">Umumnya hanya pensil dan lembar yang disediakan; alat bantu hitung tidak diperbolehkan.</td></tr>
+    <tr><td data-label="Bagian">Jawaban yang salah</td><td data-label="Yang perlu kamu tahu">Umumnya tidak perlu dihapus. Teruskan pada baris berikutnya supaya waktumu tidak habis untuk memperbaiki.</td></tr>
+    </tbody>
+  </table>
+  <div class="catatan"><p>Tabel di atas adalah gambaran umum untuk latihanmu. Instruksi yang dibacakan pengawas di ruangan selalu berlaku lebih dulu, jadi dengarkan sampai habis sebelum mulai bekerja.</p></div>
+
+  <h2 id="cara-mengerjakan-kolom-angka-langkah-demi-langka">Cara mengerjakan kolom angka langkah demi langkah</h2>
+  <p>Cara mengerjakan yang paling sering berhasil adalah yang paling membosankan: pandangan bergeser satu langkah, angka dijumlahkan, hasil ditulis, lanjut, tanpa henti. Peserta yang tampak paling cepat biasanya bukan yang paling jago berhitung, melainkan yang gerakannya paling sedikit berhenti.</p>
+  <p>Beberapa kebiasaan berikut membantu menjaga tempo tetap dari kolom pertama sampai kolom terakhir:</p>
+  <ul>
+    <li>Baca dua angka sebagai satu pasangan, bukan satu per satu. Setelah menuliskan hasilnya, geser pandangan satu langkah dan lanjut - jangan menengok ke belakang.</li>
+    <li>Tulis dengan gerakan tangan yang tetap dan angka yang rapi. Tulisan rapi jarang menjadi penilaian utama, tetapi tulisan yang berantakan memperlambatmu sendiri ketika ingin memeriksa.</li>
+    <li>Jangan mengoreksi berulang. Kalau salah tulis, abaikan dan lanjutkan; waktu yang dipakai untuk menghapus selalu lebih merugikan daripada satu angka yang keliru.</li>
+    <li>Pakai aba-aba sebagai penanda ritme. Biasakan pindah kolom tepat saat tanda berbunyi, bukan menuntaskan sisa baris dulu.</li>
+    <li>Setelah pindah kolom, langsung mulai dari baris pertama kolom baru tanpa jeda. Detik-detik pertama inilah yang paling sering terbuang.</li>
+    <li>Simpan tenaga untuk kolom akhir. Tempo yang turun tajam di paruh terakhir justru bagian yang paling jelas terbaca pada grafik kerja.</li>
+  </ul>
+  <div class="catatan"><p>Latihan di halaman ini berbentuk pilihan ganda supaya bisa dinilai otomatis, jadi bentuknya tidak persis sama dengan lembar Kraepelin di ruang tes. Yang dilatih tetap dua hal yang sama: menjumlahkan dengan cepat dan menuliskan angka satuannya dengan benar.</p></div>
+
+  <h2 id="aturan-menulis-jawaban-tulis-satuannya-saja">Aturan menulis jawaban: tulis satuannya saja</h2>
+  <p>Aturan yang paling sering ditanyakan sekaligus paling sering dilanggar adalah cara menulis hasil penjumlahan yang berjumlah sepuluh atau lebih. Satu kotak hanya boleh memuat satu angka, sehingga dua digit hasil penjumlahan tidak dapat ditulis utuh. Inilah yang ditulis:</p>
+  <ul>
+    <li>3 + 9 = 12, yang ditulis 2.</li>
+    <li>7 + 8 = 15, yang ditulis 5.</li>
+    <li>6 + 6 = 12, yang ditulis 2.</li>
+    <li>9 + 9 = 18, yang ditulis 8.</li>
+    <li>5 + 4 = 9, yang ditulis 9 - hasil di bawah 10 ditulis utuh.</li>
+    <li>Yang paling sering keliru: menulis dua digit sekaligus sehingga kotak berikutnya terpakai, lalu langkah penjumlahanmu bergeser satu angka dan kacau sampai ujung kolom.</li>
+  </ul>
+  <div class="catatan"><p>Hafalkan pola puluhan sampai refleks: hasil 10 sampai 19 selalu diwakili angka satuan yang mudah dihitung mundur dari 10 (12 menjadi 2, 15 menjadi 5, 19 menjadi 9). Kalau aturan ini sudah otomatis, kamu tidak perlu berhenti berpikir di tengah kolom.</p></div>
+
+  <h2 id="latihan-12-soal-tentang-tes-kraepelin">Latihan: 12 soal tentang tes Kraepelin</h2>
+  <p>Dua belas soal berikut membahas hal-hal yang paling sering muncul pada tes Kraepelin: penjumlahan dengan aturan satuan, arah mengerjakan, aba-aba ganti kolom, dan cara kerja yang dinilai. Kerjakan dulu tanpa membuka pembahasan, lalu periksa hasilmu. Soal dan pembahasan diambil utuh dari bank soal SiapPsikotes, bukan ditulis ulang di halaman ini.</p>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">1.</span>Berapa hasil: 3+9 (tulis satuan jika ≥10)?</p>
+    <ol class="pilih">
+      <li>3</li>
+      <li>2</li>
+      <li>9</li>
+      <li>12</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 2
+3 + 9 = 12 → yang ditulis hanya angka satuannya: 2. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">2.</span>Berapa hasil: 2+8 (tulis satuan jika ≥10)?</p>
+    <ol class="pilih">
+      <li>0</li>
+      <li>2</li>
+      <li>10</li>
+      <li>8</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 0
+2 + 8 = 10 → yang ditulis hanya angka satuannya: 0. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">3.</span>Berapa hasil: 6+9 (tulis satuan jika ≥10)?</p>
+    <ol class="pilih">
+      <li>15</li>
+      <li>6</li>
+      <li>5</li>
+      <li>9</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 5
+6 + 9 = 15 → yang ditulis hanya angka satuannya: 5. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">4.</span>Berapa hasil: 5+5 (tulis satuan jika ≥10)?</p>
+    <ol class="pilih">
+      <li>10</li>
+      <li>20</li>
+      <li>5</li>
+      <li>0</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 0
+5 + 5 = 10 → yang ditulis hanya angka satuannya: 0. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">5.</span>Berapa hasil 4 + 9? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>13</li>
+      <li>3</li>
+      <li>9</li>
+      <li>4</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 3
+4 + 9 = 13 → yang ditulis hanya angka satuannya: 3. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">6.</span>Berapa hasil 8 + 9? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>7</li>
+      <li>17</li>
+      <li>8</li>
+      <li>9</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 7
+8 + 9 = 17 → yang ditulis hanya angka satuannya: 7. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">7.</span>Berapa hasil: 4 + 7? (jika hasil 10 atau lebih, tulis angka satuannya saja)</p>
+    <ol class="pilih">
+      <li>7</li>
+      <li>11</li>
+      <li>1</li>
+      <li>4</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 1
+4 + 7 = 11 → yang ditulis hanya angka satuannya: 1. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">8.</span>Berapa hasil 4 + 5? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>4</li>
+      <li>5</li>
+      <li>19</li>
+      <li>9</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 9
+4 + 5 = 9 (kurang dari 10, jadi ditulis apa adanya: 9).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">9.</span>Berapa hasil 8 + 2? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>8</li>
+      <li>0</li>
+      <li>2</li>
+      <li>10</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 0
+8 + 2 = 10 → yang ditulis hanya angka satuannya: 0. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">10.</span>Berapa hasil: 2 + 1? (jika hasil 10 atau lebih, tulis angka satuannya saja)</p>
+    <ol class="pilih">
+      <li>3</li>
+      <li>1</li>
+      <li>2</li>
+      <li>13</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 3
+2 + 1 = 3 (kurang dari 10, jadi ditulis apa adanya: 3).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">11.</span>Berapa hasil 7 + 9? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>7</li>
+      <li>9</li>
+      <li>6</li>
+      <li>16</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 6
+7 + 9 = 16 → yang ditulis hanya angka satuannya: 6. Ingat: hasil 10 atau lebih selalu ditulis satuannya saja (12 → 2, 15 → 5, 18 → 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">12.</span>Berapa hasil 4 + 4? (jika hasil ≥10, tulis satuannya saja)</p>
+    <ol class="pilih">
+      <li>4</li>
+      <li>18</li>
+      <li>16</li>
+      <li>8</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 8
+4 + 4 = 8 (kurang dari 10, jadi ditulis apa adanya: 8).
+INGAT: Kraepelin menilai KONSISTENSI kecepatan, bukan puncak kecepatan. Latih ritme tetap dari kolom pertama sampai terakhir.</p>
+    </details>
+  </article>
+
+  <h2 id="kecepatan-atau-ketelitian-mana-yang-lebih-menent">Kecepatan atau ketelitian: mana yang lebih menentukan</h2>
+  <p>Keduanya dinilai, dan keduanya bisa saling merusak. Kecepatan tanpa ketelitian terlihat sebagai lonjakan di awal kolom lalu hasil yang makin banyak salah; ketelitian tanpa kecepatan membuat jumlah baris yang kamu selesaikan terlalu sedikit untuk dibaca polanya. Karena bobot penilaian berbeda antar penyelenggara dan tidak diumumkan, cara paling aman adalah menjaga keduanya sekaligus dengan tempo yang bisa kamu pertahankan sampai selesai.</p>
+  <p>Tempo yang bisa dipertahankan selalu lebih bernilai daripada tempo puncak yang hanya bertahan sebentar. Empat kebiasaan berikut membantu menyeimbangkan keduanya:</p>
+  <ul>
+    <li>Perlambat sedikit pada awal kolom baru. Beberapa baris pertama dipakai untuk menemukan ritme, bukan untuk mengejar jumlah.</li>
+    <li>Jaga kecepatan penulisan, bukan hanya kecepatan berhitung. Banyak peserta sudah tahu jawabannya tetapi kehilangan waktu di gerakan tangan.</li>
+    <li>Kalau sadar tertinggal, jangan menebak angka. Perbaiki pada baris berikutnya dan teruskan.</li>
+    <li>Latih tempo yang bisa kamu pegang selama beberapa kolom berturut-turut, bukan tempo yang hanya bertahan satu kolom.</li>
+  </ul>
+  <div class="catatan"><p>Satu kesalahan biasanya tidak membuat penilaianmu jatuh, tetapi pola kesalahan yang berulang di bagian yang sama bisa terbaca. Karena itu, catat pada latihan berikutnya: apakah keliru karena salah hitung, salah menulis satuan, atau karena pandangan bergeser dari baris.</p></div>
+
+  <h2 id="kesalahan-yang-sering-terjadi-saat-tes-kraepelin">Kesalahan yang sering terjadi saat tes Kraepelin</h2>
+  <p>Sebagian besar nilai yang kurang memuaskan pada tes ini bukan karena tidak bisa berhitung, melainkan karena kebiasaan kerja yang boros waktu. Tujuh hal berikut termasuk yang paling sering terjadi sekaligus paling mudah diperbaiki.</p>
+  <ul>
+    <li>Menjumlahkan angka hasil tulisan sendiri. Yang dijumlahkan selalu dua angka yang tercetak di lembar, bukan jawaban yang baru kamu tulis.</li>
+    <li>Menulis dua digit untuk hasil sepuluh atau lebih, padahal yang benar hanya angka satuannya.</li>
+    <li>Salah arah sejak awal karena tidak mendengarkan instruksi pengawas sampai habis.</li>
+    <li>Tetap menuntaskan kolom lama saat aba-aba ganti kolom sudah berbunyi, sehingga kolom berikutnya tidak tersentuh.</li>
+    <li>Menghapus dan memperbaiki jawaban yang keliru berkali-kali; waktu yang dipakai untuk itu lebih besar daripada nilainya.</li>
+    <li>Menghitung dengan gerakan jari atau bersuara pelan. Keduanya memperlambat dan bisa mengganggu konsentrasi peserta lain.</li>
+    <li>Pensil tumpul atau tanpa cadangan. Menulis tipis dan lancar jauh lebih cepat daripada menekan pensil yang tumpul.</li>
+  </ul>
+  <div class="catatan"><p>Sebelum hari tes, tuliskan satu daftar pendek kesalahanmu sendiri dari latihan - misalnya salah satuan atau pandangan bergeser dari baris - lalu periksa daftar itu sekali lagi sebelum mulai. Kebiasaan memeriksa daftar pendek seperti ini lebih berguna daripada mengerjakan soal baru tanpa arah.</p></div>
+
+  <h2 id="cara-berlatih-di-rumah-tanpa-alat-khusus">Cara berlatih di rumah tanpa alat khusus</h2>
+  <p>Tes Kraepelin bisa dilatih dengan alat yang sangat sederhana: selembar kertas berisi angka acak dan pewaktu. Latihan beberapa menit setiap hari lebih berguna daripada satu sesi panjang sekali seminggu, karena yang dibentuk adalah kebiasaan tempo, bukan pengetahuan.</p>
+  <p>Tulis enam kolom berisi angka acak 1 sampai 9 pada selembar kertas, lalu berlatih dengan rangkaian berikut:</p>
+  <ul>
+    <li>Menit 1-2: jumlahkan satu kolom tanpa jeda dan tulis semua hasilnya, tanpa memeriksa.</li>
+    <li>Menit 3-5: lanjutkan ke kolom berikutnya, dan biasakan diri berpindah kolom setiap kali pewaktu berbunyi, walau kolomnya belum selesai.</li>
+    <li>Menit 6-7: periksa hasilnya dan tandai kesalahan, tetapi hanya jenisnya - salah hitung, salah satuan, atau pandangan bergeser dari baris.</li>
+    <li>Menit 8-10: kerjakan satu kolom baru dengan tempo yang lebih lambat tetapi tanpa kesalahan satuan sama sekali.</li>
+  </ul>
+  <div class="catatan"><p>Catat dua angka setiap sesi: jumlah baris yang selesai dan jumlah kesalahan. Kenaikan kecepatan biasanya terasa lebih dulu daripada penurunan kesalahan, dan itu tanda yang wajar. Bandingkan catatanmu setiap akhir pekan, bukan setiap hari.</p></div>
+
+  <h2 id="tanya-jawab">Pertanyaan yang sering muncul</h2>
+  <div class="tanya"><p class="tanya-teks">Apa bedanya tes Kraepelin dan tes Pauli?</p><p class="bahas-isi">Keduanya tes berhitung cepat dengan lembar berisi kolom angka, dan perbedaan yang biasa disebut adalah tempo serta panjang lembarnya: Kraepelin bertempo lebih cepat dengan kolom yang lebih pendek, sedangkan Pauli memakai lembar lebih panjang dengan waktu kerja lebih lama. Karena pengaturan waktu dan bentuk lembar bisa berbeda antar penyelenggara, ikuti saja instruksi yang dibacakan di ruangan.</p></div>
+  <div class="tanya"><p class="tanya-teks">Kalau hasil penjumlahan 14, angka apa yang saya tulis?</p><p class="bahas-isi">Yang ditulis adalah 4, yaitu angka satuannya. Hasil 10 sampai 19 selalu ditulis satuannya saja: 10 menjadi 0, 12 menjadi 2, 15 menjadi 5, 18 menjadi 8. Hasil di bawah 10 ditulis utuh, misalnya 7 ditulis 7.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apakah saya boleh memakai kalkulator, jari, atau kertas coretan?</p><p class="bahas-isi">Alat bantu hitung umumnya tidak diperbolehkan; yang tersedia biasanya hanya pensil dan lembar tesnya. Menghitung dengan gerakan jari juga memperlambat dan bisa mengganggu peserta lain, jadi latih berhitung di kepala sejak sekarang. Instruksi pengawas di ruangan tetap menjadi acuan utama.</p></div>
+  <div class="tanya"><p class="tanya-teks">Berapa lama tes Kraepelin berlangsung dan berapa kolom yang harus diselesaikan?</p><p class="bahas-isi">Lama kerja dan jumlah kolom berbeda antar penyelenggara, dan tidak ada susunan yang berlaku untuk semua seleksi. Karena itu, jangan menyusun strategi berdasarkan dugaan jumlah kolom; yang bisa kamu latih adalah berpindah kolom tepat saat aba-aba berbunyi dan menjaga tempo tetap sampai tes selesai.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apakah lulus seleksi saya bergantung pada nilai tes Kraepelin saja?</p><p class="bahas-isi">Tidak. Hasil seleksi ditentukan oleh penyelenggara melalui banyak tahap dan penilaian, bukan oleh satu tes berhitung. Yang bisa disiapkan di halaman ini adalah latihan agar kamu mengenali bentuk tes, aturan satuan, dan ritme kerjanya sebelum hari pelaksanaan.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apa bedanya 12 soal di halaman ini dengan materi di dalam aplikasi?</p><p class="bahas-isi">Di halaman contoh tersedia 40 soal berpembahasan yang bisa dicoba gratis tanpa akun. Materi di dalam aplikasi berbayar memuat 1.225 soal untuk 9 jenis tes, termasuk Kraepelin dengan simulasi kolom angka, lengkap dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar - bukan langganan, jadi tidak ada tagihan berulang.</p></div>
+  <p>Tes Kraepelin jarang memenangkan orang yang paling cepat menghitung. Yang tampak paling menonjol biasanya adalah peserta yang gerakannya tidak berhenti, tulisannya tetap rapi sampai kolom akhir, dan tidak terpaku pada kekeliruan kecil. Tiga hal itu bisa dilatih dalam sesi singkat, asalkan kamu melatihnya dengan pola yang sama setiap kali: hitung, tulis, lanjut.</p>
+  <p>Kalau ingin mencoba lebih dulu, 40 soal berpembahasan tersedia gratis tanpa akun di halaman contoh. Untuk latihan penuh, akses ke dalam aplikasi berisi 1.225 soal untuk 9 jenis tes dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar. SiapPsikotes bukan situs resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah; seluruh soal adalah karya penyusun sendiri untuk latihan, dan pembelian tidak menjamin kelulusan seleksi apa pun.</p>
+
+  <div class="tautan-artikel">
+    <a class="tombol sekunder" href="/psikotes/">Latihan soal psikotes di aplikasi</a>
+    <a class="tombol sekunder" href="/contoh/">40 soal contoh gratis (tanpa akun)</a>
+    <a class="tombol sekunder" href="/beli/">Harga dan cara beli</a>
+    <a class="tombol sekunder" href="/mutu/">Mutu dan bukti pemeriksaan soal</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#eaf1f8">SiapPsikotes</strong> &mdash; latihan psikotes kerja, tes IQ, dan tes kepribadian.</p>
+    <div class="tautan-kaki">
+      <a href="../psikotes/">Buka aplikasi latihan</a>
+      <a href="../contoh/">40 soal contoh gratis</a>
+      <a href="../beli/">Harga &amp; cara beli</a>
+      <a href="../mutu/">Mutu &amp; bukti pemeriksaan</a>
+      <a href="../syarat/">Syarat &amp; ketentuan</a>
+      <a href="../privasi/">Kebijakan privasi</a>
+    </div>
+    <p>SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah.</p>
+    <p>Seluruh soal di halaman ini diambil dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang. Halaman ini bersifat latihan; hasil seleksi bergantung pada usaha pembaca.</p>
+    <p>Halaman ini diperbarui 17 September 2026.</p>
+  </div>
+</footer>
+</body>
+</html>
