@@ -862,8 +862,9 @@ def main():
                 ? /^[0-9]{6,}-[a-z0-9]+\.apps\.googleusercontent\.com$/.test(cid)
                 : cid === '';
             out.skripBelumDimuat = !document.querySelector('script[src*="accounts.google.com"]');
-            out.lingkupBenar = String(AKUN_GOOGLE.lingkup || '').indexOf('auth/drive.appdata') >= 0
-                && String(AKUN_GOOGLE.lingkup || '').indexOf('auth/drive ') < 0;
+            out.lingkupBenar = String(AKUN_GOOGLE.lingkup || '').indexOf('drive') < 0
+                && String(AKUN_GOOGLE.lingkup || '').indexOf('openid') >= 0
+                && String(AKUN_GOOGLE.lingkup || '').indexOf('email') >= 0;
             // uji pembaca token dengan token buatan
             const b64 = (o) => btoa(JSON.stringify(o)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
             const jwt = 'kepala.' + b64({email:'uji@contoh.id', name:'Uji Google', picture:'https://x/y.png', sub:'12345'}) + '.ekor';
@@ -878,7 +879,7 @@ def main():
             return out;
         }""")
         cek(ad['konfigurasiSah'] and ad['skripBelumDimuat'] and ad['lingkupBenar'],
-            'konfigurasi Google sah, lingkup hanya drive.appdata, & skrip Google tidak dimuat sebelum ditekan', ad)
+            'konfigurasi Google sah, lingkup identitas saja (tanpa Drive), & skrip Google tidak dimuat sebelum ditekan', ad)
         cek(ad['uraiToken'] and ad['tokenRusakDitangani'],
             'pembaca token Google bekerja & tahan token rusak', ad)
         cek(ad['adaKartuGoogle'] and ad['dinyatakanOpsional'],
@@ -955,7 +956,7 @@ def main():
             {'klik': _klik, 'terkunci': _terkunci, 'bersih': _bersih})
         _p2.close()
 
-        print('== AE. Aktif: alur Drive dengan Google tiruan ==')
+        print('== AE. Aktif: alur masuk dengan Google tiruan (ruang akun, tanpa Drive) ==')
         ae = page.evaluate("""() => {
             const hasil = { panggilan: [], dipanggilMasuk: false };
             AKUN_GOOGLE.aktif = true;
@@ -969,11 +970,12 @@ def main():
                 },
                 revoke: (t, cb) => cb && cb()
             } } };
-            // tahan jaringan: catat alamat, jangan benar-benar menghubungi Google
+            // tahan jaringan: catat alamat + isi kiriman, jangan benar-benar menghubungi server
             const alamat = [];
-            window.fetch = (u, o) => { alamat.push(String(u) + '|' + ((o && o.method) || 'GET'));
-                if (String(u).indexOf('drive/v3/files?spaces=appDataFolder') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({files:[]}) });
-                return Promise.resolve({ ok:true, text:()=>Promise.resolve(''), json:()=>Promise.resolve({id:'berkas-1'}) }); };
+            window.fetch = (u, o) => { alamat.push(String(u) + '|' + ((o && o.method) || 'GET') + '|' + String((o && o.body) || ''));
+                if (String(u).indexOf('/api/masuk') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ token: 'sesi-akun-uji', pengguna: { surel: 'pemakai@contoh.id' } }) });
+                if (String(u).indexOf('/api/saya') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ progres: [], salah: [], bahan: [], pembelian: [] }) });
+                return Promise.resolve({ ok:true, json:()=>Promise.resolve({ ok:true }) }); };
 
             masukkanGoogle();
             // tunggu balasan Google tiruan benar-benar diproses, baru periksa tampilan
@@ -983,23 +985,23 @@ def main():
                 const teks = document.body.textContent;
                 selesai({
                     masukDipanggil: hasil.dipanggilMasuk,
-                    lingkupBenar: hasil.panggilan.length && hasil.panggilan[0].indexOf('auth/drive.appdata') >= 0,
+                    lingkupTanpaDrive: hasil.panggilan.length && hasil.panggilan[0].indexOf('drive') < 0
+                        && hasil.panggilan[0].indexOf('openid') >= 0,
                     akunTersimpan: !!(akun && akun.email === 'pemakai@contoh.id'),
                     namaTampil: teks.indexOf('Pemakai Uji') >= 0,
-                    adaTombolSalin: teks.indexOf('Salin ke Drive') >= 0,
-                    adaTombolPulihkan: teks.indexOf('Pulihkan dari Drive') >= 0,
+                    tanpaSebutDrive: teks.indexOf('Drive') < 0,
                     alamat: alamat
                 });
             }, 900));
         }""")
-        cek(ae['masukDipanggil'] and ae['lingkupBenar'],
-            'masuk Google meminta lingkup drive.appdata saja (bukan seluruh Drive)', ae['alamat'])
-        cek(ae['akunTersimpan'] and ae['namaTampil'] and ae['adaTombolSalin'] and ae['adaTombolPulihkan'],
-            'setelah masuk: nama tampil & tombol salin/pulihkan Drive tersedia', ae['alamat'])
-        cek(any('upload/drive/v3/files' in a or 'drive/v3/files' in a for a in ae['alamat']),
-            'salinan benar-benar dikirim ke Drive pengguna (endpoint benar)', ae['alamat'])
+        cek(ae['masukDipanggil'] and ae['lingkupTanpaDrive'],
+            'masuk Google meminta lingkup identitas saja (tanpa akses Drive)', ae['alamat'])
+        cek(ae['akunTersimpan'] and ae['namaTampil'] and ae['tanpaSebutDrive'],
+            'setelah masuk: nama tampil & halaman tidak lagi menyinggung Drive', ae['alamat'])
+        cek(any('/api/masuk' in a for a in ae['alamat']),
+            'ruang akun dibuka di server saat masuk (endpoint /api/masuk)', ae['alamat'][:4])
 
-        print('== AE2. Masuk tanpa id_token: email lewat userinfo, pemilik langsung masuk, Drive senyap ==')
+        print('== AE2. Masuk tanpa id_token: email lewat userinfo, pemilik langsung masuk, ruang akun dibuka ==')
         ae2a = page.evaluate("""() => {
             const simpanan = localStorage.getItem('tni_google_akun');
             localStorage.setItem('tni_google_akun', JSON.stringify({ email: '(tanpa surel)', nama: '', foto: '', sub: '' }));
@@ -1020,10 +1022,11 @@ def main():
                 } }),
                 revoke: (t, cb) => cb && cb()
             } } };
-            window.fetch = (u, o) => { alamat.push(String(u));
+            window.fetch = (u, o) => { alamat.push(String(u) + '|' + ((o && o.method) || 'GET') + '|' + String((o && o.body) || ''));
                 if (String(u).indexOf('oauth2/v3/userinfo') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ email: 'rasyidahmad180@gmail.com', name: 'Pemilik Uji', sub: '1' }) });
-                if (String(u).indexOf('drive/v3/files?spaces=appDataFolder') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({files:[]}) });
-                return Promise.resolve({ ok:true, text:()=>Promise.resolve(''), json:()=>Promise.resolve({id:'berkas-2'}) });
+                if (String(u).indexOf('/api/masuk') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ token: 'sesi-pemilik-uji', pengguna: { surel: 'rasyidahmad180@gmail.com' } }) });
+                if (String(u).indexOf('/api/saya') >= 0) return Promise.resolve({ ok:true, json:()=>Promise.resolve({ progres: [], salah: [], bahan: [], pembelian: [] }) });
+                return Promise.resolve({ ok:true, json:()=>Promise.resolve({ ok:true }) });
             };
             masukkanGoogle();
             return new Promise((selesai) => setTimeout(() => {
@@ -1031,6 +1034,8 @@ def main():
                 selesai({
                     emailBenar: !!(akun && akun.email === 'rasyidahmad180@gmail.com'),
                     pakaiUserinfo: alamat.some(a => a.indexOf('oauth2/v3/userinfo') >= 0),
+                    ruangAkunDibuka: alamat.some(a => a.indexOf('/api/masuk') >= 0
+                        && a.indexOf('access_token') >= 0 && a.indexOf('token-uji-2') >= 0),
                     pemilikMasuk: peranAkses() === 'pemilik' && punyaAkses(),
                     gerbangHilang: !document.getElementById('kodeAksesGerbang')
                 });
@@ -1041,26 +1046,8 @@ def main():
         cek(ae2b['pemilikMasuk'] and ae2b['gerbangHilang'],
             'login pemilik lewat Google: langsung masuk aplikasi tanpa terkunci', ae2b)
 
-        ae2c = page.evaluate("""() => new Promise((selesai) => {
-            const asliAlert = window.alert;
-            const dicatat = [];
-            window.alert = (m) => { dicatat.push(String(m)); };
-            const panggil = (senyap) => new Promise((selesaiDalam) => {
-                try { googleAmbilDariDrive(senyap); } catch (e) {}
-                setTimeout(selesaiDalam, 400);
-            });
-            panggil(true).then(() => {
-                const setelahSenyap = dicatat.slice();
-                return panggil(undefined).then(() => {
-                    window.alert = asliAlert;
-                    selesai({ senyap: setelahSenyap, manual: dicatat.slice() });
-                });
-            });
-        })""")
-        cek(len(ae2c['senyap']) == 0,
-            'pemulihan Drive otomatis (usai masuk): senyap, tanpa pesan mengganggu', ae2c)
-        cek(any('Belum ada cadangan' in m for m in ae2c['manual']),
-            'tombol "Pulihkan dari Drive" (manual) tetap memberi kabar bila belum ada cadangan', ae2c)
+        cek(ae2b['ruangAkunDibuka'],
+            'masuk tanpa id_token tetap membuka ruang akun di server (access_token terkirim)', ae2b)
 
         print('== AF. Nonaktif kembali: tidak ada panggilan ke Google ==')
         af = page.evaluate("""() => {
@@ -1328,34 +1315,7 @@ def main():
             out.penandaPalsuDitolak = punyaAkses() === false;
             localStorage.removeItem('tni_akses');
 
-            // 2) pemulihan cadangan seperti milik pembeli yang pindah perangkat
-            const KUNCI = 'siap|psikotes|2026|kode';
-            function sidik(isi) { let h = 2166136261; const s = isi + '#' + KUNCI;
-                for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
-                let pos = h % 1679616, ab = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', o = '';
-                while (pos > 0) { o = ab[pos % 36] + o; pos = Math.floor(pos / 36); } return o.padStart(4, '0'); }
-            const isi = 'AKUN' + String(Date.now()).slice(-5);
-            const kode = 'SP' + isi + sidik(isi);
-            const paket = { v: 1, dibuat: new Date().toISOString(), data: {
-                tni_kode_akses: kode,
-                tni_pembelian: JSON.stringify({ kode: kode, rujukan: 'SP-777', nominal: 39777, dasar: 39000,
-                                                tanggal: new Date().toISOString(), produk: 'Akses penuh' }),
-                tni_prog: JSON.stringify({ tkw: { benar: 4, salah: 1 } }),
-                tni_jahil: 'tidak boleh ikut' } };
-            const bundel = btoa(unescape(encodeURIComponent(JSON.stringify(paket))));
-            const hasil = window.terapkanBundel(bundel, true);
-            out.terapkan = hasil;
-            out.aksesTerbuka = punyaAkses();
-            out.peran = peranAkses();
-            out.kodeCocok = localStorage.getItem('tni_kode_akses') === kode;
-            out.pembelianIkut = !!localStorage.getItem('tni_pembelian');
-            out.progresIkut = localStorage.getItem('tni_prog');
-            out.kunciAsingDitolak = localStorage.getItem('tni_jahil') === null;
-
-            // 3) cadangan rusak / terlalu besar harus ditolak dengan aman
-            out.rusakDitolak = window.terapkanBundel('bukan-bundel', true).ok === false;
-
-            // 4) layar gerbang menyatakan manfaat masuk & menyediakan pemulihan
+            // 2) layar gerbang menyatakan manfaat masuk & menyediakan kolom kode
             try { localStorage.clear(); } catch (e) {}
             // Uji isi layar MASUK secara langsung (tidak bergantung halaman yang sedang tampil)
             const html = (typeof renderGerbang === 'function') ? renderGerbang() : '';
@@ -1368,11 +1328,39 @@ def main():
             return out;
         }""")
         cek(an['penandaPalsuDitolak'], "penanda 'TERBUKA' saja tidak membuka (harus kode sah)", an)
-        cek(an['terapkan']['ok'] and an['aksesTerbuka'] and an['peran'] == 'pembeli' and an['kodeCocok'],
-            'cadangan dari akun memulihkan akses & kode pembeli (pindah perangkat)', an)
-        cek(an['pembelianIkut'] and an['progresIkut'] and an['kunciAsingDitolak'],
-            'pembelian & progres ikut dipulihkan; kunci asing ditolak', an)
-        cek(an['rusakDitolak'], 'cadangan rusak ditolak dengan aman', an)
+
+        print('== AN2. Pemulihan perangkat baru lewat ruang akun (pengganti cadangan Drive) ==')
+        an2 = page.evaluate("""() => new Promise((selesai) => {
+            // kode pembeli sah dibuat dengan sidik yang sama seperti alat penerbit kode
+            const KUNCI = 'siap|psikotes|2026|kode';
+            function sidik(isi) { let h = 2166136261; const s = isi + '#' + KUNCI;
+                for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+                let pos = h % 1679616, ab = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', o = '';
+                while (pos > 0) { o = ab[pos % 36] + o; pos = Math.floor(pos / 36); } return o.padStart(4, '0'); }
+            const isi = 'AKUN' + String(Date.now()).slice(-5);
+            const kode = 'SP' + isi + sidik(isi);
+            try { localStorage.clear(); } catch (e) {}
+            try { localStorage.setItem('tni_sesi_db', 'sesi-tarik-uji'); } catch (e) {}
+            window.__dbToken = 'sesi-tarik-uji';
+            window.fetch = (u, o) => {
+                const a = String(u);
+                if (a.indexOf('/api/saya') >= 0) return Promise.resolve({ ok: true, json: () => Promise.resolve({
+                    progres: [{ kategori: 'tkw', benar: 4, salah: 1 }], salah: [], bahan: [],
+                    pembelian: [{ kode: kode, rujukan: 'SP-777', nominal: 39777, tanggal: '2026-09-17' }] }) });
+                return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) });
+            };
+            dbTarik().then(() => {
+                selesai({
+                    aksesTerbuka: punyaAkses(),
+                    peran: peranAkses(),
+                    kodeCocok: localStorage.getItem('tni_kode_akses') === kode,
+                    pembelianIkut: !!localStorage.getItem('tni_pembelian'),
+                    progresIkut: !!localStorage.getItem('tni_prog')
+                });
+            });
+        })""")
+        cek(an2['aksesTerbuka'] and an2['peran'] == 'pembeli' and an2['kodeCocok'] and an2['pembelianIkut'] and an2['progresIkut'],
+            'ruang akun memulihkan akses, kode pembeli, & progres di perangkat baru (pengganti Drive)', an2)
         cek(an['manfaatDijelaskan'] and an['bisaDilewati'] and an['adaTombolPulihkan'],
             'layar masuk menjelaskan manfaatnya, mengarahkan ke harga, & menyediakan kolom kode', an)
 

@@ -62,7 +62,7 @@ TIRUAN = """() => {
     window.fetch = (u, o) => {
         const a = String(u).replace('https://siappsikotes-api.rasyidahmad180.workers.dev', '').split('?')[0];
         const tajuk = ((o && o.headers) || {}).Authorization || '';
-        window.__dikirim.push(a + '|' + ((o && o.method) || 'GET') + '|' + tajuk);
+        window.__dikirim.push(a + '|' + ((o && o.method) || 'GET') + '|' + tajuk + '|' + String((o && o.body) || ''));
         return Promise.resolve({ ok: true, json: () => Promise.resolve(isiApi[a] || { ok: true }) });
     };
 }"""
@@ -99,6 +99,18 @@ with sync_playwright() as p:
     cek('masuk menukar token Google ke sesi & kiriman membawa otorisasi',
         tukar and sesi_ok and otorisasi,
         {'tukar': tukar, 'sesi': sesi_ok, 'otorisasi': otorisasi})
+
+    # 1b. masuk lewat access_token (peramban tanpa id_token, mis. Safari) -> tetap dikirim ke server
+    page.evaluate("() => { window.__dikirim.length = 0; dbMasuk('', 'akses-uji-token'); }")
+    try:
+        page.wait_for_function("() => (window.__dikirim || []).some(x => x.indexOf('/api/masuk|POST') === 0 && x.indexOf('access_token') >= 0 && x.indexOf('akses-uji-token') >= 0)", timeout=15000)
+        masuk_akses = True
+    except Exception:
+        masuk_akses = False
+    if RUSAK:
+        masuk_akses = False
+    cek('masuk juga menerima access_token (peramban tanpa id_token)', masuk_akses,
+        page.evaluate("() => (window.__dikirim || []).filter(x => x.indexOf('/api/masuk') === 0)"))
 
     # 2. tarik -> tunggu data diterapkan
     try:

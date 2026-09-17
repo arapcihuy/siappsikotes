@@ -8,18 +8,19 @@ var __dbToken = null;
 var __dbPendorong = null;
 var __dbSedangDorong = false;
 function dbKunci() {
-return ['tni_prog', 'tni_wrong', 'tni_scores', 'tni_harian', 'tni_iq_log', 'tni_psi_progress',
-'tni_kode_akses', 'tni_pembelian', 'tni_laporan_bayar'];
+return ['tni_prog', 'tni_wrong', 'tni_scores', 'tni_to_total', 'tni_harian',
+'tni_iq_log', 'tni_iq_meta', 'tni_iq_nb', 'tni_iq_sesi', 'tni_jalur_mulai', 'tni_psi_progress',
+'tni_soal_riwayat', 'tni_kode_akses', 'tni_pembelian', 'tni_laporan_bayar'];
 }
 window.dbTokenTersimpan = function () {
 try { return localStorage.getItem('tni_sesi_db') || ''; } catch (e) { return ''; }
 };
-window.dbMasuk = function (idToken) {
-if (!AKUN_DB.aktif || !idToken) return Promise.resolve(false);
+window.dbMasuk = function (idToken, accessToken) {
+if (!AKUN_DB.aktif || (!idToken && !accessToken)) return Promise.resolve(false);
 return fetch(AKUN_DB.api + '/api/masuk', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ id_token: idToken })
+body: JSON.stringify({ id_token: idToken || '', access_token: accessToken || '' })
 }).then(function (r) { return r.ok ? r.json() : null; })
 .then(function (j) {
 if (!j || !j.token) return false;
@@ -34,6 +35,9 @@ return dbTarik().then(function () { return dbDorongSekarang(); });
 // Satu kode = satu ruang; kode berbeda = ruang berbeda, jadi progres tiap pengguna terpisah.
 window.dbMasukKode = function (kode) {
 if (!AKUN_DB.aktif || !kode) return Promise.resolve(false);
+// Bila sedang masuk dengan Google, rumah data pengguna = ruang akunnya (bukan ruang kode).
+// Kode yang dimasukkan tetap tersimpan di perangkat dan ikut terkirim sebagai pembelian.
+if (window.__gToken) return window.dbMasuk('', window.__gToken);
 return fetch(AKUN_DB.api + '/api/ruang/masuk', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json' },
@@ -134,6 +138,20 @@ method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'B
 body: JSON.stringify({ kode: kode, rujukan: (bel && bel.rujukan) || '', nominal: (bel && bel.nominal) || 0 })
 }));
 }
+// Sisa bahan belajar (nilai, log IQ, jalur, laporan) ikut dikirim per kunci, supaya
+// ruang akun benar-benar menjadi cadangan utuh — bukan hanya progres & pembelian.
+['tni_scores', 'tni_to_total', 'tni_harian', 'tni_iq_log', 'tni_iq_meta', 'tni_iq_nb',
+'tni_iq_sesi', 'tni_jalur_mulai', 'tni_psi_progress', 'tni_soal_riwayat', 'tni_laporan_bayar']
+.forEach(function (k) {
+var v = null;
+try { v = localStorage.getItem(k); } catch (e) {}
+if (typeof v === 'string' && v.length && v.length <= 100000) {
+tugas.push(fetch(AKUN_DB.api + '/api/bahan', {
+method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
+body: JSON.stringify({ jenis: 'kunci', kunci: k, isi: v })
+}));
+}
+});
 return Promise.all(tugas).then(function () {
 __dbSedangDorong = false;
 if (!senyap) tampilkanStatusSinkron('Data terkirim ke akunmu.');

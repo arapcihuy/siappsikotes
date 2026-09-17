@@ -48,9 +48,9 @@ print('  tidak ada di repo : %s' % (hilang if hilang else 'tidak ada'))
 print()
 print('=== 3. Angka di /mutu/ vs kenyataan ===')
 mutu = open(os.path.join(AKAR, 'mutu', 'index.html'), encoding='utf-8').read()
-for angka in ['1.348', '162', '11', '50']:
+for angka in ['1.348', '159', '11', '50']:
     print('  angka %-5s muncul %d kali di /mutu/' % (angka, mutu.count(angka)))
-print('  (kenyataan: 1.348 soal, 162 uji fitur, 11 butir mutu, 50 uji tampilan)')
+print('  (kenyataan: 1.348 soal, 159 uji fitur, 11 butir mutu, 50 uji tampilan)')
 
 print()
 print('=== 4. Kata "gratis" di halaman aplikasi (index.html) ===')

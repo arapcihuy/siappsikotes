@@ -7,9 +7,9 @@
 //   2. Setiap kueri memakai parameter terikat (prepared statement) - tidak ada penyusunan SQL
 //      dari teks kiriman pengguna.
 //   3. Token sesi hanya dikirim SEKALI saat masuk; yang disimpan di database hanya HASH-nya.
-//   4. Identitas pengguna datang dari token Google yang DIPERIKSA TANDA TANGANNYA di server
-//      (RS256 terhadap kunci publik Google, plus pemeriksaan aud/iss/exp). Klaim surel dari
-//      peramban tidak pernah dipercaya.
+//   4. Identitas pengguna datang dari token Google yang DIPERIKSA di server: id_token diperiksa
+//      tanda tangannya (RS256 terhadap kunci publik Google, plus aud/iss/exp), dan access_token
+//      ditukar langsung ke Google lewat API userinfo. Klaim surel dari peramban tidak pernah dipercaya.
 //   5. CORS dibatasi ke alamat situs kita saja (bukan *).
 //   6. Pemilik (rasyidahmad180@gmail.com) boleh membaca ringkasan semua pengguna; pengguna
 //      biasa hanya bisa membaca datanya sendiri - dan itu ditegakkan di setiap kueri.
@@ -93,6 +93,25 @@ async function periksaTokenGoogle(idToken) {
   return { id: String(isi.sub), surel: String(isi.email).toLowerCase(), nama: isi.name || '', foto: isi.picture || '' };
 }
 
+// Memeriksa access_token Google dengan MENANYAKAN langsung ke Google (tokeninfo).
+// Peramban yang tidak mengirim id_token (mis. Safari pada alur token GIS) tetap bisa
+// menyambung ruang akunnya dengan cara ini, TAPI tokennya harus benar-benar milik aplikasi
+// ini: tokeninfo mengembalikan audiens (client id) dan lingkup, jadi token dari aplikasi
+// Google lain - walau sah untuk akunnya - ditolak di sini. Klaim dari peramban tidak dipercaya.
+async function periksaTokenAksesGoogle(accessToken) {
+  const t = String(accessToken || '').trim();
+  if (t.length < 10) throw new Error('token akses kosong');
+  const r = await fetch('https://oauth2.googleapis.com/tokeninfo?access_token=' + encodeURIComponent(t));
+  if (!r.ok) throw new Error('token akses tidak sah');
+  const p = await r.json();
+  if (p.aud !== CLIENT_ID) throw new Error('token bukan untuk aplikasi ini');
+  if (String(p.scope || '').indexOf('email') === -1) throw new Error('lingkup token tidak memuat surel');
+  if (typeof p.email !== 'string' || !p.email) throw new Error('token tidak memuat surel');
+  if (p.email_verified === false) throw new Error('surel Google belum terverifikasi');
+  if (!p.sub) throw new Error('token tidak memuat id akun');
+  return { id: String(p.sub), surel: String(p.email).toLowerCase(), nama: p.name || '', foto: p.picture || '' };
+}
+
 // Pembatas laju: menahan percobaan beruntun (pengintaian, brute force, penyalahgunaan).
 // Disimpan di database supaya berlaku lintas-instance (Worker tidak menyimpan keadaan).
 async function batasiLaju(env, ip, alamat, batas, jendelaDetik) {
@@ -169,13 +188,15 @@ export default {
     if (asal && SITUS.indexOf(asal) === -1) return jawab({ pesan: 'asal tidak diizinkan' }, 403, asal);
 
     try {
-      // ---- masuk: tukar token Google dengan sesi kita ----
+      // ---- masuk: tukar token Google (id_token atau access_token) dengan sesi kita ----
       if (jalan === '/api/masuk' && request.method === 'POST') {
         const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
         const laju = await batasiLaju(env, ip, 'masuk', 10, 60);   // maksimal 10 kali per menit per IP
         if (!laju.boleh) return jawab({ pesan: 'terlalu banyak percobaan, coba lagi nanti' }, 429, asal);
         const badan = await request.json().catch(() => ({}));
-        const orang = await periksaTokenGoogle(badan.id_token);
+        // id_token (JWT) bila ada; kalau tidak, access_token ditukar ke Google (userinfo).
+        const orang = badan.id_token ? await periksaTokenGoogle(badan.id_token)
+                                     : await periksaTokenAksesGoogle(badan.access_token);
         const kini = new Date().toISOString();
         await env.DB.prepare(
           'INSERT INTO pengguna (id, surel, nama, foto, dibuat, terakhir_aktif) VALUES (?, ?, ?, ?, ?, ?) ' +

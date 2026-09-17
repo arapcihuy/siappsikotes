@@ -15,7 +15,7 @@
       (makin lama tidak dilihat makin cepat kembali).
       Jadi bank 100 soal baru terulang setelah benar-benar habis.
    Semua di localStorage (tanpa server). Ikut tercadang oleh
-   Export/Import data dan sinkronisasi Google Drive.
+   Export/Import data dan sinkronisasi ruang akun (server).
    ============================================================ */
 (function () {
   var KUNCI = 'tni_soal_riwayat';

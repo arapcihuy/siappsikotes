@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Nyalakan 'Masuk dengan Google' + simpan bahan belajar di Drive pengguna.
+"""Nyalakan 'Masuk dengan Google' + ruang akun pengguna di server (tanpa Google Drive).
 
-Latar: proyek Google Cloud "SiapPsikotes" (id: handy-geography-415619) dan Google Drive API
-sudah disiapkan lewat gcloud. Yang tersisa hanya OAuth Client ID, karena Google tidak menyediakan
+Latar: proyek Google Cloud "SiapPsikotes" (id: handy-geography-415619) sudah disiapkan lewat gcloud.
+Yang tersisa hanya OAuth Client ID, karena Google tidak menyediakan
 pembuatan client lewat terminal - harus lewat konsol (sekali klik oleh pemilik).
 
 Contoh:
@@ -41,7 +41,7 @@ def main():
     print('=== keadaan sekarang ===')
     print('  aktif     :', aktif.group(1) if aktif else '?')
     print('  clientId  :', (m.group(1) or '(kosong)') if m else '?')
-    print('  proyek    :', PROYEK, '| Drive API: sudah dinyalakan lewat gcloud')
+    print('  proyek    :', PROYEK, '| Google Sign-In: identitas saja (tanpa Drive)')
     if a.periksa or not a.client_id:
         print('\n=== yang perlu kamu klik SEKALI di konsol Google ===')
         print('  1. Buka:', CONSOLE)
@@ -53,7 +53,7 @@ def main():
         print('     (Authorized redirect URIs: biarkan KOSONG)')
         print('  5. CREATE -> salin Client ID -> jalankan:')
         print('     /usr/bin/python3 tools/aktifkan-google.py --client-id "<Client ID>" --kirim')
-        print('\nTidak ada yang dibayar: Drive API dan Google Sign-In tidak berbiaya pada skala ini.')
+        print('\nTidak ada yang dibayar: Google Sign-In tidak berbiaya pada skala ini.')
         return 0
 
     cid = a.client_id.strip()

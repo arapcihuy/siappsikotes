@@ -81,7 +81,7 @@ tanggal: new Date().toISOString(), produk: 'Akses penuh SiapPsikotes + Laporan L
 }));
 } catch (e) {}
 if (st) st.textContent = 'Kode sah. Membuka seluruh aplikasi...';
-try { if (typeof googleMasuk === 'function' && googleMasuk() && typeof googleKirimKeDrive === 'function') googleKirimKeDrive(false); } catch (e) {}
+// (pengiriman ke ruang akun kini otomatis lewat dbMasukKode -> dbMasuk saat sedang masuk Google)
 bukaRuangKode(kode);
 } else if (st) {
 var wa = (typeof BAYAR !== 'undefined' && BAYAR.whatsapp) ? String(BAYAR.whatsapp).replace(/[^0-9]/g, '') : '';
@@ -104,16 +104,6 @@ try {
 if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(teks).then(beres, beres); return; }
 } catch (e) {}
 beres();
-};
-window.pulihkanAksesDariAkun = function () {
-if (typeof googleMasuk !== 'function' || !googleMasuk()) {
-alert('Masuk dengan Google dulu, lalu tekan lagi untuk memulihkan.');
-return;
-}
-var st = document.getElementById('statusGerbang');
-if (st) st.textContent = 'Memeriksa cadangan di Google Drive-mu...';
-if (typeof googleAmbilDariDrive !== 'function') return;
-try { googleAmbilDariDrive(); } catch (e) {}
 };
 window.tutupGerbangUlang = function () {
 if (!confirm('Kunci kembali aplikasinya di perangkat ini? Kamu perlu kode akses lagi untuk masuk.')) return;
@@ -139,13 +129,13 @@ var html = '<!DOCTYPE html><html lang="id"><head><meta charset="utf-8">' +
 '</style></head><body>' +
 '<h1>Kuitansi pembelian</h1><p class="sub">SiapPsikotes — bukti pembayaran akses penuh</p>' +
 '<table>' +
-'<tr><th>Produk</th><td>' + b.produk + '</td></tr>' +
-'<tr><th>Kode akses</th><td>' + b.kode + '</td></tr>' +
-'<tr><th>Kode rujukan</th><td>' + (b.rujukan || '-') + '</td></tr>' +
+'<tr><th>Produk</th><td>' + escapeHtml(String(b.produk || '')) + '</td></tr>' +
+'<tr><th>Kode akses</th><td>' + escapeHtml(String(b.kode || '')) + '</td></tr>' +
+'<tr><th>Kode rujukan</th><td>' + escapeHtml(String(b.rujukan || '-')) + '</td></tr>' +
 '<tr><th>Nominal dibayar</th><td>' + rupiahKomersial(b.nominal || b.dasar || 0) + '</td></tr>' +
-'<tr><th>Tanggal</th><td>' + tgl + '</td></tr>' +
-'<tr><th>Nama akun</th><td>' + (akun && akun.nama ? akun.nama : '-') + '</td></tr>' +
-'<tr><th>Surel akun</th><td>' + (akun && akun.email ? akun.email : '-') + '</td></tr>' +
+'<tr><th>Tanggal</th><td>' + escapeHtml(String(tgl)) + '</td></tr>' +
+'<tr><th>Nama akun</th><td>' + escapeHtml(String((akun && akun.nama) || '-')) + '</td></tr>' +
+'<tr><th>Surel akun</th><td>' + escapeHtml(String((akun && akun.email) || '-')) + '</td></tr>' +
 '</table><total>Lunas</total>' +
 '<p class="cat">Kuitansi ini dibuat dari catatan di perangkatmu sendiri, bukan dari server kami. ' +
 'Simpan sebagai PDF lewat menu cetak peramban. Pembelian sekali bayar tanpa perpanjangan otomatis.</p>' +
