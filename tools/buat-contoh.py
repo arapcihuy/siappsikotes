@@ -193,9 +193,9 @@ def bangun():
     <h1>%(jumlah)d contoh soal psikotes, lengkap dengan pembahasan</h1>
     <p class="dek">Ini soal asli dari bank soal SiapPsikotes — bukan contoh karangan. Pilih jawabanmu,
       lalu pembahasan langkah demi langkah terbuka. Kalau cara ini cocok untukmu, di aplikasi tersedia
-      <strong>1.225 soal</strong> dari 9 jenis tes dengan sekali bayar Rp 39.000.</p>
+      <strong>1.348 soal</strong> dari 9 jenis tes dengan sekali bayar Rp 39.000.</p>
     <div class="aksi">
-      <a class="tombol" href="../beli/">Buka semua 1.225 soal &mdash; Rp 39.000</a>
+      <a class="tombol" href="../beli/">Buka semua 1.348 soal &mdash; Rp 39.000</a>
       <a class="tombol sekunder" href="../">Buka aplikasi</a>
     </div>
   </section>
@@ -216,7 +216,7 @@ def bangun():
   <section class="pita" style="margin-top:30px">
     <h2 style="margin:0 0 10px;font-size:clamp(22px,3.2vw,28px)">Sudah terlihat polanya?</h2>
     <p class="dek">Yang barusan kamu kerjakan itu %(persen)d%% dari bank soal. Di aplikasi, sisa
-      <strong>1.185 soal</strong> menunggu bersama 9 modul tes, pembahasan tiap soal, riwayat latihan,
+      <strong>1.308 soal</strong> menunggu bersama 9 modul tes, pembahasan tiap soal, riwayat latihan,
       dan Laporan Lengkap kesiapan seleksimu. Sekali bayar Rp 39.000, tanpa langganan.</p>
     <p class="dek" style="margin-top:10px">Soal bergambar (Tes Gambar dan kolom hitung Kraepelin)
       tidak bisa dimuat di halaman ringan ini — semuanya ada di dalam aplikasi.</p>
@@ -246,7 +246,7 @@ def bangun():
       <a href="../privasi/">Kebijakan privasi</a>
     </div>
     <p>SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah.</p>
-    <p>Halaman ini diperbarui 14 September 2026.</p>
+    <p>Halaman ini diperbarui 17 September 2026.</p>
   </div>
 </footer>
 
@@ -377,7 +377,7 @@ window.CONTOH_SOAL = %(data)s;
 ''' % {
         'jumlah': total,
         'situs': SITUS,
-        'persen': int(round(total * 100.0 / 1225)),
+        'persen': int(round(total * 100.0 / 1348)),
         'gaya': gaya,
         'data': data_js,
         'opsi': '\n'.join(

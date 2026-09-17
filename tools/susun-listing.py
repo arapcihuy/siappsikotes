@@ -73,7 +73,7 @@ Salin salah satu (batas Tokopedia 70 karakter; semuanya sudah dihitung):
 
 | Urutan | Berkas | Isi |
 |---|---|---|
-| 1 | `gambar-marketplace/01-gambar-utama.png` | soal asli + angka 1.225 |
+| 1 | `gambar-marketplace/01-gambar-utama.png` | soal asli + angka 1.348 |
 | 2 | `gambar-marketplace/02-isi-lengkap.png` | daftar kategori + jumlah soal |
 | 3 | `gambar-marketplace/03-cara-pakai.png` | bayar, kirim bukti, terima kode |
 | 4 | `gambar-marketplace/04-nilai-jujur.png` | 40 soal gratis, tanpa akun, bisa offline |

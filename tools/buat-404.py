@@ -65,11 +65,11 @@ __GAYA__
 
   <h2 style="font-size:22px;margin:26px 0 10px">Halaman yang paling sering dicari</h2>
   <ul class="langkah">
-    <li><a href="/">Aplikasi latihan</a> — 1.225 soal psikotes, tes IQ, dan kepribadian, berpembahasan tiap soal.</li>
+    <li><a href="/">Aplikasi latihan</a> — 1.348 soal psikotes, tes IQ, dan kepribadian, berpembahasan tiap soal.</li>
     <li><a href="/contoh/">Contoh soal gratis</a> — 40 soal berpembahasan, tanpa akun dan tanpa bayar.</li>
     <li><a href="/psikotes/">Penjelasan paket</a> — isi lengkap dan untuk siapa latihan ini dibuat.</li>
     <li><a href="/beli/">Harga &amp; cara beli</a> — Rp 39.000 sekali bayar lewat QRIS, tanpa langganan.</li>
-    <li><a href="/mutu/">Bukti mutu soal</a> — hasil pemeriksaan 1.225 soal yang bisa dijalankan ulang.</li>
+    <li><a href="/mutu/">Bukti mutu soal</a> — hasil pemeriksaan 1.348 soal yang bisa dijalankan ulang.</li>
     <li><a href="/syarat/">Syarat &amp; ketentuan</a> dan <a href="/privasi/">kebijakan privasi</a>.</li>
   </ul>
 
@@ -90,7 +90,7 @@ __GAYA__
       <a href="/privasi/">Kebijakan privasi</a>
     </div>
     <p>SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah.</p>
-    <p>Halaman ini diperbarui 14 September 2026.</p>
+    <p>Halaman ini diperbarui 17 September 2026.</p>
   </div>
 </footer>
 </body>

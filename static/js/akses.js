@@ -150,7 +150,7 @@ return { judul: 'Akun ini belum punya akses', sub: 'Kamu sudah masuk sebagai <st
 }
 return { judul: 'Seluruh materi terbuka setelah membeli',
 sub: 'Sejak sekarang tidak ada lagi akses gratis. Satu pembayaran <strong>' + AKSES.harga +
-'</strong> membuka <strong>semua</strong>: 1.225 soal, seluruh modul tes, pembahasan langkah demi langkah, ' +
+'</strong> membuka <strong>semua</strong>: 1.348 soal, seluruh modul tes, pembahasan langkah demi langkah, ' +
 'dan Laporan Lengkap. Bukan langganan, tanpa perpanjangan otomatis.' };
 }
 window.renderGerbang = function () {

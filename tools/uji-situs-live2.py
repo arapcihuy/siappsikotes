@@ -53,7 +53,7 @@ with sync_playwright() as p:
     cek(d['nama'] == 'SiapPsikotes' and d['judul'].startswith('SiapPsikotes'), 'nama produk di situs live', d['nama'])
     cek(d['badge'] == 'SiapPsikotes', 'badge header bukan merek lama', d['badge'])
     cek(not d['adaMerekLama'], 'tidak ada merek lama di layar live', d['adaMerekLama'])
-    cek(d['totalSoal'] >= 1225, 'jumlah soal di situs live', d['totalSoal'])
+    cek(d['totalSoal'] >= 1348, 'jumlah soal di situs live', d['totalSoal'])
     cek(d['jalur'] == 5 and d['teksJalur'][0].startswith('Umum'), '5 jalur, Umum/Kerja paling depan', d['teksJalur'])
     cek(d['modul'] >= 9 and d['adaWawancara'], 'baterai 9+ modul termasuk wawancara', d['modul'])
     cek(d['halamanWawancara'] and d['jumlahPertanyaanWawancara'] == 12, 'modul wawancara live (12 pertanyaan)', d)

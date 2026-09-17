@@ -54,7 +54,7 @@ def main():
         'Cara pakai (1 menit):\n'
         '1. Buka https://siappsikotes.my.id/\n'
         '2. Pada layar "Buka dengan kode akses", tempel kode di atas.\n'
-        '3. Seluruh materi terbuka: 1.225 soal, semua modul, pembahasan, dan Laporan Lengkap.\n\n'
+        '3. Seluruh materi terbuka: 1.348 soal, semua modul, pembahasan, dan Laporan Lengkap.\n\n'
         'Simpan kode ini. Kode yang sama juga membuka aplikasi di perangkat lain, dan bisa dipakai '
         'berulang tanpa batas pada perangkatmu. Bila ada kendala, balas pesan ini.'
         % kode)

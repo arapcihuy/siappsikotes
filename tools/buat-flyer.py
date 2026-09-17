@@ -60,7 +60,7 @@ HTML = """<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><style>
       <li><i>&#10003;</i> Data latihanmu tersimpan di perangkatmu sendiri</li>
     </ul>
     <div class="harga"><b>Akses penuh: Rp 39.000 sekali bayar</b>
-      <span>1.225 soal &middot; 9 jenis tes &middot; Laporan Lengkap &middot; bukan langganan</span></div>
+      <span>1.348 soal &middot; 9 jenis tes &middot; Laporan Lengkap &middot; bukan langganan</span></div>
   </div>
   <div class="kaki">
     <span>Latihan mandiri. <strong>Bukan tes resmi</strong> dan tidak menjamin kelulusan seleksi.</span>
@@ -109,7 +109,7 @@ HTML_TERANG = """<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><sty
       <li><i>&#10003;</i> Data latihanmu tersimpan di perangkatmu sendiri</li>
     </ul>
     <div class="harga"><b>Akses penuh: Rp 39.000 sekali bayar</b>
-      <span>1.225 soal &middot; 9 jenis tes &middot; Laporan Lengkap &middot; bukan langganan</span></div>
+      <span>1.348 soal &middot; 9 jenis tes &middot; Laporan Lengkap &middot; bukan langganan</span></div>
   </div>
   <div class="kaki">
     <span>Latihan mandiri. <strong>Bukan tes resmi</strong> dan tidak menjamin kelulusan seleksi.</span>

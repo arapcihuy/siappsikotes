@@ -111,7 +111,7 @@ def skema_untuk(jalur):
         return graf(jalur, 'Harga dan cara beli', 'beli', [{
             '@type': 'Product',
             'name': 'Akses penuh SiapPsikotes',
-            'description': ('Akses penuh aplikasi latihan psikotes: 1.225 soal, 9 jenis tes, '
+            'description': ('Akses penuh aplikasi latihan psikotes: 1.348 soal, 9 jenis tes, '
                             'pembahasan tiap soal, dan Laporan Lengkap. Sekali bayar, bukan langganan.'),
             'url': DOMAIN + '/beli/',
             'brand': {'@type': 'Brand', 'name': 'SiapPsikotes'},
