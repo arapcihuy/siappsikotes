@@ -397,6 +397,72 @@ def main():
                     [g2['kartuIsi'], g2['akun'], g2['panjang']])
                 cek(not galat_gerbang, '/: tanpa galat JavaScript di gerbang akses', galat_gerbang[:2])
                 gctx.close()
+            # Kode akses kini dibuat halaman /beli/ sendiri sesudah pembeli menekan
+            # "Tampilkan kode akses". Kalau sidik di halaman beli tidak sama dengan sidik
+            # aplikasi, pembeli membayar lalu tetap terkunci - jadi kode dari halaman itu
+            # diuji sampai benar-benar membuka aplikasi, bukan cuma sampai tampil.
+            print('== /beli/ -> /: kode buatan halaman beli membuka aplikasi ==')
+            bctx = browser.new_context(viewport={'width': 1280, 'height': 900})
+            bpage = bctx.new_page()
+            galat_kode = []
+            bpage.on('pageerror', lambda e: galat_kode.append(str(e)[:150]))
+            try:
+                bpage.goto('http://127.0.0.1:%d/beli/' % PORT, wait_until='load', timeout=45000)
+                bpage.wait_for_timeout(600)
+                bpage.click('#beliAmbilKode')
+                bpage.wait_for_timeout(250)
+                bk = bpage.evaluate("""() => {
+                    var el = document.getElementById('beliKodeAkses');
+                    var salin = document.getElementById('beliSalinKode');
+                    var ambil = document.getElementById('beliAmbilKode');
+                    return {
+                        kode: (el && el.textContent || '').trim(),
+                        tampil: !!el && getComputedStyle(el).display !== 'none',
+                        salinTampil: !!salin && getComputedStyle(salin).display !== 'none',
+                        ambilSembunyi: !!ambil && getComputedStyle(ambil).display === 'none',
+                        rujukan: (document.getElementById('beliRujukan') || {}).textContent || ''};
+                }""")
+                cek(bk['tampil'] and bool(re.match(r'^SP[A-Z0-9]{6,}$', bk['kode'])),
+                    '/beli/: tombol menampilkan kode akses berformat SP', bk['kode'][:14])
+                cek(bk['salinTampil'] and bk['ambilSembunyi'],
+                    '/beli/: tombol salin muncul, tombol ambil tidak dobel', [bk['salinTampil'], bk['ambilSembunyi']])
+                angka = re.sub(r'[^0-9]', '', bk['rujukan'])[-3:]
+                cek(angka and angka in bk['kode'],
+                    '/beli/: kode akses dapat ditelusuri ke kode rujukan pembeli', [bk['rujukan'], bk['kode'][:14]])
+                pemeriksa_siap = False
+                sah_kode = False
+                try:
+                    import importlib.util
+                    _spec2 = importlib.util.spec_from_file_location(
+                        'buat_kode2', os.path.join(AKAR, 'tools', 'buat-kode.py'))
+                    _mod2 = importlib.util.module_from_spec(_spec2)
+                    _spec2.loader.exec_module(_mod2)
+                    sah_kode = bool(_mod2.periksa(bk['kode']))
+                    pemeriksa_siap = True
+                except Exception as e:
+                    print('  LEWAT | pemeriksa kode tidak bisa dijalankan (%s)' % str(e)[:120])
+                if pemeriksa_siap:
+                    cek(sah_kode, '/beli/: kode buatan halaman beli lolos pemeriksa resmi repo', bk['kode'][:14])
+                bpage.goto('http://127.0.0.1:%d/' % PORT, wait_until='load', timeout=45000)
+                bpage.wait_for_timeout(700)
+                bpage.fill('#kodeAksesGerbang', bk['kode'])
+                bpage.click('.komer-kartu button:has-text("Buka")')
+                try:
+                    bpage.wait_for_function(
+                        "() => !document.querySelector('.komer-kartu')", timeout=20000)
+                except Exception:
+                    pass
+                bpage.wait_for_timeout(400)
+                b3 = bpage.evaluate("""() => ({
+                    kartu: !!document.querySelector('.komer-kartu'),
+                    tersimpan: localStorage.getItem('tni_akses'),
+                    isi: document.querySelectorAll('#main .card').length })""")
+                cek(not b3['kartu'] and b3['tersimpan'] == 'TERBUKA' and b3['isi'] > 0,
+                    '/beli/: kode dari halaman beli membuka aplikasi tanpa bantuan pengelola', b3)
+                cek(not galat_kode, '/beli/: tanpa galat JavaScript di alur kode akses', galat_kode[:2])
+            except Exception as e:
+                cek(False, '/beli/: alur ambil kode akses berjalan di peramban sungguhan', str(e)[:140])
+            bctx.close()
             cek(not galat, 'tanpa galat JavaScript di halaman pendukung', galat[:3])
             # /favicon.ico diminta peramban sendiri, tanpa membaca <link rel="icon">
             try:

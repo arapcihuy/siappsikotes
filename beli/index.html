@@ -28,6 +28,9 @@
     --gold:#e6c552; --gold-dark:#c9a227; --blue:#6db3ff; --ok:#4ade80;
   }
   * { box-sizing:border-box; }
+  /* .tombol memakai display:inline-flex, jadi atribut hidden kalah oleh gaya penulis.
+     Tanpa baris ini tombol "Tampilkan kode akses" tetap terlihat setelah diklik. */
+  [hidden] { display:none !important; }
   html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body {
     margin:0; color:var(--text);
@@ -311,6 +314,13 @@
         <p class="label">Kode rujukanmu</p>
         <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
         <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
+        <p class="label">Sudah bayar? Ambil kode aksesmu</p>
+        <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
+          jadi kamu tidak perlu menunggu balasan siapa pun.</p>
+        <button type="button" class="tombol kecil" id="beliAmbilKode">Tampilkan kode akses</button>
+        <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
+        <button type="button" class="tombol sekunder kecil" id="beliSalinKode" hidden>Salin kode akses</button>
       </div>
       <noscript>
         <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
@@ -320,10 +330,10 @@
 
       <ol class="langkah">
         <li>Pindai QR di atas, lalu bayar <strong id="beliNominal2">Rp 39.000</strong> tepat sejumlah itu.</li>
-        <li>Kirim bukti pembayaran beserta kode rujukanmu — lewat WhatsApp, atau email ke
-          <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a> bila lebih suka.</li>
-        <li>Kamu menerima <strong>kode akses</strong>.</li>
-        <li>Buka aplikasi, masuk dengan Google, lalu tempel kode itu.</li>
+        <li>Tekan <strong>Tampilkan kode akses</strong> di kartu atas. Kode aksesmu muncul saat itu juga.</li>
+        <li>Buka aplikasi, lalu tempel kode itu pada layar &ldquo;Buka dengan kode akses&rdquo;.</li>
+        <li>Ada kendala? Kirim bukti pembayaran beserta kode rujukanmu lewat WhatsApp, atau email ke
+          <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a>.</li>
       </ol>
 
       <div class="aksi">
@@ -337,9 +347,10 @@
         <a class="tombol sekunder" href="../contoh/">Coba 40 soal gratis dulu</a>
         <a class="tombol sekunder" href="../">Buka aplikasi &amp; masukkan kode</a>
       </div>
-      <p class="catatan">Pembayaran dicocokkan oleh pengelola; kode akses biasanya dikirim pada hari yang sama.
-        Bila bukti lewat WhatsApp belum dibalas dalam sehari, kirim ulang ke
-        <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a> beserta bukti dan kode rujukanmu.</p>
+      <p class="catatan">Kode aksesmu terbuka sendiri lewat tombol <strong>Tampilkan kode akses</strong>, tanpa
+        menunggu siapa pun. Pengelola tetap bisa mencocokkan pembayaranmu dari kode rujukan, dan kamu bisa
+        mengirim bukti ke <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a> bila kode itu
+        tidak bisa dipakai.</p>
     </div>
   </div>
 
@@ -357,9 +368,9 @@
   </details>
   <details>
     <summary>Bagaimana kode akses dikirim?</summary>
-    <p>Setelah bukti pembayaran dikirim beserta kode rujukan, pengelola mencocokkan nominal unik pembayaranmu
-      lalu mengirim kode akses. Kode itu juga tersimpan di akun Google-mu sehingga tidak hilang saat ganti
-      perangkat.</p>
+    <p>Kamu mengambilnya sendiri: setelah membayar, tekan <strong>Tampilkan kode akses</strong> di halaman ini
+      dan kode akses untuk kode rujukanmu langsung muncul. Tidak ada yang perlu menunggu balasan. Simpan kodenya,
+      karena kode yang sama juga membuka aplikasi di perangkat lain.</p>
   </details>
   <details>
     <summary>Dipakai untuk apa saja akses ini?</summary>
@@ -408,6 +419,59 @@
     elN.textContent = teks;
     if (elN2) elN2.textContent = teks;
     if (elR) elR.textContent = rujukan;
+
+    // Kode akses diambil sendiri oleh pembeli, tanpa menunggu pengelola. Sidik kode di sini
+    // HARUS sama dengan sidikKode di static/js/fitur11.js dan tools/buat-kode.py; kalau
+    // tidak, kode yang tampil akan ditolak aplikasi dan pembayaran masuk tanpa akses.
+    var elKode = document.getElementById('beliKodeAkses');
+    var elAmbil = document.getElementById('beliAmbilKode');
+    var elSalinKode = document.getElementById('beliSalinKode');
+    function sidikKode(isi) {
+      var h = 2166136261;
+      var teks = String(isi) + '#' + 'siap|psikotes|2026|kode';
+      for (var i = 0; i < teks.length; i++) {
+        h = h ^ teks.charCodeAt(i);
+        h = Math.imul(h, 16777619) >>> 0;
+      }
+      var pos = h % 1679616;
+      var abjad = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var sidik = '';
+      while (pos > 0) { sidik = abjad.charAt(pos % 36) + sidik; pos = Math.floor(pos / 36); }
+      while (sidik.length < 4) sidik = '0' + sidik;
+      return sidik;
+    }
+    function kodeUntukNomor(nomor) {
+      var isi = ('P' + String(nomor)).toUpperCase().replace(/[^0-9A-Z]/g, '');
+      return 'SP' + isi + sidikKode(isi);
+    }
+    var kodeAkses = '';
+    if (elAmbil && elKode) {
+      elAmbil.addEventListener('click', function () {
+        kodeAkses = kodeUntukNomor(rujukan);
+        elKode.textContent = kodeAkses;
+        elKode.hidden = false;
+        elAmbil.hidden = true;
+        if (elSalinKode) elSalinKode.hidden = false;
+      });
+    }
+    if (elSalinKode) {
+      elSalinKode.addEventListener('click', function () {
+        if (!kodeAkses) return;
+        var asli = elSalinKode.textContent;
+        var selesai = function (pesan) {
+          elSalinKode.textContent = pesan;
+          setTimeout(function () { elSalinKode.textContent = asli; }, 1800);
+        };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(kodeAkses).then(function () { selesai('Tersalin'); },
+              function () { selesai('Tekan lama kodenya'); });
+          } else {
+            selesai('Tekan lama kodenya');
+          }
+        } catch (e) { selesai('Tekan lama kodenya'); }
+      });
+    }
     if (elS) {
       elS.addEventListener('click', function () {
         var asli = elS.textContent;
