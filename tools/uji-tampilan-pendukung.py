@@ -10,11 +10,15 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
   - warna teks terang di latar gelap (tema navy + emas);
   - axe-core: 0 pelanggaran WCAG 2.1 AA & kontras teks >= 4,5:1;
   - tanpa geser horizontal pada 1280 px dan 390 px, tidak ada elemen keluar layar;
-  - tombol cukup besar untuk disentuh (>= 38 px);
+  - tombol cukup besar untuk disentuh (>= 38 px); yang diukur hanya tombol yang benar-benar
+    tampil, sebab elemen tersembunyi tidak bisa disentuh sama sekali (bilah hasil /contoh/
+    memang baru muncul setelah ada jawaban);
   - logika /beli/ utuh: nominal unik, kode rujukan = 3 angka terakhir nominal,
     tombol bukti membawa kode rujukan, gambar QR termuat dan latarnya putih (bisa dipindai),
     nama merchant yang akan dilihat pembeli dijelaskan SEBELUM QR-nya dipindai;
   - tombol "Kirim bukti lewat WhatsApp" tetap tautan WhatsApp walau skrip halaman tidak jalan;
+  - bilah hasil di /contoh/: tersembunyi sebelum ada jawaban, skornya cocok, tautan bagikan
+    hanya WhatsApp berisi pesan pembaca sendiri, dan tersembunyi lagi setelah "Mulai ulang";
   - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
     dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
 
@@ -29,6 +33,7 @@ import os
 import re
 import sys
 import threading
+import urllib.parse
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AXE = os.path.join(AKAR, 'tools', 'axe.min.js')
@@ -120,6 +125,7 @@ def main():
                 s = sempit.evaluate("""() => ({
                     isi: document.documentElement.scrollWidth, layar: window.innerWidth,
                     ukuranKetuk: Array.from(document.querySelectorAll('a.tombol, button.tombol'))
+                        .filter(a => a.getClientRects().length)
                         .map(a => Math.round(a.getBoundingClientRect().height))
                 })""")
                 cek(s['isi'] <= s['layar'] + 1, '%s: tanpa geser horizontal 390px' % jalur, s)
@@ -270,6 +276,57 @@ def main():
             }""")
             cek(taut['keBeli'] and taut['keAplikasi'] and taut['keMutu'],
                 '/contoh/: ada jalan ke halaman beli, aplikasi, dan bukti mutu', taut)
+            # Bilah hasil + ajakan berbagi. Satu-satunya jalur penyebaran yang tidak butuh akun:
+            # pembaca sendiri yang mengirim tautannya, dan halaman tidak pernah mengirim pesan
+            # atas nama siapa pun. Yang diuji: bilah tidak muncul sebelum ada jawaban, angkanya
+            # sama dengan jawaban benar, tautannya WhatsApp berisi skor + alamat halaman, tetap
+            # tanpa pelanggaran aksesibilitas / geser horizontal saat tampil, dan tersembunyi lagi
+            # setelah "Mulai ulang".
+            page.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
+            page.wait_for_timeout(400)
+            awal = page.evaluate("""() => ({
+                tampil: getComputedStyle(document.getElementById('contoh-hasil')).display !== 'none',
+                bagi: document.getElementById('contoh-bagi').getAttribute('href') })""")
+            cek(not awal['tampil'], '/contoh/: bilah hasil tersembunyi sebelum ada jawaban', awal)
+            bilah = page.evaluate("""async () => {
+                const kartu = document.querySelectorAll('.kartu-soal');
+                for (let i = 0; i < 5; i++) {
+                    kartu[i].querySelectorAll('.pilih')[window.CONTOH_SOAL[i].j].click();
+                }
+                const el = document.getElementById('contoh-hasil');
+                const a = axe.run(document, { runOnly: ['wcag2a','wcag2aa','wcag21a','wcag21aa'] });
+                const r = await a;
+                return {
+                    tampil: getComputedStyle(el).display !== 'none',
+                    angka: document.getElementById('contoh-hasil-angka').textContent.trim(),
+                    kata: document.getElementById('contoh-hasil-kata').textContent.trim(),
+                    bagi: document.getElementById('contoh-bagi').getAttribute('href') || '',
+                    padat: document.body.classList.contains('ada-hasil'),
+                    axe: r.violations.map(v => v.id + '(' + v.nodes.length + ')'),
+                    isi: document.documentElement.scrollWidth, layar: window.innerWidth,
+                    ukuran: Array.from(el.querySelectorAll('.tombol'))
+                        .map(x => Math.round(x.getBoundingClientRect().height))
+                };
+            }""")
+            cek(bilah['tampil'] and bilah['angka'] == '5/5' and bilah['padat'],
+                '/contoh/: bilah hasil muncul dengan skor jawaban benar', [bilah['angka'], bilah['kata']])
+            cek(bilah['bagi'].startswith('https://wa.me/?text='),
+                '/contoh/: tombol bagikan menuju WhatsApp', bilah['bagi'][:60])
+            kirim = urllib.parse.unquote(bilah['bagi'])
+            cek('5 dari 5' in kirim and 'https://siappsikotes.my.id/contoh/' in kirim,
+                '/contoh/: pesan bagikan memuat skor dan alamat halaman', kirim[:160])
+            cek(not bilah['axe'] and bilah['isi'] <= bilah['layar'] + 1,
+                '/contoh/: bilah hasil tampil tanpa pelanggaran WCAG / geser horizontal',
+                [bilah['axe'], bilah['isi'], bilah['layar']])
+            cek(all(h >= 38 for h in bilah['ukuran']),
+                '/contoh/: tombol bilah hasil nyaman disentuh (>=38px)', bilah['ukuran'])
+            page.click('#contoh-ulang')
+            page.wait_for_timeout(300)
+            ulang2 = page.evaluate("""() => ({
+                tampil: getComputedStyle(document.getElementById('contoh-hasil')).display !== 'none',
+                hitung: document.getElementById('contoh-hitung').textContent })""")
+            cek(not ulang2['tampil'] and ulang2['hitung'].startswith('0 dari'),
+                '/contoh/: mulai ulang menyembunyikan bilah hasil', ulang2)
             # Gerbang kode akses adalah satu-satunya langkah pembeli SETELAH membayar, dan
             # belum pernah dijalankan di peramban sungguhan. Kode yang dibuat tools/buat-kode.py
             # harus benar-benar membuka aplikasi; kalau tidak, pembayaran masuk dan pembeli

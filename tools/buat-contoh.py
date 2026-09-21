@@ -252,6 +252,10 @@ def bangun():
 
 <script>
 window.CONTOH_SOAL = %(data)s;
+/* PERINGATAN: templat skrip di bawah ini sudah tertinggal dari contoh/index.html yang
+   benar-benar terbit (halaman hidup memakai createElement + bilah hasil/berbagi).
+   Menjalankan ulang generator ini MENIMPA halaman terbit dan menghapus fitur itu.
+   Perbarui templat ini dulu sebelum membuat ulang contoh/index.html. */
 (function () {
   var data = window.CONTOH_SOAL || [];
   var daftar = document.getElementById('contoh-daftar');
