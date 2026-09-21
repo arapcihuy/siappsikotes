@@ -1,0 +1,109 @@
+{
+ "slug": "contoh-soal-psikotes-polri",
+ "judul_tab": "Contoh Soal Psikotes Polri dan Pembahasan (Gratis)",
+ "deskripsi": "Latihan psikotes Polri: angka hilang, deret angka, aritmatika lisan, penalaran, dan verbal. 36 soal dengan pembahasan, tanpa akun, bisa dari HP.",
+ "h1": "Contoh Soal Psikotes Polri: Angka Hilang, Deret, dan Penalaran dengan Pembahasan",
+ "dek": "Tes kecerdasan di seleksi Polri menilai kecepatan, bukan hafalan. Di halaman ini ada 36 soal latihan berpembahasan yang bisa langsung kamu kerjakan dari HP.",
+ "kata_kunci": "contoh soal psikotes polri",
+ "pembuka": [
+  "Seleksi Polri berjalan bertahap, dan tahap yang oleh peserta biasa disebut psikotes umumnya memuat tiga kelompok: tes kecerdasan, tes kepribadian, dan tes gambar. Urutan serta jumlah subtesnya bisa berbeda tiap tahun dan tiap jalur, jadi anggap daftar di bawah sebagai gambaran umum, bukan susunan yang tetap.",
+  "Halaman ini memuat 36 soal latihan dari bank soal SiapPsikotes, lengkap dengan pembahasan yang bisa kamu buka satu per satu. Semua soal diambil apa adanya dari bank yang sudah diperiksa memakai pedoman mutu situs ini, jadi tidak ada kunci jawaban yang dikarang setelah soalnya dibuat.",
+  "Satu hal yang perlu kamu tahu di muka: halaman ini bukan materi dari instansi, dan bentuk soal di seleksi bisa berbeda dari latihan mana pun. Yang bisa kamu latih di sini adalah kecepatan, ketelitian, dan cara memeriksa pola."
+ ],
+ "bagian": [
+  {
+   "h2": "Tes apa saja yang biasanya muncul di seleksi Polri?",
+   "isi": [
+    "Dari ketiga kelompok tadi, hanya kelompok kecerdasan yang bisa dilatih dengan halaman ini. Soalnya berbentuk pilihan ganda dengan waktu yang sempit: deret angka, angka hilang, hitung cepat, padanan kata, dan penalaran."
+   ],
+   "poin": [
+    "Tes kecerdasan: deret angka dan huruf, angka hilang, hitung cepat, padanan kata, dan penalaran.",
+    "Tes kepribadian: pernyataan sikap. Jawab jujur dan konsisten; tidak ada kunci yang bisa dihafal.",
+    "Tes gambar: menggambar orang dan pohon, serta menyusun kotak. Bentuknya menggambar, bukan memilih jawaban."
+   ],
+   "catatan": "Tes gambar memang tidak ada di halaman ini, dan itu disengaja: soalnya harus digambar, jadi tidak bisa dipaksakan menjadi teks pilihan ganda tanpa mengubah maksud tesnya."
+  },
+  {
+   "h2": "Kenapa kecepatan berhitung sering jadi penentu",
+   "isi": [
+    "Bagian hitung cepat dan angka hilang biasanya memberi waktu beberapa detik per soal. Peserta yang menghitung penuh dari awal akan kehabisan waktu di soal terakhir, padahal soalnya sendiri sederhana.",
+    "Yang dilatih bukan matematika tingkat lanjut, melainkan kebiasaan memeriksa: taksir dulu besarannya, periksa angka terakhir, baru pilih jawaban yang paling dekat."
+   ],
+   "poin": [
+    "Periksa angka terakhir dan besaran hasil sebelum menghitung penuh.",
+    "Kerjakan soal termudah lebih dulu; jangan berhenti lama di satu soal.",
+    "Latih dengan pengatur waktu. Kecepatan hanya naik kalau waktunya dibatasi."
+   ],
+   "catatan": "Batas waktu berbeda tiap tahap dan tiap tahun, jadi biasakan berlatih dengan tempo yang lebih ketat daripada perkiraanmu."
+  },
+  {
+   "h2": "Contoh soal angka hilang dan deret angka",
+   "isi": [
+    "Dua belas soal berikut bergaya deret angka dan angka hilang. Kerjakan satu blok sekaligus, baru buka pembahasannya."
+   ],
+   "soal": {"kategori": "numerik", "jumlah": 12}
+  },
+  {
+   "h2": "Contoh soal penalaran dan logika",
+   "isi": [
+    "Delapan soal berikut menguji cara menarik kesimpulan dari pernyataan. Baca premisnya dua kali sebelum melihat pilihan jawaban."
+   ],
+   "soal": {"kategori": "penalaran_logika", "jumlah": 8}
+  },
+  {
+   "h2": "Contoh soal padanan kata dan sinonim",
+   "isi": [
+    "Soal verbal menguji hubungan antar kata, bukan luas kosakata. Ucapkan dulu hubungannya dalam satu kalimat, lalu cari pasangan dengan hubungan yang sama."
+   ],
+   "soal": {"kategori": "verbal", "jumlah": 8}
+  },
+  {
+   "h2": "Contoh soal aritmatika lisan",
+   "isi": [
+    "Pada aritmatika lisan, pertanyaannya dibacakan satu kali lalu kamu menjawab dari ingatan. Latih dengan menutup layar setelah membaca soalnya, karena di seleksi kamu tidak bisa mengulang pertanyaannya."
+   ],
+   "soal": {"psikologi": "aritmatika", "jumlah": 8}
+  },
+  {
+   "h2": "Mengatur waktu tiap bagian",
+   "tabel": {
+    "kepala": ["Bagian", "Yang diuji", "Kebiasaan yang menolong"],
+    "baris": [
+     ["Deret angka", "Melihat pola bilangan", "Periksa selisih, lalu rasio, lalu pola bertingkat"],
+     ["Angka hilang", "Menaksir hasil operasi", "Periksa angka terakhir dan besarannya lebih dulu"],
+     ["Aritmatika lisan", "Mengingat angka", "Simpan hasil sementara sebagai kata, bukan deret panjang"],
+     ["Penalaran", "Menarik kesimpulan", "Ubah premisnya jadi kalimat pendek, lalu uji tiap pilihan"],
+     ["Padanan kata", "Hubungan antar kata", "Ucapkan hubungannya dalam satu kalimat sebelum memilih"]
+    ]
+   },
+   "catatan": "Tabel ini bukan jadwal resmi seleksi, hanya urutan latihan yang masuk akal. Sesuaikan dengan tempo yang kamu ukur sendiri."
+  },
+  {
+   "h2": "Latihan penuh dengan waktu dan laporan",
+   "isi": [
+    "Halaman ini memuat 36 soal contoh. Versi penuh di aplikasi berisi 1.348 soal, sembilan modul, dan Laporan Lengkap yang menunjukkan bagian mana yang paling banyak salah.",
+    "Empat puluh soal pertama bisa dikerjakan tanpa akun. Akses penuh dibuka sekali bayar Rp 39.000 lewat QRIS, tanpa langganan dan tanpa perpanjangan otomatis."
+   ],
+   "catatan": "Harga, isi akses, dan siapa penerima pembayarannya disebut terbuka di halaman harga, supaya kamu bisa memeriksanya sebelum membayar."
+  }
+ ],
+ "faq": [
+  {"t": "Apakah soal di halaman ini sama dengan yang keluar di seleksi?", "j": "Tidak ada yang bisa memastikan itu, dan halaman ini tidak mengklaimnya. Semua soal adalah latihan bergaya tes kecerdasan yang dipakai di banyak seleksi, termasuk seleksi Polri. Yang dilatih di sini adalah cara cepat dan ketelitiannya."},
+  {"t": "Apakah halaman ini bagian dari instansi?", "j": "Bukan. SiapPsikotes adalah situs latihan mandiri dan tidak berafiliasi dengan lembaga mana pun. Nama Polri dipakai untuk menyebut jenis latihannya, bukan sebagai klaim kerja sama."},
+  {"t": "Berapa biaya latihannya?", "j": "Halaman ini dan 40 soal contoh di aplikasi bisa dipakai tanpa bayar. Seluruh 1.348 soal, sembilan modul, dan Laporan Lengkap dibuka sekali bayar Rp 39.000 lewat QRIS, tanpa langganan."},
+  {"t": "Bisakah latihan dikerjakan dari HP?", "j": "Bisa. Aplikasi ini berjalan di peramban HP, dan setelah halamannya tersimpan sebagian latihan tetap bisa dibuka tanpa internet."},
+  {"t": "Jawabanku banyak yang salah, sebaiknya bagaimana?", "j": "Buka pembahasannya, catat jenis soalnya, lalu kerjakan blok yang sama lagi besok. Yang perlu dicatat adalah jenis kesalahannya, bukan angkanya."}
+ ],
+ "penutup": [
+  "Latihan soal hanya berguna kalau waktunya dibatasi. Kerjakan satu blok tanpa membuka pembahasan, baru periksa, dan ulangi besok dengan tempo yang lebih ketat.",
+  "Kalau kamu ingin tahu bagian mana yang paling lemah, kerjakan versi penuh di aplikasi: laporannya memisahkan hasil per modul, jadi kamu tidak perlu menebak-nebak."
+ ],
+ "tautan": [
+  {"teks": "Coba 40 soal gratis", "url": "/contoh/"},
+  {"teks": "Contoh soal deret angka", "url": "/contoh-soal-deret-angka/"},
+  {"teks": "Contoh soal tes Kraepelin", "url": "/contoh-soal-tes-kraepelin/"},
+  {"teks": "Harga dan cara beli akses penuh", "url": "/beli/"}
+ ],
+ "tanggal_terbit": "2026-09-22",
+ "diperbarui": "22 September 2026"
+}
