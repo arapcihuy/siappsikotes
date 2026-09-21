@@ -12,7 +12,8 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
   - tanpa geser horizontal pada 1280 px dan 390 px, tidak ada elemen keluar layar;
   - tombol cukup besar untuk disentuh (>= 38 px);
   - logika /beli/ utuh: nominal unik, kode rujukan = 3 angka terakhir nominal,
-    tombol bukti membawa kode rujukan, gambar QR termuat dan latarnya putih (bisa dipindai).
+    tombol bukti membawa kode rujukan, gambar QR termuat dan latarnya putih (bisa dipindai);
+  - tombol "Kirim bukti lewat WhatsApp" tetap tautan WhatsApp walau skrip halaman tidak jalan.
 
 Pakai Chrome asli (channel='chrome'), bukan chromium bawaan Playwright.
 Bila Playwright/Chrome tidak tersedia: cetak LEWAT + alasannya, keluar dengan kode 0.
@@ -145,6 +146,17 @@ def main():
             cek(b['qr']['termuat'] and abs(b['qr']['w'] - b['qr']['h']) <= 2,
                 '/beli/: gambar QR termuat & tidak gepeng', b['qr'])
             cek(b['qr']['latar'] == 'rgb(255, 255, 255)', '/beli/: latar QR putih (bisa dipindai)', b['qr']['latar'])
+            # Pengunjung yang skripnya gagal (peramban dalam aplikasi, saringan jaringan, galat JS)
+            # tetap harus sampai ke WhatsApp. Sebelum ini tombol "Kirim bukti lewat WhatsApp"
+            # hanya menjadi tautan wa.me setelah skrip berjalan; tanpa skrip ia membuka draf surel.
+            tanpaskrip = browser.new_context(viewport={'width': 390, 'height': 844},
+                                            java_script_enabled=False)
+            halaman_tanpa_skrip = tanpaskrip.new_page()
+            halaman_tanpa_skrip.goto('http://127.0.0.1:%d/beli/' % PORT, wait_until='load', timeout=45000)
+            t = halaman_tanpa_skrip.evaluate(
+                "() => document.getElementById('beliBukti').getAttribute('href') || ''")
+            cek(t.startswith('https://wa.me/'), '/beli/: tombol WhatsApp tetap WhatsApp tanpa skrip', t[:80])
+            tanpaskrip.close()
             print('== /contoh/: soal gratis berpembahasan ==')
             page.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
             page.wait_for_timeout(500)

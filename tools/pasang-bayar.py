@@ -17,7 +17,28 @@ import sys
 
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FITUR11 = os.path.join(APP, 'static', 'js', 'fitur11.js')
+BELI = os.path.join(APP, 'beli', 'index.html')
 GAMBAR_TUJUAN = os.path.join(APP, 'static', 'img', 'qris-bayar.png')
+
+
+def nomor_di_beli():
+    """Nomor WhatsApp yang tertulis di tombol /beli/, atau '' bila tidak ada."""
+    try:
+        isi = open(BELI, encoding='utf-8').read()
+    except OSError:
+        return ''
+    m = re.search(r'https://wa\.me/(\d+)', isi)
+    return m.group(1) if m else ''
+
+
+def samakan_beli(nomor):
+    """Samakan nomor di tombol /beli/. Tombol itu ditulis di HTML supaya tetap menuju
+    WhatsApp walau skrip halaman gagal; karena itu nomornya harus ikut berubah di sini."""
+    isi = open(BELI, encoding='utf-8').read()
+    baru, n = re.subn(r'(https://wa\.me/)\d+', r'\g<1>' + nomor, isi)
+    if n:
+        open(BELI, 'w', encoding='utf-8').write(baru)
+    return n
 
 
 def baca():
@@ -52,6 +73,10 @@ def main():
         print('  rekening :', (rec.group(1) or '(kosong)') if rec else '(belum ada kolom)')
         print('  whatsapp :', (wa.group(1) or '(kosong)') if wa else '?')
         print('  gambar   :', (qr.group(1) or '(kosong)') if qr else '?')
+        ada_beli = nomor_di_beli()
+        print('  wa /beli/:', ada_beli or '(tidak ada)')
+        if wa and ada_beli and ada_beli != wa.group(1):
+            print('  SELISIH   : tombol WhatsApp di /beli/ beda dari setelan di atas')
         ada = os.path.exists(os.path.join(APP, (qr.group(1) if qr else ''))) if qr else False
         print('  berkas QR ada:', ada)
         print('\nUntuk menyalakan (pilih salah satu):')
@@ -90,6 +115,8 @@ def main():
     if a.whatsapp:
         t = re.sub(r"whatsapp:\s*'[^']*'", "whatsapp: '%s'" % a.whatsapp.replace("'", "\\'"), t, count=1)
         print('kontak WhatsApp dicatat:', a.whatsapp)
+        n_beli = samakan_beli(re.sub(r'[^0-9]', '', a.whatsapp))
+        print('nomor di tombol /beli/ disamakan:', n_beli, 'tautan' if n_beli else 'TIDAK DITEMUKAN')
     if a.surel:
         t = re.sub(r"surel:\s*'[^']*'", "surel: '%s'" % a.surel.replace("'", "\\'"), t, count=1)
         print('surel kontak dicatat:', a.surel)

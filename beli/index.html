@@ -284,7 +284,7 @@
     <div>
       <div class="qris-kotak">
         <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
-             width="268" height="268" loading="lazy" decoding="async">
+             width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
       </div>
       <p class="catatan">Pindai dengan aplikasi bank atau e-wallet apa pun: GoPay, OVO, DANA, ShopeePay,
         atau mobile banking.</p>
@@ -313,8 +313,11 @@
       </ol>
 
       <div class="aksi">
+        <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
+             tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
+             pesannya dengan kode rujukan. -->
         <a class="tombol" id="beliBukti" target="_blank" rel="noopener"
-           href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim bukti lewat WhatsApp</a>
+           href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20kirim%20kode%20aksesnya.">Kirim bukti lewat WhatsApp</a>
         <a class="tombol sekunder" id="beliBuktiSurel"
            href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
         <a class="tombol sekunder" href="../contoh/">Coba 40 soal gratis dulu</a>
