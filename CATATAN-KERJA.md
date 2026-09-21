@@ -188,3 +188,27 @@ Dua kali CI merah ("Verifikasi Bank Soal") hanya karena pemeriksaan yang **seben
 pertama karena skrip pemeriksa membaca berkas kerja `.audit/` yang tidak ikut ke repo; kedua karena
 berkas baru (`fitur7.js`) ditulis dengan `?v=1` sehingga konsistensi versi aset gagal. Keduanya bisa
 dicegah mesin, dan sekarang memang dicegah.
+
+## HALAMAN PUBLIK TERBACA TANPA JAVASCRIPT (22 September 2026)
+
+Perayap yang tidak menjalankan skrip hanya melihat berkas HTML mentah. Karena itu seluruh
+20 alamat publik diukur dalam keadaan skrip mati (`java_script_enabled=False`), lalu hasil
+ukurnya dijadikan ambang di gerbang pemeriksaan supaya tidak bisa turun diam-diam.
+
+| Halaman | Teks tanpa skrip | Ambang |
+|---|---|---|
+| `/contoh/` | 16.785 | 8.000 |
+| 12 artikel `contoh-soal-*` | 7.158 - 19.992 | 5.000 |
+| `/psikotes/` | 7.457 | 3.000 |
+| `/privasi/` `/syarat/` | 7.667 / 7.274 | 3.000 |
+| `/lisensi/` | 5.231 | 2.500 |
+| `/mutu/` | 4.234 | 2.000 |
+| `/beli/` | 2.788 | 1.500 |
+| `/` (aplikasi) | 3.251 | 1.500 |
+| `/404.html` | 1.223 | 600 |
+
+Tidak ada halaman yang kembali menjadi kerangka: seluruh isi utama sudah ada di HTML, bukan
+digambar skrip. Yang ditambahkan penjaganya, bukan perbaikannya. Beranda juga diuji harus
+menautkan keduabelas artikel tanpa skrip, sebab tautan itulah satu-satunya jalan perayap
+menemukan artikel-artikel tersebut. Gerbang: **206 lulus, 0 gagal** (sebelumnya 185).
+Mode `--rusak` menangkap 40 kegagalan, jadi pemeriksaan ini benar-benar mengukur.

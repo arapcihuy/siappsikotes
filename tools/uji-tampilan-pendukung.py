@@ -17,6 +17,10 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
     tombol bukti membawa kode rujukan, gambar QR termuat dan latarnya putih (bisa dipindai),
     nama merchant yang akan dilihat pembeli dijelaskan SEBELUM QR-nya dipindai;
   - tombol "Kirim bukti lewat WhatsApp" tetap tautan WhatsApp walau skrip halaman tidak jalan;
+  - SETIAP halaman publik (termasuk sepuluh artikel contoh-soal-*) dibuka dengan skrip mati dan
+    wajib menghasilkan judul <h1> + sejumlah teks yang cukup; beranda wajib menautkan seluruh
+    artikel. Perayap yang tidak menjalankan skrip hanya melihat berkas HTML mentah, jadi
+    halaman yang isinya digambar skrip sama saja dengan halaman kosong di matanya;
   - bilah hasil di /contoh/: tersembunyi sebelum ada jawaban, skornya cocok, tautan bagikan
     hanya WhatsApp berisi pesan pembaca sendiri, dan tersembunyi lagi setelah "Mulai ulang";
   - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
@@ -53,6 +57,15 @@ HAL = ['mutu/', 'beli/', 'lisensi/', 'syarat/', 'privasi/', 'contoh/', '404.html
        'contoh-soal-psikotes-bahasa-inggris/', 'contoh-soal-psikotes-kepribadian/',
        'contoh-soal-psikotes-daya-ingat/', 'contoh-soal-psikotes-polri/',
        'contoh-soal-psikotes-bumn/', 'contoh-soal-psikotes-kai/']
+# Batas bawah teks yang harus terbaca saat JavaScript mati, diukur 2026-09-22 pada salinan
+# lokal halaman yang sedang terbit (lihat CATATAN-KERJA.md). Ambangnya sengaja jauh di bawah
+# hasil ukur (artikel tersedikit 7.233 karakter, /contoh/ 16.817) supaya tidak menuduh bersalah
+# saat isinya berkembang; yang dijaga cuma satu hal: halaman tidak boleh kembali jadi kerangka.
+MIN_TEKS = {'contoh/': 8000, '404.html': 600, 'beli/': 1500, 'mutu/': 2000,
+            'lisensi/': 2500, 'psikotes/': 3000, 'syarat/': 3000, 'privasi/': 3000}
+for _j in HAL:
+    MIN_TEKS.setdefault(_j, 5000)      # sepuluh artikel contoh-soal-*
+MIN_TEKS[''] = 1500                    # beranda aplikasi: teks saja, isi soal memang dari skrip
 RUSAK = '--rusak' in sys.argv   # mode pembuktian: uji HARUS menangkap kerusakan yang disuntikkan
 hasil = []
 
@@ -253,12 +266,41 @@ def main():
                     adaBahas: kecil.indexOf('pembahasan') >= 0,
                     adaKunci: kecil.indexOf('(jawaban)') >= 0 };
             }""")
-            tanpaskrip2.close()
             cek(statis['jumlah'] >= 40 and statis['pilihan'] >= 4
                 and statis['adaBahas'] and statis['adaKunci'],
                 '/contoh/: 40 soal + pembahasan terbaca tanpa JavaScript', statis)
-            cek(statis['panjang'] >= 8000,
+            cek(statis['panjang'] >= MIN_TEKS['contoh/'] * (999 if RUSAK else 1),
                 '/contoh/: teks statis cukup banyak untuk dibaca mesin pencari', statis['panjang'])
+            # Sapuan seluruh halaman publik dengan skrip mati. Satu halaman yang kembali menjadi
+            # kerangka berarti halaman itu hilang bagi perayap, pembaca layar, dan pengunjung
+            # yang skripnya diblokir - kerusakan yang tidak terlihat di peramban pengembang.
+            print('== seluruh halaman publik tanpa JavaScript ==')
+            for jalur in HAL:
+                halaman_contoh.goto('http://127.0.0.1:%d/%s' % (PORT, jalur),
+                                    wait_until='load', timeout=45000)
+                n = halaman_contoh.evaluate("""() => ({
+                    panjang: (document.body.innerText || '').replace(/\s+/g, ' ').trim().length,
+                    judul: ((document.querySelector('h1') || {}).textContent || '').trim() })""")
+                ambang = MIN_TEKS[jalur] * (999 if RUSAK else 1)
+                cek(n['panjang'] >= ambang and len(n['judul']) >= 10,
+                    '%s: terbaca tanpa JavaScript (teks %d, ambang %d)' % (jalur, n['panjang'], ambang),
+                    n['judul'][:60])
+            # Beranda: teks saja tidak cukup, tautan ke artikel itulah jalan masuk perayap.
+            halaman_contoh.goto('http://127.0.0.1:%d/' % PORT, wait_until='load', timeout=45000)
+            beranda = halaman_contoh.evaluate("""() => {
+                const teks = (document.body.innerText || '').replace(/\s+/g, ' ').trim();
+                const tautan = Array.from(document.querySelectorAll('a[href]'))
+                    .map(a => a.getAttribute('href'));
+                return { panjang: teks.length,
+                         artikel: Array.from(new Set(tautan.filter(
+                             h => /^\/contoh-soal-[a-z-]+\/$/.test(h)))) };
+            }""")
+            cek(beranda['panjang'] >= MIN_TEKS[''] * (999 if RUSAK else 1),
+                '/: terisi teks tanpa JavaScript, bukan kerangka', beranda['panjang'])
+            cek(len(beranda['artikel']) >= 12,
+                '/: beranda menautkan 12 artikel contoh-soal tanpa JavaScript',
+                sorted(beranda['artikel'])[:3])
+            tanpaskrip2.close()
             print('== /contoh/: soal gratis berpembahasan ==')
             page.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
             page.wait_for_timeout(500)
