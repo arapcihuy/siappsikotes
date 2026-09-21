@@ -751,7 +751,8 @@ def main():
         cek(z2['ada'] and z2['tampak'], 'kaki penyangkalan tampil di setiap halaman aplikasi', z2['teks'][:60])
         cek('Bukan produk resmi instansi' in z2['teks'] and 'tidak berafiliasi' in z2['teks'],
             'kaki menyatakan bukan produk resmi & tidak berafiliasi', z2['teks'][:80])
-        cek(z2['tautan'] == ['mutu/', 'syarat/', 'privasi/'], 'kaki menautkan mutu, syarat, privasi', z2['tautan'])
+        cek(z2['tautan'] == ['lisensi/', 'mutu/', 'syarat/', 'privasi/'],
+            'kaki menautkan lisensi, mutu, syarat, privasi', z2['tautan'])
 
         print('== AA. Aksi lanjutan & kartu hasil yang bisa dibagikan ==')
         a2 = page.evaluate("""() => {
