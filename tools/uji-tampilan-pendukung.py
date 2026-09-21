@@ -21,6 +21,9 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
     hanya WhatsApp berisi pesan pembaca sendiri, dan tersembunyi lagi setelah "Mulai ulang";
   - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
     dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
+  - satu klik dari /beli/ ke aplikasi: tombol "Buka aplikasi & pakai kode ini" membawa kode
+    di alamat (?kode=) dan kode itu benar-benar membuka aplikasi di peramban yang bersih,
+    lalu tidak tertinggal di alamat; pesan WhatsApp tidak lagi menunggu kiriman kode akses.
   - /favicon.ico: ada di akar situs dan berupa ICO asli (peramban memintanya tanpa
     membaca <link rel="icon">, dan jalur ini pernah 404 di setiap kunjungan).
   - /llms.txt: berkas yang dibaca mesin pencari AI (tanpa akun dan tanpa peringkat Google).
@@ -415,17 +418,28 @@ def main():
                     var el = document.getElementById('beliKodeAkses');
                     var salin = document.getElementById('beliSalinKode');
                     var ambil = document.getElementById('beliAmbilKode');
+                    var buka = document.getElementById('beliBukaKode');
+                    var wa = document.getElementById('beliBukti');
                     return {
                         kode: (el && el.textContent || '').trim(),
                         tampil: !!el && getComputedStyle(el).display !== 'none',
                         salinTampil: !!salin && getComputedStyle(salin).display !== 'none',
                         ambilSembunyi: !!ambil && getComputedStyle(ambil).display === 'none',
+                        tautanBuka: !!buka && (buka.getAttribute('href') || ''),
+                        tautanBukaTampil: !!buka && getComputedStyle(buka).display !== 'none',
+                        pesanWa: decodeURIComponent(((wa && wa.getAttribute('href')) || '').split('text=')[1] || ''),
                         rujukan: (document.getElementById('beliRujukan') || {}).textContent || ''};
                 }""")
                 cek(bk['tampil'] and bool(re.match(r'^SP[A-Z0-9]{6,}$', bk['kode'])),
                     '/beli/: tombol menampilkan kode akses berformat SP', bk['kode'][:14])
                 cek(bk['salinTampil'] and bk['ambilSembunyi'],
                     '/beli/: tombol salin muncul, tombol ambil tidak dobel', [bk['salinTampil'], bk['ambilSembunyi']])
+                # Satu klik dari bayar ke aplikasi: kode dibawa di alamat halaman aplikasi.
+                # Langkah inilah yang tadinya menuntut pembeli menyalin lalu menempel sendiri.
+                cek(bk['tautanBukaTampil'] and ('kode=' + bk['kode']) in bk['tautanBuka'],
+                    '/beli/: tombol buka aplikasi membawa kode akses di alamat', bk['tautanBuka'][:70])
+                cek('kirim kode aksesnya' not in bk['pesanWa'].lower(),
+                    '/beli/: pesan WhatsApp tidak lagi menunggu kiriman kode akses', bk['pesanWa'][:90])
                 angka = re.sub(r'[^0-9]', '', bk['rujukan'])[-3:]
                 cek(angka and angka in bk['kode'],
                     '/beli/: kode akses dapat ditelusuri ke kode rujukan pembeli', [bk['rujukan'], bk['kode'][:14]])
@@ -460,6 +474,35 @@ def main():
                 cek(not b3['kartu'] and b3['tersimpan'] == 'TERBUKA' and b3['isi'] > 0,
                     '/beli/: kode dari halaman beli membuka aplikasi tanpa bantuan pengelola', b3)
                 cek(not galat_kode, '/beli/: tanpa galat JavaScript di alur kode akses', galat_kode[:2])
+                # Tautannya sendiri yang diuji, di konteks peramban yang bersih: pembeli yang
+                # membayar lalu menekan satu tombol harus langsung masuk, bukan sekadar melihat
+                # tautan yang tampak benar di halaman.
+                print('== /beli/ -> /?kode=: satu klik membuka aplikasi ==')
+                dctx = browser.new_context(viewport={'width': 1280, 'height': 900})
+                dpage = dctx.new_page()
+                galat_tautan = []
+                dpage.on('pageerror', lambda e: galat_tautan.append(str(e)[:150]))
+                dpage.goto('http://127.0.0.1:%d/?kode=%s' % (PORT, bk['kode']),
+                           wait_until='load', timeout=45000)
+                try:
+                    dpage.wait_for_function(
+                        "() => !document.querySelector('.komer-kartu')", timeout=20000)
+                except Exception:
+                    pass
+                dpage.wait_for_timeout(400)
+                d4 = dpage.evaluate("""() => ({
+                    kartu: !!document.querySelector('.komer-kartu'),
+                    tersimpan: localStorage.getItem('tni_akses'),
+                    kode: localStorage.getItem('tni_kode_akses'),
+                    isi: document.querySelectorAll('#main .card').length,
+                    alamat: location.search })""")
+                cek(not d4['kartu'] and d4['tersimpan'] == 'TERBUKA'
+                    and d4['kode'] == bk['kode'].upper() and d4['isi'] > 0,
+                    '/beli/: satu klik tautan kode langsung membuka aplikasi', d4)
+                cek(d4['alamat'] == '',
+                    '/beli/: kode akses tidak tertinggal di alamat peramban', d4['alamat'][:60])
+                cek(not galat_tautan, '/beli/: tanpa galat JavaScript di tautan kode', galat_tautan[:2])
+                dctx.close()
             except Exception as e:
                 cek(False, '/beli/: alur ambil kode akses berjalan di peramban sungguhan', str(e)[:140])
             bctx.close()

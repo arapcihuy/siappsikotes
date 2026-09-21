@@ -90,6 +90,28 @@ st.innerHTML = 'Kode tidak dikenali. Periksa penulisannya' + (wa
 : ', atau kirim bukti pembayaran ke pemilik') + '. Kode yang sah selalu diawali SP.';
 }
 };
+// Pembeli yang menekan "Buka aplikasi & pakai kode ini" di /beli/ tiba dengan kodenya
+// di alamat (?kode=SP...). Tanpa ini langkah terakhir funnel masih menuntut salin-tempel,
+// dan pembeli yang menyerah di situ sudah membayar tetapi tetap terkunci.
+window.kodeDariAlamat = function () {
+var m = /[?&]kode=(SP[A-Za-z0-9]{6,})/.exec(location.search || '');
+return m ? m[1].toUpperCase() : '';
+};
+window.terapkanKodeDariAlamat = function () {
+var kode = window.kodeDariAlamat();
+if (!kode) return false;
+var el = document.getElementById('kodeAksesGerbang');
+if (!el) return false;
+// Buang kodenya dari alamat SEBELUM dipakai: halaman dimuat ulang setelah kode diterima,
+// dan kode yang tertinggal di riwayat peramban tidak perlu ikut tersimpan di sana.
+try { if (window.history && history.replaceState) history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+el.value = kode;
+terapkanKodeAkses();
+return true;
+};
+document.addEventListener('DOMContentLoaded', function () {
+try { terapkanKodeDariAlamat(); } catch (e) {}
+});
 window.bukaHalamanBayar = function () {
 var u = (typeof BAYAR !== 'undefined' && BAYAR.tautanBayar) ? BAYAR.tautanBayar : '';
 if (!u) return;

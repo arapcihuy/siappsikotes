@@ -320,7 +320,10 @@
           jadi kamu tidak perlu menunggu balasan siapa pun.</p>
         <button type="button" class="tombol kecil" id="beliAmbilKode">Tampilkan kode akses</button>
         <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
-        <button type="button" class="tombol sekunder kecil" id="beliSalinKode" hidden>Salin kode akses</button>
+        <div class="kode-baris" id="beliAksiKode" hidden>
+          <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi &amp; pakai kode ini</a>
+          <button type="button" class="tombol sekunder kecil" id="beliSalinKode">Salin kode akses</button>
+        </div>
       </div>
       <noscript>
         <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
@@ -331,7 +334,8 @@
       <ol class="langkah">
         <li>Pindai QR di atas, lalu bayar <strong id="beliNominal2">Rp 39.000</strong> tepat sejumlah itu.</li>
         <li>Tekan <strong>Tampilkan kode akses</strong> di kartu atas. Kode aksesmu muncul saat itu juga.</li>
-        <li>Buka aplikasi, lalu tempel kode itu pada layar &ldquo;Buka dengan kode akses&rdquo;.</li>
+        <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.
+          Di perangkat lain, buka aplikasi lalu tempel kodenya di layar &ldquo;Buka dengan kode akses&rdquo;.</li>
         <li>Ada kendala? Kirim bukti pembayaran beserta kode rujukanmu lewat WhatsApp, atau email ke
           <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a>.</li>
       </ol>
@@ -341,7 +345,7 @@
              tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
              pesannya dengan kode rujukan. -->
         <a class="tombol" id="beliBukti" target="_blank" rel="noopener"
-           href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20kirim%20kode%20aksesnya.">Kirim bukti lewat WhatsApp</a>
+           href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20catat%20pembayarannya%2C%20kode%20akses%20sudah%20saya%20ambil%20di%20halaman%20beli.">Kirim bukti lewat WhatsApp</a>
         <a class="tombol sekunder" id="beliBuktiSurel"
            href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
         <a class="tombol sekunder" href="../contoh/">Coba 40 soal gratis dulu</a>
@@ -425,6 +429,8 @@
     // tidak, kode yang tampil akan ditolak aplikasi dan pembayaran masuk tanpa akses.
     var elKode = document.getElementById('beliKodeAkses');
     var elAmbil = document.getElementById('beliAmbilKode');
+    var elAksiKode = document.getElementById('beliAksiKode');
+    var elBuka = document.getElementById('beliBukaKode');
     var elSalinKode = document.getElementById('beliSalinKode');
     function sidikKode(isi) {
       var h = 2166136261;
@@ -451,7 +457,11 @@
         elKode.textContent = kodeAkses;
         elKode.hidden = false;
         elAmbil.hidden = true;
-        if (elSalinKode) elSalinKode.hidden = false;
+        // Satu klik dari pembayaran ke aplikasi: kodenya dibawa di alamat, jadi pembeli
+        // tidak perlu menyalin lalu menempel sendiri. Angka rujukan tetap ikut (#sp-)
+        // supaya kuitansi di aplikasi cocok dengan nominal yang benar-benar ia bayar.
+        if (elBuka) elBuka.setAttribute('href', '../?kode=' + kodeAkses + '#sp-' + angkaRujukan);
+        if (elAksiKode) elAksiKode.hidden = false;
       });
     }
     if (elSalinKode) {
@@ -490,7 +500,9 @@
       });
     }
     var pesanBukti = 'Halo, saya sudah membayar akses SiapPsikotes.\n\nKode rujukan: ' + rujukan +
-      '\nNominal dibayar: ' + teks + '\n\nBukti pembayaran saya lampirkan di chat ini. Mohon kirim kode aksesnya. Terima kasih.';
+      '\nNominal dibayar: ' + teks + '\n\nBukti pembayaran saya lampirkan di chat ini. Mohon catat ' +
+      'pembayarannya; kode akses sudah saya ambil sendiri di halaman beli, dan saya butuh bantuan ' +
+      'bila kode itu ditolak. Terima kasih.';
     // Bawa angka yang sama ke aplikasi: tanpa ini pembeli yang penyimpanannya diblokir
     // mendapat kode rujukan baru begitu ia pindah ke aplikasi, dan nominal yang ia bayar
     // tidak lagi cocok dengan yang tertulis di kuitansinya.
