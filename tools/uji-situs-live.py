@@ -105,8 +105,11 @@ def main():
             else:
                 page = browser.new_page()
                 page.on('pageerror', lambda e: kesalahan.append('pageerror: %s' % e))
+                # Beacon Cloudflare yang disuntik zona diblokir oleh CSP halaman ini dengan sengaja
+                # (halaman privasi menjanjikan tanpa pelacak pihak ketiga), jadi galat itu diharapkan.
                 page.on('console', lambda m: kesalahan.append('console: %s' % m.text)
-                        if m.type == 'error' and 'favicon' not in m.text.lower() else None)
+                        if m.type == 'error' and 'favicon' not in m.text.lower()
+                        and 'cloudflareinsights' not in m.text.lower() else None)
                 page.goto(BASE + '/index.html?smo=1', wait_until='load', timeout=45000)
                 page.wait_for_function('() => window.DATA_SOAL_INDEX && window.DATA_SOAL_INDEX.total > 0', timeout=30000)
                 page.evaluate('() => pastikanSemua()')
@@ -117,9 +120,12 @@ def main():
                         const i = new Image(); i.onload = () => r(1); i.onerror = () => r(0); i.src = s.gambar;
                     })));
                     startCat('tkw', 'learn');
-                    // startCat menyiapkan kategori secara asinkron bila datanya belum siap:
-                    // menunggu di sini, karena soal yang belum ada pernah membuat uji ini mati
-                    // dengan TypeError alih-alih melaporkan keadaan situs yang sebenarnya.
+                    // Tanpa kode akses, kategori berbayar memang TIDAK boleh terbuka - itu gerbang
+                    // penghasilan. Uji ini dulu menganggapnya terbuka dan mati dengan TypeError.
+                    const terkunci = (S.questions || []).length === 0 && S.page !== 'soal';
+                    localStorage.setItem('tni_akses_pemilik', '1');   // kait uji yang dipakai uji repo lain
+                    startCat('tkw', 'learn');
+                    // kategori bisa disiapkan asinkron: tunggu soalnya benar-benar ada
                     for (let i = 0; i < 120 && !(S.questions || []).length; i++) {
                         await new Promise(r => setTimeout(r, 250));
                     }
@@ -129,9 +135,12 @@ def main():
                     const b = document.querySelector('.explanation-body');
                     return { total: totalSoal(), gambar: imgs.length, gambarOK: ok.reduce((a, b) => a + b, 0),
                              pb: b ? b.textContent.split('\\n').length : 0, qAda: !!q,
+                             terkunci: terkunci,
                              ringkasan: typeof ringkasanHafalan === 'function' };
                 }""")
-                cek(hasil['qAda'], 'soal tkw terbuka di situs live (startCat menyiapkan kategori)', hasil['qAda'])
+                cek(hasil['terkunci'], 'kategori berbayar terkunci di situs live tanpa kode akses',
+                    hasil['terkunci'])
+                cek(hasil['qAda'], 'soal tkw terbuka di situs live setelah akses diberikan', hasil['qAda'])
                 cek(hasil['total'] >= 1000, 'soal termuat di situs live', hasil['total'])
                 cek(hasil['gambarOK'] == hasil['gambar'], 'semua gambar live ter-render',
                     '%s/%s' % (hasil['gambarOK'], hasil['gambar']))
