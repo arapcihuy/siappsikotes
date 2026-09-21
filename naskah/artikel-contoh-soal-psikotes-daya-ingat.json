@@ -1,0 +1,103 @@
+{
+ "slug": "contoh-soal-psikotes-daya-ingat",
+ "judul_tab": "Contoh Soal Psikotes Daya Ingat dan Aritmatika | SiapPsikotes",
+ "deskripsi": "Latihan 15 contoh soal psikotes daya ingat (digit span) dan aritmatika lisan dari bank soal SiapPsikotes, lengkap dengan pembahasan yang bisa dibuka.",
+ "h1": "Contoh Soal Psikotes Daya Ingat dan Aritmatika Lisan",
+ "dek": "Daya ingat dan aritmatika lisan jarang gagal karena soalnya sulit. Yang menghabiskan nilai adalah menyimpan angka di kepala sambil masih mendengarkan angka berikutnya.",
+ "kata_kunci": "contoh soal psikotes daya ingat dan aritmatika lisan",
+ "pembuka": [
+  "Soal daya ingat dan aritmatika lisan muncul di seleksi kerja, seleksi sekolah kedinasan, dan pemeriksaan psikologi. Bentuknya sederhana: deret angka yang harus ditulis kembali, dan hitungan cerita yang harus dijawab tanpa alat bantu.",
+  "Yang membuat peserta kehilangan nilai biasanya bukan hitungannya, melainkan penyimpanannya. Deret lima angka yang diucapkan satu per satu harus tetap utuh sementara telinga masih menerima angka berikutnya. Begitu juga pada aritmatika lisan, angka antara yang lupa dicatat membuat jawaban akhir ikut salah.",
+  "Halaman ini memuat lima belas soal dari bank soal SiapPsikotes, lengkap dengan pembahasan yang bisa dibuka satu per satu. Kerjakan dulu tanpa membuka pembahasan, baru bandingkan cara berpikirmu dengan cara yang tertulis."
+ ],
+ "bagian": [
+  {
+   "h2": "Apa yang sebenarnya diukur",
+   "isi": [
+    "Tes daya ingat mengukur berapa banyak informasi yang masih bisa kamu pegang sekaligus, dan seberapa tahan ingatan itu ketika informasi berikutnya masuk. Tes aritmatika lisan mengukur hal yang mirip: kemampuan menjaga angka antara tetap benar sambil mengerjakan langkah berikutnya.",
+    "Karena itu, latihannya bukan menghafal rumus. Yang dilatih adalah kebiasaan menahan angka dengan cara tertentu, misalnya mengelompokkan deret menjadi potongan dua atau tiga angka, atau menuliskan hasil antara sebelum melangkah."
+   ],
+   "poin": [
+    "Deret angka biasanya dibacakan satu per satu, tidak sekaligus, sehingga kamu tidak bisa membaca ulang.",
+    "Sebagian deret harus ditulis mundur, jadi jangan langsung menulis saat angka pertama diucapkan.",
+    "Aritmatika lisan sebaiknya dikerjakan bertahap dengan hasil antara yang jelas, bukan dikira-kira di akhir.",
+    "Kecepatan bukan penilaian utama; ketepatan deret dan hasil antaranya yang lebih menentukan."
+   ]
+  },
+  {
+   "h2": "Soal daya ingat (digit span)",
+   "isi": [
+    "Delapan soal berikut diambil apa adanya dari bank soal SiapPsikotes. Soal yang bertipe mundur harus ditulis dari angka paling belakang. Pembahasannya menunjukkan cara membaca deret itu, bukan sekadar kuncinya."
+   ],
+   "soal": {"psikologi": "digit_span", "jumlah": 8}
+  },
+  {
+   "h2": "Tingkat kesulitan deret angka",
+   "tabel": {
+    "kepala": ["Level", "Jumlah angka", "Skor per soal"],
+    "baris": [
+     ["1", "3 angka", "1"],
+     ["2", "4 angka", "2"],
+     ["3", "5 angka", "3"],
+     ["4", "6 angka", "4"],
+     ["5", "7 angka", "5"]
+    ]
+   },
+   "catatan": "Deret makin panjang, tetapi polanya tetap sama. Kalau deret lima angka sudah lancar, menambah panjang deret jauh lebih mudah daripada menambah kecepatan."
+  },
+  {
+   "h2": "Soal aritmatika lisan",
+   "isi": [
+    "Tujuh soal berikut juga diambil apa adanya dari bank soal. Setiap pembahasan memuat langkah hitungnya, supaya kamu bisa melihat di langkah mana kesalahan biasanya terjadi."
+   ],
+   "soal": {"psikologi": "aritmatika", "jumlah": 7}
+  },
+  {
+   "h2": "Cara berlatih tanpa aplikasi",
+   "poin": [
+    "Bacakan deret angka dengan suara sendiri, lalu tulis jawabannya tanpa melihat catatan.",
+    "Mulai dari tiga angka, lalu tambah satu angka setiap kali jawabanmu benar dua kali berturut-turut.",
+    "Untuk aritmatika, biasakan menuliskan hasil antara sebelum melanjutkan ke langkah berikutnya.",
+    "Latihan singkat lima sampai sepuluh menit setiap hari lebih berguna daripada satu sesi panjang sekali seminggu.",
+    "Setelah selesai, periksa pembahasan dan catat jenis kesalahannya, bukan hanya jumlah benarnya."
+   ],
+   "catatan": "Halaman ini tidak memakai pengatur waktu, jadi kamu bisa berlatih dengan tempo sendiri. Aplikasi latihan SiapPsikotes memakai batas waktu supaya lebih dekat dengan suasana tes."
+  }
+ ],
+ "faq": [
+  {
+   "t": "Apakah soal daya ingat di halaman ini sama dengan yang keluar saat seleksi?",
+   "j": "Bentuk soalnya mengikuti jenis yang umum dipakai, yaitu deret angka yang harus ditulis kembali dan kadang ditulis mundur. Isinya diambil dari bank soal SiapPsikotes, bukan naskah milik instansi mana pun, dan SiapPsikotes tidak berafiliasi dengan lembaga pemerintah."
+  },
+  {
+   "t": "Berapa waktu yang diberikan untuk satu soal daya ingat?",
+   "j": "Di aplikasi latihan SiapPsikotes, satu soal daya ingat diberi 30 detik dan satu soal aritmatika lisan 45 detik. Di halaman ini tidak ada pengatur waktu, sehingga kamu bisa berlatih lebih dulu tanpa tekanan waktu."
+  },
+  {
+   "t": "Bagaimana cara menjawab soal deret mundur?",
+   "j": "Jangan menulis saat angka pertama diucapkan. Tunggu deretnya selesai, baru tulis dari angka terakhir menuju angka pertama. Contohnya deret 3 8 6 dibaca dari belakang menjadi 6 8 3."
+  },
+  {
+   "t": "Bolehkah mencoret-coret saat mengerjakan aritmatika lisan?",
+   "j": "Boleh. Soal aritmatika lisan memang disarankan dikerjakan dengan menuliskan hasil antara, supaya langkah berikutnya tidak dihitung dari angka yang sudah keliru."
+  },
+  {
+   "t": "Apakah halaman ini berbayar?",
+   "j": "Halaman ini bisa dibuka tanpa akun dan tanpa bayar. Akses penuh ke seluruh aplikasi latihan, termasuk pembahasan tiap soal dan laporan hasil, dijual sekali bayar; rinciannya ada di halaman harga."
+  }
+ ],
+ "penutup": [
+  "Kerjakan satu bagian dulu sampai selesai, baru periksa pembahasannya. Cara itu membuat kamu tahu apakah kesalahannya ada di penyimpanan angka atau di langkah hitungnya.",
+  "Kalau delapan soal daya ingat di atas sudah lancar, lanjutkan dengan deret angka dan hitung cepat pada halaman contoh soal lainnya, lalu coba versi berwaktu di aplikasi latihan."
+ ],
+ "tautan": [
+  {"teks": "40 soal contoh gratis", "url": "/contoh/"},
+  {"teks": "Contoh soal psikotes kerja", "url": "/contoh-soal-psikotes-kerja/"},
+  {"teks": "Contoh soal tes kraepelin", "url": "/contoh-soal-tes-kraepelin/"},
+  {"teks": "Contoh soal deret angka", "url": "/contoh-soal-deret-angka/"},
+  {"teks": "Buka aplikasi latihan", "url": "/psikotes/"},
+  {"teks": "Harga & cara beli", "url": "/beli/"}
+ ],
+ "tanggal_terbit": "2026-09-21",
+ "diperbarui": "21 September 2026"
+}

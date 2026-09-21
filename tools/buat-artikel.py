@@ -35,6 +35,7 @@ import html
 import json
 import os
 import re
+import subprocess
 import sys
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,6 +56,76 @@ def baca_berkas_soal(kategori):
     if not m:
         raise SystemExit('pola berkas soal tidak dikenali: %s' % jalur)
     return json.loads(m.group(1))
+
+def baca_bank_js(berkas, ekspresi):
+    """Baca bank yang bukan JSON murni (kunci objeknya tanpa tanda kutip).
+
+    Berkasnya tidak pernah disentuh: node mengevaluasi isinya apa adanya lalu
+    mencetak JSON-nya. Dipakai hanya untuk bank yang memang tidak bisa dibaca
+    `json.loads`, supaya bank yang sudah diaudit tetap utuh byte per byte.
+    """
+    jalur = os.path.join(DATA, berkas)
+    skrip = ('const fs=require("fs");'
+             'const src=fs.readFileSync(process.argv[1],"utf8");'
+             'eval(src + "\\n;globalThis.__bank = %s;");'
+             'process.stdout.write(JSON.stringify(globalThis.__bank));' % ekspresi)
+    try:
+        keluaran = subprocess.run(['node', '-e', skrip, jalur],
+                                  capture_output=True, text=True, check=True)
+    except (OSError, subprocess.CalledProcessError) as e:
+        raise SystemExit('gagal membaca %s lewat node: %s' % (jalur, e))
+    return json.loads(keluaran.stdout)
+
+def pilih_merata(daftar, jumlah):
+    langkah = max(1, len(daftar) // jumlah)
+    terpilih = daftar[::langkah][:jumlah]
+    for s in daftar:
+        if len(terpilih) >= jumlah:
+            break
+        if s not in terpilih:
+            terpilih.append(s)
+    return terpilih[:jumlah]
+
+def soal_psikologi(jenis, jumlah):
+    """Soal lisan/daya ingat dari data/soal-psikologi.js, diambil apa adanya.
+
+    Pembahasannya dirakit ulang dari angka atau `cara` milik bank dan diperiksa
+    terhadap kunci bank, jadi tidak ada pembahasan karangan.
+    """
+    d = baca_bank_js('soal-psikologi.js', 'SOAL_PSIKOLOGI')
+    if jenis == 'digit_span':
+        soal = d['digit_span']['soal']
+    elif jenis == 'aritmatika':
+        soal = d['aritmatika']['soal']
+    else:
+        raise SystemExit('jenis soal psikologi tidak dikenal: %s' % jenis)
+    if len(soal) < jumlah:
+        raise SystemExit('soal %s hanya %d, diminta %d' % (jenis, len(soal), jumlah))
+
+    keluaran = []
+    for s in pilih_merata(soal, jumlah):
+        if jenis == 'digit_span':
+            angka = [str(a) for a in s['angka']]
+            if s['tipe'] == 'mundur':
+                benar = ''.join(reversed(angka))
+                pertanyaan = ('Tulis kembali deret berikut secara mundur: %s'
+                              % ' '.join(angka))
+                pembahasan = 'Dibaca dari urutan paling belakang: %s → %s.' % (
+                    '-'.join(reversed(angka)), benar)
+            else:
+                benar = ''.join(angka)
+                pertanyaan = ('Tulis kembali deret berikut sesuai urutan yang kamu dengar: %s'
+                              % ' '.join(angka))
+                pembahasan = 'Deret dibaca apa adanya: %s → %s.' % ('-'.join(angka), benar)
+            if benar != str(s['jawaban']):
+                raise SystemExit('kunci bank %s tidak cocok: %s != %s'
+                                 % (s['id'], benar, s['jawaban']))
+            keluaran.append({'pertanyaan': pertanyaan, 'pilihan': [],
+                             'pembahasan': pembahasan})
+        else:
+            keluaran.append({'pertanyaan': s['soal'], 'pilihan': [],
+                             'pembahasan': '%s Jadi jawabannya %s.' % (s['cara'], s['jawaban'])})
+    return keluaran
 
 
 def ambil_soal(kategori, jumlah):
@@ -205,20 +276,23 @@ def paragraf(daftar):
 
 def render_soal(kategori, jumlah):
     soal = ambil_soal(kategori, jumlah)
+    return rakit_soal(soal)
+
+def rakit_soal(soal):
     keluar = []
     for i, s in enumerate(soal, 1):
-        pilihan = '\n'.join('      <li>%s</li>' % html.escape(str(p))
-                            for p in s['pilihan'])
+        pilih = ''
+        if s.get('pilihan'):
+            pilih = '\n    <ol class="pilih">\n%s\n    </ol>' % '\n'.join(
+                '      <li>%s</li>' % html.escape(str(p)) for p in s['pilihan'])
         keluar.append('''  <article class="tanya">
     <p class="tanya-teks"><span class="tanya-nomor">%d.</span>%s</p>
-    <ol class="pilih">
 %s
-    </ol>
     <details class="bahas">
       <summary>Lihat jawaban &amp; pembahasan</summary>
       <p class="bahas-isi">%s</p>
     </details>
-  </article>''' % (i, html.escape(str(s['pertanyaan'])), pilihan,
+  </article>''' % (i, html.escape(str(s['pertanyaan'])), pilih.lstrip('\n'),
                     html.escape(str(s['pembahasan']))))
     return '\n'.join(keluar), len(soal)
 
@@ -252,7 +326,12 @@ def isi_artikel(n):
         if b.get('catatan'):
             potong.append('  <div class="catatan"><p>%s</p></div>' % b['catatan'])
         if b.get('soal'):
-            html_soal, jml = render_soal(b['soal']['kategori'], b['soal']['jumlah'])
+            blok = b['soal']
+            if blok.get('psikologi'):
+                html_soal, jml = rakit_soal(soal_psikologi(blok['psikologi'],
+                                                           blok['jumlah']))
+            else:
+                html_soal, jml = render_soal(blok['kategori'], blok['jumlah'])
             potong.append(html_soal)
         bagian.append('\n'.join(potong))
 
