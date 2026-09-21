@@ -14,7 +14,9 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
   - logika /beli/ utuh: nominal unik, kode rujukan = 3 angka terakhir nominal,
     tombol bukti membawa kode rujukan, gambar QR termuat dan latarnya putih (bisa dipindai),
     nama merchant yang akan dilihat pembeli dijelaskan SEBELUM QR-nya dipindai;
-  - tombol "Kirim bukti lewat WhatsApp" tetap tautan WhatsApp walau skrip halaman tidak jalan.
+  - tombol "Kirim bukti lewat WhatsApp" tetap tautan WhatsApp walau skrip halaman tidak jalan;
+  - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
+    dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
 
 Pakai Chrome asli (channel='chrome'), bukan chromium bawaan Playwright.
 Bila Playwright/Chrome tidak tersedia: cetak LEWAT + alasannya, keluar dengan kode 0.
@@ -221,6 +223,68 @@ def main():
             }""")
             cek(taut['keBeli'] and taut['keAplikasi'] and taut['keMutu'],
                 '/contoh/: ada jalan ke halaman beli, aplikasi, dan bukti mutu', taut)
+            # Gerbang kode akses adalah satu-satunya langkah pembeli SETELAH membayar, dan
+            # belum pernah dijalankan di peramban sungguhan. Kode yang dibuat tools/buat-kode.py
+            # harus benar-benar membuka aplikasi; kalau tidak, pembayaran masuk dan pembeli
+            # tetap terkunci. Diuji lewat konteks baru supaya simpanan perangkat bersih.
+            print('== /: gerbang kode akses (langkah setelah membayar) ==')
+            kode_sah = None
+            try:
+                import importlib.util
+                _spec = importlib.util.spec_from_file_location(
+                    'buat_kode', os.path.join(AKAR, 'tools', 'buat-kode.py'))
+                _mod = importlib.util.module_from_spec(_spec)
+                _spec.loader.exec_module(_mod)
+                kode_sah = _mod.buat_kode('PENGUJIAN')
+                if not _mod.periksa(kode_sah):
+                    kode_sah = None
+            except Exception as e:
+                print('  LEWAT | tools/buat-kode.py tidak bisa dijalankan (%s)' % str(e)[:120])
+            if kode_sah:
+                gctx = browser.new_context(viewport={'width': 1280, 'height': 900})
+                gpage = gctx.new_page()
+                galat_gerbang = []
+                gpage.on('pageerror', lambda e: galat_gerbang.append(str(e)[:150]))
+                gpage.goto('http://127.0.0.1:%d/' % PORT, wait_until='load', timeout=45000)
+                gpage.wait_for_timeout(700)
+                g1 = gpage.evaluate("""() => ({
+                    kartu: !!document.querySelector('.komer-kartu'),
+                    kolom: !!document.getElementById('kodeAksesGerbang'),
+                    isiAplikasi: document.querySelectorAll('#main .card').length,
+                    akun: !!document.getElementById('pfNama')
+                })""")
+                cek(g1['kartu'] and g1['kolom'] and g1['isiAplikasi'] == 0 and not g1['akun'],
+                    '/: aplikasi terkunci sebelum kode dimasukkan', g1)
+                gpage.fill('#kodeAksesGerbang', 'SPXXXXXX')
+                gpage.click('.komer-kartu button:has-text("Buka")')
+                gpage.wait_for_timeout(300)
+                pesan_salah = gpage.inner_text('#statusGerbang')
+                cek('tidak dikenali' in pesan_salah.lower(),
+                    '/: kode salah ditolak dengan pesan yang bisa ditindaklanjuti', pesan_salah[:80])
+                gpage.fill('#kodeAksesGerbang', kode_sah)
+                gpage.click('.komer-kartu button:has-text("Buka")')
+                try:
+                    gpage.wait_for_function(
+                        "() => !document.querySelector('.komer-kartu')", timeout=20000)
+                except Exception:
+                    pass
+                gpage.wait_for_timeout(400)
+                g2 = gpage.evaluate("""() => ({
+                    kartu: !!document.querySelector('.komer-kartu'),
+                    tersimpan: localStorage.getItem('tni_akses'),
+                    kode: localStorage.getItem('tni_kode_akses'),
+                    kartuIsi: document.querySelectorAll('#main .card').length,
+                    akun: !!document.getElementById('pfNama'),
+                    panjang: ((document.getElementById('main') || {}).innerText || '').length
+                })""")
+                cek(not g2['kartu'] and g2['tersimpan'] == 'TERBUKA'
+                    and g2['kode'] == kode_sah.upper(),
+                    '/: kode buatan pemilik membuka aplikasi', g2)
+                cek(g2['kartuIsi'] > 0 and g2['akun'] and g2['panjang'] > 1000,
+                    '/: isi aplikasi benar-benar tampil setelah kode diterima',
+                    [g2['kartuIsi'], g2['akun'], g2['panjang']])
+                cek(not galat_gerbang, '/: tanpa galat JavaScript di gerbang akses', galat_gerbang[:2])
+                gctx.close()
             cek(not galat, 'tanpa galat JavaScript di halaman pendukung', galat[:3])
             browser.close()
     finally:
