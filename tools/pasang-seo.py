@@ -44,6 +44,7 @@ HALAMAN = [
     ('contoh-soal-psikotes-daya-ingat/index.html', '/contoh-soal-psikotes-daya-ingat/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-polri/index.html', '/contoh-soal-psikotes-polri/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-bumn/index.html', '/contoh-soal-psikotes-bumn/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-kai/index.html', '/contoh-soal-psikotes-kai/', '0.8', 'monthly'),
     ('beli/index.html', '/beli/', '0.7', 'monthly'),
     ('mutu/index.html', '/mutu/', '0.6', 'monthly'),
     ('syarat/index.html', '/syarat/', '0.3', 'yearly'),

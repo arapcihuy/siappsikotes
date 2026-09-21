@@ -49,7 +49,7 @@ HAL = ['mutu/', 'beli/', 'syarat/', 'privasi/', 'contoh/', '404.html',
        'contoh-soal-twk-cpns/', 'contoh-soal-tiu-cpns/',
        'contoh-soal-psikotes-bahasa-inggris/', 'contoh-soal-psikotes-kepribadian/',
        'contoh-soal-psikotes-daya-ingat/', 'contoh-soal-psikotes-polri/',
-       'contoh-soal-psikotes-bumn/']
+       'contoh-soal-psikotes-bumn/', 'contoh-soal-psikotes-kai/']
 RUSAK = '--rusak' in sys.argv   # mode pembuktian: uji HARUS menangkap kerusakan yang disuntikkan
 hasil = []
 
