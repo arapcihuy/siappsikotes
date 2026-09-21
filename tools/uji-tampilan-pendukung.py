@@ -31,7 +31,8 @@ AXE = os.path.join(AKAR, 'tools', 'axe.min.js')
 PORT = 8791
 HAL = ['mutu/', 'beli/', 'syarat/', 'privasi/', 'contoh/', '404.html',
        'contoh-soal-psikotes-kerja/', 'contoh-soal-psikotes-matematika/',
-       'contoh-soal-deret-angka/', 'contoh-soal-tes-kraepelin/']
+       'contoh-soal-deret-angka/', 'contoh-soal-tes-kraepelin/',
+       'contoh-soal-twk-cpns/']
 RUSAK = '--rusak' in sys.argv   # mode pembuktian: uji HARUS menangkap kerusakan yang disuntikkan
 hasil = []
 
