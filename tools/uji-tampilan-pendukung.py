@@ -139,6 +139,9 @@ def main():
                 nominal2: document.getElementById('beliNominal2').textContent.trim(),
                 rujukan: document.getElementById('beliRujukan').textContent.trim(),
                 tautan: document.getElementById('beliBukti').getAttribute('href'),
+                tautanAplikasi: (Array.from(document.querySelectorAll('a'))
+                    .filter((x) => (x.getAttribute('href') || '').indexOf('../#sp-') === 0)
+                    .map((x) => x.getAttribute('href'))[0]) || '',
                 qr: (() => { const i = document.querySelector('.qris-kotak img');
                     const r = i.getBoundingClientRect();
                     return { w: Math.round(r.width), h: Math.round(r.height),
@@ -159,6 +162,50 @@ def main():
             # penjelasannya harus terbaca sebelum QR-nya, bukan catatan kaki sesudah tombol.
             cek(b['notaSebelumQr'] is True, '/beli/: nama merchant dijelaskan sebelum QR dipindai',
                 b['notaSebelumQr'])
+            # Nomor rujukan dulu dibuat ulang tiap muat halaman bila penyimpanan peramban
+            # diblokir (mode privat, cookie ditolak). Pembeli yang memuat ulang antara
+            # membayar dan mengirim bukti lalu memegang kode rujukan yang tidak lagi cocok
+            # dengan nominal yang ia bayar. Sekarang angkanya ikut disimpan di alamat halaman.
+            kode_alamat = page.url.split('#')[1] if '#' in page.url else ''
+            cek(kode_alamat == 'sp-' + b['rujukan'].split('-')[1],
+                '/beli/: nomor rujukan tersimpan di alamat halaman', page.url)
+            cek(b['tautanAplikasi'].endswith('#' + b['rujukan'].replace('SP-', 'sp-')),
+                '/beli/: tautan ke aplikasi membawa angka rujukan yang sama',
+                b['tautanAplikasi'])
+            tanpa_simpanan = browser.new_context(viewport={'width': 390, 'height': 844})
+            tanpa_simpanan.add_init_script(
+                "Object.defineProperty(window, 'localStorage', "
+                "{ get: function () { throw new Error('penyimpanan diblokir'); } });")
+            pk = tanpa_simpanan.new_page()
+            pk.goto('http://127.0.0.1:%d/beli/' % PORT, wait_until='load', timeout=45000)
+            pk.wait_for_timeout(300)
+            baca = ("() => ({ n: document.getElementById('beliNominal').textContent.trim(),"
+                    " r: document.getElementById('beliRujukan').textContent.trim(),"
+                    " u: location.href })")
+            a1 = pk.evaluate(baca)
+            pk.reload(wait_until='load')
+            pk.wait_for_timeout(300)
+            a2 = pk.evaluate(baca)
+            cek(a1['n'] == a2['n'] and a1['r'] == a2['r'],
+                '/beli/: nominal & rujukan tetap walau penyimpanan diblokir + muat ulang',
+                [a1['n'], a2['n'], a1['r'], a2['r']])
+            cek('#sp-' + a2['r'].split('-')[1] in (a2['u'] or ''),
+                '/beli/: muat ulang memakai angka yang tersimpan di alamat', a2['u'])
+            # Sisi aplikasi (fitur11.js) memakai aturan yang sama; kalau tidak, kode
+            # rujukan di kuitansi bisa berbeda dari yang dipakai di halaman beli.
+            pk.goto('http://127.0.0.1:%d/' % PORT, wait_until='load', timeout=45000)
+            pk.wait_for_timeout(400)
+            k1 = pk.evaluate("() => kodeBayar().rujukan")
+            pk.reload(wait_until='load')
+            pk.wait_for_timeout(400)
+            k2 = pk.evaluate("() => kodeBayar().rujukan")
+            cek(k1 == k2, '/: kode rujukan aplikasi stabil walau penyimpanan diblokir', [k1, k2])
+            pk.goto('http://127.0.0.1:%d/#sp-321' % PORT, wait_until='load', timeout=45000)
+            pk.wait_for_timeout(400)
+            k3 = pk.evaluate("() => kodeBayar().rujukan")
+            cek(k3 == 'SP-321', '/: aplikasi memakai angka rujukan yang dibawa tautan /beli/',
+                [k3, pk.url])
+            tanpa_simpanan.close()
             # Pengunjung yang skripnya gagal (peramban dalam aplikasi, saringan jaringan, galat JS)
             # tetap harus sampai ke WhatsApp. Sebelum ini tombol "Kirim bukti lewat WhatsApp"
             # hanya menjadi tautan wa.me setelah skrip berjalan; tanpa skrip ia membuka draf surel.

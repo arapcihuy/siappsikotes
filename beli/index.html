@@ -383,16 +383,28 @@
     var elBS = document.getElementById('beliBuktiSurel');
     var elS = document.getElementById('beliSalin');
     if (!elN) return;
-    var kode;
+    // Angka rujukan harus bertahan walau penyimpanan peramban diblokir. Kalau angka
+    // dibuat ulang tiap muat halaman, pembeli bisa membayar nominal yang tidak lagi
+    // cocok dengan kode rujukan yang ia kirim. Karena itu angkanya juga ditulis ke
+    // alamat halaman (#sp-594), yang tetap ada sesudah muat ulang.
+    var angkaRujukan = '';
+    var dariAlamat = /^#sp-(\d{3})$/.exec(location.hash || '');
+    if (dariAlamat) angkaRujukan = dariAlamat[1];
+    var kode = null;
     try { kode = JSON.parse(localStorage.getItem('tni_kode_bayar') || 'null'); } catch (e) { kode = null; }
-    if (!kode || !kode.angka) {
-      kode = { angka: String(Math.floor(Math.random() * 900) + 100), waktu: new Date().toISOString() };
-      try { localStorage.setItem('tni_kode_bayar', JSON.stringify(kode)); } catch (e) {}
-    }
-    var angka = parseInt(kode.angka, 10);
+    if (!angkaRujukan && kode && /^\d{3}$/.test(String(kode.angka))) angkaRujukan = String(kode.angka);
+    if (!angkaRujukan) angkaRujukan = String(Math.floor(Math.random() * 900) + 100);
+    kode = { angka: angkaRujukan, waktu: (kode && kode.waktu) || new Date().toISOString() };
+    try { localStorage.setItem('tni_kode_bayar', JSON.stringify(kode)); } catch (e) {}
+    try {
+      if (location.hash !== '#sp-' + angkaRujukan && window.history && history.replaceState) {
+        history.replaceState(null, '', location.pathname + location.search + '#sp-' + angkaRujukan);
+      }
+    } catch (e) {}
+    var angka = parseInt(angkaRujukan, 10);
     var nominal = 39000 + angka;
     var teks = 'Rp ' + String(nominal).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    var rujukan = 'SP-' + kode.angka;
+    var rujukan = 'SP-' + angkaRujukan;
     elN.textContent = teks;
     if (elN2) elN2.textContent = teks;
     if (elR) elR.textContent = rujukan;
@@ -415,6 +427,12 @@
     }
     var pesanBukti = 'Halo, saya sudah membayar akses SiapPsikotes.\n\nKode rujukan: ' + rujukan +
       '\nNominal dibayar: ' + teks + '\n\nBukti pembayaran saya lampirkan di chat ini. Mohon kirim kode aksesnya. Terima kasih.';
+    // Bawa angka yang sama ke aplikasi: tanpa ini pembeli yang penyimpanannya diblokir
+    // mendapat kode rujukan baru begitu ia pindah ke aplikasi, dan nominal yang ia bayar
+    // tidak lagi cocok dengan yang tertulis di kuitansinya.
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="../"]'), function (a) {
+      a.setAttribute('href', '../#sp-' + angkaRujukan);
+    });
     if (elB) {
       elB.setAttribute('href', 'https://wa.me/6281387906930?text=' + encodeURIComponent(pesanBukti));
     }

@@ -218,19 +218,31 @@ window.laporanSudahDibuka = function () {
 try { return !!JSON.parse(localStorage.getItem('tni_laporan_bayar') || 'null'); } catch (e) { return false; }
 };
 window.kodeBayar = function () {
+// Angka rujukan harus bertahan walau penyimpanan peramban diblokir: kalau berubah
+// tiap muat halaman, pembeli bisa membayar nominal yang tidak lagi cocok dengan
+// kode rujukan yang ia kirim. Karena itu angkanya juga ditulis ke alamat halaman
+// (#sp-594), yang tetap ada sesudah muat ulang.
+var angka = '';
+var dariAlamat = /^#sp-(\d{3})$/.exec(location.hash || '');
+if (dariAlamat) angka = dariAlamat[1];
 var ada = null;
 try { ada = JSON.parse(localStorage.getItem('tni_kode_bayar') || 'null'); } catch (e) {}
-if (!ada || !ada.angka) {
-ada = { angka: String(Math.floor(Math.random() * 900) + 100), waktu: new Date().toISOString() };
+if (!angka && ada && /^\d{3}$/.test(String(ada.angka))) angka = String(ada.angka);
+if (!angka) angka = String(Math.floor(Math.random() * 900) + 100);
+ada = { angka: angka, waktu: (ada && ada.waktu) || new Date().toISOString() };
 try { localStorage.setItem('tni_kode_bayar', JSON.stringify(ada)); } catch (e) {}
+try {
+if (location.hash !== '#sp-' + angka && window.history && history.replaceState) {
+history.replaceState(null, '', location.pathname + location.search + '#sp-' + angka);
 }
+} catch (e) {}
 var dasar = 39000;
 var m = String(BAYAR.harga || 'Rp 39.000').match(/[\d.]+/g);
 if (m) {
 var angkaHarga = parseInt(String(m[0]).replace(/\./g, ''), 10);
 if (angkaHarga > 1000) dasar = angkaHarga;
 }
-return { rujukan: 'SP-' + ada.angka, nominal: dasar + parseInt(ada.angka, 10), dasar: dasar };
+return { rujukan: 'SP-' + angka, nominal: dasar + parseInt(angka, 10), dasar: dasar };
 };
 function rupiah(n) { return 'Rp ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
 (function () {
