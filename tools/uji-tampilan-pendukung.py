@@ -234,6 +234,31 @@ def main():
                 "() => document.getElementById('beliBukti').getAttribute('href') || ''")
             cek(t.startswith('https://wa.me/'), '/beli/: tombol WhatsApp tetap WhatsApp tanpa skrip', t[:80])
             tanpaskrip.close()
+            # /contoh/ tanpa skrip: 40 soal gratis itu satu-satunya isi produk yang terbuka,
+            # jadi harus terbaca walau JavaScript mati - oleh pembaca layar, pengunjung lama,
+            # dan perayap mesin pencari yang tidak menjalankan skrip. Sebelum ini halaman
+            # hanya berisi kerangka (~1,9 KB teks) dan 40 soalnya digambar oleh skrip.
+            tanpaskrip2 = browser.new_context(viewport={'width': 390, 'height': 844},
+                                              java_script_enabled=False)
+            halaman_contoh = tanpaskrip2.new_page()
+            halaman_contoh.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
+            statis = halaman_contoh.evaluate("""() => {
+                const kartu = document.querySelectorAll('#contoh-daftar .kartu-soal');
+                const teks = (document.getElementById('contoh-daftar').innerText || '').trim();
+                const kecil = teks.toLowerCase();
+                return {
+                    jumlah: kartu.length,
+                    pilihan: kartu.length ? kartu[0].querySelectorAll('.statis-pilih li').length : 0,
+                    panjang: teks.length,
+                    adaBahas: kecil.indexOf('pembahasan') >= 0,
+                    adaKunci: kecil.indexOf('(jawaban)') >= 0 };
+            }""")
+            tanpaskrip2.close()
+            cek(statis['jumlah'] >= 40 and statis['pilihan'] >= 4
+                and statis['adaBahas'] and statis['adaKunci'],
+                '/contoh/: 40 soal + pembahasan terbaca tanpa JavaScript', statis)
+            cek(statis['panjang'] >= 8000,
+                '/contoh/: teks statis cukup banyak untuk dibaca mesin pencari', statis['panjang'])
             print('== /contoh/: soal gratis berpembahasan ==')
             page.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
             page.wait_for_timeout(500)
