@@ -77,6 +77,14 @@ def main():
     except Exception as e:
         cek(False, 'favicon.ico live dapat diambil', str(e)[:120])
 
+    # /llms.txt: berkas untuk mesin pencari AI. Diperiksa live karena hanya berguna bila tayang.
+    try:
+        st, llms = ambil('llms.txt')
+        cek(st == 200 and BASE in llms and 'Rp 39.000' in llms,
+            'llms.txt live tersaji, menyebut alamat situs dan harga', [st, len(llms)])
+    except Exception as e:
+        cek(False, 'llms.txt live dapat diambil', str(e)[:120])
+
     try:
         st, idx = ambil('data/soal-index.js?v=%s' % v)
         m = re.search(r'"total":\s*(\d+)', idx) or re.search(r'total\s*=\s*(\d+)', idx)

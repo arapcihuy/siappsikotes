@@ -1,0 +1,49 @@
+# SiapPsikotes
+
+> Situs latihan psikotes kerja, tes IQ, dan tes kepribadian berbahasa Indonesia.
+> 1.348 soal berpembahasan dalam 9 modul, akses penuh Rp 39.000 sekali bayar lewat QRIS.
+> Tanpa akun, tanpa langganan, dan bisa dipakai tanpa internet setelah halaman tersimpan.
+> English: Indonesian psychotest and IQ practice site; one-time Rp 39.000 access, no account required.
+
+SiapPsikotes adalah alat latihan mandiri untuk orang Indonesia yang menyiapkan psikotes kerja,
+tes kedinasan, dan tes IQ. Latihan berjalan di peramban. Tidak ada pendaftaran, surel, atau
+kata sandi, dan hasil latihan disimpan di perangkat pengguna sendiri.
+
+Sebagian materi bisa dicoba tanpa membayar: 40 soal dari 8 jenis tes dengan pembahasan ada di
+halaman Contoh.
+
+## Halaman
+
+- [Beranda](https://siappsikotes.my.id/): ringkasan produk, daftar modul, dan harga.
+- [Aplikasi latihan](https://siappsikotes.my.id/psikotes/): tempat latihan dijalankan.
+- [Contoh gratis](https://siappsikotes.my.id/contoh/): 40 soal dari 8 jenis tes, tanpa akun dan tanpa bayar.
+- [Contoh soal psikotes kerja](https://siappsikotes.my.id/contoh-soal-psikotes-kerja/): soal verbal, penalaran, dan numerik dengan pembahasan.
+- [Contoh soal psikotes matematika](https://siappsikotes.my.id/contoh-soal-psikotes-matematika/): aritmetika dasar dan cara cepat mengerjakannya.
+- [Contoh soal deret angka](https://siappsikotes.my.id/contoh-soal-deret-angka/): pola bilangan dan langkah menemukan suku berikutnya.
+- [Contoh soal tes Kraepelin](https://siappsikotes.my.id/contoh-soal-tes-kraepelin/): aturan tes kecepatan kerja dan cara berlatihnya.
+- [Contoh soal TWK CPNS](https://siappsikotes.my.id/contoh-soal-twk-cpns/): wawasan kebangsaan beserta pembahasan.
+- [Contoh soal TIU CPNS](https://siappsikotes.my.id/contoh-soal-tiu-cpns/): tiga kelompok kisi-kisi TIU dan strategi waktunya.
+- [Contoh soal bahasa Inggris](https://siappsikotes.my.id/contoh-soal-psikotes-bahasa-inggris/): struktur, sinonim, dan pemahaman bacaan.
+- [Contoh soal kepribadian](https://siappsikotes.my.id/contoh-soal-psikotes-kepribadian/): cara kerja tes kepribadian, bukan kunci jawaban.
+- [Contoh soal daya ingat](https://siappsikotes.my.id/contoh-soal-psikotes-daya-ingat/): digit span dan aritmetika lisan.
+- [Harga dan cara beli](https://siappsikotes.my.id/beli/): Rp 39.000 sekali bayar lewat QRIS, tanpa langganan.
+- [Mutu dan bukti pemeriksaan soal](https://siappsikotes.my.id/mutu/): cara bank soal diperiksa dan hasilnya.
+- [Syarat dan ketentuan](https://siappsikotes.my.id/syarat/) dan [kebijakan privasi](https://siappsikotes.my.id/privasi/): ketentuan pemakaian dan cara data ditangani.
+
+## Fakta yang boleh dikutip
+
+- Harga: Rp 39.000 sekali bayar untuk akses penuh. Bukan langganan dan tidak ada perpanjangan otomatis.
+- Isi akses penuh: 1.348 soal beserta pembahasan, 9 modul tes, dan Laporan Lengkap.
+- Pembayaran: QRIS (semua bank dan e-wallet). Nominal ditambah tiga angka unik supaya pembayaran
+  bisa dicocokkan tanpa menanyakan data pribadi apa pun.
+- Kode akses dikirim setelah bukti pembayaran dicocokkan pengelola, biasanya pada hari yang sama.
+- Latihan bisa dipakai tanpa internet setelah halaman tersimpan, dan tanpa akun.
+
+## Batasan
+
+- Situs ini bukan situs resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah mana pun.
+- Ini alat latihan, bukan tes berlisensi. Tidak memakai Raven, WAIS, atau Wartegg; hasil latihan bukan
+  hasil tes psikologi dan bukan jaminan kelulusan seleksi.
+- Tes kepribadian memakai 20 pernyataan Mini-IPIP dari International Personality Item Pool yang
+  berstatus domain publik, dengan aturan penilaiannya. Hasilnya menggambarkan lima sifat besar,
+  bukan diagnosis psikologi.

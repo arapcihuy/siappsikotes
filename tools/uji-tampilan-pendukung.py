@@ -23,6 +23,8 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
     dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
   - /favicon.ico: ada di akar situs dan berupa ICO asli (peramban memintanya tanpa
     membaca <link rel="icon">, dan jalur ini pernah 404 di setiap kunjungan).
+  - /llms.txt: berkas yang dibaca mesin pencari AI (tanpa akun dan tanpa peringkat Google).
+    Daftar tautannya harus menunjuk berkas yang benar-benar ada - bukan tautan karangan.
 
 Pakai Chrome asli (channel='chrome'), bukan chromium bawaan Playwright.
 Bila Playwright/Chrome tidak tersedia: cetak LEWAT + alasannya, keluar dengan kode 0.
@@ -405,6 +407,26 @@ def main():
             cek(status_ico == 200 and isi_ico[:4] == b'\x00\x00\x01\x00' and jumlah_ico >= 2,
                 '/favicon.ico: ICO asli di akar situs, >= 2 ukuran',
                 [status_ico, isi_ico[:4], jumlah_ico])
+            # /llms.txt: dibaca mesin pencari AI, yang datang tanpa akun dan tanpa peringkat Google.
+            # Tautan yang tidak ada berkasnya akan membuat mesin itu menyebut halaman 404.
+            try:
+                with urllib.request.urlopen('http://127.0.0.1:%d/llms.txt' % PORT, timeout=15) as r:
+                    status_llms, isi_llms = r.status, r.read().decode('utf-8', 'replace')
+            except Exception as e:
+                status_llms, isi_llms = 0, str(e)
+            cek(status_llms == 200 and 0 < len(isi_llms) <= 8192,
+                '/llms.txt: tersaji di akar situs dan ringkas', [status_llms, len(isi_llms)])
+            tautan = sorted(set(re.findall(r'https://siappsikotes\.my\.id(/[^)\s]*)', isi_llms)))
+            hilang = [t for t in tautan
+                      if not os.path.exists(os.path.join(AKAR, t.strip('/'), 'index.html'))
+                      and not os.path.exists(os.path.join(AKAR, t.strip('/')))]
+            cek(bool(tautan) and not hilang,
+                '/llms.txt: setiap tautan menunjuk berkas yang benar-benar ada',
+                [len(tautan), hilang[:3]])
+            cek('Rp 39.000' in isi_llms and '1.348 soal' in isi_llms
+                and 'bukan situs resmi instansi mana pun' in isi_llms,
+                '/llms.txt: harga, jumlah soal, dan penyangkalan afiliasi sesuai kenyataan situs',
+                ['Rp 39.000' in isi_llms, '1.348 soal' in isi_llms])
             browser.close()
     finally:
         httpd.shutdown()
