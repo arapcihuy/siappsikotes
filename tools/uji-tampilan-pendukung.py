@@ -21,6 +21,8 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
     hanya WhatsApp berisi pesan pembaca sendiri, dan tersembunyi lagi setelah "Mulai ulang";
   - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
     dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
+  - /favicon.ico: ada di akar situs dan berupa ICO asli (peramban memintanya tanpa
+    membaca <link rel="icon">, dan jalur ini pernah 404 di setiap kunjungan).
 
 Pakai Chrome asli (channel='chrome'), bukan chromium bawaan Playwright.
 Bila Playwright/Chrome tidak tersedia: cetak LEWAT + alasannya, keluar dengan kode 0.
@@ -34,6 +36,7 @@ import re
 import sys
 import threading
 import urllib.parse
+import urllib.request
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AXE = os.path.join(AKAR, 'tools', 'axe.min.js')
@@ -390,6 +393,16 @@ def main():
                 cek(not galat_gerbang, '/: tanpa galat JavaScript di gerbang akses', galat_gerbang[:2])
                 gctx.close()
             cek(not galat, 'tanpa galat JavaScript di halaman pendukung', galat[:3])
+            # /favicon.ico diminta peramban sendiri, tanpa membaca <link rel="icon">
+            try:
+                with urllib.request.urlopen('http://127.0.0.1:%d/favicon.ico' % PORT, timeout=15) as r:
+                    status_ico, isi_ico = r.status, r.read()
+            except Exception as e:
+                status_ico, isi_ico = 0, str(e).encode()
+            jumlah_ico = int.from_bytes(isi_ico[4:6], 'little') if len(isi_ico) >= 6 else 0
+            cek(status_ico == 200 and isi_ico[:4] == b'\x00\x00\x01\x00' and jumlah_ico >= 2,
+                '/favicon.ico: ICO asli di akar situs, >= 2 ukuran',
+                [status_ico, isi_ico[:4], jumlah_ico])
             browser.close()
     finally:
         httpd.shutdown()

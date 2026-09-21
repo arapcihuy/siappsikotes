@@ -30,6 +30,13 @@ def ambil(path):
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.status, r.read().decode('utf-8', 'replace')
 
+def ambil_biner(path):
+    """Ambil berkas apa adanya (tanpa dekode teks), untuk memeriksa isi biner seperti ICO."""
+    url = BASE + '/' + path.lstrip('/')
+    req = urllib.request.Request(url, headers={'User-Agent': 'pemeriksa-pk-perwira/1.0'})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.status, r.read()
+
 
 def main():
     print('memeriksa:', BASE)
@@ -60,6 +67,15 @@ def main():
             cek(st == 200 and penanda in isi, 'berkas %s memuat %s' % (nama.split('?')[0], penanda), st)
         except Exception as e:
             cek(False, 'berkas %s dapat diambil' % nama.split('?')[0], str(e)[:120])
+
+    # /favicon.ico: jalur yang diminta peramban sendiri; pernah 404 di situs live
+    try:
+        st, ico = ambil_biner('favicon.ico')
+        jumlah = int.from_bytes(ico[4:6], 'little') if len(ico) >= 6 else 0
+        cek(st == 200 and ico[:4] == b'\x00\x00\x01\x00' and jumlah >= 2,
+            'favicon.ico live berupa ICO asli, >= 2 ukuran', [st, ico[:4], jumlah])
+    except Exception as e:
+        cek(False, 'favicon.ico live dapat diambil', str(e)[:120])
 
     try:
         st, idx = ambil('data/soal-index.js?v=%s' % v)
@@ -101,12 +117,21 @@ def main():
                         const i = new Image(); i.onload = () => r(1); i.onerror = () => r(0); i.src = s.gambar;
                     })));
                     startCat('tkw', 'learn');
+                    // startCat menyiapkan kategori secara asinkron bila datanya belum siap:
+                    // menunggu di sini, karena soal yang belum ada pernah membuat uji ini mati
+                    // dengan TypeError alih-alih melaporkan keadaan situs yang sebenarnya.
+                    for (let i = 0; i < 120 && !(S.questions || []).length; i++) {
+                        await new Promise(r => setTimeout(r, 250));
+                    }
+                    S.idx = 0; S.tSoalIdx = -1; render();
                     const q = S.questions[S.idx];
-                    pickAnswer(q.jawaban);
+                    if (q) pickAnswer(q.jawaban);
                     const b = document.querySelector('.explanation-body');
                     return { total: totalSoal(), gambar: imgs.length, gambarOK: ok.reduce((a, b) => a + b, 0),
-                             pb: b ? b.textContent.split('\\n').length : 0, ringkasan: typeof ringkasanHafalan === 'function' };
+                             pb: b ? b.textContent.split('\\n').length : 0, qAda: !!q,
+                             ringkasan: typeof ringkasanHafalan === 'function' };
                 }""")
+                cek(hasil['qAda'], 'soal tkw terbuka di situs live (startCat menyiapkan kategori)', hasil['qAda'])
                 cek(hasil['total'] >= 1000, 'soal termuat di situs live', hasil['total'])
                 cek(hasil['gambarOK'] == hasil['gambar'], 'semua gambar live ter-render',
                     '%s/%s' % (hasil['gambarOK'], hasil['gambar']))
