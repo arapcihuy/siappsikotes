@@ -39,6 +39,8 @@ HALAMAN = [
     ('contoh-soal-tes-kraepelin/index.html', '/contoh-soal-tes-kraepelin/', '0.8', 'monthly'),
     ('contoh-soal-twk-cpns/index.html', '/contoh-soal-twk-cpns/', '0.8', 'monthly'),
     ('contoh-soal-tiu-cpns/index.html', '/contoh-soal-tiu-cpns/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-bahasa-inggris/index.html', '/contoh-soal-psikotes-bahasa-inggris/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-kepribadian/index.html', '/contoh-soal-psikotes-kepribadian/', '0.8', 'monthly'),
     ('beli/index.html', '/beli/', '0.7', 'monthly'),
     ('mutu/index.html', '/mutu/', '0.6', 'monthly'),
     ('syarat/index.html', '/syarat/', '0.3', 'yearly'),

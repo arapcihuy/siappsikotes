@@ -44,7 +44,8 @@ PORT = 8791
 HAL = ['mutu/', 'beli/', 'syarat/', 'privasi/', 'contoh/', '404.html',
        'contoh-soal-psikotes-kerja/', 'contoh-soal-psikotes-matematika/',
        'contoh-soal-deret-angka/', 'contoh-soal-tes-kraepelin/',
-       'contoh-soal-twk-cpns/', 'contoh-soal-tiu-cpns/']
+       'contoh-soal-twk-cpns/', 'contoh-soal-tiu-cpns/',
+       'contoh-soal-psikotes-bahasa-inggris/', 'contoh-soal-psikotes-kepribadian/']
 RUSAK = '--rusak' in sys.argv   # mode pembuktian: uji HARUS menangkap kerusakan yang disuntikkan
 hasil = []
 
