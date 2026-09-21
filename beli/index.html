@@ -161,6 +161,11 @@
   .percikan { display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; }
   .percikan span { font-size:13.5px; color:var(--muted); border:1px solid var(--line2);
     background:var(--surface); border-radius:999px; padding:6px 13px; }
+  .nota-merchant { border:1px solid rgba(230,197,82,.3); border-left:3px solid var(--gold);
+    border-radius:14px; padding:13px 15px; margin:0 0 14px; color:var(--isi);
+    background:linear-gradient(180deg, rgba(230,197,82,.09), rgba(230,197,82,.02)), var(--surface);
+    font-size:14px; line-height:1.6; }
+  .nota-merchant b { color:var(--gold); }
 
   @media (max-width:700px) {
     .kepala { padding:12px 18px; gap:10px; }
@@ -282,6 +287,10 @@
   <h2 id="bayar">Cara membayar</h2>
   <div class="beli-dua">
     <div>
+      <p class="nota-merchant">Di aplikasi bank atau e-wallet-mu, kode QRIS ini bisa muncul dengan nama
+        <b>Momo dimsum &mdash; Sleman</b>, bukan &ldquo;SiapPsikotes&rdquo;. Itu memang kode pembayaran
+        pengelola SiapPsikotes, jadi pembayaranmu tetap sah dan tetap masuk ke pengelola yang sama.
+        Yang dicocokkan tetap <b>nominal</b> dan <b>kode rujukanmu</b> di sebelah.</p>
       <div class="qris-kotak">
         <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
              width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
@@ -300,9 +309,14 @@
           membuat pembayaranmu mudah dicocokkan.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
         <p class="label">Kode rujukanmu</p>
-        <p class="rujukan" id="beliRujukan">SP-000</p>
+        <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
         <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
       </div>
+      <noscript>
+        <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
+          supaya keduanya muncul, atau tulis <strong>nama lengkap</strong> dan <strong>waktu pembayaran</strong>mu
+          di pesan bukti agar pembayaran tetap bisa dicocokkan.</p>
+      </noscript>
 
       <ol class="langkah">
         <li>Pindai QR di atas, lalu bayar <strong id="beliNominal2">Rp 39.000</strong> tepat sejumlah itu.</li>
@@ -324,8 +338,8 @@
         <a class="tombol sekunder" href="../">Buka aplikasi &amp; masukkan kode</a>
       </div>
       <p class="catatan">Pembayaran dicocokkan oleh pengelola; kode akses biasanya dikirim pada hari yang sama.
-        Bila di aplikasi pembayaranmu muncul nama merchant pemilik kode QRIS — bukan tulisan "SiapPsikotes" —
-        pembayaran tetap sah dan tetap masuk ke pengelola yang sama.</p>
+        Bila bukti lewat WhatsApp belum dibalas dalam sehari, kirim ulang ke
+        <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a> beserta bukti dan kode rujukanmu.</p>
     </div>
   </div>
 
