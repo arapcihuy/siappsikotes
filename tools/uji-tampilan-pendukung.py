@@ -46,7 +46,7 @@ import urllib.request
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AXE = os.path.join(AKAR, 'tools', 'axe.min.js')
 PORT = 8791
-HAL = ['mutu/', 'beli/', 'syarat/', 'privasi/', 'contoh/', '404.html',
+HAL = ['mutu/', 'beli/', 'lisensi/', 'syarat/', 'privasi/', 'contoh/', '404.html',
        'contoh-soal-psikotes-kerja/', 'contoh-soal-psikotes-matematika/',
        'contoh-soal-deret-angka/', 'contoh-soal-tes-kraepelin/',
        'contoh-soal-twk-cpns/', 'contoh-soal-tiu-cpns/',

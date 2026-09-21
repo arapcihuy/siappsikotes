@@ -46,6 +46,7 @@ HALAMAN = [
     ('contoh-soal-psikotes-bumn/index.html', '/contoh-soal-psikotes-bumn/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-kai/index.html', '/contoh-soal-psikotes-kai/', '0.8', 'monthly'),
     ('beli/index.html', '/beli/', '0.7', 'monthly'),
+    ('lisensi/index.html', '/lisensi/', '0.6', 'monthly'),
     ('mutu/index.html', '/mutu/', '0.6', 'monthly'),
     ('syarat/index.html', '/syarat/', '0.3', 'yearly'),
     ('privasi/index.html', '/privasi/', '0.3', 'yearly'),
@@ -131,6 +132,34 @@ def skema_untuk(jalur):
                 'availability': 'https://schema.org/InStock',
                 'seller': {'@type': 'Organization', 'name': 'SiapPsikotes'},
             },
+        }])
+    if jalur == '/lisensi/':
+        return graf(jalur, 'Lisensi lembaga dan jasa bank soal', 'lisensi', [{
+            '@type': 'Service',
+            'name': 'Lisensi bank soal psikotes untuk lembaga',
+            'description': ('Lisensi pakai bank soal dan aplikasi latihan psikotes untuk bimbel, sekolah, '
+                            'dan tim rekrutmen, mulai Rp 1.500.000 per tahun, serta jasa audit dan '
+                            'penyusunan bank soal dengan laporan pelanggaran per butir.'),
+            'url': DOMAIN + '/lisensi/',
+            'serviceType': 'Lisensi bank soal dan audit mutu soal',
+            'areaServed': {'@type': 'Country', 'name': 'Indonesia'},
+            'provider': {'@type': 'Organization', 'name': 'SiapPsikotes', 'url': DOMAIN + '/'},
+            'offers': [
+                {'@type': 'Offer', 'name': 'L1 - Cabang tunggal', 'price': '1500000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'L2 - Multi-cabang', 'price': '4500000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'L3 - White-label', 'price': '12000000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'L4 - Psikotes rekrutmen', 'price': '6000000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'A - Audit bank soal', 'price': '2500000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'B - Bank soal baru teraudit', 'price': '7500000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+                {'@type': 'Offer', 'name': 'C - Jaga mutu bulanan', 'price': '900000',
+                 'priceCurrency': 'IDR', 'url': DOMAIN + '/lisensi/'},
+            ],
         }])
     if jalur in ('/syarat/', '/privasi/'):
         judul = 'Syarat dan ketentuan' if jalur == '/syarat/' else 'Kebijakan privasi'

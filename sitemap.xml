@@ -92,9 +92,15 @@
   </url>
   <url>
     <loc>https://siappsikotes.my.id/beli/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://siappsikotes.my.id/lisensi/</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://siappsikotes.my.id/mutu/</loc>

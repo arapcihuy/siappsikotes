@@ -30,6 +30,7 @@ halaman Contoh.
 - [Contoh soal psikotes BUMN](https://siappsikotes.my.id/contoh-soal-psikotes-bumn/): deret angka, penalaran, padanan kata, dan aritmetika lisan dengan pembahasan.
 - [Contoh soal psikotes KAI](https://siappsikotes.my.id/contoh-soal-psikotes-kai/): deret angka, penalaran, padanan kata, dan digit span dengan pembahasan.
 - [Harga dan cara beli](https://siappsikotes.my.id/beli/): Rp 39.000 sekali bayar lewat QRIS, tanpa langganan.
+- [Lisensi lembaga dan jasa bank soal](https://siappsikotes.my.id/lisensi/): lisensi pakai untuk bimbel, sekolah, dan tim rekrutmen, serta jasa audit bank soal dengan uji coba 100 soal gratis.
 - [Mutu dan bukti pemeriksaan soal](https://siappsikotes.my.id/mutu/): cara bank soal diperiksa dan hasilnya.
 - [Syarat dan ketentuan](https://siappsikotes.my.id/syarat/) dan [kebijakan privasi](https://siappsikotes.my.id/privasi/): ketentuan pemakaian dan cara data ditangani.
 
@@ -39,7 +40,8 @@ halaman Contoh.
 - Isi akses penuh: 1.348 soal beserta pembahasan, 9 modul tes, dan Laporan Lengkap.
 - Pembayaran: QRIS (semua bank dan e-wallet). Nominal ditambah tiga angka unik supaya pembayaran
   bisa dicocokkan tanpa menanyakan data pribadi apa pun.
-- Kode akses dikirim setelah bukti pembayaran dicocokkan pengelola, biasanya pada hari yang sama.
+- Kode akses dikeluarkan sendiri di halaman beli setelah pembayaran dan langsung bisa dipakai membuka
+  aplikasi; pengelola hanya mencatat pembayaran dan membantu bila kode ditolak.
 - Latihan bisa dipakai tanpa internet setelah halaman tersimpan, dan tanpa akun.
 
 ## Batasan
