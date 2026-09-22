@@ -123,19 +123,6 @@ def bangun():
     data_js = json.dumps(semua, ensure_ascii=False, separators=(',', ':'))
     gaya = gaya_dari_beli()
 
-    kode_kartu = '\n'.join([
-        '      {',
-        '        const a = document.createElement("article");',
-        '        a.className = "kartu-soal";',
-        '        a.innerHTML = \'<div class="kartu-kepala"><span class="kartu-jenis">\' + q.jenis +',
-        '          \'</span><span class="kartu-nomor">\' + (i + 1) + \'/\' + data.length + \'</span></div>\' +',
-        '          \'<p class="kartu-tanya">\' + q.t + \'</p>\' +',
-        '          \'<div class="kartu-pilih" role="group" aria-label="Pilihan jawaban">\' + q.pilihan + \'</div>\' +',
-        '          \'<div class="kartu-bahas" hidden><p class="bahas-judul">Pembahasan</p><p class="bahas-isi">\' + q.b + \'</p></div>\';',
-        '        daftar.appendChild(a);',
-        '      }',
-    ])
-
     html = '''<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -192,7 +179,92 @@ def bangun():
   .bahas-isi { margin:0; color:var(--isi); font-size:15.5px; white-space:pre-wrap; }
   .kartu-soal.dijawab { border-color:var(--line2); }
   @media (max-width:700px) { .alat-contoh { top:56px; } }
+
+  /* ---- hasil latihan: bilah tetap di bawah, muncul setelah cukup banyak dijawab ---- */
+  #contoh-hasil {
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    display:none; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:12px max(16px, calc((100vw - 1000px) / 2));
+    background:linear-gradient(180deg, rgba(18,26,40,.96), rgba(10,15,24,.99));
+    border-top:1px solid var(--line2);
+    box-shadow:0 -10px 28px rgba(0,0,0,.45);
+  }
+  #contoh-hasil.tampil { display:flex; }
+  body.ada-hasil { padding-bottom:104px; }
+  .hasil-skor { display:flex; align-items:baseline; gap:8px; margin-right:auto; min-width:0; }
+  .hasil-angka { font-size:clamp(22px,4vw,30px); font-weight:800; color:var(--gold);
+    letter-spacing:-.02em; line-height:1; }
+  .hasil-kata { color:var(--muted); font-size:14.5px; line-height:1.45; }
+  .hasil-kata b { color:var(--text); }
+  .hasil-aksi { display:flex; gap:10px; }
+  @media (max-width:560px) {
+    #contoh-hasil { padding:10px 14px; gap:8px; }
+    .hasil-skor { margin-right:0; }
+    .hasil-aksi { width:100%%; }
+    .hasil-aksi .tombol { flex:1; text-align:center; }
+  }
 </style>
+<!-- statis-gaya:mulai -->
+<style>
+  .statis-pilih { margin:0 0 14px; padding-left:22px; }
+  .statis-pilih li { margin:0 0 6px; }
+  .statis-kunci { font-weight:700; color:var(--ok); }
+</style>
+<!-- statis-gaya:selesai -->
+
+<!-- seo:terpasang -->
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Beranda",
+     "item": "%(situs)s/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Contoh soal psikotes gratis",
+     "item": "%(situs)s/contoh/"
+    }
+   ]
+  },
+  {
+   "@type": "LearningResource",
+   "name": "%(jumlah)d contoh soal psikotes gratis dengan pembahasan",
+   "description": "%(jumlah)d contoh soal psikotes dari 8 jenis tes, lengkap dengan pembahasan tiap soal. Bisa dikerjakan langsung tanpa akun dan tanpa bayar.",
+   "url": "%(situs)s/contoh/",
+   "inLanguage": "id",
+   "learningResourceType": "Kuis latihan",
+   "educationalLevel": "Dewasa",
+   "isAccessibleForFree": true,
+   "teaches": [
+    "Verbal",
+    "Penalaran",
+    "Numerik",
+    "Matematika dasar",
+    "Bahasa Inggris",
+    "Wawasan kebangsaan",
+    "Kraepelin",
+    "Kepribadian"
+   ],
+   "publisher": {
+    "@type": "Organization",
+    "name": "SiapPsikotes",
+    "url": "%(situs)s/"
+   },
+   "isPartOf": {
+    "@type": "WebSite",
+    "name": "SiapPsikotes",
+    "url": "%(situs)s/"
+   }
+  }
+ ]
+}</script>
 </head>
 <body>
 <a class="lewati" href="#isi">Langsung ke isi</a>
@@ -236,6 +308,17 @@ def bangun():
 
   <div id="contoh-daftar"></div>
 
+  <div id="contoh-hasil">
+    <span class="hasil-skor">
+      <span class="hasil-angka" id="contoh-hasil-angka">0/0</span>
+      <span class="hasil-kata" id="contoh-hasil-kata" aria-live="polite"></span>
+    </span>
+    <span class="hasil-aksi">
+      <a class="tombol" id="contoh-bagi" href="#" target="_blank" rel="noopener">Bagikan hasil</a>
+      <a class="tombol sekunder" href="../beli/">Buka versi lengkap</a>
+    </span>
+  </div>
+
   <section class="pita" style="margin-top:30px">
     <h2 style="margin:0 0 10px;font-size:clamp(22px,3.2vw,28px)">Sudah terlihat polanya?</h2>
     <p class="dek">Yang barusan kamu kerjakan itu %(persen)d%% dari bank soal. Di aplikasi, sisa
@@ -275,10 +358,6 @@ def bangun():
 
 <script>
 window.CONTOH_SOAL = %(data)s;
-/* PERINGATAN: templat skrip di bawah ini sudah tertinggal dari contoh/index.html yang
-   benar-benar terbit (halaman hidup memakai createElement + bilah hasil/berbagi).
-   Menjalankan ulang generator ini MENIMPA halaman terbit dan menghapus fitur itu.
-   Perbarui templat ini dulu sebelum membuat ulang contoh/index.html. */
 (function () {
   var data = window.CONTOH_SOAL || [];
   var daftar = document.getElementById('contoh-daftar');
@@ -286,10 +365,52 @@ window.CONTOH_SOAL = %(data)s;
   var saring = document.getElementById('contoh-jenis');
   var terjawab = 0;
   var benar = 0;
+  var perKategori = {};
+  var AMBANG_HASIL = 5;
+  var SITUS_CONTOH = '%(situs)s/contoh/';
+
+  // Bilah hasil: memperlihatkan skor sementara dan topik terlemah, lalu mengajak membagikannya.
+  // Tombol "Bagikan hasil" hanya membuka WhatsApp berisi pesan yang dikirim pembaca sendiri;
+  // halaman ini tidak pernah mengirim pesan apa pun atas nama siapa pun.
+  function perbaruiHasil() {
+    var bilah = document.getElementById('contoh-hasil');
+    if (!bilah) return;
+    if (terjawab < AMBANG_HASIL) {
+      bilah.classList.remove('tampil');
+      document.body.classList.remove('ada-hasil');
+      return;
+    }
+    var persen = Math.round((benar / terjawab) * 100);
+    var lemah = null;
+    Object.keys(perKategori).forEach(function (nama) {
+      var p = perKategori[nama];
+      if (!p.t) return;
+      var rasio = p.b / p.t;
+      if (!lemah || rasio < lemah.rasio) lemah = { nama: nama, rasio: rasio };
+    });
+    var angka = document.getElementById('contoh-hasil-angka');
+    var kata = document.getElementById('contoh-hasil-kata');
+    var bagi = document.getElementById('contoh-bagi');
+    if (angka) angka.textContent = benar + '/' + terjawab;
+    if (kata) {
+      kata.textContent = 'benar (' + persen + '%%)' +
+        (lemah && lemah.rasio < 0.7 ? ' \\u00b7 paling perlu dilatih: ' + lemah.nama : '') +
+        (terjawab < data.length ? ' \\u00b7 sisa ' + (data.length - terjawab) + ' soal' : ' \\u00b7 semua soal terjawab');
+    }
+    if (bagi) {
+      var pesan = 'Aku baru mengerjakan contoh soal psikotes gratis di SiapPsikotes: benar ' +
+        benar + ' dari ' + terjawab + ' soal (' + persen + '%%)' +
+        (lemah && lemah.rasio < 0.7 ? ', terlemah ' + lemah.nama : '') +
+        '. Cobain juga, tanpa akun: ' + SITUS_CONTOH;
+      bagi.setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(pesan));
+    }
+    bilah.classList.add('tampil');
+    document.body.classList.add('ada-hasil');
+  }
 
   function perbaruiHitung() {
     hitung.textContent = terjawab + ' dari ' + data.length + ' soal dijawab' +
-      (terjawab ? ' \u00b7 benar ' + benar : '');
+      (terjawab ? ' · benar ' + benar : '');
   }
 
   function buatDaftar() {
@@ -364,14 +485,20 @@ window.CONTOH_SOAL = %(data)s;
     if (bahas) bahas.hidden = false;
     terjawab += 1;
     if (j === s.j) benar += 1;
+    var kat = perKategori[s.n] || (perKategori[s.n] = { t: 0, b: 0 });
+    kat.t += 1;
+    if (j === s.j) kat.b += 1;
     perbaruiHitung();
+    perbaruiHasil();
   }
 
   if (saring) {
     saring.addEventListener('change', function () {
       terjawab = 0; benar = 0;
+      perKategori = {};
       buatDaftar();
       perbaruiHitung();
+      perbaruiHasil();
     });
   }
   var acak = document.getElementById('contoh-acak');
@@ -382,16 +509,20 @@ window.CONTOH_SOAL = %(data)s;
         var t = data[i]; data[i] = data[k]; data[k] = t;
       }
       terjawab = 0; benar = 0;
+      perKategori = {};
       buatDaftar();
       perbaruiHitung();
+      perbaruiHasil();
     });
   }
   var ulang = document.getElementById('contoh-ulang');
   if (ulang) {
     ulang.addEventListener('click', function () {
       terjawab = 0; benar = 0;
+      perKategori = {};
       buatDaftar();
       perbaruiHitung();
+      perbaruiHasil();
     });
   }
 

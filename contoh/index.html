@@ -28,6 +28,9 @@
     --gold:#e6c552; --gold-dark:#c9a227; --blue:#6db3ff; --ok:#4ade80;
   }
   * { box-sizing:border-box; }
+  /* .tombol memakai display:inline-flex, jadi atribut hidden kalah oleh gaya penulis.
+     Tanpa baris ini tombol "Tampilkan kode akses" tetap terlihat setelah diklik. */
+  [hidden] { display:none !important; }
   html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body {
     margin:0; color:var(--text);
@@ -161,6 +164,11 @@
   .percikan { display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; }
   .percikan span { font-size:13.5px; color:var(--muted); border:1px solid var(--line2);
     background:var(--surface); border-radius:999px; padding:6px 13px; }
+  .nota-merchant { border:1px solid rgba(230,197,82,.3); border-left:3px solid var(--gold);
+    border-radius:14px; padding:13px 15px; margin:0 0 14px; color:var(--isi);
+    background:linear-gradient(180deg, rgba(230,197,82,.09), rgba(230,197,82,.02)), var(--surface);
+    font-size:14px; line-height:1.6; }
+  .nota-merchant b { color:var(--gold); }
 
   @media (max-width:700px) {
     .kepala { padding:12px 18px; gap:10px; }
