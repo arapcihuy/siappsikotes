@@ -1934,10 +1934,30 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
   var perKategori = {};
   var AMBANG_HASIL = 5;
   var SITUS_CONTOH = 'https://siappsikotes.my.id/contoh/';
+  var PING_ALAMAT = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/ruang/masuk';
+  var PING_KODE = 'SPCONTOHSELESAI407OD1';
+  var pingTerkirim = false;
+
+  // Satu ping anonim saat soal terakhir dijawab: memberi tahu API bahwa ada orang yang
+  // menuntaskan contoh gratis. Isinya hanya kode tetap milik halaman ini - tanpa jawaban,
+  // tanpa identitas, tanpa penyimpanan di peramban. Ping gagal (offline, API mati, atau
+  // diblokir) tidak pernah menghalangi pembaca: hasilnya tetap tampil seperti biasa.
+  function kirimPingSelesai() {
+    if (pingTerkirim || terjawab < data.length) return;
+    pingTerkirim = true;
+    try {
+      fetch(PING_ALAMAT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kode: PING_KODE }),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) {}
+  }
 
   // Bilah hasil: memperlihatkan skor sementara dan topik terlemah, lalu mengajak membagikannya.
   // Tombol "Bagikan hasil" hanya membuka WhatsApp berisi pesan yang dikirim pembaca sendiri;
-  // halaman ini tidak pernah mengirim pesan apa pun atas nama siapa pun.
+  // satu-satunya kiriman dari halaman ini adalah ping anonim di kirimPingSelesai().
   function perbaruiHasil() {
     var bilah = document.getElementById('contoh-hasil');
     if (!bilah) return;
@@ -2056,6 +2076,7 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
     if (j === s.j) kat.b += 1;
     perbaruiHitung();
     perbaruiHasil();
+    kirimPingSelesai();
   }
 
   if (saring) {

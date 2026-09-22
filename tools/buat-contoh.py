@@ -24,6 +24,12 @@ KELUAR = os.path.join(AKAR, 'contoh', 'index.html')
 SITUS = 'https://siappsikotes.my.id'
 PER_KATEGORI = 5
 
+# Penanda satu-satunya dari halaman ini: kode tetap yang dikirim SEKALI saat pembaca
+# menuntaskan 40 soal. Dihitung di server lewat peristiwa 'ruang' (rincian = 6 huruf
+# terakhir kode). Tanpa data pribadi; halaman tetap berjalan walau ping-nya gagal.
+PING_KODE = 'SPCONTOHSELESAI407OD1'
+PING_ALAMAT = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/ruang/masuk'
+
 # Urutan tampil + nama panjang tiap jenis tes (samakan dengan DATA_SOAL_INDEX).
 JENIS = [
     ('verbal', 'Kemampuan Verbal'),
@@ -428,10 +434,30 @@ window.CONTOH_SOAL = %(data)s;
   var perKategori = {};
   var AMBANG_HASIL = 5;
   var SITUS_CONTOH = '%(situs)s/contoh/';
+  var PING_ALAMAT = '%(ping_alamat)s';
+  var PING_KODE = '%(ping_kode)s';
+  var pingTerkirim = false;
+
+  // Satu ping anonim saat soal terakhir dijawab: memberi tahu API bahwa ada orang yang
+  // menuntaskan contoh gratis. Isinya hanya kode tetap milik halaman ini - tanpa jawaban,
+  // tanpa identitas, tanpa penyimpanan di peramban. Ping gagal (offline, API mati, atau
+  // diblokir) tidak pernah menghalangi pembaca: hasilnya tetap tampil seperti biasa.
+  function kirimPingSelesai() {
+    if (pingTerkirim || terjawab < data.length) return;
+    pingTerkirim = true;
+    try {
+      fetch(PING_ALAMAT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kode: PING_KODE }),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) {}
+  }
 
   // Bilah hasil: memperlihatkan skor sementara dan topik terlemah, lalu mengajak membagikannya.
   // Tombol "Bagikan hasil" hanya membuka WhatsApp berisi pesan yang dikirim pembaca sendiri;
-  // halaman ini tidak pernah mengirim pesan apa pun atas nama siapa pun.
+  // satu-satunya kiriman dari halaman ini adalah ping anonim di kirimPingSelesai().
   function perbaruiHasil() {
     var bilah = document.getElementById('contoh-hasil');
     if (!bilah) return;
@@ -550,6 +576,7 @@ window.CONTOH_SOAL = %(data)s;
     if (j === s.j) kat.b += 1;
     perbaruiHitung();
     perbaruiHasil();
+    kirimPingSelesai();
   }
 
   if (saring) {
@@ -599,6 +626,8 @@ window.CONTOH_SOAL = %(data)s;
         'gaya': gaya,
         'data': data_js,
         'seo_kuis': blok_seo_tambahan(semua),
+        'ping_kode': PING_KODE,
+        'ping_alamat': PING_ALAMAT,
         'opsi': '\n'.join(
             '      <option value="%s">%s</option>' % (kunci, nama)
             for kunci, nama in JENIS),

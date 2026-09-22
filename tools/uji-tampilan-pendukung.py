@@ -23,6 +23,9 @@ tombol utama di /beli/ tidak punya gaya sama sekali. Uji ini menjaga hal itu ter
     halaman yang isinya digambar skrip sama saja dengan halaman kosong di matanya;
   - bilah hasil di /contoh/: tersembunyi sebelum ada jawaban, skornya cocok, tautan bagikan
     hanya WhatsApp berisi pesan pembaca sendiri, dan tersembunyi lagi setelah "Mulai ulang";
+  - ping penyelesaian /contoh/: TIDAK ada kiriman sebelum soal ke-40 dijawab, lalu tepat satu
+    kiriman anonim sesudahnya - isinya hanya kode tetap milik halaman, tanpa jawaban dan
+    tanpa identitas pembaca. Tanpa uji ini, ping bisa hilang tanpa jejak saat halaman diubah;
   - gerbang kode akses (langkah SETELAH membayar): terkunci sebelum kode, kode salah ditolak
     dengan pesan, dan kode buatan tools/buat-kode.py benar-benar membuka aplikasi.
   - satu klik dari /beli/ ke aplikasi: tombol "Buka aplikasi & pakai kode ini" membawa kode
@@ -40,6 +43,7 @@ Pakai:  /usr/bin/python3 tools/uji-tampilan-pendukung.py
 """
 import functools
 import http.server
+import json
 import os
 import re
 import sys
@@ -405,6 +409,53 @@ def main():
                 hitung: document.getElementById('contoh-hitung').textContent })""")
             cek(not ulang2['tampil'] and ulang2['hitung'].startswith('0 dari'),
                 '/contoh/: mulai ulang menyembunyikan bilah hasil', ulang2)
+            # Ping penyelesaian: satu-satunya ukuran "ada yang benar-benar mengerjakan" yang
+            # dimiliki halaman ini (tidak ada akun, tidak ada analytics). Diuji dengan menahan
+            # permintaan ke API di peramban ini - tidak ada paket yang keluar, jadi yang diukur
+            # perilaku halaman, bukan keadaan server. Isi ping harus HANYA kode tetap: bukan
+            # jawaban, bukan skor, bukan identitas.
+            with urllib.request.urlopen('http://127.0.0.1:%d/contoh/' % PORT, timeout=15) as r:
+                sumber_contoh = r.read().decode('utf-8', 'replace')
+            kode_ping = sorted(set(re.findall(r"PING_KODE = '([A-Z0-9]{8,44})'", sumber_contoh)))
+            cek(len(kode_ping) == 1 and kode_ping[0].startswith('SP'),
+                '/contoh/: penanda ping tunggal dan berbentuk kode akses', kode_ping[:2])
+            ping = []
+
+            def _tahan_ping(rute):
+                ping.append(rute.request.post_data or '')
+                rute.fulfill(status=204, headers={'Content-Type': 'application/json'}, body='{}')
+
+            page.route('**/api/ruang/masuk', _tahan_ping)
+            page.goto('http://127.0.0.1:%d/contoh/' % PORT, wait_until='load', timeout=45000)
+            page.wait_for_timeout(300)
+            page.evaluate('''() => {
+                const kartu = document.querySelectorAll('.kartu-soal');
+                for (let i = 0; i < kartu.length - 1; i++) {
+                    kartu[i].querySelectorAll('.pilih')[window.CONTOH_SOAL[i].j].click();
+                }
+            }''')
+            page.wait_for_timeout(300)
+            cek(not ping, '/contoh/: belum ada kiriman sebelum soal terakhir dijawab', len(ping))
+            page.evaluate('''() => {
+                const kartu = document.querySelectorAll('.kartu-soal');
+                const akhir = kartu.length - 1;
+                kartu[akhir].querySelectorAll('.pilih')[window.CONTOH_SOAL[akhir].j].click();
+            }''')
+            page.wait_for_timeout(600)
+            page.evaluate('''() => {
+                const kartu = document.querySelectorAll('.kartu-soal');
+                kartu[0].querySelectorAll('.pilih')[0].click();
+            }''')
+            page.wait_for_timeout(300)
+            isi_ping = []
+            for b in ping:
+                try:
+                    isi_ping.append(json.loads(b))
+                except Exception:
+                    isi_ping.append(b)
+            cek(len(ping) == 1 and isi_ping[0] == {'kode': kode_ping[0]},
+                '/contoh/: tepat satu ping anonim setelah 40 soal terjawab', [len(ping), isi_ping[:1]])
+            page.unroute('**/api/ruang/masuk')
             # Gerbang kode akses adalah satu-satunya langkah pembeli SETELAH membayar, dan
             # belum pernah dijalankan di peramban sungguhan. Kode yang dibuat tools/buat-kode.py
             # harus benar-benar membuka aplikasi; kalau tidak, pembayaran masuk dan pembeli
