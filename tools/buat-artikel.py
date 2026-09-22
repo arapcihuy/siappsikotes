@@ -206,7 +206,7 @@ def kepala(n, gaya):
 <meta property="og:description" content="%(desk)s">
 <meta property="og:type" content="article">
 <meta property="og:url" content="%(kanon)s">
-<meta property="og:image" content="%(situs)s/og-image.png">
+<meta property="og:image" content="%(og_gambar)s">
 <meta property="og:locale" content="id_ID">
 <meta property="og:site_name" content="SiapPsikotes">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,6 +241,7 @@ def kepala(n, gaya):
     <p class="dek">%(dek)s</p>
   </section>
 ''' % dict(judul=judul_tab, desk=deskripsi, kanon=kanon, situs=SITUS,
+           og_gambar='%s/static/og/%s.png' % (SITUS, n['slug']),
            gaya=gaya, gaya_artikel=GAYA_ARTIKEL, skema=skema,
            h1=n['h1'], dek=n['dek'])
 

@@ -205,7 +205,7 @@ def bangun():
 <meta property="og:description" content="%(jumlah)d soal dari 8 jenis tes: verbal, penalaran, numerik, matematika, bahasa Inggris, wawasan kebangsaan, kraepelin, dan kepribadian. Jawab langsung, pembahasan terbuka.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="%(situs)s/contoh/">
-<meta property="og:image" content="%(situs)s/og-image.png">
+<meta property="og:image" content="%(og_gambar)s">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
@@ -622,6 +622,7 @@ window.CONTOH_SOAL = %(data)s;
 ''' % {
         'jumlah': total,
         'situs': SITUS,
+        'og_gambar': '%s/static/og/contoh.png' % SITUS,
         'persen': int(round(total * 100.0 / 1348)),
         'gaya': gaya,
         'data': data_js,

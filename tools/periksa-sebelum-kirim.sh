@@ -133,6 +133,18 @@ else
 fi
 
 echo
+echo "=== 9/9 KARTU PRATINJAU HALAMAN (OG IMAGE) ==="
+if ! $PY tools/buat-gambar-og.py --periksa; then
+  echo ">>> GAGAL: kartu pratinjau halaman tidak lengkap"
+  GAGAL=1
+fi
+if ! $PY tools/pasang-seo.py --periksa; then
+  echo ">>> GAGAL: tag gambar pratinjau tidak cocok dengan halamannya"
+  echo "    perbaiki dengan: $PY tools/pasang-seo.py"
+  GAGAL=1
+fi
+
+echo
 if [ "$GAGAL" -ne 0 ]; then
   echo "=============================================="
   echo "PENGIRIMAN DIBATALKAN - perbaiki dulu di atas."

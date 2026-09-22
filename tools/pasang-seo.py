@@ -16,6 +16,7 @@ Yang dikerjakan:
 Catatan aturan jujur (~/pk-bisnis/ATURAN-JUJUR-MARKETING.md): seluruh teks data terstruktur
 TIDAK memuat kata "resmi", "dijamin", "pasti", "satu-satunya", "terbaik", "nomor 1".
 """
+import html as htmllib
 import json
 import os
 import re
@@ -249,6 +250,66 @@ def periksa_halaman_baru():
     else:
         print('  OK    | seluruh halaman publik sudah masuk peta situs')
 
+def nama_kartu(jalur):
+    """Nama berkas kartu pratinjau untuk satu jalur halaman."""
+    return jalur.strip('/').replace('/', '-') or 'beranda'
+
+def blok_gambar(jalur, judul):
+    """Tag gambar pratinjau milik satu halaman: og + twitter, satu berkas per halaman."""
+    src = '%s/static/og/%s.png' % (DOMAIN, nama_kartu(jalur))
+    judul = htmllib.escape(htmllib.unescape(judul), quote=True)
+    return '\n'.join([
+        '<meta property="og:image" content="%s">' % src,
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="%s">' % judul,
+        '<meta name="twitter:image" content="%s">' % src,
+        '<meta name="twitter:image:alt" content="%s">' % judul,
+    ])
+
+POLA_GAMBAR = re.compile(
+    r'^([ \t]*)<meta property="og:image"[^\n]*\n'
+    r'(?:[ \t]*<meta property="og:image:(?:width|height|alt)"[^\n]*\n)*'
+    r'(?:[ \t]*<meta name="twitter:image(?::alt)?"[^\n]*\n)*', re.M)
+
+def _ganti_gambar(blok):
+    """Ganti tag gambar lama beserta indentasinya; satu-satunya tempat blok ditulis."""
+    return lambda m: '\n'.join(m.group(1) + b for b in blok.split('\n')) + '\n'
+
+def pasang_gambar_og(kering):
+    """Satu kartu pratinjau per halaman. Sebelum ini 20 halaman berbagi kartu beranda."""
+    gagal = 0
+    for berkas, jalur, _, _ in HALAMAN:
+        if not os.path.exists(berkas):
+            continue
+        judul = ''
+        with open(berkas, encoding='utf-8') as f:
+            isi = f.read()
+        cari = re.search(r'<meta property="og:title" content="([^"]*)"', isi)
+        if cari:
+            judul = cari.group(1)
+        blok = blok_gambar(jalur, judul)
+        if not POLA_GAMBAR.search(isi):
+            print('  GAGAL | %s tidak punya tag og:image' % berkas)
+            gagal += 1
+            continue
+        baru = POLA_GAMBAR.sub(_ganti_gambar(blok), isi, count=1)
+        kartu = os.path.join('static', 'og', nama_kartu(jalur) + '.png')
+        if not os.path.exists(kartu):
+            print('  GAGAL | kartu belum dibuat: %s (jalankan tools/buat-gambar-og.py)' % kartu)
+            gagal += 1
+        if kering:
+            if baru != isi:
+                print('  GAGAL | %s masih menunjuk kartu lama' % berkas)
+                gagal += 1
+            continue
+        if baru != isi:
+            with open(berkas, 'w', encoding='utf-8') as f:
+                f.write(baru)
+            print('  OK    | %s: kartu pratinjau %s' % (berkas, nama_kartu(jalur)))
+    if gagal == 0:
+        print('  OK    | setiap halaman menunjuk kartu pratinjaunya sendiri')
+    return gagal
 
 def main():
     kering = '--periksa' in sys.argv
@@ -257,11 +318,15 @@ def main():
     tulis_peta_situs(kering)
     print('2. robots.txt')
     tulis_robots(kering)
-    print('3. data terstruktur (ld+json)')
+    print('3. gambar pratinjau (og:image) per halaman')
+    gagal = pasang_gambar_og(kering)
+    print('4. data terstruktur (ld+json)')
     pasang_ldjson(kering)
-    print('4. kelengkapan')
+    print('5. kelengkapan')
     periksa_halaman_baru()
     print('selesai.')
+    if gagal:
+        sys.exit(1)
 
 
 if __name__ == '__main__':

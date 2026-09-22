@@ -34,3 +34,8 @@ jobs:
             node --check "$f" || exit 1
           done
           echo "sintaks JS OK"
+
+      - name: Cek kartu pratinjau (og:image) tiap halaman
+        run: |
+          python3 tools/buat-gambar-og.py --periksa
+          python3 tools/pasang-seo.py --periksa
