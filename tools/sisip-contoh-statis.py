@@ -18,7 +18,10 @@ tools/buat-contoh.py) atau bila jumlah soalnya berubah. Gerbang
 tools/uji-tampilan-pendukung.py memeriksa hasilnya tanpa JavaScript, jadi salinan
 yang hilang ketahuan sebelum terkirim.
 
-Pakai:  /usr/bin/python3 tools/sisip-contoh-statis.py
+Pakai:  /usr/bin/python3 tools/sisip-contoh-statis.py [berkas]
+        (tanpa argumen: contoh/index.html; alat ini juga dipanggil otomatis
+         sebagai langkah terakhir tools/buat-contoh.py supaya salinan statis
+         tidak bisa hilang saat halaman dibuat ulang)
 """
 import html
 import json
@@ -84,8 +87,8 @@ def ganti_antara(isi, gawal, baru):
     return pola.sub(lambda _: baru, isi, count=1)
 
 
-def main():
-    isi = open(HALAMAN, encoding='utf-8').read()
+def main(jalur=HALAMAN):
+    isi = open(jalur, encoding='utf-8').read()
     soal = baca_soal(isi)
     if len(soal) < 40:
         print('GAGAL: hanya %d soal di window.CONTOH_SOAL, seharusnya >= 40' % len(soal))
@@ -107,17 +110,17 @@ def main():
     soal_blok = ganti_antara(isi, GAWAL_BLOK, baru)
     if soal_blok is None:
         if WADAH not in isi:
-            print('GAGAL: %s tidak ditemukan di %s' % (WADAH, HALAMAN))
+            print('GAGAL: %s tidak ditemukan di %s' % (WADAH, jalur))
             return 1
         soal_blok = isi.replace(WADAH, '<div id="contoh-daftar">\n' + baru + '\n</div>', 1)
     isi = soal_blok
 
-    open(HALAMAN, 'w', encoding='utf-8').write(isi)
+    open(jalur, 'w', encoding='utf-8').write(isi)
     print('soal statis   : %d' % len(soal))
-    print('berkas        : %s' % HALAMAN)
+    print('berkas        : %s' % jalur)
     print('ukuran        : %.1f KB -> %.1f KB' % (lama / 1024.0, len(isi) / 1024.0))
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else HALAMAN))

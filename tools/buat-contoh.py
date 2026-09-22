@@ -5,11 +5,16 @@ Ambil 5 soal teks dari tiap jenis tes (soal bergambar dilewati karena halaman in
 tanpa gambar), salin gaya halaman pendukung dari /beli/ supaya satu keluarga
 tampilan, lalu tulis contoh/index.html.
 
+Langkah terakhir memanggil tools/sisip-contoh-statis.py supaya salinan 40 soal yang
+terbaca tanpa JavaScript selalu ikut; tanpa itu halaman ini hanya kerangka kosong
+di mata perayap dan pembaca layar. Satu perintah menghasilkan halaman yang lengkap.
+
 Pakai:  /usr/bin/python3 tools/buat-contoh.py
 """
 import json
 import os
 import re
+import subprocess
 import sys
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,6 +95,24 @@ def kartu_pilihan(pilihan):
                      % (i, abjad[i] if i < len(abjad) else str(i + 1), teks))
     return '\n'.join(baris)
 
+
+def sisipkan_salinan_statis():
+    """Jalankan penyisip salinan statis sebagai langkah terakhir.
+
+    Halaman ini menggambar 40 soalnya dengan JavaScript; tanpa salinan statis
+    mesin pencari dan pengunjung tanpa skrip hanya melihat kerangka kosong.
+    Dulu langkah itu alat terpisah yang harus diingat manusia, sehingga
+    pembuatan ulang halaman diam-diam menghapus salinannya. Sekarang satu
+    perintah menghasilkan halaman yang lengkap.
+    """
+    alat = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sisip-contoh-statis.py')
+    hasil = subprocess.run([sys.executable, alat], capture_output=True, text=True)
+    sys.stdout.write(hasil.stdout)
+    if hasil.returncode != 0:
+        print('MASALAH: penyisipan salinan statis gagal (kode %d)' % hasil.returncode)
+        if hasil.stderr:
+            sys.stderr.write(hasil.stderr)
+    return hasil.returncode
 
 def bangun():
     semua = []
@@ -405,6 +428,9 @@ window.CONTOH_SOAL = %(data)s;
     if masalah:
         for m in masalah:
             print('MASALAH:', m)
+        return 1
+
+    if sisipkan_salinan_statis() != 0:
         return 1
 
     print('soal gratis   : %d (dari %d jenis tes)' % (total, len(JENIS)))
