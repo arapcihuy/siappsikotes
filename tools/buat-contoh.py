@@ -114,6 +114,66 @@ def sisipkan_salinan_statis():
             sys.stderr.write(hasil.stderr)
     return hasil.returncode
 
+def blok_seo_tambahan(semua):
+    """JSON-LD Quiz (Practice problems) + FAQPage untuk contoh soal gratis.
+
+    Soalnya sama persis dengan yang tampil di halaman, dan tiap jawaban benar
+    diambil dari kunci soal itu sendiri. FAQ cuma mengulang kalimat yang sudah
+    terbaca pengunjung di halaman ini, karena data terstruktur harus cocok
+    dengan isi yang terlihat.
+    """
+    bagian = []
+    for s in semua:
+        bagian.append({
+            '@type': 'Question',
+            'eduQuestionType': 'Multiple choice',
+            'name': s['t'],
+            'acceptedAnswer': {'@type': 'Answer', 'text': s['p'][s['j']]},
+            'suggestedAnswer': [
+                {'@type': 'Answer', 'text': teks}
+                for i, teks in enumerate(s['p']) if i != s['j']
+            ],
+        })
+    kuis = {
+        '@type': 'Quiz',
+        'name': '%d contoh soal psikotes gratis (pilihan ganda, ada pembahasan)' % len(semua),
+        'description': ('%d contoh soal psikotes dari 8 jenis tes dengan pembahasan, '
+                        'bisa dikerjakan langsung tanpa akun dan tanpa bayar.' % len(semua)),
+        'url': SITUS + '/contoh/',
+        'inLanguage': 'id',
+        'educationalLevel': 'Dewasa',
+        'isAccessibleForFree': True,
+        'about': {'@type': 'Thing', 'name': 'Psikotes'},
+        'hasPart': bagian,
+    }
+    tanya = [
+        ('Apakah contoh soal di halaman ini gratis?',
+         'Ya. Halaman ini gratis, tanpa akun, dan tanpa bayar.'),
+        ('Berapa banyak contoh soal psikotes di halaman ini?',
+         '%d contoh soal dari 8 jenis tes, lengkap dengan pembahasan.' % len(semua)),
+        ('Apakah setiap soal punya pembahasan?',
+         'Punya. Pilih jawabanmu, lalu pembahasan langkah demi langkah terbuka.'),
+        ('Apakah SiapPsikotes produk resmi instansi?',
+         'SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi '
+         'dengan lembaga pemerintah.'),
+    ]
+    faq = {
+        '@type': 'FAQPage',
+        'mainEntity': [
+            {
+                '@type': 'Question',
+                'name': t,
+                'acceptedAnswer': {'@type': 'Answer', 'text': j},
+            }
+            for t, j in tanya
+        ],
+    }
+    blok = []
+    for obj in (kuis, faq):
+        teks = json.dumps(obj, ensure_ascii=False, indent=1)
+        blok.append('\n'.join('  ' + baris for baris in teks.splitlines()))
+    return ',\n' + ',\n'.join(blok)
+
 def bangun():
     semua = []
     for kunci, nama in JENIS:
@@ -262,7 +322,7 @@ def bangun():
     "name": "SiapPsikotes",
     "url": "%(situs)s/"
    }
-  }
+  }%(seo_kuis)s
  ]
 }</script>
 </head>
@@ -538,6 +598,7 @@ window.CONTOH_SOAL = %(data)s;
         'persen': int(round(total * 100.0 / 1348)),
         'gaya': gaya,
         'data': data_js,
+        'seo_kuis': blok_seo_tambahan(semua),
         'opsi': '\n'.join(
             '      <option value="%s">%s</option>' % (kunci, nama)
             for kunci, nama in JENIS),
