@@ -402,6 +402,61 @@ def main():
                 [bilah['axe'], bilah['isi'], bilah['layar']])
             cek(all(h >= 38 for h in bilah['ukuran']),
                 '/contoh/: tombol bilah hasil nyaman disentuh (>=38px)', bilah['ukuran'])
+            # Kartu hasil: 1080x1350 yang dibawa pembaca ke grup WhatsApp-nya sendiri, karena
+            # pratinjau tautan tidak selalu dirender di grup. Yang diperiksa adalah objek yang
+            # benar-benar digambar (window.CONTOH_KARTU), bukan teks di sumber halaman, supaya
+            # kalimat di kartu tidak bisa melenceng dari yang tergambar.
+            kartu = page.evaluate("""() => {
+                const k = window.CONTOH_KARTU;
+                if (!k) return { ada: false };
+                const px = k.kanvas.getContext('2d')
+                    .getImageData(0, 0, k.kanvas.width, k.kanvas.height).data;
+                let beda = 0;
+                for (let i = 0; i < px.length; i += 4000) {
+                    if (px[i] !== 10 || px[i + 1] !== 15 || px[i + 2] !== 24) beda += 1;
+                }
+                return { ada: true, lebar: k.kanvas.width, tinggi: k.kanvas.height,
+                         teks: k.teks, berwarna: beda };
+            }""")
+            cek(kartu.get('ada') and kartu['lebar'] == 1080 and kartu['tinggi'] == 1350,
+                '/contoh/: kartu hasil digambar 1080x1350', [kartu.get('lebar'), kartu.get('tinggi')])
+            cek(kartu.get('berwarna', 0) > 20,
+                '/contoh/: kartu hasil terisi (ada piksel di luar latar)', kartu.get('berwarna'))
+            gabung_kartu = ' | '.join(kartu.get('teks') or [])
+            cek(all(x in gabung_kartu for x in ('5/5', 'benar', 'siappsikotes.my.id/contoh/',
+                                                'Rp 39.000', 'tanpa afiliasi')),
+                '/contoh/: teks kartu memuat skor, alamat, harga, dan penyangkalan afiliasi',
+                gabung_kartu[:220])
+            # Peramban yang mendukung berbagi berkas: klik harus mengirim PNG lewat
+            # navigator.share dan menahan navigasi, sementara tautan WhatsApp tetap utuh
+            # sebagai jalan cadangan di peramban yang tidak mendukung.
+            bagikan = page.evaluate("""async () => {
+                window.__bagikan = null;
+                navigator.canShare = () => true;
+                navigator.share = (d) => {
+                    window.__bagikan = { nama: d.files[0].name, tipe: d.files[0].type,
+                        ukuran: d.files[0].size, teks: d.text || '' };
+                    return Promise.resolve();
+                };
+                await new Promise((r) => setTimeout(r, 400));
+                const a = document.getElementById('contoh-bagi');
+                const ev = new MouseEvent('click', { bubbles: true, cancelable: true });
+                a.dispatchEvent(ev);
+                await new Promise((r) => setTimeout(r, 100));
+                return { cegah: ev.defaultPrevented, kirim: window.__bagikan,
+                         tautan: a.getAttribute('href') || '' };
+            }""")
+            cek(bagikan['cegah'] and bagikan['kirim'] and bagikan['kirim']['tipe'] == 'image/jpeg'
+                and bagikan['kirim']['ukuran'] > 5000 and bagikan['kirim']['nama'].endswith('.jpg'),
+                '/contoh/: tombol bagikan mengirim berkas gambar kartu', bagikan['kirim'])
+            cek(bagikan['kirim']['ukuran'] < 400000,
+                '/contoh/: kartu bagikan cukup ringan untuk sambungan seluler (<400 KB)',
+                bagikan['kirim']['ukuran'])
+            cek('https://siappsikotes.my.id/contoh/' in bagikan['kirim']['teks'],
+                '/contoh/: keterangan bagikan tetap memuat alamat halaman',
+                bagikan['kirim']['teks'][:120])
+            cek(bagikan['tautan'].startswith('https://wa.me/?text='),
+                '/contoh/: tautan WhatsApp tetap ada sebagai jalan cadangan', bagikan['tautan'][:60])
             page.click('#contoh-ulang')
             page.wait_for_timeout(300)
             ulang2 = page.evaluate("""() => ({

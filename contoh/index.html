@@ -1939,9 +1939,12 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
   var perKategori = {};
   var AMBANG_HASIL = 5;
   var SITUS_CONTOH = 'https://siappsikotes.my.id/contoh/';
+  var BANK_SOAL = 1348;
   var PING_ALAMAT = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/ruang/masuk';
   var PING_KODE = 'SPCONTOHSELESAI407OD1';
   var pingTerkirim = false;
+  var pesanBagikan = '';
+  var berkasKartu = null;
 
   // Satu ping anonim saat soal terakhir dijawab: memberi tahu API bahwa ada orang yang
   // menuntaskan contoh gratis. Isinya hanya kode tetap milik halaman ini - tanpa jawaban,
@@ -1960,9 +1963,119 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
     } catch (e) {}
   }
 
+  // Kartu hasil: satu gambar yang dibawa pembaca ke grup WhatsApp-nya sendiri. Isinya hanya
+  // keadaan halaman ini (skor, topik terlemah, alamat, harga) dan digambar di peramban pembaca -
+  // halaman tidak pernah mengirim apa pun atas nama siapa pun. Gambar ini yang membuat kiriman
+  // tetap terbaca ketika pratinjau tautan tidak dirender, karena alamatnya tercetak di gambar.
+  // Objeknya ditaruh di window.CONTOH_KARTU sebagai pegangan uji gerbang (sama seperti
+  // window.CONTOH_SOAL), supaya teks yang benar-benar digambar bisa diperiksa.
+  var KARTU_LEBAR = 1080, KARTU_TINGGI = 1350;
+  var KARTU_HURUF = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif';
+
+  function hurufBerspasi(g, isi, x, y, jarak) {
+    var maju = 0;
+    for (var i = 0; i < isi.length; i++) {
+      g.fillText(isi.charAt(i), x + maju, y);
+      maju += g.measureText(isi.charAt(i)).width + jarak;
+    }
+  }
+
+  function tulis(g, isi, x, y, ukuran, warna, tebal, maks) {
+    tebal = tebal || 700;
+    maks = maks || 888;
+    do {
+      g.font = tebal + ' ' + ukuran + 'px ' + KARTU_HURUF;
+      ukuran -= 2;
+    } while (g.measureText(isi).width > maks && ukuran > 20);
+    g.fillStyle = warna;
+    g.fillText(isi, x, y);
+    return isi;
+  }
+
+  function gambarKartu(lemah, persen) {
+    var c = document.createElement('canvas');
+    c.width = KARTU_LEBAR; c.height = KARTU_TINGGI;
+    var g = c.getContext('2d');
+    var teks = [];
+
+    g.fillStyle = '#0a0f18';
+    g.fillRect(0, 0, KARTU_LEBAR, KARTU_TINGGI);
+    var kuning = g.createRadialGradient(150, 60, 0, 150, 60, 900);
+    kuning.addColorStop(0, 'rgba(230,197,82,.17)');
+    kuning.addColorStop(1, 'rgba(230,197,82,0)');
+    g.fillStyle = kuning; g.fillRect(0, 0, KARTU_LEBAR, KARTU_TINGGI);
+    var biru = g.createRadialGradient(960, 40, 0, 960, 40, 820);
+    biru.addColorStop(0, 'rgba(109,179,255,.15)');
+    biru.addColorStop(1, 'rgba(109,179,255,0)');
+    g.fillStyle = biru; g.fillRect(0, 0, KARTU_LEBAR, KARTU_TINGGI);
+
+    g.strokeStyle = 'rgba(255,255,255,.14)';
+    g.lineWidth = 2;
+    g.strokeRect(48, 48, KARTU_LEBAR - 96, KARTU_TINGGI - 96);
+    g.strokeStyle = '#e6c552'; g.lineWidth = 6;
+    [[48, 48, 1, 1], [KARTU_LEBAR - 48, 48, -1, 1],
+     [48, KARTU_TINGGI - 48, 1, -1], [KARTU_LEBAR - 48, KARTU_TINGGI - 48, -1, -1]]
+      .forEach(function (p) {
+        g.beginPath();
+        g.moveTo(p[0] + 52 * p[2], p[1]);
+        g.lineTo(p[0], p[1]);
+        g.lineTo(p[0], p[1] + 52 * p[3]);
+        g.stroke();
+      });
+
+    g.font = '700 30px ' + KARTU_HURUF;
+    g.fillStyle = '#6db3ff';
+    var kepala = 'SIAPPSIKOTES · CONTOH SOAL GRATIS';
+    hurufBerspasi(g, kepala, 96, 168, 6);
+    teks.push(kepala);
+    g.fillStyle = '#e6c552'; g.fillRect(96, 196, 168, 4);
+
+    g.font = '600 34px ' + KARTU_HURUF; g.fillStyle = '#b3c0d1';
+    hurufBerspasi(g, 'HASIL LATIHANMU', 96, 292, 7);
+    teks.push('HASIL LATIHANMU');
+
+    teks.push(tulis(g, benar + '/' + terjawab, 90, 572, 300, '#e6c552', 800));
+    teks.push(tulis(g, 'benar · ' + persen + '%', 96, 676, 46, '#eaf1f8', 600));
+    if (lemah && lemah.rasio < 0.7) {
+      teks.push(tulis(g, 'Paling perlu dilatih: ' + lemah.nama, 96, 756, 38, '#c9d5e3', 500));
+    }
+
+    g.fillStyle = 'rgba(230,197,82,.38)'; g.fillRect(96, 848, 888, 2);
+    teks.push(tulis(g, 'Sisa ' + (BANK_SOAL - data.length).toLocaleString('id-ID') +
+      ' soal + pembahasan di aplikasi', 96, 936, 50, '#eaf1f8', 700));
+    teks.push(tulis(g, 'Rp 39.000 sekali bayar, tanpa langganan', 96, 1008, 50, '#e6c552', 700));
+
+    teks.push(tulis(g, 'siappsikotes.my.id/contoh/', 96, 1188, 46, '#6db3ff', 700));
+    teks.push(tulis(g, 'Tanpa akun · tanpa afiliasi dengan instansi mana pun',
+      96, 1252, 28, '#b3c0d1', 400));
+
+    window.CONTOH_KARTU = { kanvas: c, teks: teks };
+    return { kanvas: c, teks: teks };
+  }
+
+  // Kartu disiapkan ulang setiap bilah hasil berubah, bukan saat tombol diklik: peramban
+  // hanya mengizinkan navigator.share dipanggil di dalam gestur pengguna, sedangkan
+  // kanvas.toBlob() asinkron. Dengan berkas yang sudah ada, klik langsung bisa membagikan.
+  // JPEG mutu 0,9 dipilih, bukan PNG: PNG kartu ini keluar ~960 KB (gradien gelap tidak
+  // terkompresi rapi) dan terlalu berat untuk kiriman WhatsApp dari sambungan seluler.
+  function siapkanKartu(lemah, persen) {
+    berkasKartu = null;
+    try {
+      var kartu = gambarKartu(lemah, persen);
+      if (!kartu.kanvas.toBlob) return;
+      kartu.kanvas.toBlob(function (b) {
+        if (!b) return;
+        try {
+          berkasKartu = new File([b], 'hasil-siappsikotes.jpg', { type: 'image/jpeg' });
+        } catch (e) {}
+      }, 'image/jpeg', 0.9);
+    } catch (e) {}
+  }
+
   // Bilah hasil: memperlihatkan skor sementara dan topik terlemah, lalu mengajak membagikannya.
-  // Tombol "Bagikan hasil" hanya membuka WhatsApp berisi pesan yang dikirim pembaca sendiri;
-  // satu-satunya kiriman dari halaman ini adalah ping anonim di kirimPingSelesai().
+  // Tombol "Bagikan hasil" membawa gambar kartu lewat navigator.share bila peramban mendukung;
+  // kalau tidak, ia tetap tautan WhatsApp berisi pesan yang dikirim pembaca sendiri.
+  // Satu-satunya kiriman dari halaman ini adalah ping anonim di kirimPingSelesai().
   function perbaruiHasil() {
     var bilah = document.getElementById('contoh-hasil');
     if (!bilah) return;
@@ -1993,8 +2106,10 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
         benar + ' dari ' + terjawab + ' soal (' + persen + '%)' +
         (lemah && lemah.rasio < 0.7 ? ', terlemah ' + lemah.nama : '') +
         '. Cobain juga, tanpa akun: ' + SITUS_CONTOH;
+      pesanBagikan = pesan;
       bagi.setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(pesan));
     }
+    siapkanKartu(lemah, persen);
     bilah.classList.add('tampil');
     document.body.classList.add('ada-hasil');
   }
@@ -2115,6 +2230,22 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
       buatDaftar();
       perbaruiHitung();
       perbaruiHasil();
+    });
+  }
+
+  var bagiTombol = document.getElementById('contoh-bagi');
+  if (bagiTombol) {
+    bagiTombol.addEventListener('click', function (ev) {
+      if (!berkasKartu || !navigator.canShare) return;
+      if (!navigator.canShare({ files: [berkasKartu] })) return;
+      ev.preventDefault();
+      try {
+        navigator.share({
+          files: [berkasKartu],
+          text: pesanBagikan,
+          title: 'Hasil latihan contoh SiapPsikotes'
+        }).catch(function () {});
+      } catch (e) {}
     });
   }
 
