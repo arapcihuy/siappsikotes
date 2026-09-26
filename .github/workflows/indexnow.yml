@@ -1,0 +1,42 @@
+name: Kirim Alamat ke IndexNow
+
+# Setiap kali situs berubah, alamat halaman dikirim ke IndexNow (Bing, Yandex,
+# Seznam, Naver) supaya mesin pencari langsung tahu ada halaman baru atau
+# berubah, tanpa menunggu jadwal merayap sendiri.
+#
+# Kunci IndexNow sudah tersedia sebagai berkas di akar situs, jadi tidak ada
+# rahasia yang perlu disimpan di GitHub: kuncinya dibaca dari berkas itu dan
+# dicocokkan dengan namanya.
+#
+# Google tidak memakai IndexNow. Jalur Google tetap lewat peta situs yang sudah
+# tertulis di robots.txt.
+
+on:
+  push:
+    branches: [master, main]
+  schedule:
+    # Senin 02:00 UTC / 09:00 WIB, setelah pemeriksaan terjadwal selesai.
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kirim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Kirim peta situs ke IndexNow
+        run: python3 tools/kirim-indexnow.py
+
+      - name: Ringkas hasil
+        run: |
+          if [ -f .gen/indexnow-hasil.txt ]; then
+            cat .gen/indexnow-hasil.txt
+          fi
