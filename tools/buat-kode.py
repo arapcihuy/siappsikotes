@@ -11,13 +11,16 @@ Isi kode bebas (dipakai pemilik untuk menandai pesanan, mis. tanggal + nomor uru
 asalkan huruf/angka saja. Sidik dihitung dengan algoritma yang SAMA dengan aplikasi
 (static/js/fitur11.js, fungsi sidikKode).
 
-CATATAN JUJUR: karena aplikasi berjalan di perangkat pembeli, kunci rahasia bisa dibaca
-orang yang tekun. Untuk harga Rp 39.000 risiko ini diterima; bila penjualan sudah besar,
-pemeriksaan sebaiknya dipindah ke server.
+CATATAN JUJUR (diperbarui 26 September 2026): kunci rahasia memang bisa dibaca orang yang
+tekun, dan itu sudah terjadi konsekuensinya. Pemeriksaan kini dipindah ke server: kode hanya
+berlaku bila TERBIT di tabel `kode_terbit` (lihat server/src/index.js). Alat ini sekarang hanya
+membuat ISI kode (huruf/angka + sidik 4 huruf yang benar) dan tidak lagi cukup untuk membuka
+aplikasi di produksi. Jalur penerbitan yang sah: tools/terbitkan-kode.py, yang mencatat dulu
+rujukan + nominal setoran.
 
 Pakai:
-  python3 tools/buat-kode.py                     # 10 kode dengan penanda hari ini
-  python3 tools/buat-kode.py --jumlah 50         # 50 kode
+  python3 tools/buat-kode.py                     # 10 isi kode berpenanda hari ini
+  python3 tools/buat-kode.py --jumlah 50         # 50 isi kode
   python3 tools/buat-kode.py --isi 2609RP01      # penanda khusus
   python3 tools/buat-kode.py --periksa SP2609RP01K7Q2   # uji satu kode
 """
@@ -86,7 +89,8 @@ def main():
         f.write('# Kode akses Laporan Lengkap SiapPsikotes\n')
         f.write('# Dibuat: %s\n' % datetime.datetime.now().strftime('%d %B %Y %H:%M'))
         f.write('# Cara pakai: pembeli membuka aplikasi -> Laporan -> tempel kode -> Buka laporan\n')
-        f.write('# Catatan: satu kode tidak dibatasi perangkat (tanpa server), jadi jangan diumumkan.\n\n')
+        f.write('# Catatan: berkas ini hanya berisi ISI kode. Untuk membuat kode yang BERLAKU,\n')
+        f.write('#          catat setorannya dulu: python3 tools/terbitkan-kode.py --rujukan ... --nominal ...\n\n')
         for k in kode:
             f.write(k + '\n')
     print('dibuat %d kode, semua lolos uji pemeriksaan' % len(kode))

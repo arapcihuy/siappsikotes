@@ -64,6 +64,25 @@ CREATE TABLE IF NOT EXISTS pembelian (
   PRIMARY KEY (pengguna, kode)
 );
 
+-- Kode akses yang SAH terbit. Kode yang tidak ada di sini DITOLAK di /api/ruang/masuk.
+-- Alasannya: sidik 4 huruf pada kode dihitung dari kunci yang ikut terkirim ke peramban
+-- (tools/buat-kode.py, static/js/fitur11.js), jadi siapa pun bisa membuat kode ber-sidik
+-- benar tanpa membayar. Baris di tabel ini hanya lahir dari jalur pemilik SETELAH setoran
+-- dicatat (lihat tools/terbitkan-kode.py dan /api/pemilik/kode-terbit), dan hanya baris
+-- inilah yang membuat sebuah kode berlaku.
+-- Yang disimpan adalah HASH kode (sama seperti sesi), bukan kodenya: bocornya database
+-- tidak memberi kode yang bisa dipakai orang lain.
+CREATE TABLE IF NOT EXISTS kode_terbit (
+  kode_hash TEXT PRIMARY KEY,          -- SHA-256 dari penanda 'kodet:' + kode lengkap
+  kode_akhir TEXT,                     -- 6 karakter terakhir, untuk dikenali pemilik
+  terbit    TEXT NOT NULL,             -- waktu kode diterbitkan
+  dibayar   TEXT,                      -- waktu setoran dicatat (NULL = belum lunas)
+  rujukan   TEXT,                      -- rujukan setoran (nomor transfer / SP-594)
+  nominal   INTEGER NOT NULL DEFAULT 0,-- nominal setoran menurut catatan server
+  asal      TEXT                       -- jalur penerbitan, mis. 'alat-pemilik'
+);
+CREATE INDEX IF NOT EXISTS idx_kode_terbit_dibayar ON kode_terbit(dibayar);
+
 -- Catatan ringkas untuk dasbor pemilik
 CREATE TABLE IF NOT EXISTS peristiwa (
   id       INTEGER PRIMARY KEY AUTOINCREMENT,

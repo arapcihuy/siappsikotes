@@ -141,6 +141,29 @@ function sidikKode(data) {
   return hasil;
 }
 
+// Penanda hash untuk tabel kode_terbit. Kode mentah tidak pernah disimpan.
+async function hashKodeTerbit(kode) {
+  return await sha256hex('kodet:' + String(kode).toUpperCase());
+}
+
+// Mencari catatan terbit sebuah kode. null = kode tidak pernah diterbitkan pemilik.
+async function kodeTerbit(env, kode) {
+  const hash = await hashKodeTerbit(kode);
+  return await env.DB.prepare(
+    'SELECT kode_hash, kode_akhir, terbit, dibayar, rujukan, nominal FROM kode_terbit WHERE kode_hash = ?'
+  ).bind(hash).first();
+}
+
+// Isi kode baru: penanda tanggal + 12 huruf acak dari abjad tanpa karakter mudah tertukar
+// (tidak ada 0/O/1/I/L). Sidik 4 huruf dihitung di server dengan sidikKode.
+function isiKodeBaru() {
+  const teks = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+  const b = crypto.getRandomValues(new Uint8Array(12));
+  let acak = '';
+  for (let i = 0; i < b.length; i++) acak += teks.charAt(b[i] % teks.length);
+  return new Date().toISOString().slice(2, 10).replace(/-/g, '') + acak;
+}
+
 // Membuka sesi baru: token dikirim ke klien, yang disimpan di database hanya hash-nya.
 async function bukaSesi(env, penggunaId, kini) {
   const token = teksKeBase64url(crypto.getRandomValues(new Uint8Array(32))) + '.' + teksKeBase64url(crypto.getRandomValues(new Uint8Array(16)));
@@ -224,6 +247,13 @@ export default {
         }
         const isi = kode.slice(2, kode.length - 4);
         if (sidikKode(isi) !== kode.slice(-4)) return jawab({ pesan: 'kode tidak cocok' }, 400, asal);
+        // Gerbang sebenarnya: kode harus TERBIT di catatan server. Sidik di atas hanya
+        // menyaring salah tulis; kuncinya ikut terkirim ke peramban, jadi sidik yang benar
+        // bukan bukti pembayaran. Tanpa baris di kode_terbit, kode buatan sendiri tidak
+        // membuka apa pun walau sidiknya cocok.
+        const terbit = await kodeTerbit(env, kode);
+        if (!terbit) return jawab({ pesan: 'kode tidak terdaftar' }, 400, asal);
+        if (!terbit.dibayar) return jawab({ pesan: 'kode belum tercatat lunas' }, 400, asal);
         const id = 'kode:' + (await sha256hex(kode)).slice(0, 40);
         const kini = new Date().toISOString();
         await env.DB.prepare(
@@ -339,16 +369,21 @@ export default {
       }
 
       // ---- simpan pembelian (kode akses) agar tidak hilang saat ganti perangkat ----
+      // Nominal TIDAK diambil dari kiriman peramban (dulu bisa: pembeli mana pun bisa
+      // menulis nominal berapa saja). Yang dicatat adalah nominal pada catatan setoran
+      // server; kode yang tidak terbit juga ditolak di sini.
       if (jalan === '/api/pembelian' && request.method === 'POST') {
         if (!saya) return perluMasuk();
         const b = await request.json().catch(() => ({}));
         const kode = String(b.kode || '').toUpperCase().slice(0, 40);
         if (!kode) return jawab({ pesan: 'kode wajib' }, 400, asal);
+        const terbit = await kodeTerbit(env, kode);
+        if (!terbit || !terbit.dibayar) return jawab({ pesan: 'kode tidak terdaftar' }, 400, asal);
         const kini = new Date().toISOString();
         await env.DB.prepare(
           'INSERT INTO pembelian (pengguna, kode, rujukan, nominal, tanggal) VALUES (?, ?, ?, ?, ?) ' +
           'ON CONFLICT(pengguna, kode) DO UPDATE SET rujukan = excluded.rujukan, nominal = excluded.nominal'
-        ).bind(saya.id, kode, String(b.rujukan || '').slice(0, 20), angka(b.nominal, 100000000), kini).run();
+        ).bind(saya.id, kode, String(terbit.rujukan || '').slice(0, 20), Number(terbit.nominal) || 0, kini).run();
         await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
           .bind(saya.id, 'pembelian', kode, kini).run();
         return jawab({ ok: true }, 200, asal);
@@ -405,6 +440,54 @@ export default {
           'FROM pengguna p ORDER BY p.terakhir_aktif DESC LIMIT 200'
         ).all();
         return jawab({ total_pengguna: jumlah.n, aktif_hari_ini: aktifHariIni.n, pengguna: daftar.results || [] }, 200, asal);
+      }
+
+      // ---- pemilik: terbitkan kode akses dari catatan setoran (hanya akun pemilik) ----
+      // Satu-satunya jalur yang membuat kode berlaku. Nominal & rujukan = catatan setoran
+      // yang pemilik pegang (nomor transfer/QRIS), bukan angka dari peramban pembeli.
+      // Kodenya dibuat di server; isi yang dipilih sendiri oleh pemilik tidak diterima
+      // supaya kode tidak bisa disamakan dengan pesanan yang belum dibayar.
+      if (jalan === '/api/pemilik/kode-terbit' && request.method === 'POST') {
+        if (!saya) return perluMasuk();
+        if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
+        const b = await request.json().catch(() => ({}));
+        const nominal = Math.round(Number(b.nominal));
+        const rujukan = String(b.rujukan || '').trim().slice(0, 40);
+        const jumlah = Math.min(Math.max(parseInt(b.jumlah, 10) || 1, 1), 50);
+        if (!isFinite(nominal) || nominal <= 0) return jawab({ pesan: 'nominal setoran wajib' }, 400, asal);
+        if (!rujukan) return jawab({ pesan: 'rujukan setoran wajib' }, 400, asal);
+        const kini = new Date().toISOString();
+        const kode = [];
+        for (let i = 0; i < jumlah; i++) {
+          let k = '', isi = '', coba = 0;
+          do {
+            isi = isiKodeBaru();
+            k = 'SP' + isi + sidikKode(isi);
+            coba++;
+          } while (coba < 8 && await kodeTerbit(env, k));
+          // terbit + dibayar diisi bersama: setoran sudah dicatat sebelum kode dibuat.
+          await env.DB.prepare(
+            'INSERT INTO kode_terbit (kode_hash, kode_akhir, terbit, dibayar, rujukan, nominal, asal) VALUES (?, ?, ?, ?, ?, ?, ?)'
+          ).bind(await hashKodeTerbit(k), k.slice(-6), kini, kini, rujukan, nominal, 'pemilik').run();
+          kode.push(k);
+        }
+        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+          .bind(saya.id, 'kode-terbit', rujukan + '|' + nominal + '|' + kode.length, kini).run();
+        return jawab({ ok: true, kode, rujukan, nominal }, 200, asal);
+      }
+
+      // ---- pemilik: daftar kode terbit (tanpa kode mentahnya) ----
+      if (jalan === '/api/pemilik/kode-terbit' && request.method === 'GET') {
+        if (!saya) return perluMasuk();
+        if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
+        const daftar = await env.DB.prepare(
+          'SELECT kode_akhir, terbit, dibayar, rujukan, nominal, asal FROM kode_terbit ORDER BY terbit DESC LIMIT 200'
+        ).all();
+        const jumlah = await env.DB.prepare('SELECT COUNT(*) AS n FROM kode_terbit').first();
+        const lunas = await env.DB.prepare('SELECT COUNT(*) AS n FROM kode_terbit WHERE dibayar IS NOT NULL').first();
+        const nilai = await env.DB.prepare('SELECT COALESCE(SUM(nominal),0) AS n FROM kode_terbit WHERE dibayar IS NOT NULL').first();
+        return jawab({ jumlah_terbit: jumlah.n, jumlah_lunas: lunas.n, nominal_lunas: nilai.n,
+                       kode: daftar.results || [] }, 200, asal);
       }
 
       if (['GET', 'POST'].indexOf(request.method) === -1) {

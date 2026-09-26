@@ -212,3 +212,41 @@ digambar skrip. Yang ditambahkan penjaganya, bukan perbaikannya. Beranda juga di
 menautkan keduabelas artikel tanpa skrip, sebab tautan itulah satu-satunya jalan perayap
 menemukan artikel-artikel tersebut. Gerbang: **206 lulus, 0 gagal** (sebelumnya 185).
 Mode `--rusak` menangkap 40 kegagalan, jadi pemeriksaan ini benar-benar mengukur.
+
+## GERBANG AKSES DIPINDAH KE SERVER (26 September 2026)
+
+Sebelumnya kode akses diperiksa di perangkat pembeli: aplikasi menghitung sidik 4 huruf dari
+kunci `siap|psikotes|2026|kode` yang **ikut terkirim ke peramban** (`static/js/fitur11.js`,
+`tools/buat-kode.py`). Artinya siapa pun bisa membuat kode dengan sidik yang benar tanpa
+membayar, lalu membuka seluruh aplikasi. Uang bisa masuk lewat `/beli/`, tetapi tidak ada
+satu pun pemeriksaan di server yang bisa menahan orang yang tidak membayar.
+
+Yang berubah:
+
+| Bagian | Sebelum | Sesudah |
+|---|---|---|
+| `/api/ruang/masuk` | terima kode apa pun yang sidiknya cocok | hanya kode yang **terbit** di tabel `kode_terbit` dan tercatat lunas (lainnya 400) |
+| `pembelian.nominal` | ditulis dari badan kiriman peramban | ditulis dari catatan setoran server (`kode_terbit`) |
+| Penerbitan kode | `tools/buat-kode.py` (offline, siapa pun bisa) | `tools/terbitkan-kode.py` dan `POST /api/pemilik/kode-terbit` — keduanya wajib menyertakan rujukan + nominal setoran |
+| Gerbang di peramban | kode lolos sidik = terbuka | putusan server dipakai lebih dulu; server tak terjangkau = pemeriksaan lokal (pembeli yang sudah membayar tidak dikunci gara-gara sinyal) |
+
+Tabel `kode_terbit` menyimpan **hash** kode, bukan kodenya — sama seperti tabel `sesi`.
+
+Bukti uji (Worker dijalankan lokal dengan D1 lokal, bukan pernyataan):
+
+```
+POST /api/ruang/masuk {"kode":"SPZZMUNGERTEST01PHCT"}   -> 400 {"pesan":"kode tidak terdaftar"}
+POST /api/ruang/masuk {"kode":"SP260926E8962B1931AFVXW0"} -> 200 + token   (kode setoran SP-900)
+POST /api/pembelian {"nominal":1000,"rujukan":"NGARANG-123"} -> /api/saya: nominal 39000, rujukan SP-900
+POST /api/pemilik/kode-terbit {"rujukan":"SP-777","nominal":41444,"jumlah":2} -> 200, 2 kode
+POST /api/pemilik/kode-terbit (bukan pemilik) -> 403 ; (nominal 0) -> 400
+```
+
+Catatan penting untuk pemilik: kode yang **sudah terlanjur dijual** sebelum perubahan ini tidak
+ada di tabel, jadi ditolak. Daftarkan lewat
+`python3 tools/terbitkan-kode.py --kode SP... --rujukan <nomor pesanan> --nominal 39000`.
+
+Yang belum dibereskan (temuan, bukan bagian dari perubahan ini): kode pengembang
+`SPDEVPEMILIKB01J4S1` masih tertulis di `static/js/akses.js` dan membuka aplikasi di perangkat
+mana pun yang menempelkannya — sebaiknya dicabut atau dijadikan kata sandi yang tidak ikut ke repo.
+

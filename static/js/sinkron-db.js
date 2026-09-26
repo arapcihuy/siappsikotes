@@ -53,6 +53,30 @@ return dbTarik().then(function () { return dbDorongSekarang(); });
 })
 .catch(function () { tampilkanStatusSinkron('Database tidak terjangkau sekarang; latihan tetap jalan.'); return false; });
 };
+// Meminta putusan SERVER atas satu kode akses. Server yang berhak memutuskan: sidik 4 huruf
+// pada kode dihitung dari kunci yang ikut terkirim ke peramban, jadi kode yang sidiknya benar
+// tetap bisa dibuat orang lain tanpa membayar. Server hanya menerima kode yang sudah terbit
+// dari catatan setoran. Jaringan mati BUKAN alasan menolak pembeli yang sudah membayar:
+// dalam keadaan itu jawabannya { dilewati: true } dan keputusan kembali ke pemeriksaan lokal.
+window.periksaKodeDiServer = function (kode) {
+if (!AKUN_DB.aktif || !kode || !(window.asalSinkronDiizinkan && window.asalSinkronDiizinkan())) {
+return Promise.resolve({ dilewati: true });
+}
+return fetch(AKUN_DB.api + '/api/ruang/masuk', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ kode: String(kode).toUpperCase() })
+}).then(function (r) {
+return r.json().catch(function () { return {}; }).then(function (j) {
+if (r.ok && j && j.token) {
+__dbToken = j.token;
+try { localStorage.setItem('tni_sesi_db', j.token); } catch (e) {}
+return { ok: true };
+}
+return { ok: false, pesan: (j && j.pesan) || 'kode tidak diterima server' };
+});
+}).catch(function () { return { dilewati: true, jaringan: true }; });
+};
 // Mengakhiri sesi sinkron (dipakai tombol "Keluar dari Google"): cabut sesinya di server
 // bila asal diizinkan, lalu bersihkan sesi di perangkat. Tetap beres walau jaringan mati.
 window.dbKeluar = function () {

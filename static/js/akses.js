@@ -56,6 +56,25 @@ if (boleh && typeof dbMasukKode === 'function') tunggu = Promise.resolve(dbMasuk
 Promise.race([tunggu, new Promise(function (r) { setTimeout(r, 2500); })])
 .then(function () { location.reload(); }, function () { location.reload(); });
 }
+// Menyimpan kode yang sudah lolos sebagai penanda akses di perangkat.
+function simpanKunciLokal(kode) {
+var kb = (typeof kodeBayar === 'function') ? kodeBayar() : { rujukan: '', nominal: 0, dasar: 0 };
+try {
+localStorage.setItem('tni_kode_akses', kode);
+localStorage.setItem('tni_akses', 'TERBUKA');
+localStorage.setItem('tni_laporan_bayar', JSON.stringify({ kode: kode, tanggal: new Date().toISOString().slice(0, 10) }));
+localStorage.setItem('tni_pembelian', JSON.stringify({
+kode: kode, rujukan: kb.rujukan, nominal: kb.nominal, dasar: kb.dasar,
+tanggal: new Date().toISOString(), produk: 'Akses penuh SiapPsikotes + Laporan Lengkap'
+}));
+} catch (e) {}
+}
+function pesanKodeDitolak(st, kalimat) {
+var wa = (typeof BAYAR !== 'undefined' && BAYAR.whatsapp) ? String(BAYAR.whatsapp).replace(/[^0-9]/g, '') : '';
+if (st) st.innerHTML = kalimat + (wa
+? ' Kalau kamu sudah membayar, <a href="https://wa.me/' + wa + '?text=' + encodeURIComponent('Halo, kode akses saya ditolak. Mohon dibantu.') + '" target="_blank" rel="noopener">kirim bukti pembayaran lewat WhatsApp</a> supaya kodenya diaktifkan.'
+: ' Kalau kamu sudah membayar, kirim bukti pembayaran ke pemilik supaya kodenya diaktifkan.');
+}
 window.terapkanKodeAkses = function () {
 var el = document.getElementById('kodeAksesGerbang');
 var st = document.getElementById('statusGerbang');
@@ -69,26 +88,30 @@ return;
 }
 var sah = false;
 try { sah = (typeof periksaKode === 'function') && periksaKode(kode).sah; } catch (e) { sah = false; }
-if (sah) {
-var kb = (typeof kodeBayar === 'function') ? kodeBayar() : { rujukan: '', nominal: 0, dasar: 0 };
-try {
-localStorage.setItem('tni_kode_akses', kode);
-localStorage.setItem('tni_akses', 'TERBUKA');
-localStorage.setItem('tni_laporan_bayar', JSON.stringify({ kode: kode, tanggal: new Date().toISOString().slice(0, 10) }));
-localStorage.setItem('tni_pembelian', JSON.stringify({
-kode: kode, rujukan: kb.rujukan, nominal: kb.nominal, dasar: kb.dasar,
-tanggal: new Date().toISOString(), produk: 'Akses penuh SiapPsikotes + Laporan Lengkap'
-}));
-} catch (e) {}
+if (!sah) {
+pesanKodeDitolak(st, 'Kode tidak dikenali. Periksa penulisannya. Kode yang sah selalu diawali SP.');
+return;
+}
+// Sidik kode bisa dihitung siapa pun (kuncinya ikut terkirim ke peramban), jadi putusan
+// akhir dipegang server: kode hanya berlaku bila sudah terbit dari catatan setoran.
+// Server tak terjangkau = pemeriksaan lokal dipakai, supaya pembeli yang sudah membayar
+// tidak terkunci gara-gara sinyal.
+if (st) st.textContent = 'Memeriksa kode ke server...';
+var periksa = (typeof periksaKodeDiServer === 'function') ? periksaKodeDiServer(kode) : Promise.resolve({ dilewati: true });
+Promise.resolve(periksa).then(function (v) {
+if (v && v.ok === false) {
+if (st) st.textContent = 'Kode belum terdaftar sebagai pembelian.';
+pesanKodeDitolak(st, 'Kode belum terdaftar pada pembelian.');
+return;
+}
+simpanKunciLokal(kode);
 if (st) st.textContent = 'Kode sah. Membuka seluruh aplikasi...';
 // (pengiriman ke ruang akun kini otomatis lewat dbMasukKode -> dbMasuk saat sedang masuk Google)
 bukaRuangKode(kode);
-} else if (st) {
-var wa = (typeof BAYAR !== 'undefined' && BAYAR.whatsapp) ? String(BAYAR.whatsapp).replace(/[^0-9]/g, '') : '';
-st.innerHTML = 'Kode tidak dikenali. Periksa penulisannya' + (wa
-? ', atau <a href="https://wa.me/' + wa + '?text=' + encodeURIComponent('Halo, kode akses saya tidak diterima. Mohon dibantu.') + '" target="_blank" rel="noopener">kirim bukti pembayaran lewat WhatsApp</a>'
-: ', atau kirim bukti pembayaran ke pemilik') + '. Kode yang sah selalu diawali SP.';
-}
+}, function () {
+simpanKunciLokal(kode);
+bukaRuangKode(kode);
+});
 };
 // Pembeli yang menekan "Buka aplikasi & pakai kode ini" di /beli/ tiba dengan kodenya
 // di alamat (?kode=SP...). Tanpa ini langkah terakhir funnel masih menuntut salin-tempel,
