@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why is my OG image not showing on Facebook? Fix it with Cardcheck</title>
+    <meta name="description" content="Learn why your OG image isn't appearing on social media and how to fix it instantly with Cardcheck, a free Open Graph & Twitter card checker.">
+    <link rel="stylesheet" href="static/css/style.css?v=975b946">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="grid-lines" aria-hidden="true"></div>
+
+    <header class="bar">
+        <img class="bar__mark" src="icon.svg" alt="" width="34" height="34">
+        <span class="bar__word">SIAPSIKOTES</span>
+        <span class="bar__rule"></span>
+        <span class="bar__note">Latihan Psikotes Kerja & Tes IQ Berpembahasan</span>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="hero__title">Why is my OG image not showing on Facebook?</h1>
+            <p class="hero__lede">Learn how to diagnose and fix Open Graph image issues instantly with <a href="https://cardcheck.rasyidahmad180.workers.dev" class="hero__link">Cardcheck</a>.</p>
+        </section>
+
+        <section class="content">
+            <h2>The Problem</h>
+            <p>When you share a link on Facebook, Twitter, LinkedIn, or WhatsApp, the preview image (OG image) sometimes doesn't appear. This happens because:</p>
+            <ul>
+                <li>The <code>og:image</code> tag is missing or incorrect</li>
+                <li>The image URL is blocked or inaccessible</li>
+                <li>The image doesn't meet the platform's size or format requirements</li>
+                <li>The platform's cache hasn't been updated</li>
+            </ul>
+
+            <h2>The Solution: Cardcheck</h2>
+            <p><a href="https://cardcheck.rasyidahmad180.workers.dev" class="hero__link">Cardcheck</a> is a free tool that:</p>
+            <ul>
+                <li>Fetches any URL and reads its <code><head></code></li>
+                <li>Extracts all Open Graph and Twitter card tags</li>
+                <li>Checks the image for accessibility and dimensions</li>
+                <li>Shows you exactly which tag is breaking the preview</li>
+                <li>Provides a corrected snippet you can paste into your <code><head></code></li>
+            </ul>
+
+            <h2>How to Use Cardcheck</h2>
+            <ol>
+                <li>Go to <a href="https://cardcheck.rasyidahmad180.workers.dev">https://cardcheck.rasyidahmad180.workers.dev</a></li>
+                <li>Paste the URL you're having trouble with</li>
+                <li>Click "Scan"</li>
+                <li>Read the report and fix the identified issues</li>
+                <li>(Optional) Use the "Paste head HTML" mode to test changes without fetching</li>
+            </ol>
+
+            <h2>Why Cardcheck is Different</h2>
+            <ul>
+                <li><strong>Zero storage:</strong> Nothing is saved—not even logs.</li>
+                <li><strong>No account needed:</strong> Just visit and use.</li>
+                <li><strong>Instant feedback:</strong> See results in under a second.</li>
+                <li><strong>Free forever:</strong> No premium tier, no hidden costs.</li>
+            </ul>
+
+            <h2>Try It Now</h2>
+            <p>Fix your link preview in <a href="https://cardcheck.rasyidahmad180.workers.dev">seconds</a>:</p>
+            <a href="https://cardcheck.rasyidahmad180.workers.dev" class="hero__link" style="display: inline-block; margin-top: 1rem;">Open Cardcheck</a>
+
+            <p>Preview what your link will look like:</p>
+            <div class="report__empty" id="report-empty">
+                <div class="report__empty-card">
+                    <span class="report__empty-tag">awaiting input</span>
+                    <p>The report lands here: a verdict, a rendered card mock, every broken tag, and a corrected snippet you can paste into your head.</p>
+                </div>
+            </div>
+
+            <p>Page views: <span id="counter">0</span></p>
+        </section>
+    </main>
+
+    <footer class="foot">
+        <span>SiapPsikotes</span>
+        <span class="foot__dot">·</span>
+        <span>Latihan Psikotes Kerja & Tes IQ Berpembahasan</span>
+        <span class="foot__dot">·</span>
+        <span id="foot-stamp">—</span>
+    </footer>
+
+    <script type="module" src="static/js/app.js?v=975b946"></script>
+    <script>
+        // Simple page view counter using countapi.xyz
+        fetch('https://api.countapi.xyz/hit/siappsikotes.ogimage.troubleshooting.visit')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('counter').innerText = data.value;
+            })
+            .catch(err => {
+                console.warn('Counter failed:', err);
+                document.getElementById('counter').innerText = '?';
+            });
+    </script>
+</body>
+</html>
