@@ -274,9 +274,20 @@
 
 <main id="isi" class="wrap">
 
+  <!-- Banner flash sale akhir pekan: disembunyikan secara default, ditampilkan oleh
+       skrip di bawah hanya saat promo aktif (Sabtu-Minggu atau ?promo=flash19k).
+       Harga di seluruh halaman ikut turun ke Rp 19.000 via skrip, jadi nominal
+       QRIS dan teks tidak pernah bertentangan. Tanpa JS, harga tetap Rp 39.000. -->
+  <section id="flashSale" hidden style="margin:18px 0;padding:18px 22px;border:2px solid #e6c552;border-radius:16px;background:linear-gradient(150deg,rgba(230,197,82,.18),rgba(10,15,24,.6));text-align:center;">
+    <p style="margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#e6c552;">⚡ Flash Sale Sabtu–Minggu</p>
+    <p style="margin:0 0 10px;font-size:clamp(20px,3.5vw,28px);font-weight:800;color:#eaf1f8;">Akses penuh 1.348 soal & pembahasan — <span style="color:#e6c552;">Rp 19.000</span> <s style="color:#b3c0d1;font-weight:400;font-size:.8em;">Rp 39.000</s></p>
+    <p style="margin:0 0 14px;font-size:14.5px;color:#b3c0d1;">Sekali bayar, tanpa langganan. Hanya Sabtu–Minggu ini.</p>
+    <a class="tombol" href="#bayar">Ambil Akses Rp 19.000</a>
+  </section>
+
   <section class="pita">
     <span class="lencana">Langkah terakhir</span>
-    <h1>Beli akses penuh &mdash; Rp 39.000 sekali bayar</h1>
+    <h1 class="h-harga">Beli akses penuh &mdash; <span id="displayHarga">Rp 39.000</span> sekali bayar</h1>
     <p class="dek">Satu pembayaran membuka 1.348 soal beserta pembahasannya, semua modul tes, dan Laporan Lengkap.
       Bukan langganan, tanpa perpanjangan otomatis.</p>
     <div class="aksi">
@@ -288,8 +299,8 @@
   <div class="angka-strip">
     <div><b>1.348</b><span>soal + pembahasan</span></div>
     <div><b>9</b><span>modul psikotes &amp; IQ</span></div>
-    <div><b>Rp 39.000</b><span>sekali bayar</span></div>
-    <div><b>QRIS</b><span>semua bank &amp; e-wallet</span></div>
+    <div><b id="displayHargaStrip">Rp 39.000</b><span>sekali bayar</span></div>
+    <div><b>QRIS</b><span>semua bank & e-wallet</span></div>
   </div>
 
   <h2 id="bayar">Cara membayar</h2>
@@ -312,7 +323,7 @@
           <p class="nominal" id="beliNominal">Rp 39.000</p>
           <button type="button" class="tombol sekunder kecil" id="beliSalin">Salin nominal</button>
         </div>
-        <p class="catatan" style="margin-top:2px">Harga Rp 39.000 ditambah 3 angka unik. Angka unik itulah yang
+        <p class="catatan" style="margin-top:2px">Harga <span id="displayHargaCatatan">Rp 39.000</span> ditambah 3 angka unik. Angka unik itulah yang
           membuat pembayaranmu mudah dicocokkan.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
         <p class="label">Kode rujukanmu</p>
@@ -400,6 +411,31 @@
     var elBS = document.getElementById('beliBuktiSurel');
     var elS = document.getElementById('beliSalin');
     if (!elN) return;
+
+    // ---------- Flash sale akhir pekan (Sabtu-Minggu WIB) ----------
+    // Aktif jika hari ini Sabtu/Minggu, atau URL membawa ?promo=flash19k.
+    // Saat aktif: banner muncul dan harga dasar turun 39.000 -> 19.000.
+    // Nominal QRIS = harga dasar + 3 angka unik rujukan, jadi pencocokan
+    // pembayaran tetap bekerja. Angka unik tetap dipertahankan.
+    var hargaDasar = 39000;
+    var hariIni = new Date(Date.now() + 7 * 60 * 60 * 1000).getUTCDay(); // WIB = UTC+7
+    var paramPromo = /[?&]promo=flash19k\b/.test(location.search || '');
+    var flashAktif = paramPromo || hariIni === 6 || hariIni === 0; // 6=Sabtu, 0=Minggu
+    var elFlash = document.getElementById('flashSale');
+    if (flashAktif) {
+      hargaDasar = 19000;
+      if (elFlash) elFlash.hidden = false;
+      try {
+        var ttl = (hariIni === 6) ? 2 : 1; // hari tersisa menuju Senin WIB
+        document.title = document.title + ' — Flash Sale Rp 19.000';
+      } catch (e) {}
+      var teksHarga = 'Rp 19.000';
+      ['displayHarga', 'displayHargaStrip', 'displayHargaCatatan'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = teksHarga;
+      });
+    }
+
     // Angka rujukan harus bertahan walau penyimpanan peramban diblokir. Kalau angka
     // dibuat ulang tiap muat halaman, pembeli bisa membayar nominal yang tidak lagi
     // cocok dengan kode rujukan yang ia kirim. Karena itu angkanya juga ditulis ke
@@ -419,7 +455,7 @@
       }
     } catch (e) {}
     var angka = parseInt(angkaRujukan, 10);
-    var nominal = 39000 + angka;
+    var nominal = hargaDasar + angka;
     var teks = 'Rp ' + String(nominal).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     var rujukan = 'SP-' + angkaRujukan;
     elN.textContent = teks;
