@@ -280,7 +280,7 @@
     <p class="dek">Satu pembayaran membuka 1.348 soal beserta pembahasannya, semua modul tes, dan Laporan Lengkap.
       Bukan langganan, tanpa perpanjangan otomatis.</p>
     <div class="aksi">
-      <a class="tombol" href="#bayar">Cara membayar</a>
+      <a class="tombol" href="#bayar">Bayar Sekarang via QRIS</a>
       <a class="tombol sekunder" href="../mutu/">Bukti mutu soalnya</a>
     </div>
   </section>
@@ -299,15 +299,14 @@
         <b>Momo dimsum &mdash; Sleman</b>, bukan &ldquo;SiapPsikotes&rdquo;. Itu memang kode pembayaran
         pengelola SiapPsikotes, jadi pembayaranmu tetap sah dan tetap masuk ke pengelola yang sama.
         Yang dicocokkan tetap <b>nominal</b> dan <b>kode rujukanmu</b> di sebelah.</p>
-      <div class="qris-kotak">
+      <div class="qris-kotak" style="border: 2px solid var(--gold); background: #fff;">
         <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
              width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
       </div>
-      <p class="catatan">Pindai dengan aplikasi bank atau e-wallet apa pun: GoPay, OVO, DANA, ShopeePay,
-        atau mobile banking.</p>
+      <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QRIS Langsung Tampil — Scan otomatis dengan GoPay, OVO, DANA, ShopeePay, atau m-Banking!</p>
     </div>
     <div>
-      <div class="kartu-bayar">
+      <div class="kartu-bayar" style="border-width: 2px;">
         <p class="label">Bayar tepat sejumlah</p>
         <div class="kode-baris">
           <p class="nominal" id="beliNominal">Rp 39.000</p>
@@ -323,7 +322,7 @@
         <p class="label">Sudah bayar? Ambil kode aksesmu</p>
         <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
           jadi kamu tidak perlu menunggu balasan siapa pun.</p>
-        <button type="button" class="tombol kecil" id="beliAmbilKode">Tampilkan kode akses</button>
+        <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
         <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
         <div class="kode-baris" id="beliAksiKode" hidden>
           <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi &amp; pakai kode ini</a>
@@ -336,13 +335,11 @@
           di pesan bukti agar pembayaran tetap bisa dicocokkan.</p>
       </noscript>
 
-      <ol class="langkah">
+      <ol class="langkah" style="background:var(--surface); padding:16px 20px 16px 36px; border-radius:12px; border:1px solid var(--line);">
         <li>Pindai QR di atas, lalu bayar <strong id="beliNominal2">Rp 39.000</strong> tepat sejumlah itu.</li>
-        <li>Tekan <strong>Tampilkan kode akses</strong> di kartu atas. Kode aksesmu muncul saat itu juga.</li>
-        <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.
-          Di perangkat lain, buka aplikasi lalu tempel kodenya di layar &ldquo;Buka dengan kode akses&rdquo;.</li>
-        <li>Ada kendala? Kirim bukti pembayaran beserta kode rujukanmu lewat WhatsApp, atau email ke
-          <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a>.</li>
+        <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu atas. Kode aksesmu muncul saat itu juga.</li>
+        <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
+        <li>Ada kendala? Kirim bukti pembayaran beserta kode rujukanmu lewat WhatsApp atau email.</li>
       </ol>
 
       <div class="aksi">
