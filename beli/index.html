@@ -22,6 +22,7 @@
 <meta name="twitter:image:alt" content="Beli Akses Penuh — SiapPsikotes">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
+<link rel="preload" as="image" href="../static/img/qris-bayar.png?v=1">
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
 <style>
@@ -291,7 +292,7 @@
     <p class="dek">Satu pembayaran membuka 1.348 soal beserta pembahasannya, semua modul tes, dan Laporan Lengkap.
       Bukan langganan, tanpa perpanjangan otomatis.</p>
     <div class="aksi">
-      <a class="tombol" href="#bayar">Bayar Sekarang via QRIS</a>
+      <a class="tombol" href="#bayar" id="ctaBayar">Bayar Sekarang via QRIS</a>
       <a class="tombol sekunder" href="../mutu/">Bukti mutu soalnya</a>
     </div>
   </section>
@@ -553,6 +554,18 @@
     if (elBS) {
       elBS.setAttribute('href', 'mailto:rasyidahmad180@gmail.com?subject=' +
         encodeURIComponent('Bukti pembayaran ' + rujukan) + '&body=' + encodeURIComponent(pesanBukti));
+    }
+    
+    // Highlight QRIS box when CTA clicked
+    var elCTA = document.getElementById('ctaBayar');
+    if (elCTA) {
+      elCTA.addEventListener('click', function() {
+        var qrisBox = document.querySelector('.qris-kotak');
+        if (qrisBox) {
+          qrisBox.style.boxShadow = '0 0 20px var(--gold)';
+          setTimeout(function() { qrisBox.style.boxShadow = '0 18px 38px rgba(0,0,0,.42)'; }, 2000);
+        }
+      });
     }
   })();
   </script>

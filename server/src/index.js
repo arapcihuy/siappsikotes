@@ -499,6 +499,13 @@ export default {
       }
 
       return jawab({ pesan: 'alamat tidak dikenal' }, 404, asal);
+
+      if (jalan === '/premium' && request.method === 'GET') {
+        if (!saya) return jawab({ premium: false }, 401, asal);
+        const has = await env.DB.prepare('SELECT 1 FROM pembelian WHERE pengguna = ? LIMIT 1').bind(saya.id).first();
+        return jawab({ premium: !!has }, 200, asal);
+      }
+
     } catch (e) {
       return jawab({ pesan: 'permintaan tidak bisa diproses', rincian: String(e.message || e).slice(0, 160) }, 400, asal);
     }
