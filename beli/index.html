@@ -463,6 +463,24 @@
     if (elN2) elN2.textContent = teks;
     if (elR) elR.textContent = rujukan;
 
+    // ======== Pelacakan funnel pembelian ========
+    // Satu fungsi `lacak`: kesalahan jaringan tidak boleh mengganggu alur pembelian.
+    // Event penting (konfirmasi WA/email) pakai sendBeacon agar tetap terkirim saat halaman
+    // ditinggalkan menuju WA/mailto. Tidak ada cookie, sidik jari, atau data pribadi.
+    var URL_PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
+    function lacak(evt) {
+      try {
+        var isi = JSON.stringify({ jenis: evt, rujukan: rujukan });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(URL_PANTAU, new Blob([isi], { type: 'application/json' }));
+        } else {
+          fetch(URL_PANTAU, { method: 'POST', headers: { 'content-type': 'application/json' },
+            body: isi, keepalive: true, credentials: 'omit' }).catch(function () {});
+        }
+      } catch (e) { /* jangan biarkan pelacakan menganggu alur pembelian */ }
+    }
+    lacak('kunjungan_beli');
+
     // Kode akses diambil sendiri oleh pembeli, tanpa menunggu pengelola. Sidik kode di sini
     // HARUS sama dengan sidikKode di static/js/fitur11.js dan tools/buat-kode.py; kalau
     // tidak, kode yang tampil akan ditolak aplikasi dan pembayaran masuk tanpa akses.
@@ -493,6 +511,7 @@
     if (elAmbil && elKode) {
       elAmbil.addEventListener('click', function () {
         kodeAkses = kodeUntukNomor(rujukan);
+        lacak('tampilkan_kode');
         elKode.textContent = kodeAkses;
         elKode.hidden = false;
         elAmbil.hidden = true;
@@ -513,7 +532,7 @@
         };
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(kodeAkses).then(function () { selesai('Tersalin'); },
+            navigator.clipboard.writeText(kodeAkses).then(function () { lacak('salin_kode'); selesai('Tersalin'); },
               function () { selesai('Tekan lama kodenya'); });
           } else {
             selesai('Tekan lama kodenya');
@@ -530,7 +549,7 @@
         };
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(teks).then(function () { selesai('Tersalin'); },
+            navigator.clipboard.writeText(teks).then(function () { lacak('salin_nominal'); selesai('Tersalin'); },
               function () { selesai('Tekan lama angkanya'); });
           } else {
             selesai('Tekan lama angkanya');
@@ -550,16 +569,22 @@
     });
     if (elB) {
       elB.setAttribute('href', 'https://wa.me/6281387906930?text=' + encodeURIComponent(pesanBukti));
+      elB.addEventListener('click', function () { lacak('klik_bukti_wa'); });
     }
     if (elBS) {
       elBS.setAttribute('href', 'mailto:rasyidahmad180@gmail.com?subject=' +
         encodeURIComponent('Bukti pembayaran ' + rujukan) + '&body=' + encodeURIComponent(pesanBukti));
+      elBS.addEventListener('click', function () { lacak('klik_bukti_email'); });
+    }
+    if (elBuka) {
+      elBuka.addEventListener('click', function () { lacak('buka_aplikasi'); });
     }
     
     // Highlight QRIS box when CTA clicked
     var elCTA = document.getElementById('ctaBayar');
     if (elCTA) {
       elCTA.addEventListener('click', function() {
+        lacak('klik_cta_bayar');
         var qrisBox = document.querySelector('.qris-kotak');
         if (qrisBox) {
           qrisBox.style.boxShadow = '0 0 20px var(--gold)';

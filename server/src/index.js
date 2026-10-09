@@ -477,6 +477,41 @@ export default {
       }
 
       // ---- pemilik: daftar kode terbit (tanpa kode mentahnya) ----
+      // ---- pelacakan funnel pembelian (tanpa login). Event dikirim dari beli/index.html ----
+      // Hanya nama event yang dikenal yang dicatat, dan tanpa data pribadi: IP tidak disimpan
+      // (hanya dipakai untuk pembatas laju), rincian = rujukan SP-3angka yang pembeli memang
+      // sudah membuat sendiri di perangkatnya.
+      if (jalan === '/api/pantau' && request.method === 'POST') {
+        const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+        const laju = await batasiLaju(env, ip, 'pantau', 60, 60); // maksimal 60 event per menit per IP
+        if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+        const b = await request.json().catch(() => ({}));
+        const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
+                              'salin_kode', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email'];
+        const jenis = String(b.jenis || '');
+        if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
+        const rincian = String(b.rujukan || '').slice(0, 20);
+        if (rincian && !/^SP-\d{3}$/.test(rincian)) return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
+        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+          .bind(null, 'beli:' + jenis, rincian, new Date().toISOString()).run();
+        return jawab({ ok: true }, 200, asal);
+      }
+
+      // ---- pemilik: ringkasan funnel pembelian (jumlah per jenis event, kunjungan unik per rujukan) ----
+      if (jalan === '/api/pemilik/funnel-beli' && request.method === 'GET') {
+        if (!saya) return perluMasuk();
+        if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
+        const perJenis = await env.DB.prepare(
+          "SELECT jenis, COUNT(*) AS n, COUNT(DISTINCT rincian) AS rujukan_unik " +
+          "FROM peristiwa WHERE jenis LIKE 'beli:%' GROUP BY jenis ORDER BY jenis"
+        ).all();
+        const perHari = await env.DB.prepare(
+          "SELECT substr(waktu,1,10) AS hari, jenis, COUNT(*) AS n FROM peristiwa " +
+          "WHERE jenis LIKE 'beli:%' GROUP BY hari, jenis ORDER BY hari DESC, jenis LIMIT 400"
+        ).all();
+        return jawab({ per_jenis: perJenis.results || [], per_hari: perHari.results || [] }, 200, asal);
+      }
+
       if (jalan === '/api/pemilik/kode-terbit' && request.method === 'GET') {
         if (!saya) return perluMasuk();
         if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
