@@ -15,7 +15,8 @@
 //      biasa hanya bisa membaca datanya sendiri - dan itu ditegakkan di setiap kueri.
 
 const SITUS = ['https://siappsikotes.my.id', 'https://www.siappsikotes.my.id',
-  'https://arapcihuy.github.io', 'http://localhost:8000', 'http://127.0.0.1:8000'];
+  'https://arapcihuy.github.io', 'http://localhost:8000', 'http://127.0.0.1:8000',
+  'https://cardcheck-siapp.pages.dev'];
 const CLIENT_ID = '1093622424912-nmkq3j5boa6tgf834qp6903i8vnet14a.apps.googleusercontent.com';
 const PEMILIK = ['rasyidahmad180@gmail.com'];
 const KUNCI_GOOGLE_URL = 'https://www.googleapis.com/oauth2/v3/certs';
@@ -487,13 +488,17 @@ export default {
         if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
         const b = await request.json().catch(() => ({}));
         const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
-                              'salin_kode', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email'];
+            'salin_kode', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
+            'cardcheck_kunjungan', 'cardcheck_klik_cta'];
         const jenis = String(b.jenis || '');
         if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
+        const kartu = jenis.indexOf('cardcheck_') === 0;
         const rincian = String(b.rujukan || '').slice(0, 20);
-        if (rincian && !/^SP-\d{3}$/.test(rincian)) return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
+        if (rincian && !(kartu ? /^[A-Za-z0-9_-]{1,20}$/.test(rincian) : /^SP-\d{3}$/.test(rincian)))
+          return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
+        const awalan = kartu ? 'cardcheck:' : 'beli:';
         await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
-          .bind(null, 'beli:' + jenis, rincian, new Date().toISOString()).run();
+          .bind(null, awalan + jenis, rincian, new Date().toISOString()).run();
         return jawab({ ok: true }, 200, asal);
       }
 
@@ -527,6 +532,26 @@ export default {
 
       if (['GET', 'POST'].indexOf(request.method) === -1) {
         return jawab({ pesan: 'metode tidak diizinkan' }, 405, asal);
+      }
+
+      // ---- laporan funnel marketing (CSV/JSON, token) ----
+      if (jalan === '/api/laporan/funnel' && request.method === 'GET') {
+        const u = new URL(request.url);
+        const token = u.searchParams.get('token') || (request.headers.get('X-Token') || '');
+        if (!env.LAPORAN_TOKEN || token !== env.LAPORAN_TOKEN) return jawab({ pesan: 'token tidak sah' }, 403, asal);
+        const day = Math.min(90, Math.max(1, parseInt(u.searchParams.get('hari') || '30', 10))) || 30;
+        const cutoff = new Date(Date.now() - day*864e5).toISOString();
+        const rows = await env.DB.prepare('SELECT waktu, jenis, rincian FROM peristiwa WHERE waktu >= ? ORDER BY waktu DESC LIMIT 5000').bind(cutoff).all();
+        const data = rows.results || [];
+        if ((u.searchParams.get('format') || 'json') === 'csv') {
+          const csv = ['waktu,jenis,rincian'].concat(data.map(r => [
+            "\"" + r.waktu.replace(/\"/g,'\"\"') + "\"",
+            "\"" + r.jenis.replace(/\"/g,'\"\"') + "\"",
+            "\"" + (r.rincian||'').replace(/\"/g,'\"\"') + "\""
+          ].join(','))).join('\n') + '\n';
+          return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="funnel.csv"' } });
+        }
+        return jawab({ hari: day, hasil: data.map(r => ({ waktu: r.waktu, jenis: r.jenis, rincian: r.rincian || '' })) }, 200, asal);
       }
 
       if (jalan === '/' || jalan === '/sehat') {
