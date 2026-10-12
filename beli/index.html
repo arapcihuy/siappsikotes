@@ -315,12 +315,8 @@
       <div class="qris-kotak" id="qris" style="border: 2px solid var(--gold); background: #fff;">
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
-          <picture>
-            <source type="image/avif" srcset="../static/img/qris-bayar.avif?v=1">
-            <source type="image/webp" srcset="../static/img/qris-bayar.webp?v=1">
-            <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
-                 width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
-          </picture>
+          <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
+               width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
         </a>
       </div>
       <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QRIS Langsung Tampil — Scan otomatis dengan GoPay, OVO, DANA, ShopeePay, atau m-Banking!</p>
@@ -478,10 +474,26 @@
     // Satu fungsi `lacak`: kesalahan jaringan tidak boleh mengganggu alur pembelian.
     // Event penting (konfirmasi WA/email) pakai sendBeacon agar tetap terkirim saat halaman
     // ditinggalkan menuju WA/mailto. Tidak ada cookie, sidik jari, atau data pribadi.
+    // UTM params diambil dari URL (utm_source, utm_medium, utm_campaign) untuk atribusi kampanye.
     var URL_PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
+    function getUtmParams() {
+      var params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || ''
+      };
+    }
     function lacak(evt) {
       try {
-        var isi = JSON.stringify({ jenis: evt, rujukan: rujukan });
+        var utm = getUtmParams();
+        var isi = JSON.stringify({
+          jenis: evt,
+          rujukan: rujukan,
+          utm_source: utm.utm_source,
+          utm_medium: utm.utm_medium,
+          utm_campaign: utm.utm_campaign
+        });
         if (navigator.sendBeacon) {
           navigator.sendBeacon(URL_PANTAU, new Blob([isi], { type: 'application/json' }));
         } else {
@@ -548,7 +560,7 @@
               } else {
                 selesai('Tekan lama kodenya');
               }
-            } catch (e) { selesai('Tekan lama kodenya'); });
+            } catch (e) { selesai('Tekan lama kodenya'); }
           });
         }
         var elSalinRujukan = document.getElementById('beliSalinRujukan');
