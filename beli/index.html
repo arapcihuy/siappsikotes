@@ -23,6 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
 <link rel="preload" as="image" href="../static/img/qris-bayar.png?v=1">
+<link rel="preload" as="document" href="../" id="preloadApp">
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
 <style>
@@ -314,8 +315,12 @@
       <div class="qris-kotak" id="qris" style="border: 2px solid var(--gold); background: #fff;">
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
-          <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
-               width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
+          <picture>
+            <source type="image/avif" srcset="../static/img/qris-bayar.avif?v=1">
+            <source type="image/webp" srcset="../static/img/qris-bayar.webp?v=1">
+            <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
+                 width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
         </a>
       </div>
       <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QRIS Langsung Tampil — Scan otomatis dengan GoPay, OVO, DANA, ShopeePay, atau m-Banking!</p>
@@ -331,8 +336,11 @@
           membuat pembayaranmu mudah dicocokkan.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
         <p class="label">Kode rujukanmu</p>
-        <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
-        <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
+              <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
+              <div class="kode-baris" style="margin-top:6px;">
+                <button type="button" class="tombol sekunder kecil" id="beliSalinRujukan">Salin kode rujukan</button>
+              </div>
+              <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
         <p class="label">Sudah bayar? Ambil kode aksesmu</p>
         <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
@@ -580,10 +588,48 @@
       elBS.addEventListener('click', function () { lacak('klik_bukti_email'); });
     }
     if (elBuka) {
-      elBuka.addEventListener('click', function () { lacak('buka_aplikasi'); });
-    }
-    
-    // Highlight QRIS box when CTA clicked
+          elBuka.addEventListener('click', function () { lacak('buka_aplikasi'); });
+        }
+
+        // Prefetch halaman aplikasi saat hover/touch tombol "Buka aplikasi" & link footer
+        var preloadLink = document.getElementById('preloadApp');
+        var prefetched = false;
+        function doPrefetch() {
+          if (prefetched || !preloadLink) return;
+          prefetched = true;
+          preloadLink.rel = 'prefetch';
+          // Trigger fetch by creating a link and clicking programmatically
+          var link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = '../';
+          document.head.appendChild(link);
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('a[href="../"]'), function (a) {
+          a.addEventListener('mouseenter', doPrefetch, { once: true, passive: true });
+          a.addEventListener('touchstart', doPrefetch, { once: true, passive: true });
+        });
+
+        // Salin kode rujukan
+        var elSalinRujukan = document.getElementById('beliSalinRujukan');
+        if (elSalinRujukan) {
+          elSalinRujukan.addEventListener('click', function () {
+            var asli = elSalinRujukan.textContent;
+            var selesai = function (pesan) {
+              elSalinRujukan.textContent = pesan;
+              setTimeout(function () { elSalinRujukan.textContent = asli; }, 1800);
+            };
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(rujukan).then(function () { lacak('salin_rujukan'); selesai('Tersalin'); },
+                  function () { selesai('Tekan lama kodenya'); });
+              } else {
+                selesai('Tekan lama kodenya');
+              }
+            } catch (e) { selesai('Tekan lama kodenya'); });
+          });
+        }
+
+        // Highlight QRIS box when CTA clicked
     var elCTA = document.getElementById('ctaBayar');
     if (elCTA) {
       elCTA.addEventListener('click', function() {
