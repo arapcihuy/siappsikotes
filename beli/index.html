@@ -534,24 +534,42 @@
       });
     }
     if (elSalinKode) {
-      elSalinKode.addEventListener('click', function () {
-        if (!kodeAkses) return;
-        var asli = elSalinKode.textContent;
-        var selesai = function (pesan) {
-          elSalinKode.textContent = pesan;
-          setTimeout(function () { elSalinKode.textContent = asli; }, 1800);
-        };
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(kodeAkses).then(function () { lacak('salin_kode'); selesai('Tersalin'); },
-              function () { selesai('Tekan lama kodenya'); });
-          } else {
-            selesai('Tekan lama kodenya');
-          }
-        } catch (e) { selesai('Tekan lama kodenya'); }
-      });
-    }
-    if (elS) {
+          elSalinKode.addEventListener('click', function () {
+            if (!kodeAkses) return;
+            var asli = elSalinKode.textContent;
+            var selesai = function (pesan) {
+              elSalinKode.textContent = pesan;
+              setTimeout(function () { elSalinKode.textContent = asli; }, 1800);
+            };
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(kodeAkses).then(function () { lacak('salin_kode'); selesai('Tersalin'); },
+                  function () { selesai('Tekan lama kodenya'); });
+              } else {
+                selesai('Tekan lama kodenya');
+              }
+            } catch (e) { selesai('Tekan lama kodenya'); });
+          });
+        }
+        var elSalinRujukan = document.getElementById('beliSalinRujukan');
+        if (elSalinRujukan) {
+          elSalinRujukan.addEventListener('click', function () {
+            var asli = elSalinRujukan.textContent;
+            var selesai = function (pesan) {
+              elSalinRujukan.textContent = pesan;
+              setTimeout(function () { elSalinRujukan.textContent = asli; }, 1800);
+            };
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(rujukan).then(function () { lacak('salin_rujukan'); selesai('Tersalin'); },
+                  function () { selesai('Tekan lama kodenya'); });
+              } else {
+                selesai('Tekan lama kodenya');
+              }
+            } catch (e) { selesai('Tekan lama kodenya'); }
+          });
+        }
+        if (elS) {
       elS.addEventListener('click', function () {
         var asli = elS.textContent;
         var selesai = function (pesan) {
@@ -608,26 +626,6 @@
           a.addEventListener('mouseenter', doPrefetch, { once: true, passive: true });
           a.addEventListener('touchstart', doPrefetch, { once: true, passive: true });
         });
-
-        // Salin kode rujukan
-        var elSalinRujukan = document.getElementById('beliSalinRujukan');
-        if (elSalinRujukan) {
-          elSalinRujukan.addEventListener('click', function () {
-            var asli = elSalinRujukan.textContent;
-            var selesai = function (pesan) {
-              elSalinRujukan.textContent = pesan;
-              setTimeout(function () { elSalinRujukan.textContent = asli; }, 1800);
-            };
-            try {
-              if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(rujukan).then(function () { lacak('salin_rujukan'); selesai('Tersalin'); },
-                  function () { selesai('Tekan lama kodenya'); });
-              } else {
-                selesai('Tekan lama kodenya');
-              }
-            } catch (e) { selesai('Tekan lama kodenya'); });
-          });
-        }
 
         // Highlight QRIS box when CTA clicked
     var elCTA = document.getElementById('ctaBayar');
