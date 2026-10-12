@@ -354,15 +354,24 @@
               </div>
               <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
-        <p class="label">Sudah bayar? Ambil kode aksesmu</p>
-        <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
-          jadi kamu tidak perlu menunggu balasan siapa pun.</p>
-        <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
-        <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
-        <div class="kode-baris" id="beliAksiKode" hidden>
-          <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi &amp; pakai kode ini</a>
-          <button type="button" class="tombol sekunder kecil" id="beliSalinKode">Salin kode akses</button>
-        </div>
+                <p class="label">Sudah bayar? Ambil kode aksesmu</p>
+                <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
+                  jadi kamu tidak perlu menunggu balasan siapa pun.</p>
+                <!-- Email capture untuk retention sequence -->
+                <div id="beliEmailSection" style="margin:12px 0;">
+                  <label for="beliEmail" style="display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;">Email untuk tips belajar & update (opsional, tidak dipakai spam)</label>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <input type="email" id="beliEmail" placeholder="kamu@contoh.com" style="flex:1;min-width:200px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font-size:15px;" autocomplete="email">
+                    <button type="button" class="tombol kecil" id="beliSimpanEmail" style="white-space:nowrap;">Simpan email</button>
+                  </div>
+                  <p id="beliEmailStatus" class="catatan" style="margin:6px 0 0;font-size:13px;"></p>
+                </div>
+                <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
+                <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
+                <div class="kode-baris" id="beliAksiKode" hidden>
+                  <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi & pakai kode ini</a>
+                  <button type="button" class="tombol sekunder kecil" id="beliSalinKode">Salin kode akses</button>
+                </div>
       </div>
       <noscript>
         <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript

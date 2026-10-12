@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiapPsikotes — Funnel Pembayaran Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1117; color: #e6edf3;
+      min-height: 100vh; padding: 24px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { margin-bottom: 24px; }
+    h1 { font-size: 28px; font-weight: 600; color: #f0f6fc; }
+    .subtitle { color: #8b949e; font-size: 14px; margin-top: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .card {
+      background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { border-color: #484f58; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .card h3 { font-size: 12px; font-weight: 500; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .card .value { font-size: 36px; font-weight: 700; color: #f0f6fc; line-height: 1.2; }
+    .card .value.positive { color: #3fb950; }
+    .card .value.negative { color: #f85149; }
+    .card .change { font-size: 12px; color: #8b949e; margin-top: 4px; }
+    .section { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #f0f6fc; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #21262d; }
+    th { font-weight: 500; color: #8b949e; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { font-size: 14px; color: #e6edf3; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #1f2428; }
+    .rate { font-weight: 600; }
+    .rate.good { color: #3fb950; }
+    .rate.warn { color: #d29922; }
+    .rate.bad { color: #f85149; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .badge.live { background: #1f6feb; color: #fff; }
+    .badge.alert { background: #f85149; color: #fff; }
+    .badge.ok { background: #3fb950; color: #fff; }
+    .refresh { float: right; background: #238636; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+    .refresh:hover { background: #2ea043; }
+    .refresh:disabled { background: #30363d; color: #8b949e; cursor: not-allowed; }
+    .last-update { color: #8b949e; font-size: 12px; margin-top: 8px; }
+    .loading { opacity: 0.6; pointer-events: none; }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .card .value { font-size: 28px; }
+      th, td { padding: 8px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Funnel Pembayaran QRIS</h1>
+      <div class="subtitle">SiapPsikotes & Cardcheck — Real-time observability</div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Kunjungan /beli/ Hari Ini</h3>
+        <div class="value" id="kunjungan">—</div>
+        <div class="change">Unique visitors</div>
+      </div>
+      <div class="card">
+        <h3>Klik CTA Bayar</h3>
+        <div class="value" id="klikBeli">—</div>
+        <div class="change">Click-through</div>
+      </div>
+      <div class="card">
+        <h3>Pembayaran Sukses</h3>
+        <div class="value" id="pembayaran">—</div>
+        <div class="change">Completed payments</div>
+      </div>
+      <div class="card">
+        <h3>Revenue Hari Ini</h3>
+        <div class="value" id="revenue">—</div>
+        <div class="change">Rp</div>
+      </div>
+      <div class="card">
+        <h3>Conversion Rate</h3>
+        <div class="value" id="conversion">—</div>
+        <div class="change">%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h2>Detail Harian (7 Hari Terakhir)</h2>
+        <button class="refresh" id="refreshBtn" onclick="loadData()">Refresh</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Kunjungan</th>
+            <th>Klik Bayar</th>
+            <th>Pembayaran</th>
+            <th>Revenue</th>
+            <th>Conv. Rate</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="last-update" id="lastUpdate">Terakhir update: —</div>
+    </div>
+
+    <div class="section">
+      <h2>Status Sistem</h2>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <span class="badge live" id="apiStatus">API: Checking...</span>
+        <span class="badge ok" id="dbStatus">D1: OK</span>
+        <span class="badge ok" id="cronStatus">Cron 5m: Active</span>
+        <span class="badge ok" id="cron4hStatus">Cron 4h: Active</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'https://siappsikotes-api.arapcihuy.workers.dev';
+    let refreshInterval;
+
+    async function fetchJSON(url) {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    }
+
+    async function loadStats() {
+      try {
+        const data = await fetchJSON(`${API_BASE}/api/dashboard/stats`);
+        document.getElementById('kunjungan').textContent = data.kunjungan.toLocaleString();
+        document.getElementById('klikBeli').textContent = data.klik_beli.toLocaleString();
+        document.getElementById('pembayaran').textContent = data.pembayaran_sukses.toLocaleString();
+        document.getElementById('revenue').textContent = 'Rp ' + data.revenue_hari_ini.toLocaleString();
+        const convEl = document.getElementById('conversion');
+        convEl.textContent = data.conversion_rate.toFixed(2) + '%';
+        convEl.className = 'value ' + (data.conversion_rate > 2 ? 'positive' : data.conversion_rate > 0 ? 'warn' : 'negative');
+      } catch (e) {
+        console.error('Stats error:', e);
+        document.getElementById('apiStatus').textContent = 'API: Error';
+        document.getElementById('apiStatus').className = 'badge alert';
+      }
+    }
+
+    async function loadConversion() {
+      try {
+        const data = await fetchJSON(`${API_BASE}/api/dashboard/conversion?days=7`);
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = data.data.map(row => `
+          <tr>
+            <td>${row.hari}</td>
+            <td>${row.kunjungan.toLocaleString()}</td>
+            <td>${row.klik_beli.toLocaleString()}</td>
+            <td>${row.pembayaran.toLocaleString()}</td>
+            <td>Rp ${row.revenue.toLocaleString()}</td>
+            <td class="rate ${row.conversion_rate > 2 ? 'good' : row.conversion_rate > 0 ? 'warn' : 'bad'}">${row.conversion_rate.toFixed(2)}%</td>
+          </tr>
+        `).join('');
+        document.getElementById('lastUpdate').textContent = 'Terakhir update: ' + new Date().toLocaleString('id-ID');
+        document.getElementById('apiStatus').textContent = 'API: Live';
+        document.getElementById('apiStatus').className = 'badge live';
+      } catch (e) {
+        console.error('Conversion error:', e);
+      }
+    }
+
+    async function loadData() {
+      const btn = document.getElementById('refreshBtn');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      await Promise.all([loadStats(), loadConversion()]);
+      btn.disabled = false;
+      btn.textContent = 'Refresh';
+    }
+
+    // Initial load
+    loadData();
+
+    // Auto-refresh every 60 seconds
+    refreshInterval = setInterval(loadData, 60000);
+
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => clearInterval(refreshInterval));
+  </script>
+</body>
+</html>
