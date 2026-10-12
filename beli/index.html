@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.googleusercontent.com https://www.gstatic.com; connect-src 'self' https://accounts.google.com https://www.googleapis.com https://siappsikotes-api.rasyidahmad180.workers.dev; frame-src https://accounts.google.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.googleusercontent.com https://www.gstatic.com; connect-src 'self' https://accounts.google.com https://www.googleapis.com https://siappsikotes-api.rasyidahmad180.workers.dev https://sandbox.tripay.co.id; frame-src https://accounts.google.com; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +22,10 @@
 <meta name="twitter:image:alt" content="Beli Akses Penuh — SiapPsikotes">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
-<link rel="preload" as="image" href="../static/img/qris-bayar.png?v=1">
+<link rel="preload" as="image" href="../static/img/qris-bayar.webp?v=1" type="image/webp">
+<link rel="preload" as="image" href="../static/img/qris-bayar.png?v=1" type="image/png">
 <link rel="preload" as="document" href="../" id="preloadApp">
+<link rel="prefetch" id="preloadPayment" href="https://sandbox.tripay.co.id/checkout" as="document">
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
 <style>
@@ -287,6 +289,17 @@
     <a class="tombol" href="#bayar">Ambil Akses Rp 19.000</a>
   </section>
 
+  <!-- Banner survei pricing (tampilkan ke pengunjung /beli/ untuk riset Van Westendorp) -->
+  <section id="surveyBanner" hidden style="margin:18px 0;padding:16px 20px;border:1px solid rgba(230,197,82,.35);border-radius:14px;background:linear-gradient(150deg,rgba(230,197,82,.12),rgba(230,197,82,.02)),var(--surface);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;">
+      <div>
+        <p style="margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e6c552;">📊 Riset Harga — 30 Detik</p>
+        <p style="margin:0;font-size:15px;color:#c9d5e3;">Bantu kami tetapkan harga fair. 5 pertanyaan singkat, anonim, tidak butuh login.</p>
+      </div>
+      <a class="tombol" id="surveyCta" href="https://forms.gle/XXXXXXXXXXXXXXXX" target="_blank" rel="noopener" style="flex-shrink:0;">Isi Survei</a>
+    </div>
+  </section>
+
   <section class="pita">
     <span class="lencana">Langkah terakhir</span>
     <h1 class="h-harga">Beli akses penuh &mdash; <span id="displayHarga">Rp 39.000</span> sekali bayar</h1>
@@ -315,8 +328,11 @@
       <div class="qris-kotak" id="qris" style="border: 2px solid var(--gold); background: #fff;">
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
-          <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
-               width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
+          <picture>
+            <source srcset="../static/img/qris-bayar.webp?v=1" type="image/webp">
+            <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
+                 width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
         </a>
       </div>
       <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QRIS Langsung Tampil — Scan otomatis dengan GoPay, OVO, DANA, ShopeePay, atau m-Banking!</p>
@@ -444,6 +460,38 @@
       });
     }
 
+    // ---------- Banner survei pricing (tampilkan ke pengunjung /beli/) ----------
+    // Tampilkan sekali per sesi jika belum klik/tutup. Lacak klik ke API pantau.
+    var elSurvey = document.getElementById('surveyBanner');
+    var elSurveyCta = document.getElementById('surveyCta');
+    if (elSurvey && !sessionStorage.getItem('survey_dismissed')) {
+      elSurvey.hidden = false;
+      if (elSurveyCta) {
+        elSurveyCta.addEventListener('click', function () {
+          try {
+            var utm = getUtmParams();
+            var payload = JSON.stringify({
+              jenis: 'survei_kunjungan',
+              rujukan: rujukan,
+              utm_source: utm.utm_source,
+              utm_medium: utm.utm_medium,
+              utm_campaign: utm.utm_campaign
+            });
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(URL_PANTAU, new Blob([payload], { type: 'application/json' }));
+            }
+          } catch (e) {}
+          sessionStorage.setItem('survey_dismissed', '1');
+        });
+      }
+      // Auto-hide after 30s if no interaction
+      setTimeout(function () {
+        if (!sessionStorage.getItem('survey_dismissed')) {
+          elSurvey.hidden = true;
+        }
+      }, 30000);
+    }
+
     // Angka rujukan harus bertahan walau penyimpanan peramban diblokir. Kalau angka
     // dibuat ulang tiap muat halaman, pembeli bisa membayar nominal yang tidak lagi
     // cocok dengan kode rujukan yang ia kirim. Karena itu angkanya juga ditulis ke
@@ -484,6 +532,54 @@
         utm_campaign: params.get('utm_campaign') || ''
       };
     }
+
+    // ======== Referral / affiliate tracking ========
+    var URL_REF_TRACK = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/track';
+    var URL_REF_CONV = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/konversi';
+    var refParam = '';
+    try {
+      var refParams = new URLSearchParams(window.location.search);
+      refParam = (refParams.get('ref') || '').toUpperCase().trim();
+    } catch (e) { refParam = ''; }
+    var refTracked = false;
+    function trackReferralVisit() {
+      if (!refParam || !/^SPRF[A-Z0-9]{8}$/.test(refParam) || refTracked) return;
+      var utm = getUtmParams();
+      var payload = JSON.stringify({
+        ref: refParam,
+        utm_source: utm.utm_source,
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(URL_REF_TRACK, new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch(URL_REF_TRACK, { method: 'POST', headers: { 'content-type': 'application/json' },
+          body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
+      }
+      refTracked = true;
+    }
+    function trackReferralConversion() {
+      if (!refParam || !/^SPRF[A-Z0-9]{8}$/.test(refParam)) return;
+      var utm = getUtmParams();
+      var payload = JSON.stringify({
+        ref: refParam,
+        rujukan: rujukan,
+        nominal: nominal,
+        utm_source: utm.utm_source,
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(URL_REF_CONV, new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch(URL_REF_CONV, { method: 'POST', headers: { 'content-type': 'application/json' },
+          body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
+      }
+    }
+    // Track referral visit on page load
+    trackReferralVisit();
+
     function lacak(evt) {
       try {
         var utm = getUtmParams();
@@ -535,6 +631,8 @@
       elAmbil.addEventListener('click', function () {
         kodeAkses = kodeUntukNomor(rujukan);
         lacak('tampilkan_kode');
+        // Track referral conversion when access code is shown (purchase confirmed)
+        trackReferralConversion();
         elKode.textContent = kodeAkses;
         elKode.hidden = false;
         elAmbil.hidden = true;
@@ -650,6 +748,21 @@
           setTimeout(function() { qrisBox.style.boxShadow = '0 18px 38px rgba(0,0,0,.42)'; }, 2000);
         }
       });
+
+      // Prefetch payment page on hover/touch
+      var paymentPrefetched = false;
+      var paymentPrefetchLink = document.getElementById('preloadPayment');
+      function doPrefetchPayment() {
+        if (paymentPrefetched || !paymentPrefetchLink) return;
+        paymentPrefetched = true;
+        paymentPrefetchLink.rel = 'prefetch';
+        var link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = paymentPrefetchLink.href;
+        document.head.appendChild(link);
+      }
+      elCTA.addEventListener('mouseenter', doPrefetchPayment, { once: true, passive: true });
+      elCTA.addEventListener('touchstart', doPrefetchPayment, { once: true, passive: true });
     }
   })();
   </script>

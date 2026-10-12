@@ -218,6 +218,26 @@
     }
     window.tampilkanBannerVersi = tampilkanBannerVersi;
 
+    // ---------- Banner survei pricing (tampilkan ke user aktif app) ----------
+    // Tampilkan sekali per sesi jika belum klik/tutup.
+    (function () {
+      var elSurvey = document.getElementById('surveyBannerApp');
+      var elSurveyCta = document.getElementById('surveyCtaApp');
+      if (elSurvey && !sessionStorage.getItem('survey_dismissed_app')) {
+        elSurvey.hidden = false;
+        if (elSurveyCta) {
+          elSurveyCta.addEventListener('click', function () {
+            sessionStorage.setItem('survey_dismissed_app', '1');
+          });
+        }
+        setTimeout(function () {
+          if (!sessionStorage.getItem('survey_dismissed_app')) {
+            elSurvey.hidden = true;
+          }
+        }, 30000);
+      }
+    })();
+
     // Register Service Worker untuk PWA offline + deteksi update
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -252,6 +272,16 @@
 <script src="static/js/akun-google.js?v=58f8c01"></script>
 <script src="static/js/akses.js?v=58f8c01"></script>
 <script src="static/js/sinkron-db.js?v=58f8c01"></script>
+
+  <section id="surveyBannerApp" hidden style="margin:12px 14px;padding:14px 16px;border:1px solid rgba(230,197,82,.35);border-radius:12px;background:linear-gradient(150deg,rgba(230,197,82,.1),rgba(230,197,82,.02)),var(--card);max-width:900px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;">
+      <div>
+        <p style="margin:0 0 2px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e6c552;">📊 Riset Harga — 30 Detik</p>
+        <p style="margin:0;font-size:13px;color:var(--text2);">Bantu tetapkan harga fair. 5 pertanyaan singkat, anonim.</p>
+      </div>
+      <a class="tombol kecil" id="surveyCtaApp" href="https://forms.gle/XXXXXXXXXXXXXXXX" target="_blank" rel="noopener" style="flex-shrink:0;background:#1e2a3d;color:var(--text);border-color:rgba(255,255,255,.28);box-shadow:0 6px 16px rgba(0,0,0,.22);font-weight:600;">Isi Survei</a>
+    </div>
+  </section>
 
   <footer class="legal-footer">
     <span>SiapPsikotes &mdash; latihan psikotes kerja, tes IQ &amp; kepribadian.

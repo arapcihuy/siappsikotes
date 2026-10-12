@@ -478,31 +478,62 @@ export default {
       }
 
       // ---- pemilik: daftar kode terbit (tanpa kode mentahnya) ----
-      // ---- pelacakan funnel pembelian (tanpa login). Event dikirim dari beli/index.html ----
-      // Hanya nama event yang dikenal yang dicatat, dan tanpa data pribadi: IP tidak disimpan
-      // (hanya dipakai untuk pembatas laju), rincian = rujukan SP-3angka yang pembeli memang
-      // sudah membuat sendiri di perangkatnya.
-      if (jalan === '/api/pantau' && request.method === 'POST') {
-        const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
-        const laju = await batasiLaju(env, ip, 'pantau', 60, 60); // maksimal 60 event per menit per IP
-        if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
-        const b = await request.json().catch(() => ({}));
-        const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
-            'salin_kode', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
-            'cardcheck_kunjungan', 'cardcheck_klik_cta'];
-        const jenis = String(b.jenis || '');
-        if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
-        const kartu = jenis.indexOf('cardcheck_') === 0;
-        const rincian = String(b.rujukan || '').slice(0, 20);
-        if (rincian && !(kartu ? /^[A-Za-z0-9_-]{1,20}$/.test(rincian) : /^SP-\d{3}$/.test(rincian)))
-          return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
-        const awalan = kartu ? 'cardcheck:' : 'beli:';
-        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
-          .bind(null, awalan + jenis, rincian, new Date().toISOString()).run();
-        return jawab({ ok: true }, 200, asal);
-      }
+            // ---- pelacakan funnel pembelian (tanpa login). Event dikirim dari beli/index.html ----
+            // Hanya nama event yang dikenal yang dicatat, dan tanpa data pribadi: IP tidak disimpan
+            // (hanya dipakai untuk pembatas laju), rincian = rujukan SP-3angka yang pembeli memang
+            // sudah membuat sendiri di perangkatnya.
+            // UTM params (utm_source, utm_medium, utm_campaign) dikirim opsional dari klien
+            // untuk atribusi kampanye broadcast.
+            if (jalan === '/api/pantau' && request.method === 'POST') {
+              const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+              const laju = await batasiLaju(env, ip, 'pantau', 60, 60); // maksimal 60 event per menit per IP
+              if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+              const b = await request.json().catch(() => ({}));
+              const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
+                  'salin_kode', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
+                  'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan'];
+              const jenis = String(b.jenis || '');
+              if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
+              const kartu = jenis.indexOf('cardcheck_') === 0;
+              const rincian = String(b.rujukan || '').slice(0, 20);
+              if (rincian && !(kartu ? /^[A-Za-z0-9_-]{1,20}$/.test(rincian) : /^SP-[0-9]{3}$/.test(rincian)))
+                return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
+              const awalan = kartu ? 'cardcheck:' : 'beli:';
+                            const utmSource = String(b.utm_source || '').slice(0, 50);
+                            const utmMedium = String(b.utm_medium || '').slice(0, 50);
+                            const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
+                            await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                              .bind(null, awalan + jenis, rincian, new Date().toISOString(), utmSource, utmMedium, utmCampaign).run();
+                            return jawab({ ok: true }, 200, asal);
+                          }
 
-      // ---- pemilik: ringkasan funnel pembelian (jumlah per jenis event, kunjungan unik per rujukan) ----
+                    // ---- webhook pembayaran QRIS (tanpa login) ----
+                    // Terima notifikasi pembayaran dari klien/QRIS manual, catat ke tabel payments
+                    if (jalan === '/api/payment-webhook' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'payment_webhook', 30, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      const b = await request.json().catch(() => ({}));
+                      const timestamp = new Date().toISOString();
+                      const utmSource = String(b.utm_source || '').slice(0, 50);
+                      const utmMedium = String(b.utm_medium || '').slice(0, 50);
+                      const product = String(b.product || 'siappsikotes').slice(0, 50);
+                      const amount = Math.round(Number(b.amount)) || 39000;
+                      const status = String(b.status || 'success').slice(0, 20);
+                      const txid = String(b.txid || '').slice(0, 100);
+                      const rawPayload = JSON.stringify(b).slice(0, 5000);
+                      await env.DB.prepare(
+                        'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+                      ).bind(timestamp, utmSource, utmMedium, product, amount, status, txid, rawPayload).run();
+                      // Kirim notifikasi Telegram untuk pembayaran sukses
+                      if (status === 'success' || status === 'paid') {
+                        const alertMsg = `✅ <b>Pembayaran Baru</b>\nProduk: ${product}\nJumlah: Rp ${amount.toLocaleString()}\nUTM: ${utmSource} / ${utmMedium}\nTXID: ${txid || '-'}\nWaktu: ${timestamp}`;
+                        await kirimTelegramAlert(env, alertMsg);
+                      }
+                      return jawab({ ok: true }, 200, asal);
+                    }
+
+                    // ---- pemilik: ringkasan funnel pembelian (jumlah per jenis event, kunjukan unik per rujukan) ----
       if (jalan === '/api/pemilik/funnel-beli' && request.method === 'GET') {
         if (!saya) return perluMasuk();
         if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
@@ -554,20 +585,434 @@ export default {
         return jawab({ hari: day, hasil: data.map(r => ({ waktu: r.waktu, jenis: r.jenis, rincian: r.rincian || '' })) }, 200, asal);
       }
 
+      // ---- dashboard funnel stats (public, untuk dashboard Pages) ----
+      if (jalan === '/api/dashboard/stats' && request.method === 'GET') {
+        const hariIni = new Date().toISOString().slice(0, 10);
+        const kemarin = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+        const mingguLalu = new Date(Date.now() - 7*864e5).toISOString().slice(0, 10);
+        
+        const [kunjungan, klikBeli, pembayaranSukses, revenueHariIni, conversionRate] = await Promise.all([
+          // Kunjungan unik hari ini (event kunjungan_beli)
+          env.DB.prepare(
+            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND substr(waktu,1,10) = ?"
+          ).bind(hariIni).first(),
+          // Klik CTA bayar hari ini
+          env.DB.prepare(
+            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:klik_cta_bayar' AND substr(waktu,1,10) = ?"
+          ).bind(hariIni).first(),
+          // Pembayaran sukses hari ini (dari tabel payments)
+          env.DB.prepare(
+            "SELECT COUNT(*) AS n, COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?"
+          ).bind(hariIni).first(),
+          // Revenue hari ini
+          env.DB.prepare(
+            "SELECT COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?"
+          ).bind(hariIni).first(),
+          // Conversion rate hari ini: pembayaran / kunjungan
+          env.DB.prepare(
+            "SELECT " +
+            "  (SELECT COUNT(*) FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?) * 100.0 / " +
+            "  NULLIF((SELECT COUNT(DISTINCT rincian) FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND substr(waktu,1,10) = ?), 0) AS rate"
+          ).bind(hariIni, hariIni).first()
+        ]);
+        
+        return jawab({
+          hari: hariIni,
+          kunjungan: kunjungan?.n || 0,
+          klik_beli: klikBeli?.n || 0,
+          pembayaran_sukses: pembayaranSukses?.n || 0,
+          revenue_hari_ini: revenueHariIni?.total || 0,
+          conversion_rate: conversionRate?.rate ? Number(conversionRate.rate.toFixed(2)) : 0
+        }, 200, asal);
+      }
+
+      // ---- dashboard conversion detail (public) ----
+      if (jalan === '/api/dashboard/conversion' && request.method === 'GET') {
+        const u = new URL(request.url);
+        const days = Math.min(30, Math.max(1, parseInt(u.searchParams.get('days') || '7', 10)));
+        const cutoff = new Date(Date.now() - days*864e5).toISOString();
+        
+        const rows = await env.DB.prepare(
+          "SELECT " +
+          "  substr(waktu,1,10) AS hari, " +
+          "  COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
+          "  COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik_beli, " +
+          "  (SELECT COUNT(*) FROM payments p WHERE p.status IN ('success','paid') AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS pembayaran, " +
+          "  (SELECT COALESCE(SUM(amount),0) FROM payments p WHERE p.status IN ('success','paid') AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS revenue " +
+          "FROM peristiwa pe " +
+          "WHERE pe.waktu >= ? AND pe.jenis LIKE 'beli:%' " +
+          "GROUP BY substr(pe.waktu,1,10) " +
+          "ORDER BY hari DESC"
+        ).bind(cutoff).all();
+        
+        const data = (rows.results || []).map(r => ({
+          hari: r.hari,
+          kunjungan: r.kunjungan || 0,
+          klik_beli: r.klik_beli || 0,
+          pembayaran: r.pembayaran || 0,
+          revenue: r.revenue || 0,
+          conversion_rate: r.kunjungan ? Number(((r.pembayaran / r.kunjungan) * 100).toFixed(2)) : 0
+        }));
+        
+        return jawab({ days, data }, 200, asal);
+      }
+
       if (jalan === '/' || jalan === '/sehat') {
-        return jawab({ aplikasi: 'SiapPsikotes API', keadaan: 'hidup', waktu: new Date().toISOString() }, 200, asal);
-      }
+              return jawab({ aplikasi: 'SiapPsikotes API', keadaan: 'hidup', waktu: new Date().toISOString() }, 200, asal);
+            }
 
-      return jawab({ pesan: 'alamat tidak dikenal' }, 404, asal);
+            // ---- Referral / affiliate program ----
+            // GET /api/referral/kode - get or create user's referral code (requires login)
+            if (jalan === '/api/referral/kode' && request.method === 'GET') {
+              if (!saya) return perluMasuk();
+              const existing = await env.DB.prepare('SELECT kode FROM referral_kode WHERE pengguna = ?').bind(saya.id).first();
+              if (existing) {
+                return jawab({ kode: existing.kode }, 200, asal);
+              }
+              // Generate unique referral code: SPRF + 8 random chars
+              const chars = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+              let kode = 'SPRF';
+              let unique = false;
+              let attempts = 0;
+              while (!unique && attempts < 10) {
+                const b = crypto.getRandomValues(new Uint8Array(8));
+                let suffix = '';
+                for (let i = 0; i < b.length; i++) suffix += chars.charAt(b[i] % chars.length);
+                const kandidat = kode + suffix;
+                const cek = await env.DB.prepare('SELECT 1 FROM referral_kode WHERE kode = ?').bind(kandidat).first();
+                if (!cek) {
+                  kode = kandidat;
+                  unique = true;
+                }
+                attempts++;
+              }
+              if (!unique) return jawab({ pesan: 'gagal membuat kode unik' }, 500, asal);
+              const kini = new Date().toISOString();
+              await env.DB.prepare('INSERT INTO referral_kode (pengguna, kode, dibuat) VALUES (?, ?, ?)').bind(saya.id, kode, kini).run();
+              return jawab({ kode }, 200, asal);
+            }
 
-      if (jalan === '/premium' && request.method === 'GET') {
-        if (!saya) return jawab({ premium: false }, 401, asal);
-        const has = await env.DB.prepare('SELECT 1 FROM pembelian WHERE pengguna = ? LIMIT 1').bind(saya.id).first();
-        return jawab({ premium: !!has }, 200, asal);
-      }
+            // POST /api/referral/track - track referral visit (no login, from /beli/ page)
+            if (jalan === '/api/referral/track' && request.method === 'POST') {
+              const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+              const laju = await batasiLaju(env, ip, 'ref_track', 30, 60); // max 30 per minute per IP
+              if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+              const b = await request.json().catch(() => ({}));
+              const kodeRef = String(b.ref || '').toUpperCase().trim();
+              if (!kodeRef || !/^SPRF[A-Z0-9]{8}$/.test(kodeRef)) {
+                return jawab({ ok: true, tracked: false }, 200, asal); // silently ignore invalid
+              }
+              // Verify code exists
+              const ref = await env.DB.prepare('SELECT pengguna FROM referral_kode WHERE kode = ?').bind(kodeRef).first();
+              if (!ref) {
+                return jawab({ ok: true, tracked: false }, 200, asal); // silently ignore non-existent
+              }
+              const utmSource = String(b.utm_source || '').slice(0, 50);
+              const utmMedium = String(b.utm_medium || '').slice(0, 50);
+              const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
+              const kini = new Date().toISOString();
+              await env.DB.prepare(
+                'INSERT INTO referral_konversi (kode_ref, waktu, status, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?)'
+              ).bind(kodeRef, kini, 'visit', utmSource, utmMedium, utmCampaign).run();
+              return jawab({ ok: true, tracked: true }, 200, asal);
+            }
 
-    } catch (e) {
-      return jawab({ pesan: 'permintaan tidak bisa diproses', rincian: String(e.message || e).slice(0, 160) }, 400, asal);
-    }
-  }
-};
+            // POST /api/referral/konversi - record conversion when purchase confirmed
+            if (jalan === '/api/referral/konversi' && request.method === 'POST') {
+              const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+              const laju = await batasiLaju(env, ip, 'ref_conv', 20, 60);
+              if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+              const b = await request.json().catch(() => ({}));
+              const kodeRef = String(b.ref || '').toUpperCase().trim();
+              const rujukanBeli = String(b.rujukan || '').trim().slice(0, 20);
+              const nominal = Math.round(Number(b.nominal)) || 39000;
+              if (!kodeRef || !/^SPRF[A-Z0-9]{8}$/.test(kodeRef)) {
+                return jawab({ pesan: 'kode referral tidak sah' }, 400, asal);
+              }
+              // Verify code exists
+              const ref = await env.DB.prepare('SELECT pengguna FROM referral_kode WHERE kode = ?').bind(kodeRef).first();
+              if (!ref) {
+                return jawab({ pesan: 'kode referral tidak ditemukan' }, 400, asal);
+              }
+              // Check if conversion already recorded for this rujukan_beli
+              if (rujukanBeli) {
+                const existing = await env.DB.prepare('SELECT 1 FROM referral_konversi WHERE kode_ref = ? AND rujukan_beli = ? AND status != ?')
+                  .bind(kodeRef, rujukanBeli, 'visit').first();
+                if (existing) {
+                  return jawab({ ok: true, duplicate: true }, 200, asal);
+                }
+              }
+              const utmSource = String(b.utm_source || '').slice(0, 50);
+              const utmMedium = String(b.utm_medium || '').slice(0, 50);
+              const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
+              const kini = new Date().toISOString();
+              // Record conversion
+              await env.DB.prepare(
+                'INSERT INTO referral_konversi (kode_ref, rujukan_beli, nominal, waktu, status, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+              ).bind(kodeRef, rujukanBeli || null, nominal, kini, 'paid', utmSource, utmMedium, utmCampaign).run();
+              // Credit referrer: 10% of nominal
+              const komisi = Math.round(nominal * 0.1);
+              await env.DB.prepare(
+                'INSERT INTO referral_kredit (pengguna, total, diperbarui) VALUES (?, ?, ?) ON CONFLICT(pengguna) DO UPDATE SET total = referral_kredit.total + excluded.total, diperbarui = excluded.diperbarui'
+              ).bind(ref.pengguna, komisi, kini).run();
+              // Log event for owner dashboard
+              await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+                .bind(ref.pengguna, 'referral_komisi', kodeRef + '|' + komisi + '|' + (rujukanBeli || ''), kini).run();
+              return jawab({ ok: true, komisi, referrer: ref.pengguna }, 200, asal);
+            }
+
+            // GET /api/referral/stats - get user's referral stats (requires login)
+            if (jalan === '/api/referral/stats' && request.method === 'GET') {
+              if (!saya) return perluMasuk();
+              const [kodeRow, visits, conversions, kredit] = await Promise.all([
+                env.DB.prepare('SELECT kode FROM referral_kode WHERE pengguna = ?').bind(saya.id).first(),
+                env.DB.prepare('SELECT COUNT(*) AS n FROM referral_konversi WHERE kode_ref = (SELECT kode FROM referral_kode WHERE pengguna = ?) AND status = ?').bind(saya.id, 'visit').first(),
+                env.DB.prepare('SELECT COUNT(*) AS n, COALESCE(SUM(nominal),0) AS total_nominal FROM referral_konversi WHERE kode_ref = (SELECT kode FROM referral_kode WHERE pengguna = ?) AND status = ?').bind(saya.id, 'paid').first(),
+                env.DB.prepare('SELECT total FROM referral_kredit WHERE pengguna = ?').bind(saya.id).first()
+              ]);
+              const kode = kodeRow ? kodeRow.kode : null;
+              return jawab({
+                kode,
+                kunjungan: visits ? visits.n : 0,
+                konversi: conversions ? conversions.n : 0,
+                total_nominal_konversi: conversions ? conversions.total_nominal : 0,
+                kredit_tersedia: kredit ? kredit.total : 0
+              }, 200, asal);
+            }
+
+            // GET /api/pemilik/referral - owner view of all referrals
+            if (jalan === '/api/pemilik/referral' && request.method === 'GET') {
+              if (!saya) return perluMasuk();
+              if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
+              const u = new URL(request.url);
+              const limit = Math.min(200, Math.max(1, parseInt(u.searchParams.get('limit') || '100', 10)));
+              const offset = Math.max(0, parseInt(u.searchParams.get('offset') || '0', 10));
+              const [kodeList, konversiList, kreditList] = await Promise.all([
+                env.DB.prepare('SELECT rk.kode, rk.pengguna, rk.dibuat, p.surel, p.nama FROM referral_kode rk LEFT JOIN pengguna p ON rk.pengguna = p.id ORDER BY rk.dibuat DESC LIMIT ? OFFSET ?').bind(limit, offset).all(),
+                env.DB.prepare('SELECT kode_ref, COUNT(*) AS kunjungan, SUM(CASE WHEN status = "paid" THEN 1 ELSE 0 END) AS konversi, SUM(CASE WHEN status = "paid" THEN nominal ELSE 0 END) AS total_nominal FROM referral_konversi GROUP BY kode_ref ORDER BY konversi DESC').all(),
+                env.DB.prepare('SELECT pengguna, total FROM referral_kredit ORDER BY total DESC').all()
+              ]);
+              // Build map for quick lookup
+              const konversiMap = {};
+              konversiList.results?.forEach(r => { konversiMap[r.kode_ref] = r; });
+              const kreditMap = {};
+              kreditList.results?.forEach(r => { kreditMap[r.pengguna] = r.total; });
+              const referral = (kodeList.results || []).map(r => ({
+                kode: r.kode,
+                pengguna: r.pengguna,
+                surel: r.surel,
+                nama: r.nama,
+                dibuat: r.dibuat,
+                kunjungan: konversiMap[r.kode]?.kunjungan || 0,
+                konversi: konversiMap[r.kode]?.konversi || 0,
+                total_nominal: konversiMap[r.kode]?.total_nominal || 0,
+                kredit_diberikan: kreditMap[r.pengguna] || 0
+              }));
+              return jawab({ referral }, 200, asal);
+            }
+
+            // ---- Premium check ----
+            if (jalan === '/premium' && request.method === 'GET') {
+              if (!saya) return jawab({ premium: false }, 401, asal);
+              const has = await env.DB.prepare('SELECT 1 FROM pembelian WHERE pengguna = ? LIMIT 1').bind(saya.id).first();
+              return jawab({ premium: !!has }, 200, asal);
+            }
+
+            // ---- Monitoring health check /beli/ (dijalankan otomatis via Cron Trigger tiap 4 jam) ----
+            if (jalan === '/api/monitoring/status' && request.method === 'GET') {
+              const u = new URL(request.url);
+              const limit = Math.min(50, Math.max(1, parseInt(u.searchParams.get('limit') || '10', 10)));
+              const rows = await env.DB.prepare(
+                'SELECT waktu, endpoint, status, ok_qris, ok_turnstile, ok_cta, latency_ms, rincian, alert_terkirim FROM monitoring_checks ORDER BY waktu DESC LIMIT ?'
+              ).bind(limit).all();
+              return jawab({ checks: rows.results || [] }, 200, asal);
+            }
+
+            // ---- Comprehensive monitoring status (latest run) ----
+            if (jalan === '/api/monitoring/status-full' && request.method === 'GET') {
+              const hasil = await cekMonitoringLengkap(env);
+              return jawab({ ok: hasil.ok, waktu: new Date().toISOString(), beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay, rincian: hasil.rincian }, 200, asal);
+            }
+
+            // ---- Manual monitoring test endpoint (POST) ----
+            if (jalan === '/api/monitoring/test' && request.method === 'POST') {
+              const hasil = await cekMonitoringLengkap(env);
+              return jawab({ ok: hasil.ok, rincian: hasil.rincian, beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay }, 200, asal);
+            }
+
+            return jawab({ pesan: 'alamat tidak dikenal' }, 404, asal);
+
+          } catch (e) {
+            return jawab({ pesan: 'permintaan tidak bisa diproses', rincian: String(e.message || e).slice(0, 160) }, 400, asal);
+          }
+        },
+        async scheduled(event, env, ctx) {
+              // Cron Trigger: "0 */4 * * *" (tiap 4 jam: 0,4,8,12,16,20)
+              await cekMonitoringLengkap(env);
+            }
+      };
+
+      // ===== Monitoring /beli/ =====
+          const MONITOR_ENDPOINT = 'https://siappsikotes.my.id/beli/';
+              // FUNNEL_API akan dibangun di fungsi cekFunnelCSV menggunakan env.LAPORAN_TOKEN
+              const TRIPAY_WEBHOOK_URL = ''; // Belum dikonfigurasi - static QRIS manual
+              const TG_BOT_TOKEN = '8649638758:***'; // placeholder, akan diganti via secret
+              const TG_CHAT_ID = '7809584261';
+
+          async function kirimTelegramAlert(env, pesan) {
+              const token = env.TG_BOT_TOKEN || TG_BOT_TOKEN;
+              const chatId = env.TG_CHAT_ID || TG_CHAT_ID;
+              if (!token || token === TG_BOT_TOKEN) return { ok: false, reason: 'token tidak dikonfigurasi' };
+              try {
+                  const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ chat_id: chatId, text: pesan, parse_mode: 'HTML' })
+                  });
+                  return { ok: r.ok, status: r.status };
+              } catch (e) {
+                  return { ok: false, reason: String(e.message || e).slice(0, 100) };
+              }
+          }
+
+          // Cek funnel CSV via DB langsung - verifikasi data funnel ter-update (ekspor harian jam 01:00 WIB)
+                  async function cekFunnelCSV(env) {
+                      try {
+                          // Query DB langsung: ambil 100 event terbaru dari peristiwa (max 2 hari)
+                          const cutoff = new Date(Date.now() - 2*864e5).toISOString();
+                          const rows = await env.DB.prepare('SELECT waktu, jenis, rincian FROM peristiwa WHERE waktu >= ? ORDER BY waktu DESC LIMIT 100').bind(cutoff).all();
+                          const data = rows.results || [];
+                          if (!data.length) return { ok: false, status: 200, rincian: 'Funnel data kosong' };
+                          // Cek data paling baru tidak lebih dari 28 jam (ekspor harian + buffer 4 jam)
+                          const terbaru = new Date(data[0].waktu);
+                          const sekarang = new Date();
+                          const jamLalu = (sekarang - terbaru) / (1000 * 60 * 60);
+                          if (jamLalu > 28) return { ok: false, status: 200, rincian: 'Funnel data usang ' + jamLalu.toFixed(1) + ' jam' };
+                          return { ok: true, status: 200, rincian: 'OK (data ' + jamLalu.toFixed(1) + ' jam lalu)', jumlah: data.length };
+                      } catch (e) {
+                          return { ok: false, status: 0, rincian: 'Funnel error: ' + String(e.message || e).slice(0, 100) };
+                      }
+                  }
+
+          // Cek Tripay webhook (placeholder - static QRIS manual, tidak pakai Tripay)
+          async function cekTripayWebhook() {
+              if (!TRIPAY_WEBHOOK_URL) return { ok: true, status: 0, rincian: 'Tripay tidak dikonfigurasi (static QRIS manual)' };
+              try {
+                  const controller = new AbortController();
+                  const timeout = setTimeout(() => controller.abort(), 10000);
+                  const resp = await fetch(TRIPAY_WEBHOOK_URL + '/health', {
+                      method: 'GET',
+                      signal: controller.signal
+                  });
+                  clearTimeout(timeout);
+                  return { ok: resp.ok, status: resp.status, rincian: resp.ok ? 'OK' : 'HTTP ' + resp.status };
+              } catch (e) {
+                  return { ok: false, status: 0, rincian: 'Tripay error: ' + String(e.message || e).slice(0, 100) };
+              }
+          }
+
+          async function cekBeliPage(env) {
+              const mulai = Date.now();
+              let status = 0;
+              let okQris = 0;
+              let okTurnstile = 0;
+              let okCta = 0;
+              let rincian = '';
+
+              try {
+                  const controller = new AbortController();
+                  const timeout = setTimeout(() => controller.abort(), 15000);
+                  const resp = await fetch(MONITOR_ENDPOINT, {
+                      method: 'GET',
+                      headers: { 'User-Agent': 'SiapPsikotes-Monitor/1.0' },
+                      signal: controller.signal,
+                      cf: { cacheTtl: 0, cacheEverything: false }
+                  });
+                  clearTimeout(timeout);
+                  status = resp.status;
+                  const html = await resp.text();
+                  const latency = Date.now() - mulai;
+
+                  // Cek marker QRIS: gambar QRIS, teks QRIS, container #qris
+                  const adaQris = /qris-bayar\.png/i.test(html) || /id=["']qris["']/i.test(html) || /\bQRIS\b/i.test(html);
+                  // Cek TIDAK ada Turnstile challenge
+                  const adaTurnstile = /cf-chl|turnstile|challenge-platform|__cf_chl/i.test(html);
+                  // Cek tombol CTA bayar
+                  const adaCta = /id=["']ctaBayar["']/i.test(html);
+
+                  okQris = adaQris ? 1 : 0;
+                  okTurnstile = adaTurnstile ? 0 : 1; // 1 = baik (tidak ada Turnstile)
+                  okCta = adaCta ? 1 : 0;
+
+                  const parts = [];
+                  if (!adaQris) parts.push('QRIS hilang');
+                  if (adaTurnstile) parts.push('Turnstile terdeteksi');
+                  if (!adaCta) parts.push('CTA hilang');
+                  rincian = parts.length ? parts.join(', ') : 'OK';
+
+                  // Simpan ke D1
+                  await env.DB.prepare(
+                      'INSERT INTO monitoring_checks (waktu, endpoint, status, ok_qris, ok_turnstile, ok_cta, latency_ms, rincian, alert_terkirim) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)'
+                  ).bind(new Date().toISOString(), MONITOR_ENDPOINT, status, okQris, okTurnstile, okCta, latency, rincian).run();
+
+                  // Jika gagal, kirim alert Telegram
+                  const sehat = status === 200 && okQris && okTurnstile && okCta;
+                  if (!sehat) {
+                      const alertMsg = `⚠️ <b>Monitoring /beli/ GAGAL</b>\n` +
+                          `Waktu: ${new Date().toISOString()}\n` +
+                          `Status HTTP: ${status}\n` +
+                          `QRIS: ${okQris ? '✅' : '❌'}\n` +
+                          `Turnstile: ${okTurnstile ? '✅ (tidak ada)' : '❌ (terdeteksi)'}\n` +
+                          `CTA: ${okCta ? '✅' : '❌'}\n` +
+                          `Latency: ${latency}ms\n` +
+                          `Rincian: ${rincian}`;
+                      const alertResult = await kirimTelegramAlert(env, alertMsg);
+                      // Tandai alert terkirim
+                      await env.DB.prepare(
+                          'UPDATE monitoring_checks SET alert_terkirim = 1 WHERE waktu = (SELECT MAX(waktu) FROM monitoring_checks WHERE endpoint = ?)'
+                      ).bind(MONITOR_ENDPOINT).run();
+                      return { ok: false, status, okQris, okTurnstile, okCta, latency, rincian, alert: alertResult };
+                  }
+                  return { ok: true, status, okQris, okTurnstile, okCta, latency, rincian };
+              } catch (e) {
+                  const latency = Date.now() - mulai;
+                  const errMsg = String(e.message || e).slice(0, 160);
+                  await env.DB.prepare(
+                      'INSERT INTO monitoring_checks (waktu, endpoint, status, ok_qris, ok_turnstile, ok_cta, latency_ms, rincian, alert_terkirim) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)'
+                  ).bind(new Date().toISOString(), MONITOR_ENDPOINT, 0, 0, 0, 0, latency, 'Fetch error: ' + errMsg).run();
+
+                  const alertMsg = `🚨 <b>Monitoring /beli/ ERROR</b>\n` +
+                      `Waktu: ${new Date().toISOString()}\n` +
+                      `Error: ${errMsg}`;
+                  const alertResult = await kirimTelegramAlert(env, alertMsg);
+                  await env.DB.prepare(
+                      'UPDATE monitoring_checks SET alert_terkirim = 1 WHERE waktu = (SELECT MAX(waktu) FROM monitoring_checks WHERE endpoint = ?)'
+                  ).bind(MONITOR_ENDPOINT).run();
+                  return { ok: false, status: 0, okQris: 0, okTurnstile: 0, okCta: 0, latency, rincian: errMsg, alert: alertResult };
+              }
+          }
+
+          // Monitoring komprehensif: /beli/ + funnel CSV + Tripay webhook
+          async function cekMonitoringLengkap(env) {
+              const [beli, funnel, tripay] = await Promise.all([
+                  cekBeliPage(env),
+                  cekFunnelCSV(env),
+                  cekTripayWebhook()
+              ]);
+
+              const semuaSehat = beli.ok && funnel.ok && tripay.ok;
+              const rincianGabungan = [
+                  'beli: ' + (beli.ok ? 'OK' : 'GAGAL - ' + beli.rincian),
+                  'funnel: ' + (funnel.ok ? 'OK' : 'GAGAL - ' + funnel.rincian),
+                  'tripay: ' + (tripay.ok ? 'OK' : 'GAGAL - ' + tripay.rincian)
+              ].join('; ');
+
+              // Simpan ringkasan ke D1 (bisa extend tabel monitoring_checks nanti)
+              if (!semuaSehat) {
+                  const alertMsg = `🚨 <b>Monitoring Komprehensif GAGAL</b>\n` +
+                      `Waktu: ${new Date().toISOString()}\n` +
+                      `Rincian: ${rincianGabungan}`;
+                  await kirimTelegramAlert(env, alertMsg);
+              }
+              return { ok: semuaSehat, beli, funnel, tripay, rincian: rincianGabungan };
+          }
