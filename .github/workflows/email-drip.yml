@@ -1,0 +1,53 @@
+name: Email Drip 1K Leads
+
+# Daily 01:00 UTC (08:00 WIB) — send next email in 5-step sequence
+# Rate limited to 300/day (Brevo free tier)
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write  # commit state.json
+
+jobs:
+  send-drip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run email drip
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_SENDER: ${{ secrets.BREVO_SENDER }}
+          BREVO_TPL_1: ${{ secrets.BREVO_TPL_1 }}
+          BREVO_TPL_2: ${{ secrets.BREVO_TPL_2 }}
+          BREVO_TPL_3: ${{ secrets.BREVO_TPL_3 }}
+          BREVO_TPL_4: ${{ secrets.BREVO_TPL_4 }}
+          BREVO_TPL_5: ${{ secrets.BREVO_TPL_5 }}
+          DAILY_CAP: ${{ secrets.DAILY_CAP }}
+        run: python3 scripts/email-drip.py
+
+      - name: Commit state.json if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet leads/state.json; then
+            git add leads/state.json
+            git commit -m "chore: update email drip state $(date -u +%F)"
+            git push
+          else
+            echo "No state changes"
+          fi
