@@ -98,3 +98,18 @@ CREATE TABLE IF NOT EXISTS batas (
   kunci  TEXT PRIMARY KEY,
   jumlah INTEGER NOT NULL DEFAULT 0
 );
+
+-- Monitoring /beli/ health checks (Cron Trigger tiap 10 menit)
+CREATE TABLE IF NOT EXISTS monitoring_checks (
+  waktu       TEXT NOT NULL,
+  endpoint    TEXT NOT NULL,
+  status      INTEGER NOT NULL,
+  ok_qris     INTEGER NOT NULL,
+  ok_turnstile INTEGER NOT NULL,
+  ok_cta      INTEGER NOT NULL,
+  latency_ms  INTEGER NOT NULL,
+  rincian     TEXT,
+  alert_terkirim INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_monitoring_waktu ON monitoring_checks(waktu);
+CREATE INDEX IF NOT EXISTS idx_monitoring_endpoint ON monitoring_checks(endpoint);

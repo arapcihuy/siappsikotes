@@ -4,6 +4,10 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
+# Cron Trigger: tiap 10 menit untuk monitoring /beli/
+[triggers]
+crons = ["*/10 * * * *"]
+
 # Database D1 (SQLite di edge). Dibuat di akun pemilik, region APAC.
 [[d1_databases]]
 binding = "DB"

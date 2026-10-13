@@ -818,7 +818,7 @@ export default {
               return jawab({ premium: !!has }, 200, asal);
             }
 
-            // ---- Monitoring health check /beli/ (dijalankan otomatis via Cron Trigger tiap 4 jam) ----
+            // ---- Monitoring health check /beli/ (dijalankan otomatis via Cron Trigger tiap 10 menit) ----
             if (jalan === '/api/monitoring/status' && request.method === 'GET') {
               const u = new URL(request.url);
               const limit = Math.min(50, Math.max(1, parseInt(u.searchParams.get('limit') || '10', 10)));
@@ -847,7 +847,7 @@ export default {
           }
         },
         async scheduled(event, env, ctx) {
-              // Cron Trigger: "0 */4 * * *" (tiap 4 jam: 0,4,8,12,16,20)
+              // Cron Trigger: "*/10 * * * *" (tiap 10 menit)
               await cekMonitoringLengkap(env);
             }
       };
