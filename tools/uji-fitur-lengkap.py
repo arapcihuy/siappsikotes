@@ -1271,13 +1271,17 @@ def main():
         # Diperiksa statis supaya tidak menambah halaman peramban di tengah rangkaian
         # (kebocoran keadaan antar bagian sudah tiga kali menahan pengiriman).
         _beli = open(os.path.join(ROOT, 'beli', 'index.html'), encoding='utf-8').read()
+        # Skrip nominal/kode bayar /beli/ dipindah ke berkas terpisah (beli/script.js)
+        # saat optimasi kecepatan 73ed5e8 — diperiksa sebagai satu kesatuan halaman.
+        _beli_js = open(os.path.join(ROOT, 'beli', 'script.js'), encoding='utf-8').read()
+        _beli_semua = _beli + '\n' + _beli_js
         _depan = open(os.path.join(ROOT, 'psikotes', 'index.html'), encoding='utf-8').read()
         al = {
             'halamanAda': len(_beli) > 2000,
             'adaQr': 'qris-bayar.png' in _beli,
             'adaEmpatLangkah': _beli.count('<li>') >= 4,
-            'adaNominalUnik': 'beliNominal' in _beli and 'beliRujukan' in _beli,
-            'adaSkripNominal': 'tni_kode_bayar' in _beli,
+            'adaNominalUnik': 'beliNominal' in _beli_semua and 'beliRujukan' in _beli_semua,
+            'adaSkripNominal': 'tni_kode_bayar' in _beli_semua,
             'adaTombolBukti': 'beliBukti' in _beli and 'mailto:' in _beli,
             'halamanDepanBersih': '<section id="beli"' not in _depan and 'beliNominal' not in _depan,
             'menuMengarahKeBeli': '../beli/' in _depan or 'beli/' in _depan,
