@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0f18">
+<title>Latihan Psikotes Gratis TNI &amp; Soal Psikotes TNI (SiapPsikotes)</title>
+<meta name="description" content="Latihan psikotes gratis untuk persiapan TNI: soal TIU verbal, numerik, logika + TWK wawasan kebangsaan. 40 soal contoh bisa dikerjakan tanpa akun.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://siappsikotes.my.id/latihan-psikotes-gratis-tni/">
+<meta property="og:title" content="Latihan Psikotes Gratis TNI &amp; Soal Psikotes TNI (SiapPsikotes)">
+<meta property="og:description" content="Latihan psikotes gratis untuk persiapan TNI: soal TIU verbal, numerik, logika + TWK wawasan kebangsaan. 40 soal contoh bisa dikerjakan tanpa akun.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://siappsikotes.my.id/latihan-psikotes-gratis-tni/">
+<meta property="og:image" content="https://siappsikotes.my.id/static/og/latihan-psikotes-gratis-tni.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latihan Psikotes Gratis TNI &amp; Soal Psikotes TNI (SiapPsikotes)">
+<meta name="twitter:image" content="https://siappsikotes.my.id/static/og/latihan-psikotes-gratis-tni.png">
+<meta name="twitter:image:alt" content="Latihan Psikotes Gratis TNI &amp; Soal Psikotes TNI (SiapPsikotes)">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="SiapPsikotes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
+<link rel="manifest" href="../manifest.json">
+<style>
+  /* ============ desain halaman pendukung — satu keluarga dengan beranda (navy + emas) ============ */
+  :root {
+    --bg:#0a0f18; --surface:#121a28; --surface2:#172133;
+    --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+    --text:#eaf1f8; --muted:#b3c0d1; --isi:#c9d5e3;
+    --gold:#e6c552; --gold-dark:#c9a227; --blue:#6db3ff; --ok:#4ade80;
+  }
+  * { box-sizing:border-box; }
+  /* .tombol memakai display:inline-flex, jadi atribut hidden kalah oleh gaya penulis.
+     Tanpa baris ini tombol "Tampilkan kode akses" tetap terlihat setelah diklik. */
+  [hidden] { display:none !important; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body {
+    margin:0; color:var(--text);
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(230,197,82,.11), transparent 62%),
+      radial-gradient(760px 400px at 94% 1%, rgba(109,179,255,.08), transparent 62%),
+      var(--bg);
+    background-repeat:no-repeat;
+    font:16.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 22px; }
+  .wrap.sempit { max-width:780px; }
+  h1 { font-size:clamp(28px,4.4vw,38px); line-height:1.15; letter-spacing:-1px; font-weight:800; margin:0 0 6px; }
+  .berlaku { color:var(--muted); font-size:14.5px; margin:10px 0 22px; }
+  hr { border:0; border-top:1px solid var(--line); margin:30px 0; }
+  a { color:var(--blue); }
+  main a { text-decoration:underline; text-underline-offset:2px; text-decoration-color:rgba(109,179,255,.45); }
+  main a:hover { text-decoration-color:var(--gold); color:var(--gold); }
+  :focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:6px; }
+  .lewati { position:absolute; left:-9999px; background:var(--gold); color:#1a1405; font-weight:700;
+    padding:10px 16px; border-radius:0 0 10px 0; z-index:30; }
+  .lewati:focus { left:0; top:0; }
+
+  /* ---------- kepala ---------- */
+  header { border-bottom:1px solid var(--line); background:rgba(10,15,24,.86);
+    position:sticky; top:0; z-index:10; backdrop-filter:blur(10px); }
+  .kepala { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 22px; }
+  .merek { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:-.2px;
+    color:var(--text); text-decoration:none; }
+  .merek img { width:30px; height:30px; border-radius:8px; display:block; }
+  .kepala nav { display:flex; align-items:center; gap:22px; font-size:14.5px; }
+  .kepala nav a { text-decoration:none; }
+  .kepala nav a:not(.tombol) { color:var(--muted); }
+  .kepala nav a:not(.tombol):hover { color:var(--text); }
+  .kepala nav a[aria-current="page"] { color:var(--gold); font-weight:700; }
+
+  /* ---------- pita kepala ---------- */
+  main { padding-bottom:8px; }
+  .pita {
+    margin:26px 0 22px; padding:30px 28px 28px; border-radius:20px;
+    border:1px solid rgba(230,197,82,.28);
+    background:linear-gradient(150deg, rgba(230,197,82,.16), rgba(230,197,82,.04) 46%, rgba(23,33,51,.55));
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+  }
+  .lencana { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.1em;
+    text-transform:uppercase; color:#1a1405; background:linear-gradient(180deg,#f5c542,var(--gold-dark));
+    padding:6px 12px; border-radius:999px; margin-bottom:14px; }
+  .pita h1 { margin:0 0 12px; font-size:clamp(28px,4.6vw,40px); line-height:1.14;
+    letter-spacing:-1.1px; font-weight:800; }
+  .pita .dek { margin:0; color:#c3cfdd; font-size:clamp(16px,1.9vw,18px); max-width:44em; }
+  .aksi { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+
+  /* ---------- tombol ---------- */
+  .tombol { display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    min-height:48px; padding:13px 22px; border-radius:12px; text-decoration:none;
+    font-weight:700; font-size:16px; border:1px solid rgba(0,0,0,.14);
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark)); color:#1a1405;
+    box-shadow:0 10px 24px rgba(201,162,39,.22); transition:filter .18s ease, transform .18s ease; }
+  .tombol:hover { filter:brightness(1.06); transform:translateY(-1px); color:#1a1405; }
+  .tombol.sekunder { background:#1e2a3d; color:var(--text); border-color:rgba(255,255,255,.28);
+    box-shadow:0 6px 16px rgba(0,0,0,.22); font-weight:600; }
+  .tombol.sekunder:hover { border-color:var(--gold); color:var(--gold); }
+  .tombol.kecil { min-height:38px; padding:8px 14px; font-size:14px; border-radius:10px; }
+  button.tombol { font-family:inherit; cursor:pointer; }
+
+  /* ---------- strip angka ---------- */
+  .angka-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:12px; margin:0 0 24px; }
+  .angka-strip div { border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.008)); }
+  .angka-strip b { display:block; font-size:26px; line-height:1.2; color:var(--gold); letter-spacing:-.6px; }
+  .angka-strip span { font-size:12.5px; color:var(--muted); }
+
+  /* ---------- isi ---------- */
+  .lead { font-size:17.5px; color:var(--isi); margin:0 0 6px; }
+  .muted { color:var(--muted); font-size:14.5px; }
+  .catatan { color:var(--muted); font-size:14.5px; margin:10px 0 0; line-height:1.65; }
+  p { margin:12px 0; }
+  h2 { display:flex; gap:13px; align-items:baseline; font-size:clamp(20px,2.6vw,24px); line-height:1.3;
+    margin:44px 0 12px; padding-top:30px; border-top:1px solid var(--line);
+    letter-spacing:-.4px; font-weight:800; }
+  h2::before { content:""; flex:0 0 auto; width:4px; align-self:stretch; min-height:24px; border-radius:4px;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark)); }
+  h2:first-of-type { border-top:0; padding-top:0; }
+  h3 { font-size:17px; margin:24px 0 8px; letter-spacing:-.2px; }
+  ul, ol { padding-left:24px; margin:12px 0; }
+  li { margin:9px 0; }
+  li::marker { color:var(--gold); }
+  strong { color:var(--text); }
+
+  /* ---------- tanya-jawab ---------- */
+  details { border:1px solid var(--line); border-radius:14px; background:var(--surface);
+    margin:10px 0; overflow:hidden; }
+  details summary { display:flex; align-items:center; justify-content:space-between; gap:14px;
+    min-height:50px; padding:15px 18px; cursor:pointer; font-weight:700; list-style:none; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::after { content:""; flex:0 0 auto; width:9px; height:9px; margin-right:3px;
+    border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+    transform:rotate(45deg); transition:transform .2s ease; }
+  details[open] { border-color:rgba(230,197,82,.32); }
+  details[open] summary::after { transform:rotate(225deg); }
+  details > p, details > ul, details > ol { margin:0; padding:0 18px 16px; color:var(--isi); }
+
+  /* ---------- kaki ---------- */
+  footer { margin-top:56px; border-top:1px solid var(--line); padding:26px 0 48px;
+    color:var(--muted); font-size:14.5px; }
+  .tautan-kaki { display:flex; flex-wrap:wrap; gap:8px 20px; margin:0 0 16px; }
+  .tautan-kaki a { color:var(--blue); text-decoration:none; }
+  .tautan-kaki a:hover { color:var(--gold); }
+  footer p { margin:8px 0; }
+
+  /* ---------- khusus halaman beli ---------- */
+  .beli-dua { display:grid; gap:26px; grid-template-columns:300px 1fr; align-items:start; margin:8px 0 4px; }
+  @media (max-width:820px) { .beli-dua { grid-template-columns:1fr; } }
+  .qris-kotak { background:#fff; border-radius:16px; padding:14px;
+    border:1px solid rgba(230,197,82,.32); box-shadow:0 18px 38px rgba(0,0,0,.42); }
+  .qris-kotak img { width:100%; height:auto; display:block; border-radius:8px; }
+  .kartu-bayar { border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008)), var(--surface);
+    padding:18px 20px; margin:0 0 16px; }
+  .label { margin:0; font-size:12.5px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--muted); font-weight:700; }
+  .nominal { font-size:clamp(30px,5vw,38px); font-weight:800; color:var(--gold);
+    letter-spacing:-1px; line-height:1.15; margin:6px 0 4px; user-select:all; -webkit-user-select:all; }
+  .rujukan { font-size:20px; font-weight:800; color:var(--text); letter-spacing:.5px; margin:2px 0 0;
+    user-select:all; -webkit-user-select:all; }
+  .kode-baris { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:6px; }
+  .langkah { padding-left:22px; line-height:1.75; }
+  .langkah li { margin-bottom:8px; }
+  .langkah li::marker { color:var(--gold); font-weight:800; }
+  .percikan { display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; }
+  .percikan span { font-size:13.5px; color:var(--muted); border:1px solid var(--line2);
+    background:var(--surface); border-radius:999px; padding:6px 13px; }
+  .nota-merchant { border:1px solid rgba(230,197,82,.3); border-left:3px solid var(--gold);
+    border-radius:14px; padding:13px 15px; margin:0 0 14px; color:var(--isi);
+    background:linear-gradient(180deg, rgba(230,197,82,.09), rgba(230,197,82,.02)), var(--surface);
+    font-size:14px; line-height:1.6; }
+  .nota-merchant b { color:var(--gold); }
+
+  @media (max-width:700px) {
+    .kepala { padding:12px 18px; gap:10px; }
+    .kepala nav a:not(.tombol) { display:none; }
+    .merek span { font-size:15.5px; }
+    .pita { padding:24px 20px 22px; border-radius:16px; margin:18px 0 18px; }
+    .angka-strip { grid-template-columns:repeat(2,1fr); }
+    h2 { margin-top:36px; padding-top:24px; }
+    .qris-kotak { padding:12px; }
+  }
+  @media (max-width:560px) {
+    /* tabel 2 kolom di layar sempit: tiap baris jadi kartu supaya kata tidak terpotong */
+    table.hasil thead { display:none; }
+    table.hasil tbody tr { display:block; padding:12px 14px 14px; border-bottom:1px solid var(--line); }
+    table.hasil tbody tr:last-child { border-bottom:0; }
+    table.hasil tbody td { display:block; width:auto; border:0; padding:2px 0; overflow-wrap:break-word; }
+    table.hasil tbody td:first-child { font-weight:700; color:var(--text); }
+    table.hasil tbody td:first-child::before { display:none; }
+    table.hasil tbody td::before { content:attr(data-label); display:block; margin:6px 0 1px;
+      font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+    table.hasil tbody tr:hover td { background:transparent; }
+    caption { padding-bottom:2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    * { transition:none !important; }
+  }
+  @media print {
+    body { background:#fff; color:#000; }
+    header, .lewati { display:none; }
+    .pita, .kartu-bayar, .angka-strip div, details { border-color:#bbb; background:#fff; box-shadow:none; }
+    .pita .dek, .muted, .catatan, .lead { color:#222; }
+    h2::before { background:#999; }
+    a { color:#000; }
+  }
+</style>
+<style>
+.artikel-kepala{max-width:760px}
+.artikel p{line-height:1.75}
+.daftar-isi{background:var(--surface2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 20px;margin:24px 0}
+.daftar-isi p{margin:0 0 8px;color:var(--muted);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+.daftar-isi ol{margin:0;padding-left:22px}
+.daftar-isi a{color:#e6c552;text-decoration:none}
+.daftar-isi a:hover{text-decoration:underline}
+.tanya{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px;margin:16px 0;background:var(--surface2)}
+.tanya-nomor{color:#e6c552;font-weight:700;margin-right:6px}
+.tanya-teks{margin:0 0 10px;font-weight:600;color:var(--text)}
+.tanya .pilih{list-style:upper-alpha;margin:0 0 10px;padding-left:24px;color:var(--isi)}
+.tanya .pilih li{margin:2px 0}
+.bahas{border-top:1px dashed rgba(255,255,255,.18);padding-top:10px}
+.bahas summary{cursor:pointer;color:#e6c552;font-weight:600}
+.bahas-isi{white-space:pre-line;margin:10px 0 0;color:var(--isi)}
+.artikel table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+.artikel th,.artikel td{border:1px solid rgba(255,255,255,.16);padding:9px 11px;text-align:left;color:var(--isi)}
+.artikel th{background:var(--surface2);color:var(--text)}
+.artikel .catatan{background:var(--surface2);border-left:3px solid #e6c552;padding:12px 16px;border-radius:0 10px 10px 0;margin:18px 0}
+.artikel .tautan-artikel{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+@media (max-width:560px){
+  .artikel table,.artikel thead,.artikel tbody,.artikel th,.artikel td,.artikel tr{display:block}
+  .artikel thead{display:none}
+  .artikel td{border:none;border-bottom:1px solid rgba(255,255,255,.12);padding:8px 0}
+  .artikel td::before{content:attr(data-label);display:block;color:var(--muted);font-size:.82rem;margin-bottom:2px}
+}
+</style>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Beranda",
+     "item": "https://siappsikotes.my.id/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Latihan Psikotes Gratis untuk Persiapan TNI: Soal TIU, TWK & Cara Berlatih yang Efektif",
+     "item": "https://siappsikotes.my.id/latihan-psikotes-gratis-tni/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "headline": "Latihan Psikotes Gratis untuk Persiapan TNI: Soal TIU, TWK & Cara Berlatih yang Efektif",
+   "description": "Latihan psikotes gratis untuk persiapan TNI: soal TIU verbal, numerik, logika + TWK wawasan kebangsaan. 40 soal contoh bisa dikerjakan tanpa akun.",
+   "inLanguage": "id",
+   "mainEntityOfPage": "https://siappsikotes.my.id/latihan-psikotes-gratis-tni/",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "author": {
+    "@type": "Organization",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   },
+   "isPartOf": {
+    "@type": "WebSite",
+    "name": "SiapPsikotes",
+    "url": "https://siappsikotes.my.id/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Berapa lama sebaiknya latihan sebelum psikotes TNI?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Kalau masih ada dua minggu, 25–30 soal berwaktu setiap hari sudah cukup untuk melihat kemajuan, ditambah satu sesi penuh tanpa jeda setiap akhir pekan. Kalau waktunya tinggal 2–3 hari, jangan menambah materi baru: fokus pada kategori yang paling sering salah dan biasakan bekerja dengan batas waktu ketat."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apakah soal di SiapPsikotes sama dengan soal ujian TNI asli?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tidak. Seluruh soal di bank soal kami adalah karya penyusun sendiri untuk latihan, disusun agar polanya mendekati psikotes TNI, Polri, BUMN, CPNS yang umum. Kami bukan situs instansi mana pun dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengenali titik lemah, bukan menggantikan ujian resmi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apakah latihan psikotes gratis di sini benar-benar gratis tanpa batas waktu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ya. 40 soal contoh di halaman contoh gratis tanpa batas waktu akses, dan berjalan offline setelah dibuka pertama kali. Yang berbayar hanya materi lengkap di aplikasi latihan (1.348 soal, 9 jenis tes, pembahasan, Laporan Lengkap) seharga Rp 39.000 sekali bayar."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Apakah hasil latihan ini bisa disebut skor IQ atau skor psikotes TNI?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tidak. Hasil di aplikasi ini alat bantu untuk mengukur kesiapan sendiri, bukan laporan hasil resmi dan bukan skor IQ resmi. Skor IQ yang diakui hanya keluar dari pemeriksaan psikolog berlisensi dengan alat baku. Latihan di sini membantu kamu mengenali titik lemah, bukan menggantikan pengukuran tersebut."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana kalau saya menemukan pembahasan yang terasa keliru?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Laporkan lewat halaman mutu atau kontak yang tersedia di situs. Bank soal kami diperiksa dengan pedoman mutu yang dapat diperiksa ulang, tetapi 1.348 butir tidak bebas dari kemungkinan salah; laporan pembaca adalah bagian dari pemeriksaan itu dan kami perbaiki setelah diverifikasi."
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+</head>
+<body>
+<a class="lewati" href="#isi">Langsung ke isi</a>
+
+<header>
+  <div class="wrap kepala">
+    <a class="merek" href="../"><img src="../static/icons/icon-192.png" alt="" width="30" height="30"><span>SiapPsikotes</span></a>
+    <nav aria-label="Halaman">
+      <a href="../psikotes/">Aplikasi latihan</a>
+      <a href="../contoh/">Contoh gratis</a>
+      <a href="../beli/">Harga</a>
+      <a href="../mutu/">Mutu</a>
+      <a class="tombol sekunder kecil" href="../beli/">Beli akses</a>
+    </nav>
+  </div>
+</header>
+
+<main id="isi" class="wrap artikel">
+
+  <section class="pita artikel-kepala">
+    <span class="lencana">Panduan</span>
+    <h1>Latihan Psikotes Gratis untuk Persiapan TNI: Soal TIU, TWK & Cara Berlatih yang Efektif</h1>
+    <p class="dek">Halaman ini menyediakan latihan psikotes gratis terstruktur untuk calon TNI. Mengambil soal dari bank SiapPsikotes (1.348 soal, 9 jenis tes), kamu bisa mencoba 40 soal contoh tanpa akun, lalu mengakses seluruh bank soal TIU, TWK, dan kepribadian di aplikasi latihan.</p>
+  </section>
+  <div class="daftar-isi">
+    <p>Isi halaman</p>
+    <ol>
+      <li><a href="#struktur-psikotes-tni-tiu-twk-dan-tkp">Struktur psikotes TNI: TIU, TWK, dan TKP</a></li>
+      <li><a href="#mengapa-latihan-psikotes-gratis-di-siappsikotes-">Mengapa latihan psikotes gratis di SiapPsikotes berbeda</a></li>
+      <li><a href="#8-contoh-soal-verbal-sinonim-antonim-analogi">8 contoh soal verbal (sinonim, antonim, analogi)</a></li>
+      <li><a href="#8-contoh-soal-numerik-deret-angka">8 contoh soal numerik & deret angka</a></li>
+      <li><a href="#8-contoh-soal-penalaran-logika">8 contoh soal penalaran & logika</a></li>
+      <li><a href="#8-contoh-soal-twk-wawasan-kebangsaan">8 contoh soal TWK wawasan kebangsaan</a></li>
+      <li><a href="#strategi-latihan-2-minggu-sebelum-psikotes-tni">Strategi latihan 2 minggu sebelum psikotes TNI</a></li>
+      <li><a href="#kesalahan-umum-calon-tni-di-psikotes-cara-mengat">Kesalahan umum calon TNI di psikotes & cara mengatasinya</a></li>
+      <li><a href="#mulai-latihan-psikotes-gratis-sekarang">Mulai latihan psikotes gratis sekarang</a></li>
+    </ol>
+  </div>
+
+  <p>Seleksi TNI (Tentara Nasional Indonesia) memakai psikotes sebagai salah satu gerbang awal sebelum wawancara dan tes kesehatan. Yang diuji mencakup intelegensi umum (TIU: verbal, numerik, logika), wawasan kebangsaan (TWK), serta kecenderungan kepribadian (TKP). Banyak calon TNI yang lulus administrasi tapi terhenti di psikotes karena tidak terbiasa dengan tekanan waktu dan pola soal yang unfamiliar.</p>
+  <p>SiapPsikotes menyediakan latihan psikotes gratis yang terstruktur untuk persiapan TNI. Bank soal kami berisi 1.348 soal untuk 9 jenis tes yang sudah diperiksa dengan pedoman mutu yang terbuka. Yang gratis: 40 soal contoh berpembahasan di halaman contoh — tanpa akun, langsung bisa dikerjakan. Yang berbayar: seluruh bank soal TIU, TWK, kepribadian, tes gambar, kraepelin, dan bahasa Inggris plus Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara) seharga Rp 39.000 sekali bayar.</p>
+
+  <h2 id="struktur-psikotes-tni-tiu-twk-dan-tkp">Struktur psikotes TNI: TIU, TWK, dan TKP</h2>
+  <p>Psikotes TNI biasanya terdiri dari tiga blok utama yang dikerjakan berurutan atau dipisah sesi:</p>
+  <p>Tes Intelegensi Umum (TIU) mengukur kecepatan dan ketepatan berpikir lewat tiga subtes: kemampuan verbal (sinonim, antonim, analogi), kemampuan numerik (deret angka, aritmetika, perbandingan), serta penalaran & logika (silogisme, urutan kejadian). Waktu per soal rata-rata 45–60 detik.</p>
+  <p>Tes Wawasan Kebangsaan (TWK) mengukur pengetahuan dasar kebangsaan: Pancasila, UUD 1945, sejarah perjuangan, lembaga negara, simbol negara, dan perkembangan terkini. Jumlah soal biasanya 40–60 butir dengan waktu 30–45 menit.</p>
+  <p>Tes Kepribadian (TKP) bukan tes benar/salah. Bentuknya pernyataan sikap kerja yang harus dipilih atau diurutkan. Yang dinilai adalah konsistensi jawaban, kelengkapan, dan kecenderungan sikap yang cocok dengan nilai-nilai TNI (disiplin, loyalitas, jujur, kerja sama).</p>
+  <ul>
+    <li>TIU: verbal + numerik + logika — kecepatan & ketepatan berpikir.</li>
+    <li>TWK: wawasan kebangsaan — hafalan faktual & pemahaman konstitusi.</li>
+    <li>TKP: kepribadian situasional — konsistensi & kecocokan nilai TNI.</li>
+  </ul>
+
+  <h2 id="mengapa-latihan-psikotes-gratis-di-siappsikotes-">Mengapa latihan psikotes gratis di SiapPsikotes berbeda</h2>
+  <p>Banyak situs latihan psikotes gratis hanya menumpuk soal tanpa pembahasan, atau menjual kunci jawaban palsu yang menjanjikan "soal TNI asli". SiapPsikotes tidak melakukan hal itu. Prinsip kami: soal latihan adalah alat untuk mengenali pola, bukan naskah ujian yang dibocorkan.</p>
+  <p>Setiap soal di bank SiapPsikotes (1.348 butir) adalah karya penyusun sendiri, disusun agar pola dan tingkat kesulitannya mendekati psikotes kerja dan akademik yang umum dipakai di Indonesia — termasuk TNI, Polri, BUMN, CPNS. Soal diperiksa dengan pedoman mutu yang bisa diverifikasi ulang (lihat halaman mutu). Pembahasan tiap soal memuat langkah berpikir, bukan hanya kunci jawaban.</p>
+  <p>Fitur latihan gratis (tanpa akun): 40 soal contoh mewakili 9 jenis tes, tiap soal punya tombol pembahasan yang bisa dibuka setelah menjawab. Latihan berjalan penuh offline setelah halaman pertama kali dibuka — praktis untuk latihan di perjalanan atau tempat tanpa sinyal.</p>
+  <div class="catatan"><p>SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun. Kami tidak berafiliasi dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan.</p></div>
+
+  <h2 id="8-contoh-soal-verbal-sinonim-antonim-analogi">8 contoh soal verbal (sinonim, antonim, analogi)</h2>
+  <p>Bagian verbal TIU menguji ketepatan makna kata dan hubungan antar kata. Kuncinya: tentukan dulu jenis hubungan (makna sama, lawan, sebab-akibat, bagian-dari), baru cari jawabannya. Jangan terburu-buru membaca pilihan — baca pertanyaan sampai tuntas.</p>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">1.</span>PERWIRA : TNI = KOMISIONER : ...</p>
+    <ol class="pilih">
+      <li>POLRI</li>
+      <li>BPK</li>
+      <li>KPK</li>
+      <li>DPR</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: POLRI
+Perwira = pangkat di TNI. Komisioner = pangkat di Polri.
+INGAT: Analogi: tentukan dulu hubungannya (alat–profesi, bagian–keseluruhan, sinonim, antonim, sebab–akibat).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">2.</span>Kalimat manakah yang menggunakan kata penghubung dengan TEPAT?</p>
+    <ol class="pilih">
+      <li>Dia datang karena meskipun hujan</li>
+      <li>Dia datang meskipun hujan deras</li>
+      <li>Dia datang tetapi karena hujan</li>
+      <li>Dia datang walaupun dan hujan</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Dia datang meskipun hujan deras
+&#x27;Meskipun&#x27; diikuti klausa subordinat. &#x27;Meskipun hujan deras&#x27; benar secara tata bahasa.
+INGAT: Soal verbal TNI paling sering soal sinonim, antonim, dan bentuk baku.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">3.</span>TAMU : HOTEL = PASIEN : ...</p>
+    <ol class="pilih">
+      <li>Obat</li>
+      <li>Dokter</li>
+      <li>Perawat</li>
+      <li>Rumah sakit</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Rumah sakit
+Tamu dirawat/dilayani di hotel, pasien dirawat/dilayani di rumah sakit. Hubungannya: orang yang dilayani → tempat pelayanan.
+INGAT: Analogi: tentukan dulu hubungannya (alat–profesi, bagian–keseluruhan, sinonim, antonim, sebab–akibat).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">4.</span>Sinonim kata KOMANDAN adalah...</p>
+    <ol class="pilih">
+      <li>Tentara</li>
+      <li>Prajurit</li>
+      <li>Pemimpin</li>
+      <li>Bawahan</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Pemimpin
+Komandan = pemimpin. TRIK: komandan = pemimpin = komando.
+INGAT: Sinonim = persamaan makna. Pilih kata yang paling dekat maknanya, bukan yang hanya searah.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">5.</span>Kata yang bersinonim dengan kata TANGKAS adalah ...</p>
+    <ol class="pilih">
+      <li>Cekatan</li>
+      <li>Ceroboh</li>
+      <li>Lemah</li>
+      <li>Lamban</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Cekatan
+Tangkas berarti cepat dan terampil dalam bergerak atau bertindak, sehingga bersinonim dengan cekatan. Lamban, ceroboh, dan lemah merupakan makna yang berlawanan.
+INGAT: Sinonim = persamaan makna. Pilih kata yang paling dekat maknanya, bukan yang hanya searah.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">6.</span>Manakah penulisan yang BAKU menurut KBBI?</p>
+    <ol class="pilih">
+      <li>kwitans</li>
+      <li>kuitansi</li>
+      <li>kuitanzi</li>
+      <li>kwitansi</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: kuitansi
+Bentuk baku menurut KBBI adalah kuitansi, bukan kwitansi.
+INGAT: Bentuk baku KBBI: nasihat, praktik, analisis, risiko, apotek, atlet, izin, jadwal, kuitansi, ambulans, ekspor, fotokopi.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">7.</span>PENSIL : MENULIS = PISAU : ...</p>
+    <ol class="pilih">
+      <li>Menajamkan</li>
+      <li>Memotong</li>
+      <li>Dapur</li>
+      <li>Besi</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Memotong
+Pensil dipakai untuk menulis, jadi pisau dipakai untuk memotong. Arah relasinya alat menuju fungsinya: pensil : menulis = pisau : memotong. &#x27;Menajamkan&#x27; adalah perbuatan orang terhadap pisau, sehingga arahnya terbalik.
+INGAT: Jaga arah relasi: alat menuju fungsinya, bukan alat menuju perbuatan orang atas alat itu.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">8.</span>Antonim kata MAJEMUK adalah ...</p>
+    <ol class="pilih">
+      <li>Campuran</li>
+      <li>Tunggal</li>
+      <li>Rumit</li>
+      <li>Utama</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Tunggal
+Majemuk berarti terdiri atas lebih dari satu unsur, lawannya tunggal (hanya satu unsur): majemuk &gt;&lt; tunggal. &#x27;Campuran&#x27; justru bersinonim dengan majemuk, sedangkan &#x27;Rumit&#x27; dan &#x27;Utama&#x27; tidak berbicara soal jumlah unsur.
+INGAT: Hitung unsur: majemuk (banyak unsur) lawan tunggal (satu unsur); lawan kata rumit adalah sederhana.</p>
+    </details>
+  </article>
+
+  <h2 id="8-contoh-soal-numerik-deret-angka">8 contoh soal numerik & deret angka</h2>
+  <p>Numerik TIU mencakup deret angka, aritmetika cepat, dan perbandingan. Untuk deret: tulis selisih antar suku di kertas coret. Pola paling umum: selisih konstan, selisih berjalan (2, 4, 6...), atau pola kali/bagi. Jangan hitung di kepala untuk soal berlapis.</p>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">1.</span>1248 + 763 - 459 = ...</p>
+    <ol class="pilih">
+      <li>1552</li>
+      <li>1562</li>
+      <li>1572</li>
+      <li>1542</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 1552
+Kerjakan berurutan: 1248 + 763 = 2011, lalu 2011 − 459 = 1552.
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">2.</span>144 / 12 = ...</p>
+    <ol class="pilih">
+      <li>14</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 12
+144 ÷ 12 = 12 (cek: 12 × 12 = 144).
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">3.</span>1000 / 25 = ...</p>
+    <ol class="pilih">
+      <li>40</li>
+      <li>45</li>
+      <li>30</li>
+      <li>35</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 40
+1000 ÷ 25 = 40 (cek: 25 × 40 = 1000).
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">4.</span>415 + 773 - 107 = ...</p>
+    <ol class="pilih">
+      <li>1081</li>
+      <li>1072</li>
+      <li>1096</li>
+      <li>1079</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 1081
+Kerjakan berurutan: 415 + 773 = 1188, lalu 1188 − 107 = 1081.
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">5.</span>374 ÷ 22 = ...</p>
+    <ol class="pilih">
+      <li>14</li>
+      <li>21</li>
+      <li>18</li>
+      <li>17</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 17
+374 ÷ 22 = 17 (cek: 22 × 17 = 374).
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">6.</span>4/5 - 1/10 = ...</p>
+    <ol class="pilih">
+      <li>7/10</li>
+      <li>8/10</li>
+      <li>3/5</li>
+      <li>7/11</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 7/10
+Samakan penyebut ke 10: 4/5 = 8/10 dan 1/10 = 1/10. Selisih = 7/10.
+INGAT: Pecahan: samakan penyebut dulu, baru jumlahkan atau kurangkan pembilangnya.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">7.</span>9² = ...</p>
+    <ol class="pilih">
+      <li>729</li>
+      <li>18</li>
+      <li>9</li>
+      <li>81</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 81
+9² = 9 × 9 = 81.
+INGAT: Hafal kuadrat 1-25 dan pangkat kecil (2⁵=32, 2⁸=256, 2¹⁰=1024).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">8.</span>8,1 + 4,4 = ...</p>
+    <ol class="pilih">
+      <li>12,5</li>
+      <li>12,4</li>
+      <li>12,7</li>
+      <li>12,6</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 12,5
+8,1 + 4,4 = 12,5.
+INGAT: Numerik: kerjakan dari kiri ke kanan dan tulis hasil antara supaya tidak keliru.</p>
+    </details>
+  </article>
+
+  <h2 id="8-contoh-soal-penalaran-logika">8 contoh soal penalaran & logika</h2>
+  <p>Soal logika tidak butuh hitungan rumit; yang diuji ketelitian membaca premis. Kesalahan paling umum: menambahkan asumsi yang tidak tertulis di soal. Contoh: "Semua A adalah B" tidak berarti "Semua B adalah A". Latih pola silogisme standar dan urutan kejadian.</p>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">1.</span>Semua prajurit TNI disiplin. Budi prajurit TNI. Kesimpulan:</p>
+    <ol class="pilih">
+      <li>Budi pasti disiplin</li>
+      <li>Tidak bisa disimpulkan</li>
+      <li>Budi mungkin disiplin</li>
+      <li>Budi tidak disiplin</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Budi pasti disiplin
+Silogisme valid: premis mayor + minor valid → Budi pasti disiplin.
+INGAT: Silogisme: &#x27;semua A adalah B&#x27; + &#x27;X adalah A&#x27; → X pasti B. Kalau hanya tahu X adalah B, X belum tentu A.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">2.</span>Tidak ada prajurit yang penakut. Andi penakut. Maka:</p>
+    <ol class="pilih">
+      <li>Andi bukan prajurit</li>
+      <li>Andi prajurit terlatih</li>
+      <li>Tidak bisa disimpulkan</li>
+      <li>Andi mungkin prajurit</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Andi bukan prajurit
+Tidak ada prajurit yang penakut → semua penakut bukan prajurit. Andi penakut → Andi bukan prajurit.
+INGAT: Silogisme: &#x27;semua A adalah B&#x27; + &#x27;X adalah A&#x27; → X pasti B. Kalau hanya tahu X adalah B, X belum tentu A.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">3.</span>Deret huruf: A, C, F, J, O. Huruf berikutnya...</p>
+    <ol class="pilih">
+      <li>U</li>
+      <li>V</li>
+      <li>S</li>
+      <li>T</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: U
+Ubah ke posisi alfabet: A(1), C(3), F(6), J(10), O(15). Selisihnya +2, +3, +4, +5, maka berikutnya +6. O(15) + 6 = 21 = huruf U.
+INGAT: Deret huruf: ubah huruf menjadi nomor (A=1 sampai Z=26), lalu cari selisihnya.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">4.</span>Deret huruf: B, E, H, K, N. Huruf berikutnya...</p>
+    <ol class="pilih">
+      <li>Q</li>
+      <li>R</li>
+      <li>S</li>
+      <li>P</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Q
+Selisih: +3. B(2)+3=E(5), E+3=H(8), H+3=K(11), K+3=N(14), N+3=Q(17). Jawaban: Q.
+INGAT: Deret huruf: ubah huruf menjadi nomor (A=1 sampai Z=26), lalu cari selisihnya.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">5.</span>Deret: 3, 6, 12, 24, 48, 96. Angka berikutnya...</p>
+    <ol class="pilih">
+      <li>197</li>
+      <li>187</li>
+      <li>195</li>
+      <li>192</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 192
+Pola: 3×2ⁿ⁻¹. Setelah 96 adalah 192.
+INGAT: Deret angka: tulis selisih antar suku. Selisih tetap = aritmetika, rasio tetap = geometri, selisih naik = pola bertingkat.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">6.</span>Kode A=1, B=2, ..., Z=26. Kode untuk &#x27;GARUDA&#x27; adalah...</p>
+    <ol class="pilih">
+      <li>7-1-17-21-4-1</li>
+      <li>7-2-18-21-4-1</li>
+      <li>7-1-18-22-4-1</li>
+      <li>7-1-18-21-4-1</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 7-1-18-21-4-1
+GARUDA = G A R U D A = 7-1-18-21-4-1.
+INGAT: Sandi: cek pergeseran (+1, +2) atau ubah huruf ke posisi alfabet (A=1, B=2, ... Z=26).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">7.</span>Semua prajurit disiplin. Andi prajurit. Kesimpulan yang benar...</p>
+    <ol class="pilih">
+      <li>Informasi tidak cukup</li>
+      <li>Tidak bisa disimpulkan</li>
+      <li>Mungkin benar tapi tidak pasti</li>
+      <li>Andi disiplin</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Andi disiplin
+Silogisme: semua A=B, X=A → X=B.
+INGAT: Silogisme: &#x27;semua A adalah B&#x27; + &#x27;X adalah A&#x27; → X pasti B. Kalau hanya tahu X adalah B, X belum tentu A.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">8.</span>Dalam kotak ada 2 bola merah dan 10 bola biru. Peluang terambil bola merah...</p>
+    <ol class="pilih">
+      <li>1/5</li>
+      <li>5/6</li>
+      <li>6/5</li>
+      <li>1/6</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 1/6
+Total bola = 2 + 10 = 12. Peluang merah = 2/12 = 1/6 (dibagi 2).
+INGAT: Peluang = jumlah yang diharapkan ÷ seluruh kemungkinan. Sederhanakan pecahannya.</p>
+    </details>
+  </article>
+
+  <h2 id="8-contoh-soal-twk-wawasan-kebangsaan">8 contoh soal TWK wawasan kebangsaan</h2>
+  <p>TWK TNI mencakup Pancasila (sila, lambang, makna), UUD 1945 (pasal-pasal kunci, amandemen), sejarah proklamasi & perjuangan kemerdekaan, simbol negara (bendera, lambang, lagu kebangsaan), serta struktur lembaga negara (MPR, DPR, DPD, MA, MK, BPK). Hafal fakta kunci, tapi pahami juga konteksnya.</p>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">1.</span>Pancasila ditetapkan sebagai dasar negara pada tanggal...</p>
+    <ol class="pilih">
+      <li>18 Agustus 1945</li>
+      <li>1 Juni 1945</li>
+      <li>22 Juni 1945</li>
+      <li>17 Agustus 1945</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 18 Agustus 1945
+PPKI mengesahkan Pancasila bersama UUD 1945 pada 18 Agustus 1945. Pidato 1 Juni 1945 adalah hari lahir Pancasila, Piagam Jakarta 22 Juni 1945.
+INGAT: Hafal lambang sila: 1 Bintang, 2 Rantai, 3 Pohon Beringin, 4 Kepala Banteng, 5 Padi dan Kapas.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">2.</span>Amandemen UUD 1945 dilakukan sebanyak...</p>
+    <ol class="pilih">
+      <li>3 kali</li>
+      <li>4 kali</li>
+      <li>5 kali</li>
+      <li>2 kali</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 4 kali
+UUD 1945 diamandemen 4 kali: 1999 (amandemen I), 2000 (II), 2001 (III), 2002 (IV). Total 4 kali amandemen.
+INGAT: Hafal pasal kunci UUD 1945: 27 (HAM dan bela negara), 28 (HAM), 29 (agama), 30 (pertahanan), 31 (pendidikan), 33 (ekonomi), 34 (fakir miskin), 36A (lambang negara).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">3.</span>Piagam Jakarta yang ditandatangani 22 Juni 1945 berisi...</p>
+    <ol class="pilih">
+      <li>Pembentukan TNI</li>
+      <li>Pengakuan kedaulatan Belanda</li>
+      <li>Naskah proklamasi</li>
+      <li>Rancangan pembukaan UUD dengan syariat Islam</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Rancangan pembukaan UUD dengan syariat Islam
+Piagam Jakarta berisi rancangan pembukaan UUD 1945 dengan 7 kata yang kemudian dihapus: &#x27;dengan kewajiban menjalankan syariat Islam bagi pemeluknya&#x27;.
+INGAT: Soal TWK sering keluar berulang — baca ulang poin ini sebelum ujian.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">4.</span>Moto Korps Paskhas Karmanye Vadikaraste Mafalesu Kadatjana berarti...</p>
+    <ol class="pilih">
+      <li>Sekali terbang tetap terbang</li>
+      <li>Setia sampai akhir</li>
+      <li>Bekerja tanpa menghitung untung rugi</li>
+      <li>Di udara kita jaya</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Bekerja tanpa menghitung untung rugi
+Moto Paskhas berarti kerjakan tugas dengan rasa tanggung jawab tanpa menghitung untung rugi. Moto ini diberikan oleh Presiden Soekarno.
+INGAT: Ciri khas TNI AU: lahir 9 April 1946, semboyan Swa Bhuwana Paksa, Hari Bakti 29 Juli, Hari TNI 5 Oktober.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">5.</span>Lembaga negara yang bertugas memeriksa pengelolaan dan tanggung jawab keuangan negara adalah...</p>
+    <ol class="pilih">
+      <li>Badan Pemeriksa Keuangan (BPK)</li>
+      <li>Komisi Yudisial (KY)</li>
+      <li>DPD</li>
+      <li>Ombudsman</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Badan Pemeriksa Keuangan (BPK)
+BPK memeriksa pengelolaan dan tanggung jawab keuangan negara. Hasil pemeriksaannya diserahkan kepada DPR, DPD, dan DPRD sesuai kewenangannya.
+INGAT: Soal TWK sering keluar berulang — baca ulang poin ini sebelum ujian.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">6.</span>Gerakan 30 September (G30S) terjadi pada tahun...</p>
+    <ol class="pilih">
+      <li>1955</li>
+      <li>1965</li>
+      <li>1966</li>
+      <li>1948</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: 1965
+G30S terjadi pada malam 30 September sampai 1 Oktober 1965. Peristiwa ini menjadi latar Hari Kesaktian Pancasila.
+INGAT: Soal TWK sering keluar berulang — baca ulang poin ini sebelum ujian.</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">7.</span>Sishankamrata adalah sistem pertahanan yang...</p>
+    <ol class="pilih">
+      <li>Bersifat defensif di perbatasan</li>
+      <li>Hanya berlaku saat darurat</li>
+      <li>Hanya menggunakan kekuatan TNI</li>
+      <li>Melibatkan seluruh rakyat dan wilayah</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Melibatkan seluruh rakyat dan wilayah
+Sishankamrata (Sistem Pertahanan dan Keamanan Rakyat Semesta) melibatkan seluruh rakyat, wilayah, dan sumber daya nasional secara terpadu untuk menjaga kedaulatan negara.
+INGAT: Ketahanan nasional: trigatra (geografi, kekayaan alam, penduduk) + pancagatra (ideologi, politik, ekonomi, sosial budaya, hankam).</p>
+    </details>
+  </article>
+  <article class="tanya">
+    <p class="tanya-teks"><span class="tanya-nomor">8.</span>Akademi Angkatan Udara (AAU) yang mencetak perwira TNI AU berlokasi di...</p>
+    <ol class="pilih">
+      <li>Magelang</li>
+      <li>Bandung</li>
+      <li>Yogyakarta</li>
+      <li>Surabaya</li>
+    </ol>
+    <details class="bahas">
+      <summary>Lihat jawaban &amp; pembahasan</summary>
+      <p class="bahas-isi">JAWABAN: Yogyakarta
+AAU berada di Adisutjipto, Yogyakarta. Pembanding: Akmil di Magelang (TNI AD) dan AAL di Surabaya (TNI AL).
+INGAT: Ciri khas TNI AU: lahir 9 April 1946, semboyan Swa Bhuwana Paksa, Hari Bakti 29 Juli, Hari TNI 5 Oktober.</p>
+    </details>
+  </article>
+
+  <h2 id="strategi-latihan-2-minggu-sebelum-psikotes-tni">Strategi latihan 2 minggu sebelum psikotes TNI</h2>
+  <p>Minggu 1 (Hari 1–7): Fokus mengenali pola. Tiap hari kerjakan 1 set campuran 25 soal (8 verbal, 8 numerik, 5 logika, 4 TWK) dengan timer 20 menit. Catat soal yang salah dan jenis kesalahannya (salah baca, salah hitung, kehabisan waktu, tidak tahu pola).</p>
+  <p>Minggu 2 (Hari 8–14): Fokus kecepatan & ketahanan. Tiap hari kerjakan 1 sesi penuh 30 soal (10 verbal, 10 numerik, 10 logika) timer 20 menit. Hari 12–14: tambahkan 1 set TWK 20 soal timer 10 menit. Ulangi soal yang pernah salah di hari 5, 8, 11 — bukan besoknya.</p>
+  <p>Sesi penuh akhir pekan: kerjakan simulasi lengkap TIU 50 soal + TWK 40 soal tanpa jeda, catat jumlah benar & sisa waktu. Target: ≥70% benar TIU, ≥75% benar TWK.</p>
+  <ul>
+    <li>Target harian kecil & berangka: 25 soal berwaktu per hari.</li>
+    <li>Catat jenis kesalahan, bukan jumlahnya: salah baca instruksi, salah hitung, kehabisan waktu.</li>
+    <li>Ulangi soal salah setelah 2–3 hari, bukan besok.</li>
+    <li>Sesi penuh tanpa jeda 1×/minggu untuk latih ketahanan konsentrasi.</li>
+  </ul>
+  <div class="catatan"><p>Konsistensi harian 25 menit mengalahkan marathon 5 jam seminggu. Otak belajar pola lewat pengulangan terstruktur, bukan dorongan sesaat.</p></div>
+
+  <h2 id="kesalahan-umum-calon-tni-di-psikotes-cara-mengat">Kesalahan umum calon TNI di psikotes & cara mengatasinya</h2>
+  <p>Dari pola ribuan latihan, enam kesalahan ini paling sering muncul sekaligus paling mudah diperbaiki sebelum hari-H:</p>
+  <ul>
+    <li>Melewatkan kata kunci instruksi: "kecuali", "yang tidak termasuk", "paling tidak sesuai" — selalu lingkari kata kunci sebelum cari jawaban.</li>
+    <li>Berhenti terlalu lama di satu soal sampai soal di belakangnya tidak tersentuh — batas 60 detik verbal/logika, 45 detik numerik, lalu tandai & lanjut.</li>
+    <li>Menghitung di kepala untuk soal berlapis, lalu keliru di langkah kedua — selalu tulis langkah di kertas coret.</li>
+    <li>Tidak menandai soal ragu, sehingga tidak sempat kembali saat waktu tersisa — pakai sistem tanda: ✓ yakin, ? ragu, ✗ lewati.</li>
+    <li>Membaca pilihan jawaban sebelum pertanyaan selesai dibaca — baca pertanyaan sampai titik, baru lihat pilihan.</li>
+    <li>Belajar dengan membuka kunci jawaban lebih dulu — jawab dulu, catat alasan, baru bandingkan pembahasan.</li>
+  </ul>
+
+  <h2 id="mulai-latihan-psikotes-gratis-sekarang">Mulai latihan psikotes gratis sekarang</h2>
+  <p>Kalau ingin mencoba dulu sebelum memutuskan, buka halaman contoh: 40 soal berpembahasan mewakili 9 jenis tes (verbal, numerik, logika, matematika, bahasa Inggris, wawasan kebangsaan/TWK, kepribadian, tes gambar, kraepelin) — tanpa akun, langsung dikerjakan.</p>
+  <p>Kalau sudah siap berlatih serius dengan seluruh bank soal (1.348 soal), pembahasan lengkap, Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara), dan akses offline penuh: aplikasi latihan SiapPsikotes Rp 39.000 sekali bayar (bukan langganan). Kode akses dikirim manual target maksimal 6 jam jam kerja (08.00–21.00 WIB).</p>
+
+  <h2 id="tanya-jawab">Pertanyaan yang sering muncul</h2>
+  <div class="tanya"><p class="tanya-teks">Berapa lama sebaiknya latihan sebelum psikotes TNI?</p><p class="bahas-isi">Kalau masih ada dua minggu, 25–30 soal berwaktu setiap hari sudah cukup untuk melihat kemajuan, ditambah satu sesi penuh tanpa jeda setiap akhir pekan. Kalau waktunya tinggal 2–3 hari, jangan menambah materi baru: fokus pada kategori yang paling sering salah dan biasakan bekerja dengan batas waktu ketat.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apakah soal di SiapPsikotes sama dengan soal ujian TNI asli?</p><p class="bahas-isi">Tidak. Seluruh soal di bank soal kami adalah karya penyusun sendiri untuk latihan, disusun agar polanya mendekati psikotes TNI, Polri, BUMN, CPNS yang umum. Kami bukan situs instansi mana pun dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengenali titik lemah, bukan menggantikan ujian resmi.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apakah latihan psikotes gratis di sini benar-benar gratis tanpa batas waktu?</p><p class="bahas-isi">Ya. 40 soal contoh di halaman contoh gratis tanpa batas waktu akses, dan berjalan offline setelah dibuka pertama kali. Yang berbayar hanya materi lengkap di aplikasi latihan (1.348 soal, 9 jenis tes, pembahasan, Laporan Lengkap) seharga Rp 39.000 sekali bayar.</p></div>
+  <div class="tanya"><p class="tanya-teks">Apakah hasil latihan ini bisa disebut skor IQ atau skor psikotes TNI?</p><p class="bahas-isi">Tidak. Hasil di aplikasi ini alat bantu untuk mengukur kesiapan sendiri, bukan laporan hasil resmi dan bukan skor IQ resmi. Skor IQ yang diakui hanya keluar dari pemeriksaan psikolog berlisensi dengan alat baku. Latihan di sini membantu kamu mengenali titik lemah, bukan menggantikan pengukuran tersebut.</p></div>
+  <div class="tanya"><p class="tanya-teks">Bagaimana kalau saya menemukan pembahasan yang terasa keliru?</p><p class="bahas-isi">Laporkan lewat halaman mutu atau kontak yang tersedia di situs. Bank soal kami diperiksa dengan pedoman mutu yang dapat diperiksa ulang, tetapi 1.348 butir tidak bebas dari kemungkinan salah; laporan pembaca adalah bagian dari pemeriksaan itu dan kami perbaiki setelah diverifikasi.</p></div>
+  <p>Psikotes TNI bukan ujian hafalan, jadi menyiapkannya tidak bisa hanya dengan membaca kunci jawaban sampai hafal urutannya. Kerjakan contoh soal dengan batas waktu, periksa kesalahan, ulangi yang salah beberapa hari kemudian, dan lakukan itu berulang beberapa kali sebelum harinya tiba.</p>
+  <p>Kalau ingin mulai dari yang paling ringan, buka 40 soal contoh gratis lebih dulu — tanpa akun, langsung bisa dikerjakan. Kalau ingin berlatih lebih panjang dengan seluruh kategori, aplikasi latihan memuat 1.348 soal untuk 9 jenis tes beserta pembahasan dan Laporan Lengkap, Rp 39.000 sekali bayar. Soal di halaman ini berasal dari bank soal yang sama, dan cara pemeriksaannya bisa kamu baca di halaman mutu.</p>
+  <p>Catatan kejujuran: SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun dan tidak berafiliasi dengan lembaga pemerintah maupun perusahaan mana pun. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan seleksi. Hasil seleksi bergantung pada usaha dan persiapanmu sendiri.</p>
+
+  <div class="tautan-artikel">
+    <a class="tombol sekunder" href="/contoh/">40 soal contoh gratis (tanpa akun)</a>
+    <a class="tombol sekunder" href="/psikotes/">Buka aplikasi latihan</a>
+    <a class="tombol sekunder" href="/beli/">Harga & cara beli</a>
+    <a class="tombol sekunder" href="/mutu/">Mutu & bukti pemeriksaan soal</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#eaf1f8">SiapPsikotes</strong> &mdash; latihan psikotes kerja, tes IQ, dan tes kepribadian.</p>
+    <div class="tautan-kaki">
+      <a href="../psikotes/">Buka aplikasi latihan</a>
+      <a href="../contoh/">40 soal contoh gratis</a>
+      <a href="../beli/">Harga &amp; cara beli</a>
+      <a href="../mutu/">Mutu &amp; bukti pemeriksaan</a>
+      <a href="../syarat/">Syarat &amp; ketentuan</a>
+      <a href="../privasi/">Kebijakan privasi</a>
+    </div>
+    <p>SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah.</p>
+    <p>Seluruh soal di halaman ini diambil dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang. Halaman ini bersifat latihan; hasil seleksi bergantung pada usaha pembaca.</p>
+    <p>Halaman ini diperbarui 13 Oktober 2026.</p>
+  </div>
+</footer>
+</body>
+</html>
