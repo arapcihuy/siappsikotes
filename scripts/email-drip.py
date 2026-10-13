@@ -16,14 +16,26 @@ import requests
 REPO_ROOT = Path(__file__).parent.parent
 LEADS_CSV = REPO_ROOT / "leads" / "leads.csv"
 STATE_FILE = REPO_ROOT / "leads" / "state.json"
-TEMPLATE_MAP = {
-    1: int(os.getenv("BREVO_TPL_1", "1")),
-    2: int(os.getenv("BREVO_TPL_2", "2")),
-    3: int(os.getenv("BREVO_TPL_3", "3")),
-    4: int(os.getenv("BREVO_TPL_4", "4")),
-    5: int(os.getenv("BREVO_TPL_5", "5")),
-}
-DAILY_CAP = int(os.getenv("DAILY_CAP", "300"))
+
+
+def _int_env(name, default):
+    """Baca env sebagai int; kosong atau tidak valid -> pakai default.
+
+    GitHub Actions menyetel secret yang belum diisi menjadi string KOSONG, bukan
+    membiarkannya tak ada. Jadi os.getenv(name, default) tetap mengembalikan ''
+    dan int('') melempar ValueError -> workflow gagal setiap hari.
+    """
+    raw = (os.getenv(name) or "").strip()
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
+TEMPLATE_MAP = {n: _int_env(f"BREVO_TPL_{n}", n) for n in range(1, 6)}
+DAILY_CAP = _int_env("DAILY_CAP", 300)
 API_URL = "https://api.brevo.com/v3/smtp/email"
 API_KEY = os.getenv("BREVO_API_KEY")
 SENDER_EMAIL = os.getenv("BREVO_SENDER", "noreply@siappsikotes.my.id")
@@ -88,8 +100,12 @@ def send_email(to_email, to_name, template_id):
 
 def main():
     if not API_KEY:
-        print("[error] BREVO_API_KEY not set")
-        sys.exit(1)
+        # Secret belum diisi. Jangan keluar dengan kode 1: workflow ini cron harian,
+        # jadi tiap kegagalan mengirim email "Run failed" ke pemilik repo. Lewati saja.
+        print("[skip] BREVO_API_KEY belum diisi - tidak ada email yang dikirim.")
+        print("[skip] Isi secret BREVO_API_KEY, BREVO_SENDER, dan BREVO_TPL_1..5 di")
+        print("[skip] Settings > Secrets and variables > Actions untuk mengaktifkan drip.")
+        return
 
     today = date.today().isoformat()
     leads = load_leads()
