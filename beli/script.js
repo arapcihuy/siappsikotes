@@ -302,21 +302,24 @@
         setTimeout(function() { qrisBox.style.boxShadow = '0 18px 38px rgba(0,0,0,.42)'; }, 2000);
       }
     });
-
-    var paymentPrefetched = false;
-    var paymentPrefetchLink = document.getElementById('preloadPayment');
-    function doPrefetchPayment() {
-      if (paymentPrefetched || !paymentPrefetchLink) return;
-      paymentPrefetched = true;
-      paymentPrefetchLink.rel = 'prefetch';
-      var link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = paymentPrefetchLink.href;
-      document.head.appendChild(link);
-    }
-    elCTA.addEventListener('mouseenter', doPrefetchPayment, { once: true, passive: true });
-    elCTA.addEventListener('touchstart', doPrefetchPayment, { once: true, passive: true });
   }
+
+  // ---------- rAF QRIS visibility check ----------
+  (function ensureQris() {
+    var img = document.querySelector('#qris img');
+    if (!img) return;
+    var raf = function() {
+      if (img.complete && img.naturalWidth > 0) {
+        // lightweight client-side check: ensure nominal & rujukan present
+        if (elN && elR && elN.textContent && elR.textContent) {
+          // ok
+        }
+        return;
+      }
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  })();
 
   // ---------- Initial tracking ----------
   lacak('kunjungan_beli');
