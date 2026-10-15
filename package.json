@@ -1,0 +1,1 @@
+{"description": "SiapPsikotes baseline measurement", "devDependencies": {"playwright": "^1.52.0"}, "name": "tni-belajar", "private": true, "scripts": {"baseline:beli": "node scripts/baseline-beli.mjs"}, "type": "module", "version": "0.0.0"}
