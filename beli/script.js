@@ -19,6 +19,10 @@
 
   if (!elN) return;
 
+  // auto-select rujukan/nominal on click for mudah disalin
+  if (elR) elR.addEventListener('click', function(){ var sel = window.getSelection(); var range = document.createRange(); range.selectNodeContents(elR); sel.removeAllRanges(); sel.addRange(range); });
+  if (elN) elN.addEventListener('click', function(){ var sel = window.getSelection(); var range = document.createRange(); range.selectNodeContents(elN); sel.removeAllRanges(); sel.addRange(range); });
+
   // ---------- Constants ----------
   var HARGA_DASAR = 39000;
   var URL_PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
@@ -155,37 +159,6 @@
     var el = document.getElementById(id);
     if (el) el.textContent = teksHargaDasar;
   });
-
-  // ---------- Survey banner ----------
-  var elSurvey = document.getElementById('surveyBanner');
-  var elSurveyCta = document.getElementById('surveyCta');
-  if (elSurvey && !sessionStorage.getItem('survey_dismissed')) {
-    elSurvey.hidden = false;
-    if (elSurveyCta) {
-      elSurveyCta.addEventListener('click', function () {
-        try {
-          var utm = getUtmParams();
-          var payload = JSON.stringify({
-            jenis: 'survei_kunjungan',
-            rujukan: rujukan,
-            utm_source: utm.utm_source,
-            utm_medium: utm.utm_medium,
-            utm_campaign: utm.utm_campaign,
-            variant: 'B'
-          });
-          if (navigator.sendBeacon) {
-            navigator.sendBeacon(URL_PANTAU, new Blob([payload], { type: 'application/json' }));
-          }
-        } catch (e) {}
-        sessionStorage.setItem('survey_dismissed', '1');
-      });
-    }
-    setTimeout(function () {
-      if (!sessionStorage.getItem('survey_dismissed')) {
-        elSurvey.hidden = true;
-      }
-    }, 30000);
-  }
 
   // ---------- Kode akses generation ----------
   function sidikKode(isi) {

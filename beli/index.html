@@ -26,9 +26,7 @@
 <!-- Resource hints for faster loading -->
 <link rel="preconnect" href="https://siappsikotes-api.rasyidahmad180.workers.dev" crossorigin>
 <link rel="dns-prefetch" href="https://siappsikotes-api.rasyidahmad180.workers.dev">
-<link rel="preload" as="image" href="../static/img/qris-bayar.avif" type="image/avif" fetchpriority="high">
 <link rel="preload" as="image" href="../static/img/qris-bayar.webp" type="image/webp" fetchpriority="high">
-<link rel="preload" as="image" href="../static/img/qris-bayar.png" type="image/png" fetchpriority="high">
 <link rel="preload" as="document" href="../" id="preloadApp">
 
 <!-- Critical CSS inlined (above-fold) -->
@@ -132,8 +130,8 @@
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
           <picture style="background:#fff;display:block;border-radius:8px;">
-            <source srcset="../static/img/qris-bayar.avif?v=1" type="image/avif">
             <source srcset="../static/img/qris-bayar.webp?v=1" type="image/webp">
+            <source srcset="../static/img/qris-bayar.avif?v=1" type="image/avif">
             <img src="../static/img/qris-bayar.png?v=1" alt="Kode QRIS pembayaran akses SiapPsikotes"
                  width="268" height="268" loading="eager" fetchpriority="high" decoding="async">
           </picture>
@@ -241,17 +239,6 @@
   </details>
 
 </main>
-
-  <!-- Banner survei pricing (tampilkan ke pengunjung /beli/ untuk riset Van Westendorp) -->
-  <section id="surveyBanner" hidden style="margin:18px auto;padding:16px 20px;border:1px solid rgba(230,197,82,.35);border-radius:14px;background:linear-gradient(150deg,rgba(230,197,82,.12),rgba(230,197,82,.02)),var(--surface);max-width:1000px;">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;">
-      <div>
-        <p style="margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#e6c552;">📊 Riset Harga — 30 Detik</p>
-        <p style="margin:0;font-size:15px;color:#c9d5e3;">Bantu kami tetapkan harga fair. 5 pertanyaan singkat, anonim, tidak butuh login.</p>
-      </div>
-      <a class="tombol" id="surveyCta" href="https://forms.gle/XXXXXXXXXXXXXXXX" target="_blank" rel="noopener" style="flex-shrink:0;">Isi Survei</a>
-    </div>
-  </section>
 
 <footer>
   <div class="wrap">
