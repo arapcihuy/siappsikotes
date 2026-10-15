@@ -1,0 +1,14 @@
+{
+  "name": "Beli Akses Penuh SiapPsikotes",
+  "short_name": "Beli SiapPsikotes",
+  "start_url": "/beli/",
+  "scope": "/beli/",
+  "display": "standalone",
+  "background_color": "#0a0f18",
+  "theme_color": "#0a0f18",
+  "description": "Pembayaran QRIS Rp 39.000 untuk akses penuh SiapPsikotes. Bisa di-install sebagai PWA untuk kunjungan ulang cepat.",
+  "icons": [
+    {"src": "/icons/icon-192.png","sizes": "192x192","type": "image/png"},
+    {"src": "/icons/icon-512.png","sizes": "512x512","type": "image/png"}
+  ]
+}
