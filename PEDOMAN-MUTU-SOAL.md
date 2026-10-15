@@ -90,13 +90,13 @@ INGAT: <kiat hafalan / rumus cepat>
 CI menjalankan langkah 3-5 otomatis pada setiap push, dan **mingguan** (`.github/workflows/terjadwal.yml`)
 termasuk smoke test situs yang tayang. Tidak ada pemeriksaan yang boleh dilewati.
 
-## F. Ringkasan keadaan saat ini (12 September 2026)
+## F. Ringkasan keadaan saat ini (15 Oktober 2026)
 
-- 1225 soal, 9 kategori, semuanya punya label topik, semua kunci valid, tidak ada duplikat.
-- Posisi kunci: A 309 · B 308 · C 302 · D 306 (masing-masing ~25%).
-- 106 gambar soal; 34 di antaranya jawabannya dihitung ulang otomatis dari gambarnya.
-- 38 soal punya gambar penjelasan bernomor; 1225 pembahasan berformat JAWABAN/cara/INGAT.
-- Nol pelanggaran pada 10 butir peraturan; uji runtime lulus; aksesibilitas axe tanpa pelanggaran;
+- 1.348 soal, 9 kategori, semuanya punya label topik, semua kunci valid, tidak ada duplikat.
+- Posisi kunci: A 340 · B 340 · C 331 · D 337 (masing-masing ~25%, rasio kunci terpanjang 24%).
+- 106 gambar soal; 80 di antaranya jawabannya dihitung ulang otomatis dari gambarnya.
+- 38 soal punya gambar penjelasan bernomor; 1.348 pembahasan berformat JAWABAN/cara/INGAT.
+- Semua 11 butir peraturan P1-P11 lulus; verifikasi-soal.py LULUS semua; uji runtime lulus; aksesibilitas axe tanpa pelanggaran;
   smoke test situs tayang SEHAT.
 
 ## G. Tambahan 13 September 2026 — aturan P11 (kebijakan AI)
