@@ -657,6 +657,48 @@ export default {
         return jawab({ days, data }, 200, asal);
       }
 
+      // ---- CSV funnel harian: kunjungan /beli/ -> klik CTA -> bayar QRIS (peristiwa) + pembayaran (payments) ----
+      // Baris per hari, hari tanpa data diisi nol. Gratis: baca langsung D1, tanpa layanan lain.
+      if (jalan === '/api/dashboard/funnel-csv' && request.method === 'GET') {
+        const u = new URL(request.url);
+        const days = Math.min(90, Math.max(1, parseInt(u.searchParams.get('days') || '30', 10)));
+        const sejak = new Date(Date.now() - (days - 1) * 864e5).toISOString().slice(0, 10);
+        const [pe, pay] = await Promise.all([
+          env.DB.prepare(
+            "SELECT substr(waktu,1,10) AS hari, " +
+            "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
+            "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik " +
+            "FROM peristiwa WHERE jenis LIKE 'beli:%' AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
+          ).bind(sejak).all(),
+          env.DB.prepare(
+            "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
+            "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+          ).bind(sejak).all()
+        ]);
+        const mapHari = {};
+        for (const r of (pe.results || [])) {
+          mapHari[r.hari] = { kunjungan: r.kunjungan || 0, klik: r.klik || 0, bayar: 0, revenue: 0 };
+        }
+        for (const r of (pay.results || [])) {
+          if (!mapHari[r.hari]) mapHari[r.hari] = { kunjungan: 0, klik: 0, bayar: 0, revenue: 0 };
+          mapHari[r.hari].bayar = r.bayar || 0;
+          mapHari[r.hari].revenue = r.revenue || 0;
+        }
+        const daftar = Object.keys(mapHari).sort().reverse();
+        const csv = 'hari,kunjungan,klik_bayar,bayar_qris,konversi_pct,revenue_rp\n' + daftar.map(h => {
+          const d = mapHari[h];
+          const conv = d.kunjungan ? ((d.bayar / d.kunjungan) * 100).toFixed(2) : '0.00';
+          return h + ',' + d.kunjungan + ',' + d.klik + ',' + d.bayar + ',' + conv + ',' + d.revenue;
+        }).join('\n') + '\n';
+        return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="funnel-harian.csv"' } });
+      }
+
+      // ---- jalankan laporan harian Telegram secara manual (jalur kode sama dengan cron) ----
+      if (jalan === '/api/dashboard/laporan-coba' && request.method === 'POST') {
+        const hasil = await laporanHarian(env);
+        return jawab({ ok: !!hasil.ok, tg: hasil.tg, ringkasan: hasil.ringkasan }, 200, asal);
+      }
+
       if (jalan === '/' || jalan === '/sehat') {
               return jawab({ aplikasi: 'SiapPsikotes API', keadaan: 'hidup', waktu: new Date().toISOString() }, 200, asal);
             }
@@ -847,8 +889,9 @@ export default {
           }
         },
         async scheduled(event, env, ctx) {
-              // Cron Trigger: "*/10 * * * *" (tiap 10 menit)
-              await cekMonitoringLengkap(env);
+              // "*/10 * * * *" => cek monitoring; "55 16 * * *" => laporan funnel harian ke Telegram (23:55 WIB)
+              if (event.cron === '55 16 * * *') await laporanHarian(env);
+              else await cekMonitoringLengkap(env);
             }
       };
 
@@ -893,6 +936,52 @@ export default {
                           return { ok: false, status: 0, rincian: 'Funnel error: ' + String(e.message || e).slice(0, 100) };
                       }
                   }
+
+          // Laporan funnel harian ke Telegram admin: kunjungan /beli/ -> klik -> bayar QRIS (7 hari terakhir)
+          // Dijalankan cron harian (23:55 WIB) dan bisa juga manual via POST /api/dashboard/laporan-coba
+          async function laporanHarian(env) {
+              try {
+                  const sejak = new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10);
+                  const [pe, pay] = await Promise.all([
+                      env.DB.prepare(
+                          "SELECT substr(waktu,1,10) AS hari, " +
+                          "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
+                          "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik " +
+                          "FROM peristiwa WHERE jenis LIKE 'beli:%' AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
+                      ).bind(sejak).all(),
+                      env.DB.prepare(
+                          "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
+                          "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+                      ).bind(sejak).all()
+                  ]);
+                  const mapHari = {};
+                  for (const r of (pe.results || [])) {
+                      mapHari[r.hari] = { kunjungan: r.kunjungan || 0, klik: r.klik || 0, bayar: 0, revenue: 0 };
+                  }
+                  for (const r of (pay.results || [])) {
+                      if (!mapHari[r.hari]) mapHari[r.hari] = { kunjungan: 0, klik: 0, bayar: 0, revenue: 0 };
+                      mapHari[r.hari].bayar = r.bayar || 0;
+                      mapHari[r.hari].revenue = r.revenue || 0;
+                  }
+                  const daftar = Object.keys(mapHari).sort().reverse();
+                  let totalV = 0, totalK = 0, totalB = 0, rev = 0;
+                  const baris = daftar.map(h => {
+                      const d = mapHari[h];
+                      totalV += d.kunjungan; totalK += d.klik; totalB += d.bayar; rev += d.revenue;
+                      const conv = d.kunjungan ? ((d.bayar / d.kunjungan) * 100).toFixed(1) + '%' : '-';
+                      return h + ' · kunjungan ' + d.kunjungan + ' · klik ' + d.klik + ' · bayar ' + d.bayar + ' · ' + conv + ' · Rp ' + Number(d.revenue).toLocaleString('id-ID');
+                  }).join('\n');
+                  const convTotal = totalV ? ((totalB / totalV) * 100).toFixed(1) + '%' : '-';
+                  const pesan = `<b>📊 Funnel /beli/ — 7 hari terakhir</b>\n` +
+                      (baris || '(belum ada data)') +
+                      `\n\nTotal: kunjungan ${totalV} · klik ${totalK} · bayar ${totalB} · konversi ${convTotal} · Rp ${Number(rev).toLocaleString('id-ID')}` +
+                      `\nCSV: https://siappsikotes-api.rasyidahmad180.workers.dev/api/dashboard/funnel-csv`;
+                  const tg = await kirimTelegramAlert(env, pesan);
+                  return { ok: !!tg.ok, tg, ringkasan: baris || '(belum ada data)' };
+              } catch (e) {
+                  return { ok: false, ringkasan: String(e.message || e).slice(0, 160) };
+              }
+          }
 
           // Cek Tripay webhook (placeholder - static QRIS manual, tidak pakai Tripay)
           async function cekTripayWebhook() {

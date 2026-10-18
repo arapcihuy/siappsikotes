@@ -4,9 +4,9 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
-# Cron Trigger: tiap 10 menit untuk monitoring /beli/
+# Cron Trigger: tiap 10 menit untuk monitoring /beli/, dan 1x sehari (23:55 WIB) laporan funnel harian ke Telegram
 [triggers]
-crons = ["*/10 * * * *"]
+crons = ["*/10 * * * *", "55 16 * * *"]
 
 # Database D1 (SQLite di edge). Dibuat di akun pemilik, region APAC.
 [[d1_databases]]
