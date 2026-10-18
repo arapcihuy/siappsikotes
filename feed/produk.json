@@ -1,0 +1,112 @@
+{
+  "feed_version": 1,
+  "generated_at": "2026-10-19",
+  "brand": "SiapPsikotes",
+  "currency": "IDR",
+  "company": "Auto Company",
+  "products": [
+    {
+      "product_id": "siappsi-akses-penuh",
+      "product": "SiapPsikotes",
+      "paket": "Akses Penuh + Laporan Lengkap",
+      "harga_rp": 39000,
+      "harga_tampil": "Rp 39.000",
+      "type": "digital_access_code",
+      "tipe_bayar": "sekali bayar (bukan langganan)",
+      "deskripsi_singkat": "1.348 soal psikotes TNI/kedinasan + 9 modul tes (IQ, Kraepelin, Big Five, dll) lengkap pembahasan per soal, Laporan Lengkap, tanpa akun, bisa offline. Sekali bayar via QRIS.",
+      "produk_fisik": false,
+      "stock": "unlimited",
+      "link_beli": "https://siappsikotes.my.id/beli/?utm_source=marketplace&utm_medium=feed&utm_campaign=akses_penuh",
+      "link_coba_gratis": "https://siappsikotes.my.id/contoh/",
+      "faq": [
+        {
+          "q": "Ini soal asli dari instansi?",
+          "a": "Bukan. Semua soal karya penyusun kami sendiri untuk latihan. Tidak berafiliasi dengan instansi mana pun dan tidak memakai soal/atribut resmi."
+        },
+        {
+          "q": "Langsung aktif setelah bayar?",
+          "a": "Kode dikirim manual setelah bukti pembayaran diterima; target maksimal 6 jam pada jam kerja (08.00-21.00 WIB)."
+        },
+        {
+          "q": "Ini langganan? Nanti nagih lagi?",
+          "a": "Bukan langganan. Sekali bayar Rp 39.000, tidak ada tagihan berulang."
+        },
+        {
+          "q": "Refund / pembatalan?",
+          "a": "Kode yang belum dikirim bisa dibatalkan. Setelah kode dikirim tidak bisa dikembalikan. Jika kode gagal karena kesalahan kami, kode diganti."
+        },
+        {
+          "q": "Harus daftar akun?",
+          "a": "Tidak perlu akun sama sekali. Kode dimasukkan langsung di aplikasi."
+        },
+        {
+          "q": "Bisa dipakai offline?",
+          "a": "Bisa. Setelah halaman terbuka, latihan dikerjakan tanpa internet."
+        }
+      ]
+    },
+    {
+      "product_id": "siappsi-bundel-3",
+      "product": "SiapPsikotes",
+      "paket": "Bundel 3 laporan (3 orang)",
+      "harga_rp": 99000,
+      "harga_tampil": "Rp 99.000",
+      "type": "digital_access_code",
+      "tipe_bayar": "sekali bayar (bukan langganan)",
+      "deskripsi_singkat": "3 kode akses untuk 3 orang berbeda (hemat Rp 18.000 dari 3x Rp 39.000, setara Rp 33.000/laporan). Cocok dibeli bareng teman/keluarga. Semua fitur akses penuh.",
+      "produk_fisik": false,
+      "stock": "unlimited",
+      "link_beli": "https://siappsikotes.my.id/beli/?utm_source=marketplace&utm_medium=feed&utm_campaign=bundel_3",
+      "link_coba_gratis": "https://siappsikotes.my.id/contoh/",
+      "faq": [
+        {
+          "q": "Bundelnya isinya apa?",
+          "a": "3 kode akses unik untuk 3 orang berbeda. Satu kode tidak untuk dipakai 3 orang."
+        },
+        {
+          "q": "Langsung aktif setelah bayar?",
+          "a": "Kode dikirim manual setelah bukti pembayaran diterima; target maksimal 6 jam pada jam kerja (08.00-21.00 WIB)."
+        }
+      ]
+    },
+    {
+      "product_id": "siappsi-gratis",
+      "product": "SiapPsikotes",
+      "paket": "Coba Gratis - 40 Soal Berpembahasan",
+      "harga_rp": 0,
+      "harga_tampil": "Rp 0 (gratis)",
+      "type": "digital_content",
+      "tipe_bayar": "gratis",
+      "deskripsi_singkat": "40 soal psikotes berpembahasan, gratis tanpa akun di halaman contoh. Sarana uji kualitas sebelum beli akses penuh.",
+      "produk_fisik": false,
+      "stock": "unlimited",
+      "link_beli": "https://siappsikotes.my.id/contoh/?utm_source=marketplace&utm_medium=feed&utm_campaign=coba_gratis",
+      "link_coba_gratis": "https://siappsikotes.my.id/contoh/",
+      "faq": []
+    },
+    {
+      "product_id": "cardcheck-tool",
+      "product": "Cardcheck",
+      "paket": "OG & Twitter Card Checker",
+      "harga_rp": 0,
+      "harga_tampil": "Rp 0 (gratis)",
+      "type": "web_tool",
+      "tipe_bayar": "gratis",
+      "deskripsi_singkat": "Cek kenapa link preview (OG image/Twitter card) rusak: paste URL, Cardcheck baca head halaman, sebut tag mana yang salah, kasih blok head perbaikan siap tempel. Mode offline (paste head HTML) tanpa server.",
+      "produk_fisik": false,
+      "stock": "unlimited",
+      "link_beli": "https://cardcheck.rasyidahmad180.workers.dev/?utm_source=marketplace&utm_medium=feed&utm_campaign=cardcheck",
+      "link_coba_gratis": "https://cardcheck.rasyidahmad180.workers.dev/",
+      "faq": [
+        {
+          "q": "Apa yang diperiksa Cardcheck?",
+          "a": "Semua tag yang menentukan link preview: og:*, twitter:*, judul, deskripsi, resolusi gambar, dan apakah gambar bisa diakses."
+        },
+        {
+          "q": "Datanya disimpan?",
+          "a": "Tidak. Satu fetch halaman + satu probe gambar, tidak ada yang disimpan. Tidak perlu akun atau API key."
+        }
+      ]
+    }
+  ]
+}
