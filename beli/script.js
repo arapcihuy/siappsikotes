@@ -28,7 +28,6 @@
   var URL_PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
   var URL_REF_TRACK = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/track';
   var URL_REF_CONV = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/konversi';
-  var URL_PAYMENT_WEBHOOK = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/payment-webhook';
 
   // ---------- Helpers ----------
   function getUtmParams() {
@@ -60,27 +59,6 @@
     } catch (e) { /* jangan biarkan pelacakan menganggu alur pembelian */ }
   }
 
-  function kirimPaymentWebhook(data) {
-    try {
-      var utm = getUtmParams();
-      var payload = JSON.stringify(Object.assign({
-        product: 'siappsikotes',
-        amount: nominal,
-        status: 'success',
-        txid: rujukan,
-        variant: 'B',
-        harga_dasar: HARGA_DASAR,
-        utm_source: utm.utm_source,
-        utm_medium: utm.utm_medium,
-        utm_campaign: utm.utm_campaign
-      }, data || {}));
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(URL_PAYMENT_WEBHOOK, new Blob([payload], { type: 'application/json' }));
-      } else {
-        fetch(URL_PAYMENT_WEBHOOK, { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
-      }
-    } catch (e) { /* webhook tidak boleh mengganggu alur */ }
-  }
 
   // Referral tracking
   var refParam = '';
@@ -187,7 +165,6 @@
     kodeAkses = kodeUntukNomor(rujukan);
     lacak('tampilkan_kode');
     trackReferralConversion();
-    kirimPaymentWebhook({ event: 'tampilkan_kode', nominal: nominal, variant: 'B' });
     elKode.textContent = kodeAkses;
     elKode.hidden = false;
     elAmbil.hidden = true;
@@ -237,12 +214,12 @@
 
   if (elB) {
     elB.setAttribute('href', 'https://wa.me/6281387906930?text=' + encodeURIComponent(pesanBukti));
-    elB.addEventListener('click', function () { lacak('klik_bukti_wa'); kirimPaymentWebhook({ event: 'klik_bukti_wa' }); });
+    elB.addEventListener('click', function () { lacak('klik_bukti_wa'); });
   }
   if (elBS) {
     elBS.setAttribute('href', 'mailto:rasyidahmad180@gmail.com?subject=' +
       encodeURIComponent('Bukti pembayaran ' + rujukan) + '&body=' + encodeURIComponent(pesanBukti));
-    elBS.addEventListener('click', function () { lacak('klik_bukti_email'); kirimPaymentWebhook({ event: 'klik_bukti_email' }); });
+    elBS.addEventListener('click', function () { lacak('klik_bukti_email'); });
   }
   if (elBuka) {
     elBuka.addEventListener('click', function () { lacak('buka_aplikasi'); });
@@ -269,7 +246,6 @@
   if (elCTA) {
     elCTA.addEventListener('click', function() {
       lacak('klik_cta_bayar');
-      kirimPaymentWebhook({ event: 'klik_cta_bayar', variant: 'B' });
       if (qrisBox) {
         qrisBox.style.boxShadow = '0 0 20px var(--gold)';
         setTimeout(function() { qrisBox.style.boxShadow = '0 18px 38px rgba(0,0,0,.42)'; }, 2000);
@@ -278,6 +254,7 @@
   }
 
   // ---------- rAF QRIS visibility check ----------
+  var qrisTerlacak = false;
   (function ensureQris() {
     var img = document.querySelector('#qris img');
     if (!img) return;
@@ -285,7 +262,7 @@
       if (img.complete && img.naturalWidth > 0) {
         // lightweight client-side check: ensure nominal & rujukan present
         if (elN && elR && elN.textContent && elR.textContent) {
-          // ok
+          if (!qrisTerlacak) { qrisTerlacak = true; lacak('qris_tampil'); }
         }
         return;
       }
@@ -296,6 +273,5 @@
 
   // ---------- Initial tracking ----------
   lacak('kunjungan_beli');
-  kirimPaymentWebhook({ event: 'kunjungan_beli', variant: 'B' });
 
 })();
