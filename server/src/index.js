@@ -491,7 +491,7 @@ export default {
               const b = await request.json().catch(() => ({}));
               const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
                   'salin_kode', 'salin_rujukan', 'qris_tampil', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
-                  'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan'];
+                  'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview'];
               const jenis = String(b.jenis || '');
               if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
               const kartu = jenis.indexOf('cardcheck_') === 0;

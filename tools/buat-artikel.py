@@ -194,7 +194,7 @@ def kepala(n, gaya):
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; connect-src 'self' https://siappsikotes-api.rasyidahmad180.workers.dev">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0a0f18">
@@ -355,7 +355,26 @@ def isi_artikel(n):
             '\n\n'.join(bagian) + '\n' + faq + '\n' + paragraf(n['penutup']) + '\n' + tautan)
 
 
-def kaki(n):
+def kaki(n, pantaul=None):
+    pelacak = ''
+    if pantaul is None:
+        pantaul = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau'
+        pelacak = '''<script>
+(function () {
+  var u = new URLSearchParams(location.search);
+  var beban = JSON.stringify({
+    jenis: 'artikel_pageview',
+    rincian: '',
+    utm_source: u.get('utm_source') || 'direct',
+    utm_medium: u.get('utm_medium') || 'artikel',
+    utm_campaign: u.get('utm_campaign') || '',
+    halaman: location.pathname.replace(/^\\//, '').replace(/\\/$/, '')
+  });
+  try { navigator.sendBeacon('${PANTAU}', new Blob([beban], { type: 'application/json' })); }
+  catch (e) { fetch('${PANTAU}', { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
+})();
+</script>
+'''.replace('${PANTAU}', pantaul)
     return '''
 </main>
 
@@ -375,9 +394,9 @@ def kaki(n):
     <p>Halaman ini diperbarui %s.</p>
   </div>
 </footer>
-</body>
+%s</body>
 </html>
-''' % (PENYANGKAL, n.get('diperbarui', '15 September 2026'))
+''' % (PENYANGKAL, n.get('diperbarui', '15 September 2026'), pelacak)
 
 
 def bangun_satu(naskah):

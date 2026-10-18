@@ -48,6 +48,7 @@ HALAMAN = [
     ('contoh-soal-psikotes-kai/index.html', '/contoh-soal-psikotes-kai/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-tni/index.html', '/contoh-soal-psikotes-tni/', '0.8', 'monthly'),
     ('latihan-psikotes-gratis-tni/index.html', '/latihan-psikotes-gratis-tni/', '0.8', 'monthly'),
+    ('latihan-psikotes-10-menit/index.html', '/latihan-psikotes-10-menit/', '0.8', 'monthly'),
     ('strategi-lulus-psikotes-tni-2026/index.html', '/strategi-lulus-psikotes-tni-2026/', '0.8', 'monthly'),
     ('beli/index.html', '/beli/', '0.7', 'monthly'),
     ('lisensi/index.html', '/lisensi/', '0.6', 'monthly'),
