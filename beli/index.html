@@ -148,6 +148,7 @@
         </div>
         <p class="catatan" style="margin-top:2px">Harga <span id="displayHargaCatatan">Rp 39.000</span> ditambah 3 angka unik. Angka unik itulah yang
           membuat pembayaranmu mudah dicocokkan.</p>
+        <p class="catatan" id="beliCatatanDiskon" hidden style="margin-top:6px;color:#4ade80;font-weight:700;">Kode referensi temanmu diterapkan &mdash; hemat Rp 5.000.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
         <p class="label">Kode rujukanmu</p>
               <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
@@ -177,6 +178,12 @@
                 </div>
                 <button type="button" class="tombol kecil" id="beliSudahBayar" hidden style="width:100%; font-size:16px; padding:12px; margin-top:8px;">✅ Saya sudah bayar — aktifkan kode</button>
                 <p class="catatan" id="beliStatusBayar" hidden style="margin:8px 0 0;"></p>
+                <div class="kartu-bayar" id="beliReferensi" hidden style="margin-top:14px;border-left:3px solid #4ade80;">
+                  <p class="label">Ajak satu teman &mdash; dia hemat Rp 5.000, kamu +30 hari</p>
+                  <p class="rujukan" id="beliReferensiKode" role="status" style="user-select:all;-webkit-user-select:all;"></p>
+                  <p class="catatan" id="beliReferensiTautan" style="user-select:all;-webkit-user-select:all;word-break:break-all;"></p>
+                  <button type="button" class="tombol sekunder kecil" id="beliSalinReferensi" style="margin-top:8px;">Salin link untuk teman</button>
+                </div>
       </div>
       <noscript>
         <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript

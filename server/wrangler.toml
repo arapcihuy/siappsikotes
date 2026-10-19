@@ -4,10 +4,21 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
+# Route program referensi: /referensi/* di domain utama dilayani Worker ini
+# (validasi kode di D1 lalu 302 ke /beli/?ref=KODE; /referensi/draft dilempar
+# ke origin statis). Sisa halaman tetap dilayani origin statis.
+# CATATAN: kunci ini WAJIB di tingkat atas (sebelum [[...]] pertama) — kalau
+# ditaruh setelah bagian tabel, TOML menganggapnya milik tabel tersebut.
+routes = [
+  { pattern = "siappsikotes.my.id/referensi/*", zone_name = "siappsikotes.my.id" }
+]
+
 # Cron Trigger: tiap 10 menit untuk monitoring /beli/ + snapshot funnel 6 jaman ke KV
 # (00/06/12/18 UTC, dijadwalkan dari kode karena batas gratis 5 cron trigger per akun),
 # dan 1x sehari (23:55 WIB) laporan funnel harian ke Telegram.
-# Dashboard 1-URL: GET /api/funnel.
+# Rekonsiliasi pagi 08:00 WIB TIDAK berdiri di trigger baru (akun free sudah genap 5 cron
+# trigger) — dijadwalkan dari kode pada cron */10 (jam 8 WIB) dengan guard KV sekali/hari.
+# Dashboard 1-URL: GET /api/funnel. Rekonsiliasi: GET /api/rekonsiliasi-ringkasan.
 [triggers]
 crons = ["*/10 * * * *", "55 16 * * *"]
 

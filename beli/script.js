@@ -25,9 +25,9 @@
 
   // ---------- Constants ----------
   var HARGA_DASAR = 39000;
-  var URL_PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
-  var URL_REF_TRACK = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/track';
-  var URL_REF_CONV = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/referral/konversi';
+  var HARGA_REF = 34000;   // diskon Rp 5.000 lewat kode referensi REF-XXXX (divalidasi server)
+  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+  var URL_PANTAU = URL_API + '/api/pantau';
 
   // ---------- Helpers ----------
   function getUtmParams() {
@@ -60,50 +60,16 @@
   }
 
 
-  // Referral tracking
+  // ---------- Kode referensi teman (REF-XXXX) ----------
+  // Kode divalidasi SERVER (/api/referensi/cek) sebelum harga diskon ditampilkan; kodenya
+  // juga diteruskan ke /api/beli/kode yang menghitung nominal akhir secara resmi.
   var refParam = '';
-  var refTracked = false;
   try {
-    var refParams = new URLSearchParams(window.location.search);
-    refParam = (refParams.get('ref') || '').toUpperCase().trim();
+    refParam = (new URLSearchParams(window.location.search).get('ref') || '').toUpperCase().trim();
   } catch (e) { refParam = ''; }
-
-  function trackReferralVisit() {
-    if (!refParam || !/^SPRF[A-Z0-9]{8}$/.test(refParam) || refTracked) return;
-    var utm = getUtmParams();
-    var payload = JSON.stringify({
-      ref: refParam,
-      utm_source: utm.utm_source,
-      utm_medium: utm.utm_medium,
-      utm_campaign: utm.utm_campaign
-    });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(URL_REF_TRACK, new Blob([payload], { type: 'application/json' }));
-    } else {
-      fetch(URL_REF_TRACK, { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
-    }
-    refTracked = true;
-  }
-
-  function trackReferralConversion() {
-    if (!refParam || !/^SPRF[A-Z0-9]{8}$/.test(refParam)) return;
-    var utm = getUtmParams();
-    var payload = JSON.stringify({
-      ref: refParam,
-      rujukan: rujukan,
-      nominal: nominal,
-      utm_source: utm.utm_source,
-      utm_medium: utm.utm_medium,
-      utm_campaign: utm.utm_campaign
-    });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(URL_REF_CONV, new Blob([payload], { type: 'application/json' }));
-    } else {
-      fetch(URL_REF_CONV, { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
-    }
-  }
-
-  trackReferralVisit();
+  var refAktif = false;
+  var hargaDasar = HARGA_DASAR;
+  var elCatatanDiskon = document.getElementById('beliCatatanDiskon');
 
   // ---------- Generate reference code ----------
   var angkaRujukan = '';
@@ -122,21 +88,42 @@
   } catch (e) {}
 
   var angka = parseInt(angkaRujukan, 10);
-
-  var nominal = HARGA_DASAR + angka;
-  var teks = 'Rp ' + String(nominal).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   var rujukan = 'SP-' + angkaRujukan;
 
-  elN.textContent = teks;
-  if (elN2) elN2.textContent = teks;
+  function formatRp(n) { return 'Rp ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+  var nominal = hargaDasar + angka;
+  var teks = formatRp(nominal);
+
+  // Satu titik pembaruan harga: nominal unik, harga dasar di teks, dan catatan diskon.
+  function perbaruiHarga() {
+    nominal = hargaDasar + angka;
+    teks = formatRp(nominal);
+    elN.textContent = teks;
+    if (elN2) elN2.textContent = teks;
+    ['displayHarga', 'displayHargaStrip', 'displayHargaCatatan'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = formatRp(hargaDasar);
+    });
+    if (elCatatanDiskon) elCatatanDiskon.hidden = !refAktif;
+  }
+  perbaruiHarga();
   if (elR) elR.textContent = rujukan;
 
-  // Update display prices (HARGA_DASAR without unique digits)
-  var teksHargaDasar = 'Rp ' + String(HARGA_DASAR).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  ['displayHarga', 'displayHargaStrip', 'displayHargaCatatan'].forEach(function (id) {
-    var el = document.getElementById(id);
-    if (el) el.textContent = teksHargaDasar;
-  });
+  // Validasi kode referensi di server; bila sah, seluruh halaman menunjukkan harga diskon.
+  if (refParam) {
+    fetch(URL_API + '/api/referensi/cek?kode=' + encodeURIComponent(refParam), { credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (d && d.ok && d.sah) {
+          refAktif = true;
+          if (d.kode) refParam = d.kode;
+          hargaDasar = HARGA_REF;
+          perbaruiHarga();
+        } else refParam = '';
+      })
+      .catch(function () { refParam = ''; });
+  }
 
   // ---------- Kode akses generation ----------
   function sidikKode(isi) {
@@ -165,7 +152,6 @@
   // Pesanan (menunggu_bayar) dicatat server saat pembeli menekan "Tampilkan kode"; nominal
   // unik dihitung server. Setelah bayar, tombol klaim membawa token HMAC dari server — kode
   // aktif instan, tanpa kirim bukti, dan laporan harian pemilik mencocokkan pembayarannya.
-  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
   var elSudahBayar = document.getElementById('beliSudahBayar');
   var elStatusBayar = document.getElementById('beliStatusBayar');
   var klaimToken = null;
@@ -192,13 +178,26 @@
       : '✅ Kode aksesmu aktif. Pembayaranmu sedang diverifikasi otomatis — tidak perlu kirim bukti.');
   }
 
+  // Kartu kode referensi: tampil setelah pembayaran aktif — kodenya dibuat server
+  // (satu kode per pembelian, idempoten), link siap kirim ke teman.
+  function tampilkanReferensi(kodeRef) {
+    if (!kodeRef) return;
+    var kotak = document.getElementById('beliReferensi');
+    if (!kotak) return;
+    var isi = document.getElementById('beliReferensiKode');
+    var tautan = document.getElementById('beliReferensiTautan');
+    if (isi) isi.textContent = kodeRef;
+    if (tautan) tautan.textContent = 'https://siappsikotes.my.id/referensi/' + kodeRef;
+    kotak.hidden = false;
+  }
+
   function kirimKlaim(token) {
     fetch(URL_API + '/api/beli/klaim', {
       method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
-      body: JSON.stringify({ rujukan: rujukan, klaim_token: token })
+      body: JSON.stringify({ rujukan: rujukan, klaim_token: token, kontak: kontakKlaimer() })
     }).then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (d) {
-        if (d && d.ok && d.status) tampilkanLunas(d.status);
+        if (d && d.ok && d.status) { tampilkanLunas(d.status); tampilkanReferensi(d.referensi); }
         else tampilkanStatus((d && d.pesan) || 'Klaim belum bisa diproses — coba lagi sebentar.');
       })
       .catch(function () { tampilkanStatus('Koneksi lambat. Kode tetap tersimpan di halaman ini.'); });
@@ -208,6 +207,7 @@
     lacak('klaim_sudah_bayar');
     var token = klaimToken || ambilTokenTersimpan();
     if (token) { kirimKlaim(token); return; }
+    try { kontakKlaimer(); } catch (e) {}   // tanya kontak sekali, sebelum jalur fallback
     // Pesanan belum tercatat (mis. tanda tangan server belum aktif saat kode tampil):
     // daftarkan dulu, lalu klaim dengan token barunya.
     daftarPesanan(function () {
@@ -217,6 +217,19 @@
   }
 
   if (elSudahBayar) elSudahBayar.addEventListener('click', klaimBayar);
+
+  // Kontak opsional klaimer (WA/email) untuk tindak lanjut rekonsiliasi. Ditanya sekali
+  // per rujukan dan disimpan di perangkat pembeli; boleh dikosongkan — klaim tetap jalan.
+  function kontakKlaimer() {
+    var kunci = 'tni_kontak_' + angkaRujukan;
+    var t = null;
+    try { t = localStorage.getItem(kunci); } catch (e) {}
+    if (t) return t;
+    try { t = window.prompt('Nomor WA atau email untuk konfirmasi pembayaran (opsional, kosongkan bila tidak ingin):', ''); } catch (e) { t = null; }
+    t = t ? String(t).trim().slice(0, 64) : '';
+    if (t) { try { localStorage.setItem(kunci, t); } catch (e) {} }
+    return t || null;
+  }
 
   // Jalur A (Tripay QRIS dinamis) dipakai bila pemilik sudah memasang kunci; selama belum,
   // QRIS statis di halaman ini yang dipakai — tidak ada langkah tambahan untuk pembeli.
@@ -239,13 +252,20 @@
     var utm = getUtmParams();
     fetch(URL_API + '/api/beli/kode', {
       method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
-      body: JSON.stringify({ rujukan: rujukan, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign })
+      body: JSON.stringify({ rujukan: rujukan, ref: refParam, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign })
     }).then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (!d || !d.ok) { if (selesai) selesai(); return; }
+        // Nominal final selalu dari server (bisa sudah kena diskon referensi).
+        if (d.nominal && d.nominal !== nominal) {
+          hargaDasar = d.diskon ? HARGA_REF : HARGA_DASAR;
+          if (d.diskon) refAktif = true;
+          angka = d.nominal - hargaDasar;
+          perbaruiHarga();
+        }
         klaimToken = d.klaim_token || klaimToken;
         if (klaimToken) { try { localStorage.setItem('tni_klaim_' + angkaRujukan, JSON.stringify({ token: klaimToken, waktu: Date.now() })); } catch (e) {} }
-        if (d.status === 'lunas' || d.status === 'menunggu_verifikasi') tampilkanLunas(d.status);
+        if (d.status === 'lunas' || d.status === 'menunggu_verifikasi') { tampilkanLunas(d.status); tampilkanReferensi(d.referensi); }
         if (d.tripay_aktif && statusBayar === 'menunggu_bayar') mintaQrisDinamis();
         if (selesai) selesai(d);
       })
@@ -262,7 +282,7 @@
       fetch(URL_API + '/api/beli/status?rujukan=' + encodeURIComponent(rujukan), { credentials: 'omit' })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) {
-          if (d && d.ok && (d.status === 'lunas' || d.status === 'menunggu_verifikasi')) { tampilkanLunas(d.status); clearInterval(id); }
+          if (d && d.ok && (d.status === 'lunas' || d.status === 'menunggu_verifikasi')) { tampilkanLunas(d.status); tampilkanReferensi(d.referensi); clearInterval(id); }
         }).catch(function () {});
     }, 8000);
   }
@@ -270,7 +290,6 @@
   function prosesAmbilKode() {
     kodeAkses = kodeUntukNomor(rujukan);
     lacak('tampilkan_kode');
-    trackReferralConversion();
     elKode.textContent = kodeAkses;
     elKode.hidden = false;
     elAmbil.hidden = true;
@@ -310,6 +329,10 @@
   buatSalin(function () { return teks; }, 'salin_nominal', elS);
   buatSalin(function () { return rujukan; }, 'salin_rujukan', elSalinRujukan);
   buatSalin(function () { return kodeAkses; }, 'salin_kode', elSalinKode);
+  buatSalin(function () {
+    var isi = document.getElementById('beliReferensiKode');
+    return 'https://siappsikotes.my.id/referensi/' + ((isi && isi.textContent) || '');
+  }, 'salin_referensi', document.getElementById('beliSalinReferensi'));
 
   // ---------- WhatsApp & Email links ----------
   var pesanBukti = 'Halo, saya sudah membayar akses SiapPsikotes.\n\nKode rujukan: ' + rujukan +
