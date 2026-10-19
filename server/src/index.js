@@ -772,13 +772,22 @@ export default {
                       // dikeluarkan dari semua metrik revenue. Payload aslinya tetap tersimpan.
                       const isTest = (['test', 'audit'].indexOf(utmSource.toLowerCase()) !== -1 || b.probe === 1 || b.probe === '1') ? 1 : 0;
                       const rujukan = String(b.rujukan || '').toUpperCase().trim().slice(0, 12);
-                      await env.DB.prepare(
+                      const ins = await env.DB.prepare(
                         'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload, is_test, rujukan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
                       ).bind(timestamp, utmSource, utmMedium, product, amount, status, txid, rawPayload, isTest, rujukan || null).run();
                       // Kirim notifikasi Telegram hanya untuk pembayaran yang bukan data test
                       if ((status === 'success' || status === 'paid') && !isTest) {
                         const alertMsg = `✅ <b>Pembayaran Baru</b>\nProduk: ${product}\nJumlah: Rp ${amount.toLocaleString()}\nUTM: ${utmSource} / ${utmMedium}\nTXID: ${txid || '-'}\nWaktu: ${timestamp}`;
                         await kirimTelegramAlert(env, alertMsg);
+                        // Push instan sudah terkirim: majukan guard sweep alert revenue supaya
+                        // baris ini tidak di-push ulang oleh cron */10 (sweepBayarBaru).
+                        try {
+                          const idBaru = ins && ins.meta && ins.meta.last_row_id;
+                          if (idBaru) {
+                            const lama = parseInt(await env.FUNNEL_KV.get('alert:pay:last_rowid'), 10) || 0;
+                            if (idBaru > lama) await env.FUNNEL_KV.put('alert:pay:last_rowid', String(idBaru));
+                          }
+                        } catch (e) {}
                         // payments.status success -> kode referensi pembeli terbit + reward referrer
                         // bila pesanan itu memakai kode (mekanisme FINAL, anti-abuse di beriRewardRef).
                         if (/^SP-\d{3}$/.test(rujukan)) {
@@ -1176,6 +1185,21 @@ export default {
         return jawab({ ok: !!hasil.ok, terkirim: hasil.terkirim, lewati: hasil.lewati, jumlah_belum: hasil.jumlah_belum }, 200, asal);
       }
 
+      // ---- uji alert revenue secara manual (kode SAMA dengan cron */10 dan
+      //      ringkasan 07:00 WIB). mode=sweep memakai guard KV asli (lihat init
+      //      dan dedup di sweepBayarBaru). mode=ringkasan kirim tanpa menulis guard
+      //      supaya cron pagi tetap berjalan normal. ----
+      if (jalan === '/api/dashboard/alert-coba' && request.method === 'POST') {
+        const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+        const laju = await batasiLaju(env, ip, 'alert_coba', 10, 300);
+        if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+        const mode = (new URL(request.url)).searchParams.get('mode') || 'sweep';
+        const hasilAlert = mode === 'ringkasan'
+          ? await ringkasanRevenuePagi(env, { tanpaGuard: true })
+          : await sweepBayarBaru(env);
+        return jawab(Object.assign({ mode: mode }, hasilAlert), 200, asal);
+      }
+
       // ---- rekonsiliasi klaim "sudah bayar" vs pembayaran masuk (dasbor internal) ----
       // Autentikasi dua jalur: sesi pemilik ATAU token laporan (LAPORAN_TOKEN, jalur
       // yang sama dengan /api/laporan/funnel) supaya cron/ekspor dan pemilik bisa
@@ -1280,6 +1304,8 @@ export default {
               if (event.cron === '55 16 * * *') { await laporanHarian(env); return; }
               const kini = new Date();
               if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 8) await rekonsCronPagi(env);
+              if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 7) await ringkasanRevenuePagi(env);
+              await sweepBayarBaru(env);   // alert revenue: bayar baru -> push Telegram (guard KV rowid, tiap bayar sekali)
               if (kini.getUTCHours() % 6 === 0 && kini.getUTCMinutes() <= 10) await simpanSnapshotFunnel(env);
               await ingatkanTripayBelumPasang(env);   // sekali sehari saja, lihat fungsinya
               await cekMonitoringLengkap(env);
@@ -1303,7 +1329,9 @@ export default {
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({ chat_id: chatId, text: pesan, parse_mode: 'HTML' })
                   });
-                  return { ok: r.ok, status: r.status };
+                  let message_id = null, chat_terkirim = null;
+                  try { const d = await r.json(); if (d && d.result) { message_id = d.result.message_id || null; chat_terkirim = (d.result.chat && d.result.chat.id) || null; } } catch (e) {}
+                  return { ok: r.ok, status: r.status, message_id, chat_id: chat_terkirim };
               } catch (e) {
                   return { ok: false, reason: String(e.message || e).slice(0, 100) };
               }
@@ -1393,6 +1421,102 @@ export default {
               } catch (e) {
             return { ok: false, ringkasan: String(e.message || e).slice(0, 160) };
             }
+            }
+
+            // ===== Alert revenue: push Telegram tiap bayar baru + ringkasan pagi 07:00 WIB =====
+            // Sumber: tabel payments (webhook QRIS manual + webhook Tripay). Guard KV
+            // 'alert:pay:last_rowid' memastikan tiap baris hanya di-push SEKALI oleh sweep;
+            // sweep menutup celah jalur yang tidak push instan (Tripay PAID, webhook gagal).
+            // Baris is_test=1 tetap di-push tapi ditandai [UJI] dan TIDAK masuk metrik revenue.
+            // Uji manual: POST /api/dashboard/alert-coba (mode=sweep|ringkasan).
+            async function bersihTeks(s) {
+                return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            async function sweepBayarBaru(env) {
+                const KUNCI = 'alert:pay:last_rowid';
+                try {
+                    let terakhir = parseInt(await env.FUNNEL_KV.get(KUNCI), 10);
+                    if (!Number.isFinite(terakhir) || terakhir < 0) {
+                        // Penyalaan pertama: jangan memutar ulang riwayat pembayaran lama —
+                        // mulai dari baris terbaru yang sudah ada.
+                        const m = await env.DB.prepare('SELECT COALESCE(MAX(rowid),0) AS mx FROM payments').first();
+                        terakhir = (m && m.mx) || 0;
+                        await env.FUNNEL_KV.put(KUNCI, String(terakhir));
+                        return { ok: true, inisialisasi: true, terakhir: terakhir, dikirim: 0 };
+                    }
+                    const rows = await env.DB.prepare(
+                        "SELECT rowid AS id, timestamp, product, amount, status, txid, utm_source, is_test, rujukan " +
+                        "FROM payments WHERE rowid > ? AND status IN ('success','paid') ORDER BY rowid ASC LIMIT 10"
+                    ).bind(terakhir).all();
+                    const baru = rows.results || [];
+                    if (!baru.length) return { ok: true, dikirim: 0, terakhir: terakhir };
+                    let terjauhSukses = terakhir;
+                    const hasil = [];
+                    for (const p of baru) {
+                        const uji = p.is_test === 1 || p.is_test === '1';
+                        const pesan = (uji ? '🧪 <b>[UJI] Pembayaran Baru</b>' : '✅ <b>Pembayaran Baru</b>') +
+                            '\nProduk: ' + bersihTeks(p.product) +
+                            '\nJumlah: Rp ' + Number(p.amount).toLocaleString('id-ID') +
+                            '\nStatus: ' + bersihTeks(p.status) +
+                            (p.rujukan ? '\nRujukan: ' + bersihTeks(p.rujukan) : '') +
+                            '\nTXID: ' + bersihTeks(p.txid || '-') +
+                            '\nUTM: ' + bersihTeks(p.utm_source || '-') +
+                            '\nWaktu: ' + bersihTeks(p.timestamp) + ' UTC';
+                        const tg = await kirimTelegramAlert(env, pesan);
+                        hasil.push({ id: p.id, uji: uji, tg_ok: !!tg.ok, status: tg.status, message_id: tg.message_id || null, alasan: tg.reason || null });
+                        if (!tg.ok) break;   // gagal kirim: berhenti — baris ini diulang sweep berikutnya (tidak ada alert hilang)
+                        terjauhSukses = p.id;
+                    }
+                    await env.FUNNEL_KV.put(KUNCI, String(terjauhSukses));
+                    const sukses = hasil.filter(h => h.tg_ok).length;
+                    return { ok: true, dikirim: sukses, sisa: baru.length - sukses, terakhir: terjauhSukses, hasil: hasil };
+                } catch (e) {
+                    return { ok: false, rincian: String(e.message || e).slice(0, 160) };
+                }
+            }
+
+            // Ringkasan revenue harian 07:00 WIB: angka kemarin WIB + hari ini s/d 07:00 + 7 hari.
+            // Guard KV 'alert:ringkas:<tanggal-WIB>' sekali sehari. Uji manual:
+            // POST /api/dashboard/alert-coba?mode=ringkasan (kirim tanpa menulis guard, supaya
+            // cron pagi tetap berjalan normal).
+            async function ringkasanRevenuePagi(env, opsi) {
+                const tanpaGuard = !!(opsi && opsi.tanpaGuard);
+                try {
+                    const tanggalWIB = new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
+                    const KUNCI = 'alert:ringkas:' + tanggalWIB;
+                    if (!tanpaGuard && (await env.FUNNEL_KV.get(KUNCI))) {
+                        return { ok: true, lewati: 'sudah dikirim hari ini', tanggal: tanggalWIB };
+                    }
+                    const tengahMalamWIB = Date.parse(tanggalWIB + 'T00:00:00Z') - 7 * 3600e3; // UTC ms dari 00:00 WIB hari ini
+                    const mulaiKemarin = new Date(tengahMalamWIB - 864e5).toISOString();
+                    const mulaiHariIni = new Date(tengahMalamWIB).toISOString();
+                    const sejak7 = new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10);
+                    const satu = (dari, sampai) => env.DB.prepare(
+                        "SELECT COUNT(*) AS n, COALESCE(SUM(amount),0) AS total FROM payments " +
+                        "WHERE status IN ('success','paid') AND is_test = 0 AND timestamp >= ? AND timestamp < ?"
+                    ).bind(dari, sampai).first();
+                    const [kemarin, hariIni, tujuh] = await Promise.all([
+                        satu(mulaiKemarin, mulaiHariIni),
+                        satu(mulaiHariIni, new Date(Date.now() + 60e3).toISOString()),
+                        env.DB.prepare(
+                            "SELECT COUNT(*) AS n, COALESCE(SUM(amount),0) AS total FROM payments " +
+                            "WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ?"
+                        ).bind(sejak7).first()
+                    ]);
+                    const rp = (n) => 'Rp ' + Number(n).toLocaleString('id-ID');
+                    const pesan = '<b>🌅 Ringkasan revenue SiapPsikotes — ' + tanggalWIB + ' 07:00 WIB</b>\n' +
+                        'Kemarin (WIB): ' + (kemarin && kemarin.n ? kemarin.n + ' bayar · ' + rp(kemarin.total) : 'belum ada pembayaran') + '\n' +
+                        'Hari ini s/d 07:00: ' + (hariIni && hariIni.n ? hariIni.n + ' bayar · ' + rp(hariIni.total) : 'belum ada pembayaran') + '\n' +
+                        '7 hari terakhir: ' + ((tujuh && tujuh.n) || 0) + ' bayar · ' + rp(tujuh ? tujuh.total : 0);
+                    const tg = await kirimTelegramAlert(env, pesan);
+                    if (tg.ok && !tanpaGuard) {
+                        try { await env.FUNNEL_KV.put(KUNCI, JSON.stringify({ waktu: new Date().toISOString(), message_id: tg.message_id || null })); } catch (e) {}
+                    }
+                    return { ok: !!tg.ok, tg: tg, tanggal: tanggalWIB, pesan: pesan, kemarin: kemarin, hari_ini: hariIni };
+                } catch (e) {
+                    return { ok: false, rincian: String(e.message || e).slice(0, 160) };
+                }
             }
 
             // ===== Rekonsiliasi klaim "sudah bayar" vs pembayaran masuk =====
