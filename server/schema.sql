@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS kode_terbit (
                                        -- 'menunggu-bayar' = pesanan pembeli (belum bayar);
                                        -- 'klaim' = klaim "sudah bayar" HMAC (menunggu verifikasi harian);
                                        -- 'tripay' = webhook Tripay PAID (lunas otomatis, terverifikasi)
+  kontak     TEXT,                   -- WA/email klaimer (opsional, klaim pertama, disanitasi)
 );
 CREATE INDEX IF NOT EXISTS idx_kode_terbit_dibayar ON kode_terbit(dibayar);
 

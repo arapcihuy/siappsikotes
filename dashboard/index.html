@@ -119,10 +119,30 @@
         <span class="badge ok" id="cron4hStatus">Cron 4h: Active</span>
       </div>
     </div>
+
+    <div class="section">
+      <h2>Rekonsiliasi Klaim "Sudah Bayar" (7 hari)</h2>
+      <p style="color:#8b949e; font-size:12px; margin-bottom:12px;">
+        Klaim tombol "Saya sudah bayar" dicocokkan dengan transfer masuk D1 (is_test=0).
+        Status <b>butuh_pemilik</b> = belum ada pembayaran yang cocok — cek mutasi QR/transfer.
+      </p>
+      <div style="margin-bottom:12px; display:flex; gap:8px;">
+        <input id="rekonToken" type="password" placeholder="Token laporan (LAPORAN_TOKEN)"
+               style="flex:1; background:#0d1117; border:1px solid #30363d; color:#e6edf3; padding:8px; border-radius:6px;">
+        <button class="refresh" id="rekonBtn" onclick="loadRekonsiliasi()">Muat Tabel</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Rujukan</th><th>Nominal</th><th>Klaim (UTC)</th><th>Tunggu</th><th>Tercocok</th><th>Kontak</th><th>Status</th></tr>
+        </thead>
+        <tbody id="rekonBody"><tr><td colspan="7" style="color:#8b949e">— masukkan token lalu muat —</td></tr></tbody>
+      </table>
+      <div class="last-update" id="rekonUpdate">Terakhir update: —</div>
+    </div>
   </div>
 
   <script>
-    const API_BASE = 'https://siappsikotes-api.arapcihuy.workers.dev';
+    const API_BASE = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
     let refreshInterval;
 
     async function fetchJSON(url) {
@@ -187,6 +207,44 @@
 
     // Cleanup on unload
     window.addEventListener('beforeunload', () => clearInterval(refreshInterval));
+
+    async function loadRekonsiliasi() {
+      const input = document.getElementById('rekonToken');
+      const token = input.value.trim() || localStorage.getItem('dash_rekon_token') || '';
+      if (token) { try { localStorage.setItem('dash_rekon_token', token); } catch (e) {} }
+      const tbody = document.getElementById('rekonBody');
+      if (!token) { tbody.innerHTML = '<tr><td colspan="7" style="color:#f85149">Token kosong — ambil dari pemilik/ekspor-funnel.sh</td></tr>'; return; }
+      try {
+        const data = await fetchJSON(`${API_BASE}/api/rekonsiliasi-ringkasan?token=${encodeURIComponent(token)}&hari=7`);
+        const r = data.ringkasan || {};
+        const baris = (data.klaim || []).map(row => {
+          const ok = row.status === 'tercocok';
+          return `<tr>
+            <td>${row.rujukan}</td>
+            <td>Rp ${Number(row.nominal).toLocaleString()}</td>
+            <td>${String(row.klaim_waktu || '').slice(0, 16).replace('T', ' ')}</td>
+            <td>${row.tunggu_jam} jam</td>
+            <td>${ok ? 'Rp ' + Number(row.nominal_masuk).toLocaleString() : (row.payments || []).length ? 'Rp ' + Number(row.nominal_masuk).toLocaleString() : '—'}</td>
+            <td>${row.kontak || '—'}</td>
+            <td><span class="badge ${ok ? 'ok' : 'alert'}">${ok ? 'tercocok' : 'butuh_' + (row.alasan ? row.alasan : 'pemilik')}</span></td>
+          </tr>`;
+        }).join('');
+        tbody.innerHTML = baris || '<tr><td colspan="7" style="color:#8b949e">Belum ada klaim 7 hari — semua aman</td></tr>';
+        document.getElementById('rekonUpdate').textContent =
+          `Terakhir update: ${new Date().toLocaleString('id-ID')} — klaim ${r.klaim_total}, tercocok ${r.tercocok}, butuh_pemilik ${r.butuh_pemilik}, backlog>24j ${r.backlog_24jam}`;
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="7" style="color:#f85149">Gagal memuat: ${e.message}</td></tr>`;
+      }
+    }
+
+    // Token bisa datang dari URL (?token=...) — bookmark satu-taut untuk pemilik
+    const urlTok = new URLSearchParams(location.search).get('token');
+    if (urlTok) {
+      document.getElementById('rekonToken').value = urlTok;
+      try { localStorage.setItem('dash_rekon_token', urlTok); } catch (e) {}
+    }
+    // Muat otomatis bila token sudah tersimpan sebelumnya
+    if (localStorage.getItem('dash_rekon_token')) loadRekonsiliasi();
   </script>
 </body>
 </html>
