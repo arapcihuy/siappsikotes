@@ -267,3 +267,24 @@ tambah `?format=csv` untuk ekspor CSV, `?days=30` untuk jendela).
   (probe) ditandai is_test=1 dan dikecualikan dari semua metrik.
 - Verifikasi: unit test logika hitung 8/8 lulus; SQL diuji langsung ke D1 produksi; smoke test
   beacon varian a/b + probe webhook tercatat; deploy Worker versi 647af42e.
+
+## Cek A/B /beli/ + tambah trafik — 20 Okt 2026
+
+Hasil baca `/api/ab-beli` (jendela 7 hari, 13-19 Okt): varian A 1 kunjungan, varian B 0,
+klik bayar 1, pembayaran sukses 0. Lapangan `keputusan.pemenang` masih kosong — sampel
+belum cukup (butuh minimal 150 kunjungan per varian). Copy varian TIDAK dikunci.
+
+Trafik ditambah sesuai rencana task (jalur laman):
+
+- Tiga halaman latihan baru dari kategori bank yang belum punya halaman sendiri:
+  `/contoh-soal-psikotes-logika/` (15 soal penalaran logika),
+  `/contoh-soal-psikotes-verbal/` (15 verbal + 10 penalaran),
+  `/contoh-soal-psikotes-numerik/` (15 numerik + 10 matematika).
+  Semua soal diambil dari bank terverifikasi, setiap halaman bermuara ke `/beli/`.
+- Sitemap naik ke 28 halaman, kartu pratinjau OG ketiganya dibuat, gerbang mutu penuh
+  lulus dua kali (saat commit dan saat push), IndexNow 28/28 alamat terkirim (HTTP 200).
+- Ketiga halaman hidup di domain (HTTP 200) pada commit 03e1a70.
+
+Catatan untuk pemeriksa berikutnya (jendela 21-23 Okt): kalau sampel masih di bawah
+ambang, kanal broadcast belum bisa dipakai — `leads/leads.csv` hanya berisi 4 alamat
+dummy, jadi tidak ada penerima nyata yang sah untuk dikirimi pesan.
