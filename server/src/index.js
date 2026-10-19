@@ -748,8 +748,9 @@ export default {
                             const utmSource = String(b.utm_source || '').slice(0, 50);
                             const utmMedium = String(b.utm_medium || '').slice(0, 50);
                             const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
-                            await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?)')
-                              .bind(null, awalan + jenis, rincianTag, new Date().toISOString(), utmSource, utmMedium, utmCampaign).run();
+                            const isTest = (()=>{ const src = utmSource.toLowerCase(); const markers=['uji-','probe','audit','verify-task','test']; if (markers.some(m=>src.startsWith(m))) return 1; if (b.is_test) return 1; return 0; })();
+                            await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign, is_test) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+                              .bind(null, awalan + jenis, rincianTag, new Date().toISOString(), utmSource, utmMedium, utmCampaign, isTest).run();
                             return jawab({ ok: true }, 200, asal);
                           }
 
@@ -1015,11 +1016,11 @@ export default {
         if (!adalahPemilik(saya)) return jawab({ pesan: 'bukan pemilik' }, 403, asal);
         const perJenis = await env.DB.prepare(
           "SELECT jenis, COUNT(*) AS n, COUNT(DISTINCT rincian) AS rujukan_unik " +
-          "FROM peristiwa WHERE jenis LIKE 'beli:%' GROUP BY jenis ORDER BY jenis"
+          "FROM peristiwa WHERE jenis LIKE 'beli:%' AND is_test = 0 GROUP BY jenis ORDER BY jenis"
         ).all();
         const perHari = await env.DB.prepare(
           "SELECT substr(waktu,1,10) AS hari, jenis, COUNT(*) AS n FROM peristiwa " +
-          "WHERE jenis LIKE 'beli:%' GROUP BY hari, jenis ORDER BY hari DESC, jenis LIMIT 400"
+          "WHERE jenis LIKE 'beli:%' AND is_test = 0 GROUP BY hari, jenis ORDER BY hari DESC, jenis LIMIT 400"
         ).all();
         return jawab({ per_jenis: perJenis.results || [], per_hari: perHari.results || [] }, 200, asal);
       }
@@ -1048,7 +1049,7 @@ export default {
         if (!env.LAPORAN_TOKEN || token !== env.LAPORAN_TOKEN) return jawab({ pesan: 'token tidak sah' }, 403, asal);
         const day = Math.min(90, Math.max(1, parseInt(u.searchParams.get('hari') || '30', 10))) || 30;
         const cutoff = new Date(Date.now() - day*864e5).toISOString();
-        const rows = await env.DB.prepare('SELECT waktu, jenis, rincian FROM peristiwa WHERE waktu >= ? ORDER BY waktu DESC LIMIT 5000').bind(cutoff).all();
+        const rows = await env.DB.prepare('SELECT waktu, jenis, rincian FROM peristiwa WHERE waktu >= ? AND is_test = 0 ORDER BY waktu DESC LIMIT 5000').bind(cutoff).all();
         const data = rows.results || [];
         if ((u.searchParams.get('format') || 'json') === 'csv') {
           const csv = ['waktu,jenis,rincian'].concat(data.map(r => [
@@ -1070,11 +1071,11 @@ export default {
         const [kunjungan, klikBeli, pembayaranSukses, revenueHariIni, conversionRate] = await Promise.all([
           // Kunjungan unik hari ini (event kunjungan_beli)
           env.DB.prepare(
-            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND substr(waktu,1,10) = ?"
+            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND is_test = 0 AND substr(waktu,1,10) = ?"
           ).bind(hariIni).first(),
           // Klik CTA bayar hari ini
           env.DB.prepare(
-            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:klik_cta_bayar' AND substr(waktu,1,10) = ?"
+            "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:klik_cta_bayar' AND is_test = 0 AND substr(waktu,1,10) = ?"
           ).bind(hariIni).first(),
           // Pembayaran sukses hari ini (dari tabel payments, data test/audit dikeluarkan)
           env.DB.prepare(
@@ -1088,7 +1089,7 @@ export default {
           env.DB.prepare(
             "SELECT " +
             "  (SELECT COUNT(*) FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) = ?) * 100.0 / " +
-            "  NULLIF((SELECT COUNT(DISTINCT rincian) FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND substr(waktu,1,10) = ?), 0) AS rate"
+            "  NULLIF((SELECT COUNT(DISTINCT rincian) FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND is_test = 0 AND substr(waktu,1,10) = ?), 0) AS rate"
           ).bind(hariIni, hariIni).first()
         ]);
         
@@ -1116,7 +1117,7 @@ export default {
           "  (SELECT COUNT(*) FROM payments p WHERE p.status IN ('success','paid') AND p.is_test = 0 AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS pembayaran, " +
           "  (SELECT COALESCE(SUM(amount),0) FROM payments p WHERE p.status IN ('success','paid') AND p.is_test = 0 AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS revenue " +
           "FROM peristiwa pe " +
-          "WHERE pe.waktu >= ? AND pe.jenis LIKE 'beli:%' " +
+          "WHERE pe.waktu >= ? AND pe.jenis LIKE 'beli:%' AND pe.is_test = 0 " +
           "GROUP BY substr(pe.waktu,1,10) " +
           "ORDER BY hari DESC"
         ).bind(cutoff).all();

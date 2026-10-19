@@ -113,7 +113,8 @@ CREATE TABLE IF NOT EXISTS peristiwa (
   waktu    TEXT NOT NULL,
   utm_source TEXT,
   utm_medium TEXT,
-  utm_campaign TEXT
+  utm_campaign TEXT,
+  is_test  INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_peristiwa_waktu ON peristiwa(waktu);
 
