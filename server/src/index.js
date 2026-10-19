@@ -345,6 +345,77 @@ function angka(n, batas) {
   return Math.min(v, batas || 1000000);
 }
 
+// ==================== A/B halaman /beli/ (spesifikasi-ab-beli.md) ====================
+// Assignment server-side via cookie sp_beli_var; halaman statis Pages tidak diubah isinya.
+const ASAL_BELI_HTML = 'https://raw.githubusercontent.com/arapcihuy/siappsikotes/master/beli/index.html';
+
+// Anchor = string persis di beli/index.html master. Kalau master berubah bentuk,
+// rewrite tidak terjadi (halaman kontrol tampil apa adanya) — update anchor mengikuti master.
+const ANCHOR_BELI = {
+  lencana: '<span class="lencana">Harga standar A/B test</span>',
+  h1: '<h1 class="h-harga">Beli akses penuh &mdash; <span id="displayHarga">Rp 39.000</span> sekali bayar</h1>',
+  dek: '<p class="dek">Satu pembayaran membuka 1.348 soal beserta pembahasannya, semua modul tes, dan Laporan Lengkap.\n      Bukan langganan, tanpa perpanjangan otomatis.</p>',
+  cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar Rp 39.000 dengan QRIS</a>'
+};
+
+// Copy final 2 varian (produkt-norman, final — tidak boleh diganti selama eksperimen).
+// Harga Rp 39.000 wajib tampil di CTA kedua varian; angka 1.348/9 modul = bank soal.
+const COPY_BELI = {
+  a: {
+    lencana: '<span class="lencana">Akses aktif otomatis</span>',
+    h1: '<h1 class="h-harga">Bayar QRIS &rarr; kode akses langsung aktif</h1>',
+    dek: '<p class="dek">Tanpa kirim bukti transfer, tanpa nunggu balasan siapa pun &mdash; begitu QRIS terbayar, kode aksesmu aktif di halaman ini. Sekali bayar Rp 39.000, bukan langganan: 1.348 soal, 9 modul tes, dan Laporan Lengkap.</p>',
+    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar QRIS Rp 39.000 &mdash; kode langsung aktif</a>'
+  },
+  b: {
+    lencana: '<span class="lencana">1.348 soal + pembahasan tiap soal</span>',
+    h1: '<h1 class="h-harga">1.348 soal pola tes resmi, semua dikupas tuntas</h1>',
+    dek: '<p class="dek">Latihan dari soal berpola tes kerja &amp; kedinasan sesungguhnya &mdash; HGT, KSO, AKS, hingga wawancara &mdash; dan tiap soal sudah dikupas langkah demi langkah di pembahasannya. Sekali bayar Rp 39.000, bukan langganan.</p>',
+    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Kupas 1.348 soal &mdash; Rp 39.000 sekali bayar</a>'
+  }
+};
+
+function varianDariCookie(request) {
+  const cocok = /(?:^|;\s*)sp_beli_var=([ab])/.exec(request.headers.get('Cookie') || '');
+  return cocok ? cocok[1] : '';
+}
+
+async function layaniBeliAb(request, url) {
+  // 1) Assignment (urutan wajib): utm_source=variant-a|variant-b menang & cookie mengikuti;
+  //    lalu cookie sp_beli_var; terakhir random 50/50 (cookie di-set).
+  const dariUrl = ({ 'variant-a': 'a', 'variant-b': 'b' })[url.searchParams.get('utm_source')] || '';
+  let varian = dariUrl || varianDariCookie(request);
+  const setCookie = varian ? !!dariUrl : true;   // dari URL atau random baru -> Set-Cookie
+  if (!varian) varian = Math.random() < 0.5 ? 'a' : 'b';
+
+  // 2) HTML origin statis (master = sumber deploy Pages). Origin gagal -> pass-through
+  //    Pages apa adanya (fail-open — halaman beli tidak pernah diblok).
+  const res = await fetch(ASAL_BELI_HTML, { headers: { 'User-Agent': 'siappsikotes-api', 'Accept': 'text/html' } });
+  if (!res.ok) {
+    return fetch('https://siappsikotes.my.id' + url.pathname + (url.search || ''), { headers: { 'Accept': 'text/html' } });
+  }
+  let html = await res.text();
+
+  // 3) Rewrite 4 elemen + inject varian untuk beacon (dibaca beli/script.js).
+  //    Harga tidak pernah disentuh: string 'Rp 39.000' tetap tampil & angkanya utuh.
+  const salin = COPY_BELI[varian];
+  html = html.replace(ANCHOR_BELI.lencana, salin.lencana)
+             .replace(ANCHOR_BELI.h1, salin.h1)
+             .replace(ANCHOR_BELI.dek, salin.dek)
+             .replace(ANCHOR_BELI.cta, salin.cta)
+             .replace('<script src="script.js"', '<script>window.spBeliVar="' + varian + '";</script><script src="script.js"');
+
+  const header = {
+    'Content-Type': 'text/html; charset=utf-8',
+    // WAJIB override max-age=600 GitHub/CF — satu varian tidak boleh ter-cache untuk semua.
+    'Cache-Control': 'private, no-store'
+  };
+  if (setCookie) {
+    header['Set-Cookie'] = 'sp_beli_var=' + varian + '; Max-Age=2592000; Path=/; SameSite=Lax; Secure';
+  }
+  return new Response(html, { status: 200, headers: header });
+}
+
 export default {
   async fetch(request, env) {
     const asal = request.headers.get('Origin') || '';
@@ -368,6 +439,13 @@ export default {
         return Response.redirect('https://siappsikotes.my.id' + tujuan, 302);
       }
 
+      // ---- A/B /beli/: dokumen HTML di-swap per varian; aset /beli* lain pass-through ----
+      if (jalan === '/beli' || jalan === '/beli/index.html') {
+        return layaniBeliAb(request, url);
+      }
+      if (jalan.indexOf('/beli/') === 0) {
+        return fetch('https://siappsikotes.my.id' + url.pathname + (url.search || ''), { headers: { 'Accept': '*/*' } });
+      }
       // ---- cek kode referensi (publik, dipakai /beli/ sebelum menampilkan harga diskon) ----
       if (jalan === '/api/referensi/cek' && request.method === 'GET') {
         const kode = (url.searchParams.get('kode') || '').toUpperCase().trim();
@@ -661,11 +739,17 @@ export default {
               if (rincian && !(kartu ? /^[A-Za-z0-9_-]{1,20}$/.test(rincian) : /^SP-[0-9]{3}$/.test(rincian)))
                 return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
               const awalan = kartu ? 'cardcheck:' : 'beli:';
+                            // Varian A/B /beli/ (direct traffic: beacon kirim cookie sp_beli_var).
+                            // Tag di rincian 'SP-123|var:a' — tanpa kolom baru / migrasi D1.
+                            // Nilai di luar ^(a|b)$ dibuang.
+                            const varianAb = ['a', 'b'].indexOf(String(b.variant || '').toLowerCase()) !== -1
+                              ? String(b.variant).toLowerCase() : '';
+                            const rincianTag = rincian + (varianAb ? '|var:' + varianAb : '');
                             const utmSource = String(b.utm_source || '').slice(0, 50);
                             const utmMedium = String(b.utm_medium || '').slice(0, 50);
                             const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
                             await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?)')
-                              .bind(null, awalan + jenis, rincian, new Date().toISOString(), utmSource, utmMedium, utmCampaign).run();
+                              .bind(null, awalan + jenis, rincianTag, new Date().toISOString(), utmSource, utmMedium, utmCampaign).run();
                             return jawab({ ok: true }, 200, asal);
                           }
 

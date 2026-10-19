@@ -39,6 +39,11 @@
     };
   }
 
+  function bacaCookie(nama) {
+    var cocok = new RegExp('(?:^|;\\s*)' + nama + '=([^;]*)').exec(document.cookie);
+    return cocok ? cocok[1] : '';
+  }
+
   function lacak(evt, extra) {
     try {
       var utm = getUtmParams();
@@ -48,7 +53,9 @@
         utm_source: utm.utm_source,
         utm_medium: utm.utm_medium,
         utm_campaign: utm.utm_campaign,
-        variant: 'B',
+        // Varian A/B ditetapkan server Worker (window.spBeliVar dari HTML hasil rewrite);
+        // fallback: cookie sp_beli_var (direct traffic). Kosong kalau halaman bukan hasil Worker.
+        variant: window.spBeliVar || bacaCookie('sp_beli_var') || '',
         harga_dasar: HARGA_DASAR
       }, extra || {}));
       if (navigator.sendBeacon) {
