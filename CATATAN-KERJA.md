@@ -250,3 +250,20 @@ Yang belum dibereskan (temuan, bukan bagian dari perubahan ini): kode pengembang
 `SPDEVPEMILIKB01J4S1` masih tertulis di `static/js/akses.js` dan membuka aplikasi di perangkat
 mana pun yang menempelkannya — sebaiknya dicabut atau dijadikan kata sandi yang tidak ikut ke repo.
 
+
+## Dashboard A/B /beli/ — 19 Okt 2026
+
+Endpoint baru: `GET https://siappsikotes-api.rasyidahmad180.workers.dev/api/ab-beli` (JSON;
+tambah `?format=csv` untuk ekspor CSV, `?days=30` untuk jendela).
+
+- Sumber: tabel `peristiwa` (beacon, rincian `SP-123|var:a`) dan `payments` (webhook QRIS/Tripay,
+  kolom rujukan) — sumber yang sama dengan CSV funnel yang sudah ada, dibaca langsung dari D1.
+- Keluaran: kunjungan -> klik bayar -> QRIS tampil -> pembayaran sukses per varian A vs B,
+  persen konversi, plus kolom `tanpa_tag`/`bayar_tanpa_varian` supaya tidak ada angka yang hilang.
+- Keputusan copy pemenang: dihitung otomatis di lapangan `keputusan` — z-test dua proporsi
+  (alpha 0.05, minimal 150 kunjungan per varian). Sebelum sampel cukup endpoint menyatakan
+  "belum bisa diputuskan"; setelah 48-96 jam traffic angkanya jadi dasar mutuskan copy.
+- Wiring pembayaran tidak diubah. Pembayaran tetap 100% tercatat di webhook; data uji
+  (probe) ditandai is_test=1 dan dikecualikan dari semua metrik.
+- Verifikasi: unit test logika hitung 8/8 lulus; SQL diuji langsung ke D1 produksi; smoke test
+  beacon varian a/b + probe webhook tercatat; deploy Worker versi 647af42e.
