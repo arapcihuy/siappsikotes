@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Beli Akses Penuh — SiapPsikotes</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preload" href="qris-bayar.png" as="image" onload="this.removeAttribute('onload');" >
+</head>
+<body>
+<header class="kepala"><nav><a href="/">Buka aplikasi</a></nav></header>
+<main class="wrap">
+<h1 class="h-harga">Beli akses penuh — <span id="harga">Rp 39.000</span></h1>
+<div class="aksi">
+<a href="#" id="ctaBayar" class="tombol" aria-label="Bayar Rp 39.000 via QRIS">Bayar Rp 39.000 dengan QRIS</a>
+</div>
+<div id="qrModal" class="modal" role="dialog" aria-modal="true" hidden>
+<span class="close" id="qrClose"></span>
+<img src="../static/img/qris-bayar.avif" alt="Kode QRIS" id="qrCode">
+<p id="status">Menunggu konfirmasi</p>
+</div>
+</main>
+<script>
+// Light modal behavior
+document.getElementById('ctaBayar').addEventListener('click',e=>{e.preventDefault();document.getElementById('qrModal').hidden=false;});
+document.getElementById('qrClose').addEventListener('click',()=>{document.getElementById('qrModal').hidden=true;});
+</script>
+</body>
+</html>

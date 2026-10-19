@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+    branches: [main]
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Run lint/quality gate
+        run: bash tools/periksa-sebelum-kirim.sh --cepat
+      - name: Run tests / verifikasi bank soal
+        run: |
+          python3 tools/peraturan-mutu.py
+          python3 tools/verifikasi-soal.py
+      - name: Build site assets
+        run: python3 tools/buat-artikel.py
+      - name: Run JS syntax check
+        run: |
+          for f in static/js/*.js data/*.js sw.js; do
+            node --check "$f" || exit 1
+          done
+  deploy:
+    needs: lint-test-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+

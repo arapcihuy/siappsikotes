@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Bangun gambar listing marketplace (Shopee/Tokopedia) 1080x1080 dari naskah.
 
-Isi tiap gambar mengikuti spesifikasi di ~/pk-bisnis/MARKETPLACE-LISTING.md bagian 4.
+Isi tiap gambar mengikuti spesifikasi di ~/tni-belajar/aset-bisnis/MARKETPLACE-LISTING.md bagian 4.
 Angka kategori dibaca langsung dari data/soal-index.js supaya tidak ada angka karangan.
 
 Pakai:  /usr/bin/python3 tools/buat-gambar-marketplace.py
-Hasil:  ~/pk-bisnis/gambar-marketplace/*.png
+Hasil:  ~/tni-belajar/aset-bisnis/gambar-marketplace/*.png
 """
 import json
 import os
@@ -14,7 +14,7 @@ import sys
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEKS = os.path.join(AKAR, 'data', 'soal-index.js')
-KELUAR = os.path.expanduser('~/pk-bisnis/gambar-marketplace')
+KELUAR = os.path.expanduser('~/tni-belajar/aset-bisnis/gambar-marketplace')
 UKURAN = 1080
 
 GAYA = """

@@ -1,0 +1,22 @@
+KODE PENGEMBANG / PEMILIK — SiapPsikotes
+Diperbarui: 14 September 2026 (kode lama dinyatakan tidak berlaku lagi)
+
+Kode baru: SPDEVPEMILIKB01J4S1
+
+Kegunaan: membuka SELURUH aplikasi tanpa membayar, khusus akun pemilik.
+Cara pakai: buka aplikasi -> pada layar gerbang, tempel kode ini -> Buka aplikasi.
+Pemilik juga dibuka otomatis bila masuk dengan Google memakai rasyidahmad180@gmail.com.
+
+KENAPA DIGANTI
+Kode lama (SPDEVPEMILIK018Y4X) pernah tercetak pada keluaran perintah pemeriksaan
+di log sesi kerja pada 14 September 2026, sehingga harus dianggap bocor.
+Kode lama tidak berlaku lagi sejak static/js/akses.js diperbarui.
+
+JANGAN sebarkan kode ini. Siapa pun yang memilikinya bisa membuka seluruh materi.
+
+Bila bocor lagi, ganti dengan:
+  cd ~/tni-belajar
+  /usr/bin/python3 tools/buat-kode.py --isi DEVPEMILIKC --jumlah 1 --keluaran /tmp/kode.txt
+  # lalu perbarui AKSES.kodePengembang di static/js/akses.js dengan kode hasilnya
+  # ingat: kode harus BERBEDA ISI-nya dari yang lama, karena kodenya deterministik
+  bash tools/kirim.sh /tmp/pesan.txt

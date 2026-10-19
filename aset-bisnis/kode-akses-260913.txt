@@ -1,0 +1,6 @@
+# Kode akses Laporan Lengkap SiapPsikotes
+# Dibuat: 13 September 2026 10:52
+# Cara pakai: pembeli membuka aplikasi -> Laporan -> tempel kode -> Buka laporan
+# Catatan: satu kode tidak dibatasi perangkat (tanpa server), jadi jangan diumumkan.
+
+SPPSP77713092601Y6EE

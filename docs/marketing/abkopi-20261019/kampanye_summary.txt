@@ -1,0 +1,18 @@
+KAMPANYE A/B KOPI BROADCAST t_3aa8d57d
+T0 UTC: 2026-10-18T22:45:57 (WIB 2026-10-19 05:45)
+Sampel: 100 leads terverifikasi (leads_v4.csv) dibagi rapi 50/50,
+komposisi kanal identik: A = 43 telegram / 4 email / 3 WA, B = 43 / 4 / 3.
+Varian A (deadline): copy urgensi-kedaluwarsa, harga 39rb tutup dua jam terakhir.
+Varian B (demo): copy nilai-lebih-dulu, ajak coba 3 soal demo + latihan 10 menit gratis dulu.
+Link unik per lead: /beli/?v=a|b&utm_campaign=abkopi_a|abkopi_b&utm_content=LEADxxx
+Pengiriman:
+- 86 telegram: deep_link per lead terkirim otomatis saat lead klik (bot Km balas copy varian) — deep-linked & diformat per varian
+- 8 email: terkirim nyata via SMTP Gmail (8/8 sukses, 0 gagal)
+- 6 WA: log (tidak bisa kirim WA tanpa API)
+- Bukti copy live bot: sendMessage 2/2 HTTP 200 ke chat home.
+Pengukuran:
+- pantau beacon di script.js /beli/ kirim utm_campaign -> D1 peristiwa (klik kunjungan /beli/)
+- payments.raw_payload (Tripay webhook) -> konversi per varian
+- monitor_abkopi.py via launchd com.siappsikotes.abkopi-monitor tiap jam
+  (berhenti 2026-10-21), output: abkopi_report.csv (snapshot) & abkopi_log.csv (riwayat)
+Baseline T0: klik A=0, B=0, konversi 0 (wajar: baru terkirim).

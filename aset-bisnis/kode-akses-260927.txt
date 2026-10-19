@@ -1,0 +1,16 @@
+# Kode akses Laporan Lengkap SiapPsikotes
+# Dibuat: 27 September 2026 16:21
+# Cara pakai: pembeli membuka aplikasi -> Laporan -> tempel kode -> Buka laporan
+# Catatan: berkas ini hanya berisi ISI kode. Untuk membuat kode yang BERLAKU,
+#          catat setorannya dulu: python3 tools/terbitkan-kode.py --rujukan ... --nominal ...
+
+SPMUNGERFAKE02013R9M
+SPMUNGERFAKE020217U7
+SPMUNGERFAKE0203C25W
+SPMUNGERFAKE0204IQ9D
+SPMUNGERFAKE02050B5Q
+SPMUNGERFAKE0206KT2B
+SPMUNGERFAKE0207X7BS
+SPMUNGERFAKE0208ZDTH
+SPMUNGERFAKE020934B6
+SPMUNGERFAKE0210UH9G

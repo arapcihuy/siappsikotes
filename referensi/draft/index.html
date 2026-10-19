@@ -98,7 +98,7 @@
     halaman: 'referensi/draft'
   });
   var PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
-  try { navigator.sendBeacon(PANTAU, new Blob([beban], { type: 'application/json' })); }
+  try { navigator.sendBeacon(PANTAU, new Blob([beban], { type: 'text/plain' })); }
   catch (e) { fetch(PANTAU, { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
 })();
 </script>

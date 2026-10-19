@@ -370,7 +370,7 @@ def kaki(n, pantaul=None):
     utm_campaign: u.get('utm_campaign') || '',
     halaman: location.pathname.replace(/^\\//, '').replace(/\\/$/, '')
   });
-  try { navigator.sendBeacon('${PANTAU}', new Blob([beban], { type: 'application/json' })); }
+  try { navigator.sendBeacon('${PANTAU}', new Blob([beban], { type: 'text/plain' })); }
   catch (e) { fetch('${PANTAU}', { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
 })();
 </script>

@@ -1,0 +1,10 @@
+waktu,jenis,rincian
+"2026-10-19T05:05:13.722Z","beli:kunjungan_beli","|var:a"
+"2026-10-19T04:51:40.706Z","beli:klik_cta_bayar","SP-777|var:b"
+"2026-10-19T04:51:40.478Z","beli:kunjungan_beli","|var:a"
+"2026-10-19T03:11:38.315Z","ruang","90AFS3"
+"2026-10-18T22:03:28.477Z","beli:artikel_pageview",""
+"2026-10-18T22:02:52.954Z","beli:artikel_pageview",""
+"2026-10-18T21:47:49.784Z","beli:artikel_pageview",""
+"2026-10-18T21:38:17.372Z","beli:salin_rujukan","SP-777"
+"2026-10-18T21:38:17.258Z","beli:qris_tampil","SP-777"

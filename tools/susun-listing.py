@@ -5,14 +5,14 @@ Tujuannya memangkas pekerjaan tangan: seluruh isian platform dikumpulkan urut,
 satu blok per kolom, supaya tinggal salin-tempel tanpa mencari di dokumen panjang.
 
 Pakai: /usr/bin/python3 tools/susun-listing.py
-Hasil: ~/pk-bisnis/LISTING-SIAP-TEMPEL.md
+Hasil: ~/tni-belajar/aset-bisnis/LISTING-SIAP-TEMPEL.md
 """
 import os
 import re
 import sys
 
-SUMBER = os.path.expanduser('~/pk-bisnis/MARKETPLACE-LISTING.md')
-KELUAR = os.path.expanduser('~/pk-bisnis/LISTING-SIAP-TEMPEL.md')
+SUMBER = os.path.expanduser('~/tni-belajar/aset-bisnis/MARKETPLACE-LISTING.md')
+KELUAR = os.path.expanduser('~/tni-belajar/aset-bisnis/LISTING-SIAP-TEMPEL.md')
 
 
 def bagian(teks, nomor):
@@ -43,7 +43,7 @@ def main():
 Disusun 14 September 2026 dari `MARKETPLACE-LISTING.md`. Urutannya mengikuti kolom isian
 di platform, jadi cukup salin blok demi blok tanpa mencari di dokumen panjang.
 
-**Sebelum mulai:** siapkan 5 gambar di `~/pk-bisnis/gambar-marketplace/` (sudah jadi,
+**Sebelum mulai:** siapkan 5 gambar di `~/tni-belajar/aset-bisnis/gambar-marketplace/` (sudah jadi,
 1080x1080) dan satu kode akses cadangan dari `tools/kode-pembeli.py` untuk uji coba
 pembelian sendiri.
 

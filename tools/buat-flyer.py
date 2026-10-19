@@ -2,7 +2,7 @@
 """Bangun selebaran (flyer) A5 + gambar untuk dibagikan di WhatsApp.
 
 Isi: QR menuju halaman contoh gratis, penjelasan singkat, harga, dan penyangkalan jujur.
-Hasil di ~/pk-bisnis/flyer/ (PDF siap cetak + PNG untuk dibagikan).
+Hasil di ~/tni-belajar/aset-bisnis/flyer/ (PDF siap cetak + PNG untuk dibagikan).
 
 Pakai: /usr/bin/python3 tools/buat-flyer.py
 QR dibuat lewat ~/venv-siappsikotes/bin/python3 tools/buat-qr-png.py (butuh segno).
@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KELUAR = os.path.expanduser('~/pk-bisnis/flyer')
+KELUAR = os.path.expanduser('~/tni-belajar/aset-bisnis/flyer')
 TAUTAN = 'https://siappsikotes.my.id/contoh/'
 VENV = os.path.expanduser('~/venv-siappsikotes/bin/python3')
 QR = os.path.join(KELUAR, 'qr-contoh.png')

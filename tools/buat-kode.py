@@ -84,7 +84,7 @@ def main():
         print('GAGAL memeriksa kode buatan sendiri:', gagal)
         return 1
 
-    keluaran = args.keluaran or os.path.expanduser('~/pk-bisnis/kode-akses-%s.txt' % tanggal)
+    keluaran = args.keluaran or os.path.expanduser('~/tni-belajar/aset-bisnis/kode-akses-%s.txt' % tanggal)
     with open(keluaran, 'w', encoding='utf-8') as f:
         f.write('# Kode akses Laporan Lengkap SiapPsikotes\n')
         f.write('# Dibuat: %s\n' % datetime.datetime.now().strftime('%d %B %Y %H:%M'))

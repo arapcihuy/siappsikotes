@@ -13,7 +13,7 @@ Yang dikerjakan:
                     (/contoh/, /mutu/, /beli/, /syarat/, /privasi/).
   3. robots.txt   - memastikan Sitemap: menunjuk alamat yang benar.
 
-Catatan aturan jujur (~/pk-bisnis/ATURAN-JUJUR-MARKETING.md): seluruh teks data terstruktur
+Catatan aturan jujur (~/tni-belajar/aset-bisnis/ATURAN-JUJUR-MARKETING.md): seluruh teks data terstruktur
 TIDAK memuat kata "resmi", "dijamin", "pasti", "satu-satunya", "terbaik", "nomor 1".
 """
 import html as htmllib
@@ -36,6 +36,9 @@ HALAMAN = [
     ('contoh/index.html', '/contoh/', '0.9', 'weekly'),
     ('contoh-soal-psikotes-kerja/index.html', '/contoh-soal-psikotes-kerja/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-matematika/index.html', '/contoh-soal-psikotes-matematika/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-logika/index.html', '/contoh-soal-psikotes-logika/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-verbal/index.html', '/contoh-soal-psikotes-verbal/', '0.8', 'monthly'),
+    ('contoh-soal-psikotes-numerik/index.html', '/contoh-soal-psikotes-numerik/', '0.8', 'monthly'),
     ('contoh-soal-deret-angka/index.html', '/contoh-soal-deret-angka/', '0.8', 'monthly'),
     ('contoh-soal-tes-kraepelin/index.html', '/contoh-soal-tes-kraepelin/', '0.8', 'monthly'),
     ('contoh-soal-twk-cpns/index.html', '/contoh-soal-twk-cpns/', '0.8', 'monthly'),

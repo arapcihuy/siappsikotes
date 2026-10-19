@@ -1,0 +1,101 @@
+{
+ "slug": "contoh-soal-psikotes-numerik",
+ "judul_tab": "Contoh Soal Psikotes Numerik dan Jawabannya | SiapPsikotes",
+ "deskripsi": "Contoh soal psikotes numerik dan jawabannya: deret angka, perbandingan, dan soal cerita, plus 25 soal latihan berpembahasan dari bank soal terverifikasi.",
+ "h1": "Contoh Soal Psikotes Numerik dan Jawabannya (Latihan Berpembahasan)",
+ "dek": "Soal numerik psikotes jarang menuntut rumus sulit. Yang diuji adalah kecepatan mengenali pola dan ketelitian berhitung dalam waktu sempit. Ada 25 soal berpembahasan di halaman ini.",
+ "kata_kunci": "contoh soal psikotes numerik dan jawabannya",
+ "pembuka": [
+  "Contoh soal psikotes numerik dan jawabannya dicari oleh hampir semua peserta seleksi, karena bagian numerik muncul di psikotes kerja, BUMN, hingga kedinasan. Yang perlu dipahami sejak awal: tes ini tidak menguji matematika tingkat lanjut. Semua hitungannya bisa dikerjakan dengan operasi dasar - yang membuatnya berat adalah jumlah butir dan batas waktunya.",
+  "Di halaman ini ada 25 soal latihan: 15 soal numerik dan 10 soal matematika dasar berbentuk cerita. Semuanya diambil utuh dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang, dan setiap soal punya pembahasan yang terbuka setelah kamu menjawab.",
+  "Urutan halamannya: apa yang diuji, jenis soal yang berulang beserta tabel polanya, cara hitung cepat tanpa kalkulator, blok latihan, kesalahan yang paling mahal, lalu FAQ. Kalau kamu datang untuk latihan saja, lompat ke blok soal pertama."
+ ],
+ "bagian": [
+  {
+   "h2": "Apa yang diuji di tes numerik",
+   "isi": [
+    "Tes numerik menguji tiga hal sekaligus: kecepatan mengenali pola angka, ketepatan hitung dasar, dan keberanian melewatkan soal. Kalkulator umumnya tidak diperbolehkan, sehingga kertas coretan menjadi alat utamamu. Nilai naik paling cepat bukan dari rumus baru, melainkan dari kebiasaan menghitung dengan rapi dan target waktu per butir.",
+    "Komposisi soal berbeda antar seleksi, tetapi kelima bentuk berikut hampir selalu ada dalam salah satu wujudnya:"
+   ],
+   "poin": [
+    "Deret angka - lanjutkan barisan dari pola yang belum tentu terlihat sekilas.",
+    "Perbandingan dan skala - harga, campuran, peta, atau pembagian proporsional.",
+    "Persen dan diskon - potongan bertingkat, kenaikan, bunga sederhana.",
+    "Soal cerita - kecepatan-jarak-waktu, pekerjaan bersama, untung rugi.",
+    "Operasi deret cepat - hitung beruntun dengan batas waktu sangat ketat."
+   ],
+   "catatan": "Tidak ada satu susunan yang berlaku untuk semua penyelenggara. Latih variasi bentuknya, bukan tebakan atas satu instansi. Aturan penilaian juga berbeda antar seleksi - baca instruksi sebelum menebak."
+  },
+  {
+   "h2": "Pola deret angka yang paling sering keluar",
+   "isi": [
+    "Deret angka adalah bentuk yang paling cepat dikerjakan kalau polanya terbaca, dan paling banyak memakan waktu kalau kamu menebak-nebak. Kebiasaan yang paling membantu: tulis selisih antar suku di atas angkanya. Sebagian besar deret langsung terlihat pada langkah itu, sebelum hitungan sampai ke jawaban akhir.",
+    "Urutan pemeriksaan yang hemat waktu kira-kira tiga langkah. Pertama, hitung selisih antar suku; kalau tetap, polanya ketemu. Kedua, kalau tidak tetap, periksa apakah selisihnya sendiri naik teratur, dan lihat apakah angkanya bermain di sekitar bilangan kuadrat seperti 64 dan 81. Ketiga, pisahkan suku ganjil dan genap - kadang masing-masing punya aturan sendiri.",
+    "Enam pola berikut menutup sebagian besar deret yang muncul dalam latihan:"
+   ],
+   "tabel": {
+    "kepala": ["Pola", "Ciri mudah dikenali", "Contoh singkat"],
+    "baris": [
+     ["Beda tetap", "Selisih antar suku selalu sama", "3, 8, 13, 18, 23 (selisih +5)"],
+     ["Beda bertingkat", "Selisihnya sendiri membentuk pola", "1, 4, 9, 16, 25 (selisih 3, 5, 7, 9)"],
+     ["Perkalian tetap", "Setiap suku dikali angka yang sama", "2, 6, 18, 54 (dikali 3)"],
+     ["Dua deret bergantian", "Suku ganjil dan genap punya aturan sendiri", "5, 10, 8, 16, 11, 22 (ganjil +3, genap x2)"],
+     ["Operasi bergantian", "Dikali lalu dikurangi, berulang", "4, 12, 9, 27, 22 (x3 lalu -3)"],
+     ["Kuadrat dan pangkat", "Suku mengikuti kuadrat bilangan", "1, 4, 9, 16, 25 (1x1, 2x2, 3x3)"]
+    ]
+   },
+   "catatan": "Tabel di atas adalah ilustrasi pola, bukan soal yang harus dijawab. Periksa selalu dua sampai tiga suku terakhir sebelum memastikan polamu, karena tidak semua deret memakai satu aturan dari awal sampai akhir."
+  },
+  {
+   "h2": "Hitung cepat tanpa kalkulator",
+   "isi": [
+    "Tiga keterampilan hitung yang paling sering dipakai di soal numerik adalah persen, perbandingan, dan perkalian ringkas. Untuk persen, ubah ke pecahan yang mudah: 12,5% adalah seperdelapan, 16,67% adalah seperenam, 33,33% adalah sepertiga. Mengenali padanan pecahan ini memangkas waktu hitung hampir separuhnya.",
+    "Untuk perbandingan, kerjakan dengan satuan terkecil: kalau A:B = 3:5 dan selisihnya 12, maka satu bagian bernilai 6, dan A = 18, B = 30. Jangan cari nilai total lebih dulu - langsung dari satu bagian lebih cepat dan lebih sedikit langkah salah.",
+    "Kebiasaan kecil yang hasilnya besar:"
+   ],
+   "poin": [
+    "Samakan satuan sebelum menghitung - ribuan, persen, atau jam.",
+    "Tuliskan yang diketahui dan yang dicari sebelum memilih jawaban.",
+    "Periksa masuk akal: hasil di luar batas wajar berarti ada langkah yang salah tempat."
+   ],
+   "catatan": "Target 45 detik per butir adalah titik berangkat yang sehat. Soal yang melewati batas itu, tandai dan lewati; kembali setelah yang mudah aman."
+  },
+  {
+   "h2": "Latihan: 15 soal numerik berpembahasan",
+   "isi": [
+    "Kerjakan 15 soal berikut dengan batas 45 detik per soal. Jangan buka pembahasan sebelum menjawab. Setelah selesai, buka pembahasan soal yang salah lebih dulu, lalu soal yang kamu tandai - membaca penyebab kesalahan satu kali lebih berguna daripada mengerjakan dua puluh soal baru tanpa koreksi."
+   ],
+   "soal": {"kategori": "numerik", "jumlah": 15}
+  },
+  {
+   "h2": "Latihan: 10 soal cerita matematika",
+   "isi": [
+    "Sepuluh soal berikut berbentuk cerita: untung rugi, kecepatan, dan pekerjaan. Pola pengerjaannya selalu sama - tulis yang diketahui, tulis hubungan antarangka yang dipakai, hitung, lalu periksa apakah hasilnya masuk akal. Soal cerita yang dikerjakan dengan urutan itu hampir selalu lebih cepat daripada yang dikerjakan sambil membaca ulang."
+   ],
+   "soal": {"kategori": "matematika", "jumlah": 10}
+  },
+  {
+   "h2": "Kesalahan yang paling mahal di tes numerik",
+   "isi": [
+    "Yang pertama dan paling sering: terjebak di satu deret angka. Deret bisa memakan waktu tanpa batas, padahal jatah waktumu dibagi ke semua soal. Tetapkan batas kesabaran - sekitar 40 detik - dan patuhi. Yang kedua: menghitung dari angka lama setelah potongan bertingkat; persen kedua dihitung dari harga terbaru, bukan harga awal. Yang ketiga: tidak membaca satuannya - menit dan jam, atau ribuan dan jutaan, adalah sumber jawaban salah yang paling murah untuk dicegah.",
+    "Ketiganya dicegah dengan latihan yang sama: hitung dengan tulisan, bukan di kepala; patuhi batas waktu; dan tinjau soal yang salah dengan membaca langkah pembahasannya. Latihan lima belas menit tiap hari selama satu pekan biasanya sudah terlihat hasilnya di catatan waktu."
+   ]
+  }
+ ],
+ "faq": [
+  {"t": "Apakah tes numerik psikotes sulit?", "j": "Tingkat hitungannya dasar - persen, perbandingan, deret, soal cerita. Yang membuatnya terasa sulit adalah batas waktu per butir yang ketat dan jumlah soalnya. Keduanya bisa diatasi dengan latihan rutin dan batas waktu latihan."},
+  {"t": "Bolehkah memakai kalkulator saat psikotes numerik?", "j": "Umumnya tidak boleh. Kertas coretan biasanya diperbolehkan dan justru menjadi alat utamamu. Biasakan menghitung dengan tulisan sejak latihan supaya terbiasa saat tes."},
+  {"t": "Bagaimana cara cepat mengerjakan deret angka?", "j": "Tulis selisih antar suku di atas angkanya. Kalau selisihnya tetap, polanya ketemu; kalau tidak, periksa apakah selisih itu sendiri berpola, lalu cek apakah suku ganjil dan genap punya aturan masing-masing."},
+  {"t": "Apakah menebak dikenakan pengurangan nilai?", "j": "Tergantung penyelenggara - ada yang mengurangi nilai jawaban salah, ada yang tidak. Aturannya diumumkan di hari tes. Baca instruksi sebelum memutuskan menebak soal yang tidak kamu pahami."}
+ ],
+ "penutup": [
+  "Kalau 25 soal di halaman ini masih terasa kurang, aplikasi latihan SiapPsikotes memuat lebih dari 1.300 soal dari semua kategori - numerik, matematika, verbal, logika, figural, hingga kepribadian - dengan pembahasan tiap soal dan catatan kemajuan per kategori. Satu kali bayar untuk akses penuh, tanpa langganan.",
+  "Kerjakan sedikit setiap hari, catat waktumu, dan tinjau soal yang salah. Kecepatan numerik bukan bakat - hasil pengulangan yang teratur."
+ ],
+ "tautan": [
+  {"teks": "Contoh soal psikotes lainnya", "url": "/contoh/"},
+  {"teks": "Contoh soal psikotes matematika", "url": "/contoh-soal-psikotes-matematika/"},
+  {"teks": "Harga & cara beli", "url": "/beli/"}
+ ],
+ "diperbarui": "20 Oktober 2026"
+}

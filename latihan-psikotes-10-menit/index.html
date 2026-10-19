@@ -270,7 +270,7 @@ INGAT: Silogisme: &#x27;semua A adalah B&#x27; + &#x27;X adalah A&#x27; → X pa
     utm_campaign: u.get('utm_campaign') || '',
     halaman: location.pathname.replace(/^\//, '').replace(/\/$/, '')
   });
-  try { navigator.sendBeacon('https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau', new Blob([beban], { type: 'application/json' })); }
+  try { navigator.sendBeacon('https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau', new Blob([beban], { type: 'text/plain' })); }
   catch (e) { fetch('https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau', { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
 })();
 </script>

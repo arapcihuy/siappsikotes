@@ -6,7 +6,7 @@ Cara pakai (saat ada uang masuk, lihat nominal uniknya):
   /usr/bin/python3 tools/kode-pembeli.py --rujukan SP-164 --nominal 39164 --salin
 
 Hasilnya: satu kode akses sah + pesan balasan yang bisa langsung ditempel ke surel/WhatsApp pembeli,
-dan catatan penjualan yang ditambahkan ke ~/pk-bisnis/PENJUALAN.csv supaya pencatatanmu rapi.
+dan catatan penjualan yang ditambahkan ke ~/tni-belajar/aset-bisnis/PENJUALAN.csv supaya pencatatanmu rapi.
 """
 import argparse
 import csv
@@ -17,7 +17,7 @@ import subprocess
 import sys
 
 APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CATATAN = os.path.expanduser('~/pk-bisnis/PENJUALAN.csv')
+CATATAN = os.path.expanduser('~/tni-belajar/aset-bisnis/PENJUALAN.csv')
 
 
 def buat_kode(isi):

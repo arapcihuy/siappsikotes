@@ -59,7 +59,7 @@
         harga_dasar: HARGA_DASAR
       }, extra || {}));
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(URL_PANTAU, new Blob([payload], { type: 'application/json' }));
+        navigator.sendBeacon(URL_PANTAU, new Blob([payload], { type: 'text/plain' }));
       } else {
         fetch(URL_PANTAU, { method: 'POST', headers: { 'content-type': 'application/json' }, body: payload, keepalive: true, credentials: 'omit' }).catch(function () {});
       }
