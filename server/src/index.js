@@ -1235,6 +1235,26 @@ export default {
         return jawab(data, 200, asal);
       }
 
+      // ---- dashboard A/B /beli/ 1-URL (JSON terbuka; ?format=csv untuk ekspor) ----
+      // Membaca sumber yang sama dengan CSV funnel + webhook yang sudah ada: tabel
+      // peristiwa (beacon /api/pantau, rincian 'SP-123|var:a' — tag varian t_84585ee0)
+      // dan payments (webhook QRIS/Tripay, kolom rujukan). Hanya SELECT — wiring
+      // pembayaran tidak disentuh, pembayaran baru tetap 100% tercatat di webhook.
+      if (jalan === '/api/ab-beli' && request.method === 'GET') {
+        const u = new URL(request.url);
+        const days = Math.min(90, Math.max(1, parseInt(u.searchParams.get('days') || '7', 10) || 7));
+        const data = await abBeliJson(env, days);
+        if ((u.searchParams.get('format') || '') === 'csv') {
+          const pct = (x, n) => (n ? ((x / n) * 100).toFixed(2) : '0.00');
+          const baris = (nama, d) => [nama, d.kunjungan, d.klik_bayar, d.qris_dibuat, d.bayar_sukses, d.revenue_rp, pct(d.klik_bayar, d.kunjungan), pct(d.bayar_sukses, d.kunjungan)].join(',');
+          const csv = 'varian,kunjungan,klik_bayar,qris_dibuat,bayar_sukses,revenue_rp,klik_pct,bayar_pct\n' +
+            baris('a', data.varian.a) + '\n' + baris('b', data.varian.b) + '\n' +
+            baris('tanpa_tag', data.tanpa_tag_varian) + '\n' + baris('total', data.total) + '\n';
+          return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="ab-beli.csv"' } });
+        }
+        return jawab(data, 200, asal);
+      }
+
       if (jalan === '/' || jalan === '/sehat') {
               return jawab({ aplikasi: 'SiapPsikotes API', keadaan: 'hidup', waktu: new Date().toISOString() }, 200, asal);
             }
@@ -1752,6 +1772,123 @@ export default {
               } catch (e) {
                   return { ok: false, pesan: String(e.message || e).slice(0, 160) };
               }
+          }
+
+          // ===== Dashboard A/B /beli/: konversi per varian A vs B =====
+          // Sumber data = CSV funnel yang sudah ada, dibaca langsung dari D1 (gratis):
+          //   - peristiwa  : beacon /api/pantau, rincian 'SP-123|var:a' (tag varian server-side)
+          //   - payments   : webhook QRIS/Tripay, kolom rujukan (is_test=0 = beneran uang masuk)
+          // Atribusi pembayaran -> varian lewat peta rujukan->varian dari beacon: varian PERTAMA
+          // yang tercatat untuk rujukan itu yang menang (kunjungan mendahului klik & bayar).
+          async function abBeliJson(env, days) {
+              const sejak = new Date(Date.now() - (days - 1) * 864e5).toISOString().slice(0, 10);
+              const hingga = new Date().toISOString().slice(0, 10);
+              const JENIS_AB = "('beli:kunjungan_beli','beli:klik_cta_bayar','beli:qris_tampil')";
+              const [pe, pay, pet] = await Promise.all([
+                  // Funnel per varian: tag menempel di ujung rincian, varian '-' = beacon tanpa tag.
+                  env.DB.prepare(
+                      "SELECT CASE WHEN rincian LIKE '%|var:a' THEN 'a' WHEN rincian LIKE '%|var:b' THEN 'b' ELSE '-' END AS varian, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:qris_tampil' THEN rincian END) AS qris " +
+                      "FROM peristiwa WHERE jenis IN " + JENIS_AB + " AND substr(waktu,1,10) >= ? GROUP BY varian"
+                  ).bind(sejak).all(),
+                  // Pembayaran sukses per rujukan (definisi sama dengan CSV funnel harian).
+                  env.DB.prepare(
+                      "SELECT rujukan, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue FROM payments " +
+                      "WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ? GROUP BY rujukan"
+                  ).bind(sejak).all(),
+                  // Peta rujukan -> varian dari beacon (baris 'SP-123|var:a' saja).
+                  env.DB.prepare(
+                      "SELECT rincian, waktu FROM peristiwa WHERE jenis IN " + JENIS_AB + " " +
+                      "AND rincian LIKE 'SP-%|var:%' AND substr(waktu,1,10) >= ? ORDER BY waktu ASC LIMIT 20000"
+                  ).bind(sejak).all()
+              ]);
+              const varianRujukan = {};
+              for (const r of (pet.results || [])) {
+                  const m = /^(SP-\d{3})\|var:([ab])$/.exec(r.rincian || '');
+                  if (m && !varianRujukan[m[1]]) varianRujukan[m[1]] = m[2];
+              }
+              const kotakKosong = () => ({ kunjungan: 0, klik_bayar: 0, qris_dibuat: 0, bayar_sukses: 0, revenue_rp: 0 });
+              const perVarian = { a: kotakKosong(), b: kotakKosong(), '-': kotakKosong() };
+              for (const r of (pe.results || [])) {
+                  const kotak = perVarian[r.varian];
+                  if (!kotak) continue;
+                  kotak.kunjungan = r.kunjungan || 0;
+                  kotak.klik_bayar = r.klik || 0;
+                  kotak.qris_dibuat = r.qris || 0;
+              }
+              let tanpaVarian = { bayar: 0, revenue: 0 };
+              for (const r of (pay.results || [])) {
+                  const v = r.rujukan ? varianRujukan[String(r.rujukan).toUpperCase()] : null;
+                  const kotak = v ? perVarian[v] : null;
+                  if (kotak) { kotak.bayar_sukses += r.bayar || 0; kotak.revenue_rp += r.revenue || 0; }
+                  else { tanpaVarian.bayar += r.bayar || 0; tanpaVarian.revenue += r.revenue || 0; }
+              }
+              for (const k of ['a', 'b', '-']) {
+                  const d = perVarian[k];
+                  d.klik_pct = d.kunjungan ? Math.round((d.klik_bayar / d.kunjungan) * 10000) / 100 : 0;
+                  d.bayar_pct = d.kunjungan ? Math.round((d.bayar_sukses / d.kunjungan) * 10000) / 100 : 0;
+              }
+              const total = kotakKosong();
+              for (const k of ['a', 'b', '-']) {
+                  total.kunjungan += perVarian[k].kunjungan;
+                  total.klik_bayar += perVarian[k].klik_bayar;
+                  total.qris_dibuat += perVarian[k].qris_dibuat;
+                  total.bayar_sukses += perVarian[k].bayar_sukses;
+                  total.revenue_rp += perVarian[k].revenue_rp;
+              }
+              // Total memuat SEMUA pembayaran sukses (atribusi + tanpa atribusi) supaya
+              // angkanya cocok dengan /api/funnel dan tidak ada uang yang hilang dari funnel.
+              total.bayar_sukses += tanpaVarian.bayar;
+              total.revenue_rp += tanpaVarian.revenue;
+              total.klik_pct = total.kunjungan ? Math.round((total.klik_bayar / total.kunjungan) * 10000) / 100 : 0;
+              total.bayar_pct = total.kunjungan ? Math.round((total.bayar_sukses / total.kunjungan) * 10000) / 100 : 0;
+              return {
+                  aplikasi: 'SiapPsikotes',
+                  judul: 'A/B /beli/ — konversi per varian',
+                  waktu: new Date().toISOString(),
+                  zona_hari: 'UTC',
+                  jendela: { hari: days, sejak, hingga },
+                  definisi: {
+                      kunjungan: 'pengunjung unik /beli/ per varian (event kunjungan_beli, tag varian di rincian)',
+                      klik_bayar: 'klik unik tombol CTA bayar per varian',
+                      bayar_sukses: 'webhook QRIS/Tripay success|paid (is_test=0), diatribusikan lewat rujukan SP-xxx',
+                      bayar_pct: 'bayar_sukses / kunjungan * 100',
+                      tanpa_tag_varian: 'beacon tanpa tag varian (traffic pra-A/B atau cookie belum terpasang)',
+                      bayar_tanpa_varian: 'pembayaran sukses yang rujukannya tidak pernah terlihat di beacon'
+                  },
+                  varian: { a: perVarian.a, b: perVarian.b },
+                  tanpa_tag_varian: perVarian['-'],
+                  bayar_tanpa_varian: tanpaVarian.bayar,
+                  revenue_tanpa_varian: tanpaVarian.revenue,
+                  total: total,
+                  keputusan: keputusanPemenang(perVarian.a, perVarian.b)
+              };
+          }
+
+          // Dasar keputusan copy pemenang: z-test dua proporsi (dua arah, alpha 0.05).
+          // Pemenang hanya dinyatakan bila kedua varian sudah cukup sampel — sebelum itu
+          // endpoint tetap jujur menyatakan "belum bisa diputuskan".
+          const AB_MIN_KUNJUNGAN = 150;
+          function keputusanPemenang(a, b) {
+              if (a.kunjungan < AB_MIN_KUNJUNGAN || b.kunjungan < AB_MIN_KUNJUNGAN) {
+                  return { pemenang: null, alasan: 'sampel belum cukup — butuh >= ' + AB_MIN_KUNJUNGAN +
+                      ' kunjungan per varian (A: ' + a.kunjungan + ', B: ' + b.kunjungan + ')' };
+              }
+              const n1 = a.kunjungan, n2 = b.kunjungan, x1 = a.bayar_sukses, x2 = b.bayar_sukses;
+              const p = (x1 + x2) / (n1 + n2);
+              const se = Math.sqrt(p * (1 - p) * (1 / n1 + 1 / n2));
+              if (se === 0) return { pemenang: null, alasan: 'belum ada pembayaran di kedua varian' };
+              const z = (x1 / n1 - x2 / n2) / se;
+              if (Math.abs(z) < 1.96) {
+                  return { pemenang: null, alasan: 'selisih konversi belum signifikan (A ' + a.bayar_pct +
+                      '% vs B ' + b.bayar_pct + '%, z=' + z.toFixed(2) + ', butuh |z| >= 1.96)' };
+              }
+              const pemenang = z > 0 ? 'a' : 'b';
+              return { pemenang: pemenang,
+                  alasan: 'konversi A ' + a.bayar_pct + '% vs B ' + b.bayar_pct + '% (z=' + z.toFixed(2) +
+                  ', signifikan alpha 0.05) — pakai copy varian ' + pemenang.toUpperCase() };
           }
 
           // Cek Tripay webhook (placeholder - static QRIS manual, tidak pakai Tripay)
