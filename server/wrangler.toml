@@ -4,7 +4,10 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
-# Cron Trigger: tiap 10 menit untuk monitoring /beli/, dan 1x sehari (23:55 WIB) laporan funnel harian ke Telegram
+# Cron Trigger: tiap 10 menit untuk monitoring /beli/ + snapshot funnel 6 jaman ke KV
+# (00/06/12/18 UTC, dijadwalkan dari kode karena batas gratis 5 cron trigger per akun),
+# dan 1x sehari (23:55 WIB) laporan funnel harian ke Telegram.
+# Dashboard 1-URL: GET /api/funnel.
 [triggers]
 crons = ["*/10 * * * *", "55 16 * * *"]
 
@@ -13,6 +16,11 @@ crons = ["*/10 * * * *", "55 16 * * *"]
 binding = "DB"
 database_name = "siappsikotes-db"
 database_id = "ba629587-6277-4261-aa3e-aab44fd2e17c"
+
+# KV gratis: simpan snapshot funnel harian (dibaca GET /api/funnel, ditulis cron tiap 6 jam)
+[[kv_namespaces]]
+binding = "FUNNEL_KV"
+id = "c353a135b34e49db932341040b371a1d"
 
 # Catatan keamanan:
 # - Tidak ada variabel rahasia yang perlu disimpan di sini: identitas pengguna datang dari

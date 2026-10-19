@@ -699,6 +699,27 @@ export default {
         return jawab({ ok: !!hasil.ok, tg: hasil.tg, ringkasan: hasil.ringkasan }, 200, asal);
       }
 
+      // ---- dashboard funnel harian 1-URL (JSON terbuka, tanpa login) ----
+      // Sumber utama: snapshot KV yang diperbarui cron tiap 6 jam. Kalau snapshot
+      // belum ada (KV kosong/baru dibuat), hitung langsung dari D1 dan sekalian
+      // simpan sebagai snapshot supaya kunjungan berikutnya sudah terlayani dari KV.
+      if (jalan === '/api/funnel' && request.method === 'GET') {
+        let snap = null;
+        try { snap = await env.FUNNEL_KV.get('funnel:terkini'); } catch (e) { snap = null; }
+        if (snap) {
+          let data;
+          try { data = JSON.parse(snap); } catch (e) { data = null; }
+          if (data) return jawab(data, 200, asal);
+        }
+        const data = await funnelHarianJson(env);
+        try {
+          const tersimpan = Object.assign({}, data, { sumber: 'snapshot-kv' });
+          await env.FUNNEL_KV.put('funnel:terkini', JSON.stringify(tersimpan));
+        } catch (e) { /* KV gagal: tetap sajikan angka langsung dari D1 */ }
+        data.sumber = 'live-d1';
+        return jawab(data, 200, asal);
+      }
+
       if (jalan === '/' || jalan === '/sehat') {
               return jawab({ aplikasi: 'SiapPsikotes API', keadaan: 'hidup', waktu: new Date().toISOString() }, 200, asal);
             }
@@ -889,9 +910,13 @@ export default {
           }
         },
         async scheduled(event, env, ctx) {
-              // "*/10 * * * *" => cek monitoring; "55 16 * * *" => laporan funnel harian ke Telegram (23:55 WIB)
-              if (event.cron === '55 16 * * *') await laporanHarian(env);
-              else await cekMonitoringLengkap(env);
+              // "*/10 * * * *" => cek monitoring, plus snapshot funnel harian ke KV tiap 6 jam
+              //   (jam 00/06/12/18 UTC, run menit 0-10) untuk dashboard 1-URL GET /api/funnel.
+              // "55 16 * * *" => laporan funnel harian ke Telegram (23:55 WIB).
+              if (event.cron === '55 16 * * *') { await laporanHarian(env); return; }
+              const kini = new Date();
+              if (kini.getUTCHours() % 6 === 0 && kini.getUTCMinutes() <= 10) await simpanSnapshotFunnel(env);
+              await cekMonitoringLengkap(env);
             }
       };
 
@@ -980,6 +1005,97 @@ export default {
                   return { ok: !!tg.ok, tg, ringkasan: baris || '(belum ada data)' };
               } catch (e) {
                   return { ok: false, ringkasan: String(e.message || e).slice(0, 160) };
+              }
+          }
+
+          // ===== Dashboard funnel harian 1-URL =====
+          // Hitung funnel /beli/ per hari (UTC): kunjungan -> klik CTA bayar -> QRIS tampil
+          // -> pembayaran terkonfirmasi (webhook), plus cart-abandon dan revenue.
+          // Dipakai oleh GET /api/funnel dan snapshot cron (simpanSnapshotFunnel).
+          async function funnelHarianJson(env) {
+              const jumlahHari = 7;
+              const hariIni = new Date().toISOString().slice(0, 10);
+              const daftarHari = [];
+              for (let i = 0; i < jumlahHari; i++) {
+                  daftarHari.push(new Date(Date.now() - (jumlahHari - 1 - i) * 864e5).toISOString().slice(0, 10));
+              }
+              const awal = daftarHari[0];
+              const [pe, pay] = await Promise.all([
+                  env.DB.prepare(
+                      "SELECT substr(waktu,1,10) AS hari, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik, " +
+                      "COUNT(DISTINCT CASE WHEN jenis = 'beli:qris_tampil' THEN rincian END) AS qris " +
+                      "FROM peristiwa WHERE jenis IN ('beli:kunjungan_beli','beli:klik_cta_bayar','beli:qris_tampil') " +
+                      "AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
+                  ).bind(awal).all(),
+                  env.DB.prepare(
+                      "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
+                      "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+                  ).bind(awal).all()
+              ]);
+              const mapHari = {};
+              for (const r of (pe.results || [])) {
+                  mapHari[r.hari] = { kunjungan: r.kunjungan || 0, klik: r.klik || 0, qris: r.qris || 0, bayar: 0, revenue: 0 };
+              }
+              for (const r of (pay.results || [])) {
+                  if (!mapHari[r.hari]) mapHari[r.hari] = { kunjungan: 0, klik: 0, qris: 0, bayar: 0, revenue: 0 };
+                  mapHari[r.hari].bayar = r.bayar || 0;
+                  mapHari[r.hari].revenue = r.revenue || 0;
+              }
+              const bentuk = (h) => {
+                  const d = mapHari[h] || { kunjungan: 0, klik: 0, qris: 0, bayar: 0, revenue: 0 };
+                  return {
+                      hari: h,
+                      kunjungan: d.kunjungan,
+                      klik_bayar: d.klik,
+                      qris_dibuat: d.qris,
+                      bayar_konfirmasi: d.bayar,
+                      cart_abandon: Math.max(0, d.klik - d.bayar),
+                      revenue_rp: d.revenue,
+                      konversi_pct: d.kunjungan ? Math.round((d.bayar / d.kunjungan) * 10000) / 100 : 0
+                  };
+              };
+              const harian = daftarHari.map(bentuk);
+              const total = harian.reduce((a, b) => ({
+                  kunjungan: a.kunjungan + b.kunjungan,
+                  klik_bayar: a.klik_bayar + b.klik_bayar,
+                  qris_dibuat: a.qris_dibuat + b.qris_dibuat,
+                  bayar_konfirmasi: a.bayar_konfirmasi + b.bayar_konfirmasi,
+                  revenue_rp: a.revenue_rp + b.revenue_rp
+              }), { kunjungan: 0, klik_bayar: 0, qris_dibuat: 0, bayar_konfirmasi: 0, revenue_rp: 0 });
+              total.cart_abandon = Math.max(0, total.klik_bayar - total.bayar_konfirmasi);
+              total.konversi_pct = total.kunjungan ? Math.round((total.bayar_konfirmasi / total.kunjungan) * 10000) / 100 : 0;
+              return {
+                  aplikasi: 'SiapPsikotes',
+                  judul: 'Funnel harian /beli/',
+                  waktu_snapshot: new Date().toISOString(),
+                  zona_hari: 'UTC',
+                  cron_snapshot: '0 */6 * * * (tiap 6 jam)',
+                  definisi: {
+                      kunjungan: 'pengunjung unik /beli/ (rujukan SP-xxx, event kunjungan_beli)',
+                      klik_bayar: 'klik unik tombol CTA bayar',
+                      qris_dibuat: 'QRIS tampil unik',
+                      bayar_konfirmasi: 'webhook pembayaran status success/paid (Tripay/QRIS)',
+                      cart_abandon: 'klik_bayar tanpa bayar_konfirmasi (min. 0)',
+                      konversi_pct: 'bayar_konfirmasi / kunjungan * 100'
+                  },
+                  hari_ini: bentuk(hariIni),
+                  total_7_hari: total,
+                  '7_hari': harian
+              };
+          }
+
+          // Simpan snapshot funnel ke KV. Dipanggil cron tiap 6 jam; GET /api/funnel
+          // juga memanggil jalur penulisan yang sama saat snapshot belum ada (pulih sendiri).
+          async function simpanSnapshotFunnel(env) {
+              try {
+                  const data = await funnelHarianJson(env);
+                  data.sumber = 'snapshot-kv';
+                  await env.FUNNEL_KV.put('funnel:terkini', JSON.stringify(data));
+                  return { ok: true, waktu: data.waktu_snapshot, hari_ini: data.hari_ini };
+              } catch (e) {
+                  return { ok: false, pesan: String(e.message || e).slice(0, 160) };
               }
           }
 
