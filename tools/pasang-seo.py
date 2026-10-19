@@ -50,6 +50,7 @@ HALAMAN = [
     ('latihan-psikotes-gratis-tni/index.html', '/latihan-psikotes-gratis-tni/', '0.8', 'monthly'),
     ('latihan-psikotes-10-menit/index.html', '/latihan-psikotes-10-menit/', '0.8', 'monthly'),
     ('strategi-lulus-psikotes-tni-2026/index.html', '/strategi-lulus-psikotes-tni-2026/', '0.8', 'monthly'),
+    ('bayar-qris-kode-langsung-aktif/index.html', '/bayar-qris-kode-langsung-aktif/', '0.8', 'monthly'),
     ('beli/index.html', '/beli/', '0.7', 'monthly'),
     ('lisensi/index.html', '/lisensi/', '0.6', 'monthly'),
     ('mutu/index.html', '/mutu/', '0.6', 'monthly'),
