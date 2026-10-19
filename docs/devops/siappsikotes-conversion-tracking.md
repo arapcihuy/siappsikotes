@@ -55,3 +55,6 @@ Commit: `200e490` pushed ke `master`.
 
 ## Catatan
 Cloudflare Web Analytics (rum-beacon) hanya pageview otomatis; tidak ada API custom event. Solusi ini memakai infrastruktur yang sudah ada (Worker + D1 `peristiwa`) untuk memenuhi kebutuhan tracking konversi tanpa dependensi baru. YAGNI terpenuhi: logging minimal, error-proof, tidak mengganggu alur pembelian.
+
+## Filter is_test (2026-10-20)
+Kolom `peristiwa.is_test` (migrasi `server/migrasi-peristiwa-is-test.sql`) menandai beacon berasal dari trafik test/probe/audit: `utm_source` berawalan `uji-`, `probe`, `audit`, `verify-task`, atau `test` (case-insensitive), atau payload membawa `is_test` eksplisit dari alat internal. Semua readout funnel/A/B (`/api/pemilik/funnel-beli`, `/api/dashboard/stats`, `/api/dashboard/conversion`, `/api/laporan/funnel`) hanya menghitung baris `is_test = 0`, sehingga metrik CTR/konversi tidak tercemar beacon sendiri (pola sama dengan `payments.is_test`).
