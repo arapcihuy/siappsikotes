@@ -10,3 +10,4 @@ __pycache__/
 .tools-venv/
 venv-*/
 node_modules/
+server/.dev.vars

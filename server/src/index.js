@@ -155,6 +155,69 @@ async function kodeTerbit(env, kode) {
   ).bind(hash).first();
 }
 
+// ===== Pemesanan & verifikasi otomatis pembayaran QRIS =====
+// Harga dasar paket premium. Nominal unik = HARGA_DASAR + 3 digit rujukan (SP-123 -> 39123),
+// rumus yang sama dengan beli/script.js — dipakai mencocokkan pembayaran ke pesanan.
+const HARGA_DASAR = 39000;
+
+function nominalDariRujukan(rujukan) {
+  const m = /^SP-(\d{3})$/.exec(String(rujukan));
+  return m ? HARGA_DASAR + parseInt(m[1], 10) : 0;
+}
+
+// Kode akses pembeli diturunkan DETERMINISTIK dari rujukan — rumus yang sama dengan
+// kodeUntukNomor() di beli/script.js: isi = 'P' + 'SP123' -> 'PSP123', kode = 'SP' + isi + sidik.
+// Satu rujukan selalu menghasilkan kode yang sama di semua klik & perangkat, sehingga baris
+// kode_terbit bisa dibuat sekali dan dipakai ulang (idempoten).
+function kodeDariRujukan(rujukan) {
+  const isi = 'P' + String(rujukan).toUpperCase().replace(/[^0-9A-Z]/g, '');
+  return 'SP' + isi + sidikKode(isi);
+}
+
+// Status pesanan menurut baris kode_terbit: dibayar NULL = menunggu_bayar; terisi = lunas
+// bila asal 'tripay' (webhook terverifikasi), menunggu_verifikasi bila asal 'klaim'
+// (klaim "sudah bayar" bertanda tangan, dicocokkan laporan harian).
+function statusPesanan(baris) {
+  if (!baris) return 'tidak_ada';
+  if (!baris.dibayar) return 'menunggu_bayar';
+  return baris.asal === 'tripay' ? 'lunas' : 'menunggu_verifikasi';
+}
+
+function hexKeBytes(hex) {
+  const out = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
+  return out;
+}
+
+async function hmacHex(kunci, teks) {
+  const k = await crypto.subtle.importKey('raw', new TextEncoder().encode(String(kunci)), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const tanda = await crypto.subtle.sign('HMAC', k, new TextEncoder().encode(String(teks)));
+  return Array.from(new Uint8Array(tanda)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Token klaim "saya sudah bayar" (jalur interim B): payload + HMAC-SHA256. Diterbitkan server
+// saat pesanan dibuat, dibalas pembeli lewat tombol klaim. Kuncinya hanya ada di Worker
+// (wrangler secret KLAIM_HMAC_SECRET), jadi orang luar tidak bisa memalsukan token.
+async function buatTokenKlaim(env, isi) {
+  const payload = JSON.stringify(Object.assign({ waktu: Date.now() }, isi));
+  const tanda = await hmacHex(env.KLAIM_HMAC_SECRET, payload);
+  const tubuh = teksKeBase64url(new TextEncoder().encode(payload).buffer);
+  return tubuh + '.' + tanda;
+}
+
+// Mengembalikan payload token bila HMAC-nya sah (perbandingan constant-time), selain itu null.
+async function periksaTokenKlaim(env, token) {
+  try {
+    const [tubuh, tanda] = String(token || '').split('.');
+    if (!tubuh || !tanda || !env.KLAIM_HMAC_SECRET) return null;
+    const biner = dasar64urlKeBytes(tubuh);
+    const payload = JSON.parse(new TextDecoder().decode(biner));
+    const k = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.KLAIM_HMAC_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+    const sah = await crypto.subtle.verify('HMAC', k, hexKeBytes(tanda), biner);
+    return sah ? payload : null;
+  } catch (e) { return null; }
+}
+
 // Isi kode baru: penanda tanggal + 12 huruf acak dari abjad tanpa karakter mudah tertukar
 // (tidak ada 0/O/1/I/L). Sidik 4 huruf dihitung di server dengan sidikKode.
 function isiKodeBaru() {
@@ -491,7 +554,7 @@ export default {
               const b = await request.json().catch(() => ({}));
               const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
                   'salin_kode', 'salin_rujukan', 'qris_tampil', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
-                  'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview'];
+                  'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview'];
               const jenis = String(b.jenis || '');
               if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
               const kartu = jenis.indexOf('cardcheck_') === 0;
@@ -522,15 +585,177 @@ export default {
                       const status = String(b.status || 'success').slice(0, 20);
                       const txid = String(b.txid || '').slice(0, 100);
                       const rawPayload = JSON.stringify(b).slice(0, 5000);
+                      // Data hygiene (t_cd642aa0): webhook test/audit/probe ditandai is_test=1 dan
+                      // dikeluarkan dari semua metrik revenue. Payload aslinya tetap tersimpan.
+                      const isTest = (['test', 'audit'].indexOf(utmSource.toLowerCase()) !== -1 || b.probe === 1 || b.probe === '1') ? 1 : 0;
                       await env.DB.prepare(
-                        'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-                      ).bind(timestamp, utmSource, utmMedium, product, amount, status, txid, rawPayload).run();
-                      // Kirim notifikasi Telegram untuk pembayaran sukses
-                      if (status === 'success' || status === 'paid') {
+                        'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload, is_test, rujukan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+                      ).bind(timestamp, utmSource, utmMedium, product, amount, status, txid, rawPayload, isTest, String(b.rujukan || '').slice(0, 20) || null).run();
+                      // Kirim notifikasi Telegram hanya untuk pembayaran yang bukan data test
+                      if ((status === 'success' || status === 'paid') && !isTest) {
                         const alertMsg = `✅ <b>Pembayaran Baru</b>\nProduk: ${product}\nJumlah: Rp ${amount.toLocaleString()}\nUTM: ${utmSource} / ${utmMedium}\nTXID: ${txid || '-'}\nWaktu: ${timestamp}`;
                         await kirimTelegramAlert(env, alertMsg);
                       }
                       return jawab({ ok: true }, 200, asal);
+                    }
+
+                    // ---- pemesanan: pembeli menekan "Tampilkan kode" -> catat pesanan menunggu_bayar ----
+                    // Tanpa login. Rujukan SP-xxx yang pembeli buat sendiri di perangkatnya jadi kunci
+                    // pesanan; nominal unik dihitung SERVER dari rumus 39000+3digit, tidak dipercaya dari klien.
+                    if (jalan === '/api/beli/kode' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'beli_kode', 20, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      const b = await request.json().catch(() => ({}));
+                      const rujukan = String(b.rujukan || '').toUpperCase().trim().slice(0, 12);
+                      if (!/^SP-\d{3}$/.test(rujukan)) return jawab({ pesan: 'rujukan tidak sah (harus SP-3digit)' }, 400, asal);
+                      const nominal = nominalDariRujukan(rujukan);
+                      const kini = new Date().toISOString();
+                      const kode = kodeDariRujukan(rujukan);
+                      const hash = await hashKodeTerbit(kode);
+                      // Idempoten: klik "Tampilkan kode" berkali kali -> satu baris yang sama (dibayar tetap apa adanya).
+                      await env.DB.prepare(
+                        'INSERT INTO kode_terbit (kode_hash, kode_akhir, terbit, dibayar, rujukan, nominal, asal) VALUES (?, ?, ?, NULL, ?, ?, ?) ON CONFLICT(kode_hash) DO NOTHING'
+                      ).bind(hash, kode.slice(-6), kini, rujukan, nominal, 'menunggu-bayar').run();
+                      const baris = await env.DB.prepare('SELECT dibayar, asal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                        .bind(null, 'beli:order', rujukan + '|' + nominal, kini, String(b.utm_source || '').slice(0, 50), String(b.utm_medium || '').slice(0, 50), String(b.utm_campaign || '').slice(0, 100)).run();
+                      // Token klaim diterbitkan bila rahasia jalur B sudah dipasang; tanpa itu pesanan
+                      // tetap tercatat dan kode tetap tampil (jalur manual pemilik tetap bekerja).
+                      const klaim_token = env.KLAIM_HMAC_SECRET ? await buatTokenKlaim(env, { rujukan, nominal }) : null;
+                      return jawab({ ok: true, rujukan, nominal, kode, status: statusPesanan(baris), klaim_token,
+                                     tripay_aktif: !!(env.TRIPAY_API_KEY && env.TRIPAY_PRIVATE_KEY && env.TRIPAY_KODE_MERCHANT) }, 200, asal);
+                    }
+
+                    // ---- klaim "Saya sudah bayar" (jalur interim B, tanpa akun baru) ----
+                    // Tombol halaman beli mengirim token HMAC yang diterbitkan server saat pesanan
+                    // dibuat. Hasilnya MENUNGGU_VERIFIKASI (bukan success): kode langsung aktif, dan
+                    // laporan harian 23:55 WIB mencocokkan klaim ini dengan pembayaran yang benar-benar masuk.
+                    if (jalan === '/api/beli/klaim' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'beli_klaim', 10, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      if (!env.KLAIM_HMAC_SECRET) return jawab({ pesan: 'verifikasi klaim belum aktif' }, 503, asal);
+                      const b = await request.json().catch(() => ({}));
+                      const rujukan = String(b.rujukan || '').toUpperCase().trim().slice(0, 12);
+                      if (!/^SP-\d{3}$/.test(rujukan)) return jawab({ pesan: 'rujukan tidak sah' }, 400, asal);
+                      const isi = await periksaTokenKlaim(env, b.klaim_token);
+                      if (!isi || isi.rujukan !== rujukan) return jawab({ pesan: 'token klaim tidak sah — tekan dulu Tampilkan kode' }, 400, asal);
+                      if (Date.now() - (isi.waktu || 0) > 48 * 3600e3) return jawab({ pesan: 'token klaim kedaluwarsa — muat ulang halaman' }, 400, asal);
+                      const hash = await hashKodeTerbit(kodeDariRujukan(rujukan));
+                      const kini = new Date().toISOString();
+                      // Klaim pertama yang menang; klaim ulang tidak menggeser waktu/rujukan apa pun.
+                      const hasil = await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'klaim' WHERE kode_hash = ? AND dibayar IS NULL").bind(kini, hash).run();
+                      const baris = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      if (!baris) return jawab({ pesan: 'pesanan tidak ditemukan — tekan dulu Tampilkan kode' }, 404, asal);
+                      if (hasil.meta.changes > 0) {
+                        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+                          .bind(null, 'beli:klaim_bayar', rujukan + '|' + baris.nominal, kini).run();
+                        await kirimTelegramAlert(env, '🧾 <b>Klaim "sudah bayar" diterima</b>\nRujukan: ' + rujukan +
+                          '\nNominal: Rp ' + Number(baris.nominal).toLocaleString('id-ID') +
+                          '\nKode akses: AKTIF (status menunggu verifikasi harian)');
+                      }
+                      return jawab({ ok: true, status: statusPesanan(baris), pesan: 'kode aktif — pembayaran dicocokkan otomatis di laporan harian' }, 200, asal);
+                    }
+
+                    // ---- status pesanan (dipakai polling halaman beli) ----
+                    if (jalan === '/api/beli/status' && request.method === 'GET') {
+                      const rujukan = (url.searchParams.get('rujukan') || '').toUpperCase().trim().slice(0, 12);
+                      if (!/^SP-\d{3}$/.test(rujukan)) return jawab({ pesan: 'rujukan tidak sah' }, 400, asal);
+                      const baris = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?')
+                        .bind(await hashKodeTerbit(kodeDariRujukan(rujukan))).first();
+                      return jawab({ ok: true, rujukan, status: statusPesanan(baris), nominal: baris ? baris.nominal : nominalDariRujukan(rujukan) }, 200, asal);
+                    }
+
+                    // ---- webhook Tripay (jalur A utama: QRIS dinamis, pembayaran terverifikasi) ----
+                    // Tripay mengirim POST dengan header X-Callback-Signature = HMAC-SHA256(raw body,
+                    // private key). Kunci dipasang pemilik lewat `wrangler secret put TRIPAY_PRIVATE_KEY`
+                    // (+ TRIPAY_API_KEY & TRIPAY_KODE_MERCHANT untuk membuat transaksi) — tidak pernah
+                    // ditulis di kode atau repo. status=PAID + rujukan/nominal cocok -> dibayar otomatis.
+                    if (jalan === '/api/tripay/webhook' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'tripay_webhook', 120, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      if (!env.TRIPAY_PRIVATE_KEY) return jawab({ pesan: 'Tripay belum dikonfigurasi' }, 503, asal);
+                      const raw = await request.text();
+                      const tanda = request.headers.get('X-Callback-Signature') || '';
+                      let sah = false;
+                      try {
+                        const kunci = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.TRIPAY_PRIVATE_KEY), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+                        sah = await crypto.subtle.verify('HMAC', kunci, hexKeBytes(tanda), new TextEncoder().encode(raw));
+                      } catch (e) { sah = false; }
+                      if (!sah) return jawab({ pesan: 'signature tidak sah' }, 401, asal);
+                      const b = JSON.parse(raw);
+                      const kini = new Date().toISOString();
+                      const rujukan = String(b.merchant_ref || '').toUpperCase().trim().slice(0, 12);
+                      const nominal = Math.round(Number(b.payment_amount || b.amount || 0)) || 0;
+                      const status = String(b.status || '').toUpperCase();
+                      // Uang yang benar-benar masuk tidak pernah dibuang: SEMUA notifikasi PAID dicatat.
+                      await env.DB.prepare(
+                        'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload, is_test, rujukan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)'
+                      ).bind(kini, 'tripay', String(b.payment_method || '').slice(0, 50), 'siappsikotes', nominal,
+                             status === 'PAID' ? 'paid' : status.toLowerCase().slice(0, 20),
+                             String(b.reference || '').slice(0, 100), raw.slice(0, 5000), rujukan || null).run();
+                      if (status === 'PAID' && /^SP-\d{3}$/.test(rujukan) && nominal === nominalDariRujukan(rujukan)) {
+                        const hash = await hashKodeTerbit(kodeDariRujukan(rujukan));
+                        const hasil = await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'tripay' WHERE kode_hash = ? AND dibayar IS NULL").bind(kini, hash).run();
+                        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
+                          .bind(null, 'beli:bayar_terkonfirmasi', rujukan + '|' + nominal, kini).run();
+                        await kirimTelegramAlert(env, '💰 <b>Pembayaran QRIS terkonfirmasi otomatis</b>\nRujukan: ' + rujukan +
+                          '\nNominal: Rp ' + nominal.toLocaleString('id-ID') + '\nTripay ref: ' + (b.reference || '-') +
+                          '\nKode akses: AKTIF (terbuka otomatis di halaman beli)');
+                        return jawab({ success: true, kode_dibayar: 'dibayar' });
+                      }
+                      if (status === 'PAID' && /^SP-\d{3}$/.test(rujukan)) {
+                        // Nominal cocok tapi kode sudah dibayar (klaim lebih dulu), ATAU nominal tidak
+                        // persis sama — catat dan biarkan laporan harian mencocokkan mutasinya.
+                        const sudah = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?').bind(await hashKodeTerbit(kodeDariRujukan(rujukan))).first();
+                        if (sudah && sudah.dibayar) {
+                          return jawab({ success: true, kode_dibayar: 'sudah-dibayar-sebelumnya' });
+                        }
+                      }
+                      // PAID tapi tidak cocok (rujukan/nominal beda) atau status lain: tetap 200 supaya
+                      // Tripay tidak mengulang terus; laporan harian pemilik mencocokkan sisanya.
+                      await kirimTelegramAlert(env, '⚠️ <b>Webhook Tripay belum cocok dengan pesanan</b>\nRujukan: ' + rujukan +
+                        '\nNominal: Rp ' + nominal.toLocaleString('id-ID') + '\nStatus: ' + (status || '-'));
+                      return jawab({ success: true, cocok: false });
+                    }
+
+                    // ---- buat transaksi QRIS dinamis Tripay (jalur A) ----
+                    // Dipanggil halaman beli setelah /api/beli/kode bila tripay_aktif. Tanpa kunci,
+                    // 503 — halaman memakai QRIS statis + jalur klaim B sementara itu.
+                    if (jalan === '/api/tripay/transaksi' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'tripay_buat', 20, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      if (!env.TRIPAY_API_KEY || !env.TRIPAY_PRIVATE_KEY || !env.TRIPAY_KODE_MERCHANT)
+                        return jawab({ pesan: 'Tripay belum dikonfigurasi — pakai QRIS statis dulu' }, 503, asal);
+                      const b = await request.json().catch(() => ({}));
+                      const rujukan = String(b.rujukan || '').toUpperCase().trim().slice(0, 12);
+                      if (!/^SP-\d{3}$/.test(rujukan)) return jawab({ pesan: 'rujukan tidak sah' }, 400, asal);
+                      const nominal = nominalDariRujukan(rujukan);
+                      const tanda = await hmacHex(env.TRIPAY_PRIVATE_KEY, env.TRIPAY_KODE_MERCHANT + rujukan + nominal);
+                      const dasarApi = String(env.TRIPAY_MODE || '') === 'sandbox' ? 'https://tripay.co.id/api-sandbox' : 'https://tripay.co.id/api';
+                      let d = null;
+                      try {
+                        const r = await fetch(dasarApi + '/transaction/create', {
+                          method: 'POST',
+                          headers: { 'Authorization': 'Bearer ' + env.TRIPAY_API_KEY, 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            method: 'QRIS', merchant_ref: rujukan, amount: nominal,
+                            customer_name: String(b.nama || 'Pembeli SiapPsikotes').slice(0, 60),
+                            customer_email: String(b.email || 'pembeli@siappsikotes.my.id').slice(0, 80),
+                            signature: tanda, expired_time: Math.floor(Date.now() / 1000) + 86400,
+                            order_items: [{ sku: 'SIAAP-PREMIUM', name: 'Akses premium SiapPsikotes', price: nominal, quantity: 1 }]
+                          })
+                        });
+                        d = await r.json().catch(() => null);
+                        if (!r.ok || !d || d.success === false) d = null;
+                      } catch (e) { d = null; }
+                      if (!d) return jawab({ pesan: 'Tripay sedang tidak bisa dihubungi — pakai QRIS statis dulu' }, 502, asal);
+                      return jawab({ ok: true, rujukan, nominal, reference: d.data && d.data.reference,
+                                     pay_url: d.data && d.data.pay_url, qr_url: d.data && d.data.qr_url,
+                                     qr_image: d.data && d.data.qr_image, expired_time: d.data && d.data.expired_time }, 200, asal);
                     }
 
                     // ---- pemilik: ringkasan funnel pembelian (jumlah per jenis event, kunjukan unik per rujukan) ----
@@ -600,18 +825,18 @@ export default {
           env.DB.prepare(
             "SELECT COUNT(DISTINCT rincian) AS n FROM peristiwa WHERE jenis = 'beli:klik_cta_bayar' AND substr(waktu,1,10) = ?"
           ).bind(hariIni).first(),
-          // Pembayaran sukses hari ini (dari tabel payments)
+          // Pembayaran sukses hari ini (dari tabel payments, data test/audit dikeluarkan)
           env.DB.prepare(
-            "SELECT COUNT(*) AS n, COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?"
+            "SELECT COUNT(*) AS n, COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) = ?"
           ).bind(hariIni).first(),
           // Revenue hari ini
           env.DB.prepare(
-            "SELECT COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?"
+            "SELECT COALESCE(SUM(amount),0) AS total FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) = ?"
           ).bind(hariIni).first(),
           // Conversion rate hari ini: pembayaran / kunjungan
           env.DB.prepare(
             "SELECT " +
-            "  (SELECT COUNT(*) FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) = ?) * 100.0 / " +
+            "  (SELECT COUNT(*) FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) = ?) * 100.0 / " +
             "  NULLIF((SELECT COUNT(DISTINCT rincian) FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND substr(waktu,1,10) = ?), 0) AS rate"
           ).bind(hariIni, hariIni).first()
         ]);
@@ -637,8 +862,8 @@ export default {
           "  substr(waktu,1,10) AS hari, " +
           "  COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
           "  COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik_beli, " +
-          "  (SELECT COUNT(*) FROM payments p WHERE p.status IN ('success','paid') AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS pembayaran, " +
-          "  (SELECT COALESCE(SUM(amount),0) FROM payments p WHERE p.status IN ('success','paid') AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS revenue " +
+          "  (SELECT COUNT(*) FROM payments p WHERE p.status IN ('success','paid') AND p.is_test = 0 AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS pembayaran, " +
+          "  (SELECT COALESCE(SUM(amount),0) FROM payments p WHERE p.status IN ('success','paid') AND p.is_test = 0 AND substr(p.timestamp,1,10) = substr(pe.waktu,1,10)) AS revenue " +
           "FROM peristiwa pe " +
           "WHERE pe.waktu >= ? AND pe.jenis LIKE 'beli:%' " +
           "GROUP BY substr(pe.waktu,1,10) " +
@@ -672,7 +897,7 @@ export default {
           ).bind(sejak).all(),
           env.DB.prepare(
             "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
-            "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+            "FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
           ).bind(sejak).all()
         ]);
         const mapHari = {};
@@ -976,7 +1201,7 @@ export default {
                       ).bind(sejak).all(),
                       env.DB.prepare(
                           "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
-                          "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+                          "FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
                       ).bind(sejak).all()
                   ]);
                   const mapHari = {};
@@ -997,9 +1222,30 @@ export default {
                       return h + ' · kunjungan ' + d.kunjungan + ' · klik ' + d.klik + ' · bayar ' + d.bayar + ' · ' + conv + ' · Rp ' + Number(d.revenue).toLocaleString('id-ID');
                   }).join('\n');
                   const convTotal = totalV ? ((totalB / totalV) * 100).toFixed(1) + '%' : '-';
+                  // ===== Rekonsiliasi klaim "sudah bayar" vs pembayaran nyata (jalur interim B) =====
+                  // Klaim (kode_terbit.asal='klaim', kode sudah aktif) dicocokkan dengan pembayaran
+                  // nyata yang masuk (payments, is_test=0, rujukan diisi webhook Tripay). Klaim yang
+                  // tidak terkonfirmasi perlu rekonsiliasi manual pemilik (mutasi QRIS).
+                  let rekonsiliasi = 'Klaim "sudah bayar": tidak ada dalam 7 hari.';
+                  try {
+                      const [klaim, masuk] = await Promise.all([
+                          env.DB.prepare("SELECT rujukan, nominal, dibayar FROM kode_terbit WHERE asal = 'klaim' AND dibayar IS NOT NULL AND dibayar >= ? ORDER BY dibayar DESC LIMIT 100").bind(sejak).all(),
+                          env.DB.prepare("SELECT DISTINCT rujukan FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND rujukan IS NOT NULL AND timestamp >= ?").bind(sejak).all()
+                      ]);
+                      const sah = new Set((masuk.results || []).map(r => r.rujukan));
+                      const belum = (klaim.results || []).filter(k => !sah.has(k.rujukan));
+                      if ((klaim.results || []).length) {
+                          rekonsiliasi = belum.length === 0
+                              ? 'Klaim "sudah bayar": ' + klaim.results.length + ' — semua terkonfirmasi pembayaran masuk ✓'
+                              : '⚠️ Klaim TANPA pembayaran tercatat (rekonsiliasi manual):\n' +
+                                belum.map(k => '• ' + k.rujukan + ' — Rp ' + Number(k.nominal).toLocaleString('id-ID') +
+                                              ' (klaim ' + String(k.dibayar).slice(0, 16).replace('T', ' ') + ' UTC)').join('\n');
+                      }
+                  } catch (e) { rekonsiliasi = 'Rekonsiliasi gagal dihitung: ' + String(e.message || e).slice(0, 80); }
                   const pesan = `<b>📊 Funnel /beli/ — 7 hari terakhir</b>\n` +
                       (baris || '(belum ada data)') +
                       `\n\nTotal: kunjungan ${totalV} · klik ${totalK} · bayar ${totalB} · konversi ${convTotal} · Rp ${Number(rev).toLocaleString('id-ID')}` +
+                      `\n\n<b>🧾 ${rekonsiliasi}</b>` +
                       `\nCSV: https://siappsikotes-api.rasyidahmad180.workers.dev/api/dashboard/funnel-csv`;
                   const tg = await kirimTelegramAlert(env, pesan);
                   return { ok: !!tg.ok, tg, ringkasan: baris || '(belum ada data)' };
@@ -1031,7 +1277,7 @@ export default {
                   ).bind(awal).all(),
                   env.DB.prepare(
                       "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
-                      "FROM payments WHERE status IN ('success','paid') AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
+                      "FROM payments WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ? GROUP BY substr(timestamp,1,10)"
                   ).bind(awal).all()
               ]);
               const mapHari = {};

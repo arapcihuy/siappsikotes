@@ -76,12 +76,32 @@ CREATE TABLE IF NOT EXISTS kode_terbit (
   kode_hash TEXT PRIMARY KEY,          -- SHA-256 dari penanda 'kodet:' + kode lengkap
   kode_akhir TEXT,                     -- 6 karakter terakhir, untuk dikenali pemilik
   terbit    TEXT NOT NULL,             -- waktu kode diterbitkan
-  dibayar   TEXT,                      -- waktu setoran dicatat (NULL = belum lunas)
+  dibayar   TEXT,                      -- waktu setoran dicatat (NULL = pesanan menunggu_bayar)
   rujukan   TEXT,                      -- rujukan setoran (nomor transfer / SP-594)
   nominal   INTEGER NOT NULL DEFAULT 0,-- nominal setoran menurut catatan server
-  asal      TEXT                       -- jalur penerbitan, mis. 'alat-pemilik'
+  asal      TEXT                       -- 'alat-pemilik' = terbit manual pemilik (langsung lunas);
+                                       -- 'menunggu-bayar' = pesanan pembeli (belum bayar);
+                                       -- 'klaim' = klaim "sudah bayar" HMAC (menunggu verifikasi harian);
+                                       -- 'tripay' = webhook Tripay PAID (lunas otomatis, terverifikasi)
 );
 CREATE INDEX IF NOT EXISTS idx_kode_terbit_dibayar ON kode_terbit(dibayar);
+
+-- Catatan pembayaran dari webhook. is_test = 1 untuk data uji/audit/probe: SEMUA metrik
+-- revenue (dashboard stats, funnel CSV, laporan harian) hanya menjumlah is_test = 0.
+CREATE TABLE IF NOT EXISTS payments (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  timestamp  TEXT NOT NULL,
+  utm_source TEXT,
+  utm_medium TEXT,
+  product    TEXT,
+  amount     INTEGER,
+  status     TEXT,
+  txid       TEXT,
+  raw_payload TEXT,
+  is_test    INTEGER NOT NULL DEFAULT 0,
+  rujukan    TEXT                      -- rujukan pesanan SP-xxx (webhook Tripay), untuk rekonsiliasi klaim
+);
+CREATE INDEX IF NOT EXISTS idx_payments_timestamp ON payments(timestamp);
 
 -- Catatan ringkas untuk dasbor pemilik
 CREATE TABLE IF NOT EXISTS peristiwa (
@@ -89,7 +109,10 @@ CREATE TABLE IF NOT EXISTS peristiwa (
   pengguna TEXT,
   jenis    TEXT NOT NULL,
   rincian  TEXT,
-  waktu    TEXT NOT NULL
+  waktu    TEXT NOT NULL,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_peristiwa_waktu ON peristiwa(waktu);
 

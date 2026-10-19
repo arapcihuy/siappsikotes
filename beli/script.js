@@ -161,6 +161,112 @@
 
   var kodeAkses = '';
 
+  // ---------- Pendaftaran pesanan & klaim "Saya sudah bayar" ----------
+  // Pesanan (menunggu_bayar) dicatat server saat pembeli menekan "Tampilkan kode"; nominal
+  // unik dihitung server. Setelah bayar, tombol klaim membawa token HMAC dari server — kode
+  // aktif instan, tanpa kirim bukti, dan laporan harian pemilik mencocokkan pembayarannya.
+  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+  var elSudahBayar = document.getElementById('beliSudahBayar');
+  var elStatusBayar = document.getElementById('beliStatusBayar');
+  var klaimToken = null;
+  var statusBayar = 'menunggu_bayar';
+  var pesananTerdaftar = false;
+
+  function ambilTokenTersimpan() {
+    try {
+      var t = JSON.parse(localStorage.getItem('tni_klaim_' + angkaRujukan) || 'null');
+      if (t && t.token && Date.now() - (t.waktu || 0) < 40 * 3600e3) return t.token;
+    } catch (e) {}
+    return null;
+  }
+
+  function tampilkanStatus(pesan) {
+    if (elStatusBayar) { elStatusBayar.textContent = pesan; elStatusBayar.hidden = false; }
+  }
+
+  function tampilkanLunas(status) {
+    statusBayar = status;
+    if (elSudahBayar) elSudahBayar.hidden = true;
+    tampilkanStatus(status === 'lunas'
+      ? '✅ Pembayaran terkonfirmasi — kode aksesmu aktif.'
+      : '✅ Kode aksesmu aktif. Pembayaranmu sedang diverifikasi otomatis — tidak perlu kirim bukti.');
+  }
+
+  function kirimKlaim(token) {
+    fetch(URL_API + '/api/beli/klaim', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
+      body: JSON.stringify({ rujukan: rujukan, klaim_token: token })
+    }).then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (d) {
+        if (d && d.ok && d.status) tampilkanLunas(d.status);
+        else tampilkanStatus((d && d.pesan) || 'Klaim belum bisa diproses — coba lagi sebentar.');
+      })
+      .catch(function () { tampilkanStatus('Koneksi lambat. Kode tetap tersimpan di halaman ini.'); });
+  }
+
+  function klaimBayar() {
+    lacak('klaim_sudah_bayar');
+    var token = klaimToken || ambilTokenTersimpan();
+    if (token) { kirimKlaim(token); return; }
+    // Pesanan belum tercatat (mis. tanda tangan server belum aktif saat kode tampil):
+    // daftarkan dulu, lalu klaim dengan token barunya.
+    daftarPesanan(function () {
+      var t = klaimToken || ambilTokenTersimpan();
+      if (t) kirimKlaim(t); else tampilkanStatus('Verifikasi otomatis sedang sibuk — coba tekan lagi sebentar.');
+    });
+  }
+
+  if (elSudahBayar) elSudahBayar.addEventListener('click', klaimBayar);
+
+  // Jalur A (Tripay QRIS dinamis) dipakai bila pemilik sudah memasang kunci; selama belum,
+  // QRIS statis di halaman ini yang dipakai — tidak ada langkah tambahan untuk pembeli.
+  function mintaQrisDinamis() {
+    fetch(URL_API + '/api/tripay/transaksi', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
+      body: JSON.stringify({ rujukan: rujukan })
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok || !(d.qr_image || d.qr_url)) return;
+        var img = document.querySelector('#qris img');
+        if (img && d.qr_image) img.src = d.qr_image;
+        tampilkanStatus('QR dinamis aktif untuk ' + rujukan + ' — bayar Rp ' + String(nominal).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ', kode terbuka otomatis begitu lunas.');
+      }).catch(function () {});
+  }
+
+  function daftarPesanan(selesai) {
+    if (pesananTerdaftar) { if (selesai) selesai(); return; }
+    pesananTerdaftar = true;
+    var utm = getUtmParams();
+    fetch(URL_API + '/api/beli/kode', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
+      body: JSON.stringify({ rujukan: rujukan, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign })
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok) { if (selesai) selesai(); return; }
+        klaimToken = d.klaim_token || klaimToken;
+        if (klaimToken) { try { localStorage.setItem('tni_klaim_' + angkaRujukan, JSON.stringify({ token: klaimToken, waktu: Date.now() })); } catch (e) {} }
+        if (d.status === 'lunas' || d.status === 'menunggu_verifikasi') tampilkanLunas(d.status);
+        if (d.tripay_aktif && statusBayar === 'menunggu_bayar') mintaQrisDinamis();
+        if (selesai) selesai(d);
+      })
+      .catch(function () { if (selesai) selesai(); });
+  }
+
+  // Polling status: pembayaran terkonfirmasi (jalur Tripay) saat tab masih terbuka menandai
+  // lunas tanpa perlu apa pun dari pembeli.
+  function mulaiPolling() {
+    var sisa = 225; // 225 x 8 detik ≈ 30 menit
+    var id = setInterval(function () {
+      if (statusBayar === 'lunas' || sisa-- <= 0) { clearInterval(id); return; }
+      if (document.hidden) return;
+      fetch(URL_API + '/api/beli/status?rujukan=' + encodeURIComponent(rujukan), { credentials: 'omit' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (d && d.ok && (d.status === 'lunas' || d.status === 'menunggu_verifikasi')) { tampilkanLunas(d.status); clearInterval(id); }
+        }).catch(function () {});
+    }, 8000);
+  }
+
   function prosesAmbilKode() {
     kodeAkses = kodeUntukNomor(rujukan);
     lacak('tampilkan_kode');
@@ -170,6 +276,9 @@
     elAmbil.hidden = true;
     if (elBuka) elBuka.setAttribute('href', '../?kode=' + kodeAkses + '#sp-' + angkaRujukan);
     if (elAksiKode) elAksiKode.hidden = false;
+    if (elSudahBayar) elSudahBayar.hidden = false;
+    daftarPesanan();
+    mulaiPolling();
   }
 
   if (elAmbil && elKode) {
