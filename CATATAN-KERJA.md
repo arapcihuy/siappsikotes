@@ -288,3 +288,18 @@ Trafik ditambah sesuai rencana task (jalur laman):
 Catatan untuk pemeriksa berikutnya (jendela 21-23 Okt): kalau sampel masih di bawah
 ambang, kanal broadcast belum bisa dipakai — `leads/leads.csv` hanya berisi 4 alamat
 dummy, jadi tidak ada penerima nyata yang sah untuk dikirimi pesan.
+
+Tiga artikel SEO frasa riset Thompson (t_cea185aa) tayang 20 Okt 2026:
+
+- `/psikotes-tni-ad-bintara/` (target: psikotes tni ad bintara) — 1.580 kata,
+  10 soal contoh dari bank, tabel materi, rencana latihan 7 hari.
+- `/contoh-soal-psikotes-tni-dan-jawabannya/` (target: contoh soal psikotes tni
+  dan jawabannya) — 2.245 kata, 25 soal berpembahasan (verbal 8, silogisme 6,
+  numerik 6, Kraepelin 5) + Wartegg/kepribadian prose + cara simpan PDF.
+- `/latihan-psikotes-tni-online-gratis/` (target: latihan psikotes tni online
+  gratis) — 942 kata, corong /contoh/ -> /beli/.
+- Halaman induk daftar artikel: `/blog/` (32 tautan, skema CollectionPage+ItemList).
+- CTA per artikel: `/beli/?utm_source=blog-artikel1/2/3&utm_medium=blog` — satu
+  kotak catatan di tengah + kotak tombol bawah, khusus per artikel agar utm
+  terpisah di funnel.
+- Sitemap naik ke 32 halaman, 4 kartu OG baru, gerbang `--cepat` lulus penuh.

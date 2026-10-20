@@ -63,6 +63,9 @@ LABEL = [
     ('mutu', 'BUKTI PEMERIKSAAN', EMAS),
     ('syarat', 'KETENTUAN', ABU2),
     ('privasi', 'KETENTUAN', ABU2),
+    ('blog', 'PANDUAN & ARTIKEL', EMAS),
+    ('psikotes-tni-ad-bintara', 'PANDUAN TNI AD', EMAS),
+    ('latihan-psikotes-tni-online-gratis', 'LATIHAN GRATIS', EMAS),
 ]
 LABEL_ARTIKEL = ('CONTOH SOAL', BIRU)
 KAKI_KANAN = 'TANPA AKUN \u00b7 BISA OFFLINE'
