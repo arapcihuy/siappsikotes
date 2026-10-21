@@ -1344,7 +1344,7 @@ export default {
             "SELECT substr(waktu,1,10) AS hari, " +
             "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
             "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik " +
-            "FROM peristiwa WHERE jenis LIKE 'beli:%' AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
+            "FROM peristiwa WHERE jenis LIKE 'beli:%' AND is_test = 0 AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
           ).bind(sejak).all(),
           env.DB.prepare(
             "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
@@ -1445,12 +1445,26 @@ export default {
       // belum ada (KV kosong/baru dibuat), hitung langsung dari D1 dan sekalian
       // simpan sebagai snapshot supaya kunjungan berikutnya sudah terlayani dari KV.
       if (jalan === '/api/funnel' && request.method === 'GET') {
+        // ?segar=1 memaksa hitung ulang dari D1 dan menimpa snapshot (untuk audit/debug).
+        const paksaSegar = new URL(request.url).searchParams.get('segar') === '1';
         let snap = null;
-        try { snap = await env.FUNNEL_KV.get('funnel:terkini'); } catch (e) { snap = null; }
+        try { if (!paksaSegar) snap = await env.FUNNEL_KV.get('funnel:terkini'); } catch (e) { snap = null; }
         if (snap) {
           let data;
           try { data = JSON.parse(snap); } catch (e) { data = null; }
-          if (data) return jawab(data, 200, asal);
+          // Snapshot hanya ditulis cron jam 00/06/12/18 UTC, jadi dashboard bisa basi sampai 6 jam
+          // (mis. pukul 07:58 masih menyajikan angka 06:10). Bila snapshot lebih tua dari 2 jam,
+          // hitung ulang dari D1 lalu tulis balik — dashboard pulih sendiri tanpa cron tambahan.
+          const umurJam = data && data.waktu_snapshot
+            ? (Date.now() - new Date(data.waktu_snapshot).getTime()) / 3600e3 : Infinity;
+          if (data && umurJam <= 2) return jawab(data, 200, asal);
+          if (data) {
+            const segar = await funnelHarianJson(env);
+            try { await env.FUNNEL_KV.put('funnel:terkini', JSON.stringify(Object.assign(segar, { sumber: 'snapshot-kv' }))); } catch (e) {}
+            segar.sumber = 'live-d1';
+            segar.snapshot_sebelumnya = data.waktu_snapshot;
+            return jawab(segar, 200, asal);
+          }
         }
         const data = await funnelHarianJson(env);
         try {
@@ -1524,13 +1538,13 @@ export default {
             // ---- Comprehensive monitoring status (latest run) ----
             if (jalan === '/api/monitoring/status-full' && request.method === 'GET') {
               const hasil = await cekMonitoringLengkap(env);
-              return jawab({ ok: hasil.ok, waktu: new Date().toISOString(), beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay, rincian: hasil.rincian }, 200, asal);
+              return jawab({ ok: hasil.ok, waktu: new Date().toISOString(), beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay, rincian: hasil.rincian, mode_funnel: hasil.mode_funnel, alert: hasil.alert }, 200, asal);
             }
 
             // ---- Manual monitoring test endpoint (POST) ----
             if (jalan === '/api/monitoring/test' && request.method === 'POST') {
               const hasil = await cekMonitoringLengkap(env);
-              return jawab({ ok: hasil.ok, rincian: hasil.rincian, beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay }, 200, asal);
+              return jawab({ ok: hasil.ok, rincian: hasil.rincian, beli: hasil.beli, funnel: hasil.funnel, tripay: hasil.tripay, mode_funnel: hasil.mode_funnel, alert: hasil.alert }, 200, asal);
             }
 
             return jawab({ pesan: 'alamat tidak dikenal' }, 404, asal);
@@ -1588,22 +1602,76 @@ export default {
               }
           }
 
-          // Cek funnel CSV via DB langsung - verifikasi data funnel ter-update (ekspor harian jam 01:00 WIB)
+          // Cek kesehatan pipeline funnel. Dulu fungsi ini menyimpulkan "GAGAL - Funnel data
+          // kosong" bila tak ada event dalam 2 hari, sehingga situs yang sekadar SEPI kunjungan
+          // memicu alert Telegram tiap 10 menit tanpa henti. Sekarang dibedakan:
+          //   - trafik  : ada event nyata (is_test=0) <= 28 jam  -> sehat
+          //   - idle    : tak ada event nyata, tapi pipeline DIBUKTIKAN hidup lewat event kanari
+          //               (jenis 'monitor:kanari', is_test=1, tidak masuk metrik funnel mana pun)
+          //   - gagal   : tulis/baca D1 gagal, atau kode pelacak hilang dari script.js
                   async function cekFunnelCSV(env) {
+                      const AMBANG_JAM = 28;
                       try {
-                          // Query DB langsung: ambil 100 event terbaru dari peristiwa (max 2 hari)
-                          const cutoff = new Date(Date.now() - 2*864e5).toISOString();
-                          const rows = await env.DB.prepare('SELECT waktu, jenis, rincian FROM peristiwa WHERE waktu >= ? ORDER BY waktu DESC LIMIT 100').bind(cutoff).all();
-                          const data = rows.results || [];
-                          if (!data.length) return { ok: false, status: 200, rincian: 'Funnel data kosong' };
-                          // Cek data paling baru tidak lebih dari 28 jam (ekspor harian + buffer 4 jam)
-                          const terbaru = new Date(data[0].waktu);
-                          const sekarang = new Date();
-                          const jamLalu = (sekarang - terbaru) / (1000 * 60 * 60);
-                          if (jamLalu > 28) return { ok: false, status: 200, rincian: 'Funnel data usang ' + jamLalu.toFixed(1) + ' jam' };
-                          return { ok: true, status: 200, rincian: 'OK (data ' + jamLalu.toFixed(1) + ' jam lalu)', jumlah: data.length };
+                          const cut28 = new Date(Date.now() - AMBANG_JAM * 3600e3).toISOString();
+                          const cut7 = new Date(Date.now() - 7 * 864e5).toISOString();
+                          const [segar, mingguan] = await Promise.all([
+                              env.DB.prepare("SELECT waktu FROM peristiwa WHERE is_test = 0 AND waktu >= ? ORDER BY waktu DESC LIMIT 1").bind(cut28).first(),
+                              env.DB.prepare("SELECT COUNT(*) AS n FROM peristiwa WHERE is_test = 0 AND jenis LIKE 'beli:%' AND waktu >= ?").bind(cut7).first()
+                          ]);
+                          const n7 = (mingguan && mingguan.n) || 0;
+                          if (segar && segar.waktu) {
+                              const jamLalu = (Date.now() - new Date(segar.waktu).getTime()) / 3600e3;
+                              return { ok: true, status: 200, mode: 'trafik', jumlah_7hari: n7,
+                                       rincian: 'OK (event ' + jamLalu.toFixed(1) + ' jam lalu, ' + n7 + ' event 7 hari)' };
+                          }
+
+                          // Tak ada kunjungan nyata: jangan langsung menuduh rusak. Buktikan dulu
+                          // bahwa jalur tulis+baca peristiwa masih hidup dengan satu event kanari.
+                          // Kanari dipakai ulang bila masih < 1 jam supaya kuota tulis D1 tidak terkuras
+                          // (cron jalan tiap 10 menit).
+                          const kini = new Date().toISOString();
+                          const cut1 = new Date(Date.now() - 3600e3).toISOString();
+                          const kanariBaru = await env.DB.prepare(
+                              "SELECT id, waktu FROM peristiwa WHERE utm_source = 'monitor-kanari' AND waktu >= ? ORDER BY id DESC LIMIT 1"
+                          ).bind(cut1).first();
+                          let baca = kanariBaru || null;
+                          if (!baca) {
+                              const ins = await env.DB.prepare(
+                                  'INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign, is_test) VALUES (NULL, ?, ?, ?, ?, ?, ?, 1)'
+                              ).bind('monitor:kanari', 'pipeline', kini, 'monitor-kanari', 'cron', 'cek-funnel').run();
+                              const idKanari = ins && ins.meta && ins.meta.last_row_id;
+                              baca = idKanari
+                                  ? await env.DB.prepare('SELECT id, waktu FROM peristiwa WHERE id = ?').bind(idKanari).first()
+                                  : null;
+                          }
+                          try {
+                              await env.DB.prepare("DELETE FROM peristiwa WHERE utm_source = 'monitor-kanari' AND waktu < ?")
+                                  .bind(cut7).run();
+                          } catch (e) {}
+                          if (!baca) return { ok: false, status: 200, mode: 'kanari',
+                                              rincian: 'Pipeline tulis/baca gagal (kanari tidak terbaca)' };
+                          const umurKanari = ((Date.now() - new Date(baca.waktu).getTime()) / 60000).toFixed(0);
+
+                          // Jalur ingress (beacon di peramban) tetap diperiksa: kalau skrip pelacak
+                          // hilang dari /beli/script.js, kunjungan nyata tak akan pernah tercatat.
+                          try {
+                              const r = await fetch('https://siappsikotes.my.id/beli/script.js?cek=' + Date.now(), {
+                                  headers: { 'User-Agent': 'SiapPsikotes-Monitor/1.0' },
+                                  cf: { cacheTtl: 0, cacheEverything: false }
+                              });
+                              const js = await r.text();
+                              if (!/kunjungan_beli/.test(js) || !/\/api\/pantau/.test(js))
+                                  return { ok: false, status: r.status, mode: 'pelacak',
+                                           rincian: 'Pelacak hilang dari script.js (HTTP ' + r.status + ')' };
+                          } catch (e) {
+                              return { ok: false, status: 0, mode: 'pelacak',
+                                       rincian: 'script.js tak terbaca: ' + String(e.message || e).slice(0, 80) };
+                          }
+
+                          return { ok: true, status: 200, mode: 'idle', jumlah_7hari: n7,
+                                   rincian: 'idle: tanpa kunjungan nyata ' + AMBANG_JAM + ' jam, pipeline terverifikasi (kanari ' + umurKanari + ' mnt + pelacak OK)' };
                       } catch (e) {
-                          return { ok: false, status: 0, rincian: 'Funnel error: ' + String(e.message || e).slice(0, 100) };
+                          return { ok: false, status: 0, rincian: 'Funnel error: ' + String(e.message || e).slice(0, 120) };
                       }
                   }
 
@@ -1617,7 +1685,7 @@ export default {
                           "SELECT substr(waktu,1,10) AS hari, " +
                           "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
                           "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik " +
-                          "FROM peristiwa WHERE jenis LIKE 'beli:%' AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
+                          "FROM peristiwa WHERE jenis LIKE 'beli:%' AND is_test = 0 AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
                       ).bind(sejak).all(),
                       env.DB.prepare(
                           "SELECT substr(timestamp,1,10) AS hari, COUNT(*) AS bayar, COALESCE(SUM(amount),0) AS revenue " +
@@ -2054,6 +2122,7 @@ export default {
                       "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik, " +
                       "COUNT(DISTINCT CASE WHEN jenis = 'beli:qris_tampil' THEN rincian END) AS qris " +
                       "FROM peristiwa WHERE jenis IN ('beli:kunjungan_beli','beli:klik_cta_bayar','beli:qris_tampil') " +
+                      "AND is_test = 0 " +
                       "AND substr(waktu,1,10) >= ? GROUP BY substr(waktu,1,10)"
                   ).bind(awal).all(),
                   env.DB.prepare(
@@ -2352,16 +2421,43 @@ export default {
               const semuaSehat = beli.ok && funnel.ok && tripay.ok;
               const rincianGabungan = [
                   'beli: ' + (beli.ok ? 'OK' : 'GAGAL - ' + beli.rincian),
-                  'funnel: ' + (funnel.ok ? 'OK' : 'GAGAL - ' + funnel.rincian),
+                  'funnel: ' + (funnel.ok ? 'OK' + (funnel.mode && funnel.mode !== 'trafik' ? ' [' + funnel.mode + ']' : '')
+                                          : 'GAGAL - ' + funnel.rincian),
                   'tripay: ' + (tripay.ok ? 'OK' : 'GAGAL - ' + tripay.rincian)
               ].join('; ');
 
               // Simpan ringkasan ke D1 (bisa extend tabel monitoring_checks nanti)
-              if (!semuaSehat) {
-                  const alertMsg = `🚨 <b>Monitoring Komprehensif GAGAL</b>\n` +
-                      `Waktu: ${new Date().toISOString()}\n` +
-                      `Rincian: ${rincianGabungan}`;
-                  await kirimTelegramAlert(env, alertMsg);
-              }
-              return { ok: semuaSehat, beli, funnel, tripay, rincian: rincianGabungan };
+              // Anti-banjir alert: satu alert per SEBAB per 60 menit. Cron jalan tiap 10 menit;
+              // tanpa rem ini satu gangguan yang bertahan semalaman jadi ~144 pesan Telegram.
+              // Saat kembali normal setelah sempat gagal, dikirim tepat satu pesan pemulihan.
+              const sidik = (function () {
+                  let h = 2166136261;
+                  const s = rincianGabungan;
+                  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+                  return h.toString(36);
+              })();
+              let alertDikirim = false, alertDilewati = false;
+              try {
+                  const kunciAlert = 'alert:monitor:' + sidik;
+                  const terakhir = parseInt(await env.FUNNEL_KV.get(kunciAlert), 10) || 0;
+                  const menitLalu = (Date.now() - terakhir) / 60000;
+                  if (!semuaSehat && menitLalu >= 60) {
+                      const alertMsg = `🚨 <b>Monitoring Komprehensif GAGAL</b>\n` +
+                          `Waktu: ${new Date().toISOString()}\n` +
+                          `Rincian: ${rincianGabungan}`;
+                      const kirim = await kirimTelegramAlert(env, alertMsg);
+                      alertDikirim = !!kirim.ok;
+                      await env.FUNNEL_KV.put(kunciAlert, String(Date.now()), { expirationTtl: 6 * 3600 });
+                      await env.FUNNEL_KV.put('alert:monitor:status', 'gagal', { expirationTtl: 7 * 86400 });
+                  } else if (!semuaSehat) {
+                      alertDilewati = true;   // sebab sama sudah dilaporkan < 60 menit lalu
+                  }
+                  if (semuaSehat && (await env.FUNNEL_KV.get('alert:monitor:status')) === 'gagal') {
+                      await kirimTelegramAlert(env, `✅ <b>Monitoring Komprehensif PULIH</b>\n` +
+                          `Waktu: ${new Date().toISOString()}\nRincian: ${rincianGabungan}`);
+                      await env.FUNNEL_KV.put('alert:monitor:status', 'sehat', { expirationTtl: 7 * 86400 });
+                  }
+              } catch (e) {}
+              return { ok: semuaSehat, beli, funnel, tripay, rincian: rincianGabungan,
+                       mode_funnel: funnel.mode || null, alert: { dikirim: alertDikirim, dilewati: alertDilewati } };
           }
