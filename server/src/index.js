@@ -1645,8 +1645,9 @@ export default {
                                   : null;
                           }
                           try {
+                              // Kanari hanya penanda hidup; simpan maksimal 2 hari supaya tabel tidak menggelembung.
                               await env.DB.prepare("DELETE FROM peristiwa WHERE utm_source = 'monitor-kanari' AND waktu < ?")
-                                  .bind(cut7).run();
+                                  .bind(new Date(Date.now() - 2 * 864e5).toISOString()).run();
                           } catch (e) {}
                           if (!baca) return { ok: false, status: 200, mode: 'kanari',
                                               rincian: 'Pipeline tulis/baca gagal (kanari tidak terbaca)' };
