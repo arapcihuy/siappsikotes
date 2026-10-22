@@ -11,3 +11,6 @@ __pycache__/
 venv-*/
 node_modules/
 server/.dev.vars
+
+# Data kontak pembeli (retensi) — jangan ikut repositori
+docs/devops/retensi/

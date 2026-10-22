@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set Soal Batch 2 — harga khusus pemilik kode akses — SiapPsikotes</title>
+<meta name="description" content="Set Soal Batch 2: soal varian baru lengkap pembahasan, khusus pemilik kode akses penuh SiapPsikotes. Sekali bayar, bukan langganan. Tempel kode aksesmu untuk melihat harga khususnya.">
+<link rel="canonical" href="https://siappsikotes.my.id/beli/batch2-landing.html">
+<meta property="og:title" content="Set Soal Batch 2 — SiapPsikotes">
+<meta property="og:description" content="Soal varian baru lengkap pembahasan, khusus pemilik kode akses penuh. Tempel kode aksesmu untuk melihat harga khususnya.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://siappsikotes.my.id/beli/batch2-landing.html">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
+<style>
+:root{--bg:#0a0f18;--surface:#121a28;--surface2:#172133;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--text:#eaf1f8;--muted:#b3c0d1;--gold:#e6c552;--blue:#6db3ff;--ok:#4ade80}
+*{box-sizing:border-box}[hidden]{display:none!important}html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--text);background:var(--bg);font:16.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:22px}
+h1{font-size:clamp(24px,4vw,34px);line-height:1.2;letter-spacing:-1px;margin:8px 0 6px}
+p{margin:8px 0}
+a{color:var(--blue)}
+.kartu{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px;margin:16px 0}
+input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line2);background:var(--surface2);color:var(--text);font-size:17px;margin:6px 0}
+.tombol{display:inline-block;border:0;cursor:pointer;background:var(--gold);color:#1a1405;font-weight:700;padding:12px 20px;border-radius:10px;font-size:16px;text-decoration:none}
+.tombol.sekunder{background:var(--surface2);color:var(--text);border:1px solid var(--line2)}
+.pesan{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
+.pesan.salah{border-color:rgba(248,113,113,.5)}
+.pesan.hoki{border-color:rgba(74,222,128,.5)}
+.angka{font-size:26px;font-weight:800;color:var(--gold);letter-spacing:-.5px}
+.baris{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px dashed var(--line2);padding:10px 0 2px}
+.salin{background:none;border:1px solid var(--line2);color:var(--muted);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px}
+.qris-bayar{margin-top:12px;background:#fff;border-radius:10px;padding:10px;display:inline-block}
+.qris-bayar img{width:240px;height:240px;display:block}
+#kode{font-size:22px;font-weight:800;letter-spacing:1px;color:var(--ok)}
+.buntut{font-size:12.5px;color:var(--muted);margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.lencana{display:inline-block;font-size:12px;letter-spacing:1px;color:var(--muted);border:1px solid var(--line2);border-radius:99px;padding:3px 12px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="lencana">Satu langkah tambahan bagi pemilik kode akses</p>
+  <h1>Set Soal Batch 2</h1>
+  <p>Set soal tambahan untuk kamu yang sudah selesai drill set pertama: soal <b>varian baru</b> yang tidak
+     mengulang soal yang sudah kamu hafal — lengkap pembahasan per soal.</p>
+  <p>Sekali bayar, <b>bukan langganan</b>. Dan yang membuka set ini bukan angka di halaman ini:
+     server memeriksa kode aksesmu langsung di catatan pembayarannya.</p>
+
+  <div class="kartu" id="langkah1">
+    <p><b>Langkah 1 — tempel kode aksesmu</b></p>
+    <input id="kode" placeholder="Contoh: SPXXXXXXXXXXXX" autocomplete="off" spellcheck="false" inputmode="text">
+    <button class="tombol" id="periksa">Periksa kode</button>
+    <p id="pesanPeriksa" hidden></p>
+  </div>
+
+  <div class="kartu" id="langkah2" hidden>
+    <p><b>Langkah 2 — buat pesananmu</b></p>
+    <p>Harga khusus untuk pemilik kode: <span class="angka" id="nominalDasar"></span> sekali bayar,
+       bukan langganan. Pembayaran dicocokkan lewat sejumlah 3 angka unik (rujukan):</p>
+    <div class="baris"><span>Rujukan pembayaran</span><b id="rujukan">SP-</b><button class="salin" data-salin="rujukan">salin</button></div>
+    <div class="baris"><span>Nominal transfer</span><b class="angka" id="nominal"></b><button class="salin" data-salin="nominal">salin</button></div>
+    <button class="tombol" id="tampilkanKode">Tampilkan kode &amp; bayar</button>
+    <p id="pesananPesan" hidden></p>
+    <div id="bayar" hidden>
+      <p><b>Kode akses Set Soal Batch 2:</b></p>
+      <div id="kode"></div>
+      <p style="font-size:14px;color:var(--muted)">Sesudah lunas, tempel kode ini di aplikasi, kategori
+         Set Soal Batch 2 — soalnya terbuka langsung di perangkatmu.</p>
+      <div class="qris-bayar"><img id="qrisImg" alt="Kode QRIS pembayaran Set Soal Batch 2" width="240" height="240" src="../static/img/qris-bayar.png?v=1"></div>
+      <p style="font-size:14px;color:var(--muted)">Kode QRIS di atas adalah jalur dinamis bila tersedia;
+         kalau tidak muncul, bayar nominal di atas lewat QRIS statis ini dan tekan tombol berikut.</p>
+      <button class="tombol sekunder" id="sudahBayar">Saya sudah bayar</button>
+      <p id="statusBayar" hidden></p>
+    </div>
+  </div>
+
+  <p class="buntut">Situs ini bukan situs resmi instansi mana pun. Kami tidak berafiliasi dengan, dan tidak
+     didukung oleh, TNI maupun lembaga pemerintah mana pun. Tidak memakai lambang atau atribut resmi.
+     Seluruh soal adalah karya penyusun kami sendiri untuk keperluan latihan, diperiksa dengan pedoman
+     mutu yang dapat diperiksa ulang. Kode yang sudah dikirim tidak bisa dikembalikan; kode tidak
+     berbatas waktu dan tidak ada tagihan berulang.</p>
+</div>
+<script src="script-batch2.js"></script>
+</body>
+</html>

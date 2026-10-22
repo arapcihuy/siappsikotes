@@ -1,6 +1,6 @@
 {
   "feed_version": 1,
-  "generated_at": "2026-10-19",
+  "generated_at": "2026-10-22",
   "brand": "SiapPsikotes",
   "currency": "IDR",
   "company": "Auto Company",
@@ -66,6 +66,42 @@
         {
           "q": "Langsung aktif setelah bayar?",
           "a": "Kode dikirim manual setelah bukti pembayaran diterima; target maksimal 6 jam pada jam kerja (08.00-21.00 WIB)."
+        }
+      ]
+    },
+    {
+      "product_id": "siappsi-batch2",
+      "product": "SiapPsikotes",
+      "paket": "Set Soal Batch 2",
+      "harga_rp": 29000,
+      "harga_tampil": "Rp 29.000",
+      "type": "digital_access_code",
+      "tipe_bayar": "sekali bayar (bukan langganan)",
+      "deskripsi_singkat": "120 soal varian baru, merata per modul, tanpa soal kembar dengan set 1.348 soal, lengkap pembahasan per soal. Harga khusus HANYA untuk pemilik kode akses penuh — server memeriksa kode langsung dari catatan pembayaran. Sekali bayar, bukan langganan; kode tidak berbatas waktu.",
+      "produk_fisik": false,
+      "stock": "unlimited",
+      "link_beli": "https://siappsikotes.my.id/beli/?skus=batch2&utm_source=marketplace&utm_medium=feed&utm_campaign=batch2",
+      "link_coba_gratis": "https://siappsikotes.my.id/contoh/",
+      "faq": [
+        {
+          "q": "Siapa yang bisa beli harga khusus ini?",
+          "a": "Khusus pemilik kode akses penuh SiapPsikotes. Tempel kode aksesmu di halaman beli khususnya; server memeriksa kodenya dari catatan pembayaran, bukan dari harga yang ditulis di halaman."
+        },
+        {
+          "q": "Ini langganan? Nanti nagih lagi?",
+          "a": "Bukan langganan. Sekali bayar, tidak ada tagihan berulang."
+        },
+        {
+          "q": "Kisinya apa saja, dan apakah soalnya kembar dengan yang sudah saya kerjakan?",
+          "a": "120 soal varian baru merata per modul (8 modul, tanpa modul bergambar). Tanpa soal kembar dengan set 1.348 soal yang sudah kamu punya."
+        },
+        {
+          "q": "Kode/aksesnya berbatas waktu?",
+          "a": "Tidak. Kode tidak berbatas waktu; tidak ada tagihan berulang."
+        },
+        {
+          "q": "Ini soal asli dari instansi?",
+          "a": "Bukan. Semua soal karya penyusun kami sendiri untuk latihan. Tidak berafiliasi dengan instansi mana pun."
         }
       ]
     },
