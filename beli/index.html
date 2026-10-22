@@ -112,19 +112,13 @@
     </div>
   </section>
 
-  <div class="angka-strip">
-    <div><b>1.348</b><span>soal + pembahasan</span></div>
-    <div><b>9</b><span>modul psikotes & IQ</span></div>
-    <div><b id="displayHargaStrip">Rp 39.000</b><span>sekali bayar</span></div>
-    <div><b>QRIS</b><span>semua bank & e-wallet</span></div>
-  </div>
-
   <h2 id="bayar">Cara membayar</h2>
-  <div class="beli-dua">
-    <div>
-      <p class="nota-merchant">Nama yang muncul saat scan: <b>Momo dimsum &mdash; Sleman</b> &mdash; itu
-        kanal pembayaran pengelola SiapPsikotes, jadi pembayaranmu tetap sah.
-        Yang dicocokkan: <b>nominal</b> + <b>kode rujukanmu</b> di sebelah.</p>
+
+  <!-- SATU blok bayar padat: nota, QR, nominal + salin, rujukan + salin — semuanya terlihat
+       tanpa gulir; selebihnya (langkah, kode akses, kendala) mengalir di bawahnya. -->
+  <div class="kartu-bayar" style="border-width:2px;">
+    <p class="nota-merchant">Nama saat scan: <b>Momo dimsum &mdash; Sleman</b> &mdash; kanal pembayaran pengelola SiapPsikotes.</p>
+    <div class="bayar-pokok">
       <div class="qris-kotak" id="qris" style="border: 2px solid var(--gold); background: #fff;">
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
@@ -136,88 +130,93 @@
           </picture>
         </a>
       </div>
-      <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QR tampil langsung &mdash; pindai dengan semua bank &amp; e-wallet.</p>
-    </div>
-    <div>
-      <div class="kartu-bayar" style="border-width: 2px;">
+      <div class="bayar-kunci">
         <p class="label">Bayar tepat sejumlah</p>
         <div class="kode-baris">
           <p class="nominal" id="beliNominal">Rp 39.000</p>
           <button type="button" class="tombol sekunder kecil" id="beliSalin">Salin nominal</button>
         </div>
-        <p class="catatan" style="margin-top:2px">Harga <span id="displayHargaCatatan">Rp 39.000</span> ditambah 3 angka unik. Angka unik itulah yang
+        <p class="catatan bayar-jelas" style="margin-top:2px">Harga <span id="displayHargaCatatan">Rp 39.000</span> ditambah 3 angka unik. Angka unik itulah yang
           membuat pembayaranmu mudah dicocokkan.</p>
         <p class="catatan" id="beliCatatanDiskon" hidden style="margin-top:6px;color:#4ade80;font-weight:700;">Kode referensi temanmu diterapkan &mdash; hemat Rp 5.000.</p>
-        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:12px 0 10px">
         <p class="label">Kode rujukanmu</p>
-              <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
-              <div class="kode-baris" style="margin-top:6px;">
-                <button type="button" class="tombol sekunder kecil" id="beliSalinRujukan">Salin kode rujukan</button>
-              </div>
-              <p class="catatan">Kode rujukan + nominal unik inilah yang mencocokkan pembayaranmu otomatis
-                &mdash; tidak perlu kirim apa pun.</p>
-        <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
-                <p class="label">Sudah bayar? Ambil kode aksesmu</p>
-                <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
-                  jadi kamu tidak perlu menunggu balasan siapa pun.</p>
-                <!-- Email capture untuk retention sequence -->
-                <div id="beliEmailSection" style="margin:12px 0;">
-                  <label for="beliEmail" style="display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;">Email untuk tips belajar & update (opsional, tidak dipakai spam)</label>
-                  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                    <input type="email" id="beliEmail" placeholder="kamu@contoh.com" style="flex:1;min-width:200px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font-size:15px;" autocomplete="email">
-                    <button type="button" class="tombol kecil" id="beliSimpanEmail" style="white-space:nowrap;">Simpan email</button>
-                  </div>
-                  <p id="beliEmailStatus" class="catatan" style="margin:6px 0 0;font-size:13px;"></p>
-                </div>
-                <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
-              
-                <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
-                <div class="kode-baris" id="beliAksiKode" hidden>
-                  <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi & pakai kode ini</a>
-                  <button type="button" class="tombol sekunder kecil" id="beliSalinKode">Salin kode akses</button>
-                </div>
-                <button type="button" class="tombol kecil" id="beliSudahBayar" hidden style="width:100%; font-size:16px; padding:12px; margin-top:8px;">✅ Saya sudah bayar — aktifkan kode</button>
-                <p class="catatan" id="beliStatusBayar" hidden style="margin:8px 0 0;"></p>
-                <div class="kartu-bayar" id="beliReferensi" hidden style="margin-top:14px;border-left:3px solid #4ade80;">
-                  <p class="label">Ajak satu teman &mdash; dia hemat Rp 5.000, kamu +30 hari</p>
-                  <p class="rujukan" id="beliReferensiKode" role="status" style="user-select:all;-webkit-user-select:all;"></p>
-                  <p class="catatan" id="beliReferensiTautan" style="user-select:all;-webkit-user-select:all;word-break:break-all;"></p>
-                  <button type="button" class="tombol sekunder kecil" id="beliSalinReferensi" style="margin-top:8px;">Salin link untuk teman</button>
-                </div>
-      </div>
-      <noscript>
-        <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
-          supaya kartu pembayaran di atas bisa dipakai; bila tetap sulit, jalur bantuan ada di bagian
-          &ldquo;Ada kendala?&rdquo;.</p>
-      </noscript>
-
-      <ol class="langkah" style="background:var(--surface); padding:16px 20px 16px 36px; border-radius:12px; border:1px solid var(--line);">
-        <li>Pindai QR di atas, bayar <strong id="beliNominal2">Rp 39.xxx</strong> &mdash; tepat sejumlah itu.</li>
-        <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu &mdash; kode aksesmu muncul saat itu juga.</li>
-        <li>Setelah QRIS terbayar, tekan <strong>Saya sudah bayar &mdash; aktifkan kode</strong>: kode aktif
-          otomatis, tanpa menunggu siapa pun.</li>
-        <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
-      </ol>
-
-      <section id="kendala" style="margin-top:22px;padding:16px 18px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);">
-        <h2 style="margin:0 0 8px">Ada kendala?</h2>
-        <p class="catatan" style="margin-top:0">Normalnya tidak ada yang perlu dikirim: pembayaranmu terdeteksi
-          otomatis dari <strong>nominal unik + kode rujukanmu</strong>, dan tombol di atas langsung
-          mengaktifkan kode. Bila kode belum aktif dalam beberapa menit, kirim bukti pembayaran beserta
-          kode rujukanmu lewat:</p>
-        <div class="aksi" style="margin-top:12px">
-          <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
-               tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
-               pesannya dengan kode rujukan. -->
-          <a class="tombol kecil" id="beliBukti" target="_blank" rel="noopener"
-             href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20catat%20pembayarannya%2C%20kode%20akses%20sudah%20saya%20ambil%20di%20halaman%20beli.">Kirim bukti lewat WhatsApp</a>
-          <a class="tombol sekunder kecil" id="beliBuktiSurel"
-             href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
+        <p class="rujukan" id="beliRujukan">SP-&#183;&#183;&#183;&#183;</p>
+        <div class="kode-baris" style="margin-top:6px;">
+          <button type="button" class="tombol sekunder kecil" id="beliSalinRujukan">Salin kode rujukan</button>
         </div>
-        <p class="catatan">Masih menimbang? <a href="../contoh/">Coba 40 soal gratis dulu</a> &mdash;
-          baru putuskan untuk beli.</p>
-      </section>
+        <p class="catatan bayar-jelas" style="margin-top:2px">Kode rujukan + nominal unik inilah yang mencocokkan pembayaranmu otomatis
+          &mdash; tidak perlu kirim apa pun.</p>
+        <p class="catatan bayar-jelas" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QR tampil langsung &mdash; pindai dengan semua bank &amp; e-wallet.</p>
+      </div>
     </div>
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
+    <p class="label">Sudah bayar? Ambil kode aksesmu</p>
+    <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
+      jadi kamu tidak perlu menunggu balasan siapa pun.</p>
+    <!-- Email capture untuk retention sequence -->
+    <div id="beliEmailSection" style="margin:12px 0;">
+      <label for="beliEmail" style="display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;">Email untuk tips belajar & update (opsional, tidak dipakai spam)</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <input type="email" id="beliEmail" placeholder="kamu@contoh.com" style="flex:1;min-width:200px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font-size:15px;" autocomplete="email">
+        <button type="button" class="tombol kecil" id="beliSimpanEmail" style="white-space:nowrap;">Simpan email</button>
+      </div>
+      <p id="beliEmailStatus" class="catatan" style="margin:6px 0 0;font-size:13px;"></p>
+    </div>
+    <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
+
+    <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
+    <div class="kode-baris" id="beliAksiKode" hidden>
+      <a class="tombol kecil" id="beliBukaKode" href="../">Buka aplikasi & pakai kode ini</a>
+      <button type="button" class="tombol sekunder kecil" id="beliSalinKode">Salin kode akses</button>
+    </div>
+    <button type="button" class="tombol kecil" id="beliSudahBayar" hidden style="width:100%; font-size:16px; padding:12px; margin-top:8px;">✅ Saya sudah bayar — aktifkan kode</button>
+    <p class="catatan" id="beliStatusBayar" hidden style="margin:8px 0 0;"></p>
+    <div class="kartu-bayar" id="beliReferensi" hidden style="margin-top:14px;border-left:3px solid #4ade80;">
+      <p class="label">Ajak satu teman &mdash; dia hemat Rp 5.000, kamu +30 hari</p>
+      <p class="rujukan" id="beliReferensiKode" role="status" style="user-select:all;-webkit-user-select:all;"></p>
+      <p class="catatan" id="beliReferensiTautan" style="user-select:all;-webkit-user-select:all;word-break:break-all;"></p>
+      <button type="button" class="tombol sekunder kecil" id="beliSalinReferensi" style="margin-top:8px;">Salin link untuk teman</button>
+    </div>
+  </div>
+  <noscript>
+    <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
+      supaya kartu pembayaran di atas bisa dipakai; bila tetap sulit, jalur bantuan ada di bagian
+      &ldquo;Ada kendala?&rdquo;.</p>
+  </noscript>
+
+  <ol class="langkah" style="background:var(--surface); padding:16px 20px 16px 36px; border-radius:12px; border:1px solid var(--line);">
+    <li>Pindai QR di atas, bayar <strong id="beliNominal2">Rp 39.xxx</strong> &mdash; tepat sejumlah itu.</li>
+    <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu &mdash; kode aksesmu muncul saat itu juga.</li>
+    <li>Setelah QRIS terbayar, tekan <strong>Saya sudah bayar &mdash; aktifkan kode</strong>: kode aktif
+      otomatis, tanpa menunggu siapa pun.</li>
+    <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
+  </ol>
+
+  <section id="kendala" style="margin-top:22px;padding:16px 18px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);">
+    <h2 style="margin:0 0 8px">Ada kendala?</h2>
+    <p class="catatan" style="margin-top:0">Normalnya tidak ada yang perlu dikirim: pembayaranmu terdeteksi
+      otomatis dari <strong>nominal unik + kode rujukanmu</strong>, dan tombol di atas langsung
+      mengaktifkan kode. Bila kode belum aktif dalam beberapa menit, kirim bukti pembayaran beserta
+      kode rujukanmu lewat:</p>
+    <div class="aksi" style="margin-top:12px">
+      <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
+           tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
+           pesannya dengan kode rujukan. -->
+      <a class="tombol kecil" id="beliBukti" target="_blank" rel="noopener"
+         href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20catat%20pembayarannya%2C%20kode%20akses%20sudah%20saya%20ambil%20di%20halaman%20beli.">Kirim bukti lewat WhatsApp</a>
+      <a class="tombol sekunder kecil" id="beliBuktiSurel"
+         href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
+    </div>
+    <p class="catatan">Masih menimbang? <a href="../contoh/">Coba 40 soal gratis dulu</a> &mdash;
+      baru putuskan untuk beli.</p>
+  </section>
+
+  <div class="angka-strip">
+    <div><b>1.348</b><span>soal + pembahasan</span></div>
+    <div><b>9</b><span>modul psikotes & IQ</span></div>
+    <div><b id="displayHargaStrip">Rp 39.000</b><span>sekali bayar</span></div>
+    <div><b>QRIS</b><span>semua bank & e-wallet</span></div>
   </div>
 
   <div class="percikan">
