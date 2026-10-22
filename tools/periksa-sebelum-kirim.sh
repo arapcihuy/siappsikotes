@@ -92,13 +92,23 @@ echo "=== 2e/7 QRIS /beli/ DINAMIS (nominal terisi otomatis) ==="
 # utama salah ketik dan pembayaran tidak tercocok. Uji ini memastikan QR yang
 # dirender peramban benar-benar membawa tag 54 yang cocok dengan nominal halaman.
 if [ -x /Users/mac/venv312/bin/python3 ]; then
+  # PENTING: matikan dulu server yang mungkin masih memegang port 8799 dari run
+  # sebelumnya. Kalau tidak, http.server gagal bind dan yang diuji adalah direktori
+  # LAIN (pernah terjadi: gate melaporkan "QR masih statis" padahal produksi sehat,
+  # hanya karena port dipegang server lama dari worktree lain).
+  lsof -nP -iTCP:8799 -sTCP:LISTEN -t 2>/dev/null | xargs -r kill 2>/dev/null || true
+  sleep 1
   ( cd "$(dirname "$0")/.." && python3 -m http.server 8799 >/dev/null 2>&1 & echo $! > /tmp/srv-qris.pid )
   SRV_PID=$(cat /tmp/srv-qris.pid 2>/dev/null || true)
+  SIAP=0
   for i in 1 2 3 4 5 6 7 8; do
-    curl -sf -o /dev/null "http://127.0.0.1:8799/beli/" && break
+    if curl -sf -o /dev/null "http://127.0.0.1:8799/beli/"; then SIAP=1; break; fi
     sleep 1
   done
-  if ! /Users/mac/venv312/bin/python3 tools/periksa-qris-dinamis.py >/tmp/qris-dinamis.log 2>&1; then
+  if [ "$SIAP" -ne 1 ]; then
+    echo "  GAGAL | server uji lokal tidak bisa dijalankan di port 8799"
+    GAGAL=1
+  elif ! /Users/mac/venv312/bin/python3 tools/periksa-qris-dinamis.py >/tmp/qris-dinamis.log 2>&1; then
     echo ">>> GAGAL: QRIS /beli/ tidak dinamis atau nominalnya tidak cocok"
     tail -6 /tmp/qris-dinamis.log | sed 's/^/      /'
     GAGAL=1
