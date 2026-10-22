@@ -116,4 +116,28 @@
   }
 
   window.batch2Boot = boot;
+
+  // --- Tanam kartu gerbang pada halaman depan (tanpa render ulang penuh) ---
+  // Halaman depan di-render ulang berkali-kali oleh aplikasi; kartu kategori
+  // dan gerbang kode TIDAK mungkin masuk lewat renderHome karena kategori ini
+  // di luar daftar resmi. Jadi: pasang ulang kartu gerbang setiap kali
+  // halaman depan selesai digambar, selama batch2 belum aktif.
+  function tanamKartu() {
+    var tag = document.getElementById('buildTag');
+    if (!tag || window.batch2Aktif() || bacaKode()) return;
+    if (document.getElementById('batch2Kode')) return; // tertanam pada render ulang ini
+    var kartu = document.createElement('div');
+    kartu.innerHTML = window.batch2GerbangHtml();
+    tag.parentNode.insertBefore(kartu.firstChild, tag);
+  }
+  window.batch2Tanam = tanamKartu;
+  if (typeof window.render === 'function') {
+    var render_asli = window.render;
+    window.render = function () {
+      var hasil_render = render_asli.apply(this, arguments);
+      setTimeout(tanamKartu, 0);
+      return hasil_render;
+    };
+  }
+  tanamKartu();
 })();

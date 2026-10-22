@@ -103,18 +103,11 @@ if (!katSiapSemua()) window.pastikanSemua();
 // hidup; ia sendiri yang memutuskan (dari /api/batch2/status) apakah kategori
 // "Set Soal Batch 2" tampil di aplikasi.
 setTimeout(function () {
-if (typeof window.batch2Boot === 'function') { window.batch2Boot(); gambarUlang(); return; }
+if (typeof window.batch2Boot === 'function') { window.batch2Boot(); if (window.batch2Tanam) window.batch2Tanam(); return; }
 var s = document.createElement('script');
 s.src = 'static/js/batch2.js?v=' + versiAset();
-s.onload = function () { if (window.batch2Boot) { window.batch2Boot(); gambarUlang(); } };
+s.onload = function () { if (window.batch2Boot) { window.batch2Boot(); if (window.batch2Tanam) window.batch2Tanam(); } };
 s.onerror = function () {};
 document.head.appendChild(s);
 }, 1000);
-// Setelah batch2.js selesai, halaman depan perlu digambar ulang sekali agar
-// kartu gerbang (minta kode) atau kategori baru ikut tampil.
-function gambarUlang() {
-setTimeout(function () {
-if (typeof window.render === 'function') window.render();
-}, 60);
-}
 })();
