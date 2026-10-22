@@ -32,6 +32,7 @@ Pakai:
 """
 import glob
 import html
+from urllib.parse import quote as urlquote
 import json
 import os
 import re
@@ -185,7 +186,20 @@ GAYA_ARTIKEL = '''<style>
 </style>'''
 
 
-def kepala(n, gaya):
+def kepala(n, gaya, utm=None):
+    """Kepala halaman. Semua tautan ke /beli/ WAJIB membawa UTM supaya atribusi
+    kunjungan tidak hilang jadi 'tanpa_tag_varian' di /api/funnel.
+
+    utm = dict(utm_source, utm_medium, utm_campaign) atau None. Kalau None,
+    tautan dibiarkan relatif tanpa parameter.
+    """
+    qs = []
+    for k in ('utm_source', 'utm_medium', 'utm_campaign'):
+        v = (utm or {}).get(k)
+        if v:
+            qs.append('%s=%s' % (k, urlquote(str(v))))
+    q = ('?' + '&amp;'.join(qs)) if qs else ''
+
     kanon = '%s/%s/' % (SITUS, n['slug'])
     judul_tab = html.escape(n['judul_tab'], quote=True)
     deskripsi = html.escape(n['deskripsi'], quote=True)
@@ -226,9 +240,9 @@ def kepala(n, gaya):
     <nav aria-label="Halaman">
       <a href="../psikotes/">Aplikasi latihan</a>
       <a href="../contoh/">Contoh gratis</a>
-      <a href="../beli/">Harga</a>
+      <a href="../beli/%(q)s">Harga</a>
       <a href="../mutu/">Mutu</a>
-      <a class="tombol sekunder kecil" href="../beli/">Beli akses</a>
+      <a class="tombol sekunder kecil" href="../beli/%(q)s">Beli akses</a>
     </nav>
   </div>
 </header>
@@ -243,7 +257,7 @@ def kepala(n, gaya):
 ''' % dict(judul=judul_tab, desk=deskripsi, kanon=kanon, situs=SITUS,
            og_gambar='%s/static/og/%s.png' % (SITUS, n['slug']),
            gaya=gaya, gaya_artikel=GAYA_ARTIKEL, skema=skema,
-           h1=n['h1'], dek=n['dek'])
+           h1=n['h1'], dek=n['dek'], q=q)
 
 
 def build_skema(n, kanon):
@@ -355,7 +369,7 @@ def isi_artikel(n):
             '\n\n'.join(bagian) + '\n' + faq + '\n' + paragraf(n['penutup']) + '\n' + tautan)
 
 
-def kaki(n, pantaul=None):
+def kaki(n, pantaul=None, utm=None):
     pelacak = ''
     if pantaul is None:
         pantaul = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau'
@@ -375,6 +389,13 @@ def kaki(n, pantaul=None):
 })();
 </script>
 '''.replace('${PANTAU}', pantaul)
+    qs = []
+    for k in ('utm_source', 'utm_medium', 'utm_campaign'):
+        v = (utm or {}).get(k)
+        if v:
+            qs.append('%s=%s' % (k, urlquote(str(v))))
+    q = ('?' + '&amp;'.join(qs)) if qs else ''
+
     return '''
 </main>
 
@@ -384,19 +405,19 @@ def kaki(n, pantaul=None):
     <div class="tautan-kaki">
       <a href="../psikotes/">Buka aplikasi latihan</a>
       <a href="../contoh/">40 soal contoh gratis</a>
-      <a href="../beli/">Harga &amp; cara beli</a>
+      <a href="../beli/%(q)s">Harga &amp; cara beli</a>
       <a href="../mutu/">Mutu &amp; bukti pemeriksaan</a>
       <a href="../syarat/">Syarat &amp; ketentuan</a>
       <a href="../privasi/">Kebijakan privasi</a>
     </div>
-    <p>%s</p>
+    <p>%(penyangkal)s</p>
     <p>Seluruh soal di halaman ini diambil dari bank soal SiapPsikotes yang diperiksa dengan pedoman mutu yang dapat diperiksa ulang. Halaman ini bersifat latihan; hasil seleksi bergantung pada usaha pembaca.</p>
-    <p>Halaman ini diperbarui %s.</p>
+    <p>Halaman ini diperbarui %(diperbarui)s.</p>
   </div>
 </footer>
-%s</body>
+%(pelacak)s</body>
 </html>
-''' % (PENYANGKAL, n.get('diperbarui', '15 September 2026'), pelacak)
+''' % {'penyangkal': PENYANGKAL, 'diperbarui': n.get('diperbarui', '15 September 2026'), 'pelacak': pelacak, 'q': q}
 
 
 def bangun_satu(naskah):
@@ -419,7 +440,8 @@ def bangun_satu(naskah):
 
     tujuan = os.path.join(AKAR, n['slug'])
     os.makedirs(tujuan, exist_ok=True)
-    isi = (kepala(n, gaya_halaman()) + isi_artikel(n) + kaki(n))
+    utm = {k: n.get(k) for k in ('utm_source', 'utm_medium', 'utm_campaign') if n.get(k)}
+    isi = (kepala(n, gaya_halaman(), utm) + isi_artikel(n) + kaki(n, utm=utm))
     keluaran = os.path.join(tujuan, 'index.html')
     with open(keluaran, 'w', encoding='utf-8') as f:
         f.write(isi)

@@ -1,81 +1,96 @@
 {
-  "slug": "bayar-qris-kode-langsung-aktif",
-  "judul_tab": "Beli Paket Psikotes: Bayar QRIS, Kode Langsung Aktif",
-  "deskripsi": "Cara beli paket latihan psikotes online tanpa ribet: bayar QRIS, tekan satu tombol, kode langsung tampil. Tanpa kirim bukti transfer, tanpa nunggu admin.",
-  "h1": "Bayar QRIS, Kode Akses Langsung Aktif — Tanpa Kirim Bukti, Tanpa Nunggu",
-  "dek": "Alur beli paket latihan psikotes yang seharusnya: satu pembayaran QRIS, satu tombol, kode akses langsung terbuka. Tidak ada kirim bukti transfer. Tidak ada menunggu balasan admin.",
-  "kata_kunci": "beli paket psikotes online, psikotes online QRIS, kode akses langsung aktif, beli soal psikotes TNI",
-  "pembuka": [
-    "Biasanya beli paket latihan psikotes online itu begini: transfer dulu, foto bukti transfer, kirim ke admin, lalu menunggu. Kalau adminnya sibuk atau sedang tidur, kode akses baru datang berjam-jam kemudian. Semangat latihan yang tadinya tinggi bisa habis duluan sebelum soalnya kebuka.",
-    "Di SiapPsikotes alurnya kami buat sependek mungkin. Bayar dengan QRIS, tekan tombol \"Saya sudah bayar — aktifkan kode\", dan kode akses langsung tampil di layar. Tidak ada langkah kirim bukti. Tidak ada menunggu balasan manusia.",
-    "Artikel ini menjelaskan alurnya langkah demi langkah, plus contoh soal dari bank soal yang sama dengan yang kamu dapat setelah beli."
-  ],
-  "bagian": [
-    {
-      "h2": "Alur beli: tiga langkah, selesai dalam hitungan detik",
-      "isi": [
-        "Pertama, buka halaman beli dan tekan tombol tampilkan kode QRIS. Bayar dengan aplikasi bank atau e-wallet apa pun yang bisa scan QRIS, seharga Rp 39.000 sekali bayar.",
-        "Kedua, setelah pembayaran selesai, kembali ke halaman yang sama dan tekan tombol \"Saya sudah bayar — aktifkan kode\".",
-        "Ketiga, kode akses langsung tampil. Tinggal salin, buka aplikasi latihan, dan masuk. Seluruh proses setelah tombol ditekan hanya butuh sekitar satu detik karena aktivasinya dikerjakan otomatis oleh server, bukan oleh admin yang mengetik manual."
-      ],
-      "poin": [
-        "Bayar QRIS Rp 39.000 sekali bayar.",
-        "Tekan \"Saya sudah bayar — aktifkan kode\".",
-        "Kode akses langsung tampil — tanpa kirim bukti transfer, tanpa nunggu."
-      ]
-    },
-    {
-      "h2": "Kenapa tidak perlu kirim bukti transfer",
-      "isi": [
-        "Setiap pesanan di halaman beli membawa penanda yang diikat ke pembayaranmu. Saat kamu menekan tombol aktivasi, server memeriksa pesanan itu dan membuka kode aksesnya otomatis. Pembayaran juga dipantau dari sisi server lewat kanal pembayaran resmi, jadi tidak ada langkah manusia yang perlu kamu tunggu.",
-        "Bagi kamu yang pernah terbakar pengalaman kirim bukti transfer lalu tidak ada kabar, alur ini memangkas semua risiko itu: tidak ada bukti yang bisa telat dibaca, tidak ada pesan yang bisa terlewat."
-      ]
-    },
-    {
-      "h2": "Contoh soal yang menantimu di dalam",
-      "isi": [
-        "Bank soal SiapPsikotes berisi 1.348 soal beserta pembahasan untuk sembilan modul tes, semuanya disusun dan diperiksa lewat pedoman mutu yang bisa kamu periksa sendiri. Sepuluh contoh soal numerik di bawah ini diambil langsung dari bank soal yang sama."
-      ],
-      "soal": {"kategori": "numerik", "jumlah": 10}
-    },
-    {
-      "h2": "Yang kamu bayar dan yang kamu dapat",
-      "isi": [
-        "Rp 39.000 sekali bayar membuka seluruh 1.348 soal beserta pembahasannya di sembilan modul tes. Bukan langganan, tanpa perpanjangan otomatis. Satu pembayaran, satu kode akses, langsung pakai."
-      ],
-      "poin": [
-        "1.348 soal + pembahasan, 9 modul psikotes & IQ.",
-        "Rp 39.000 sekali bayar — bukan langganan.",
-        "Kode akses aktif otomatis setelah bayar QRIS."
-      ]
-    }
-  ],
-  "faq": [
-    {
-      "t": "Apakah saya perlu kirim bukti transfer ke admin?",
-      "j": "Tidak. Setelah membayar QRIS, tekan tombol \"Saya sudah bayar — aktifkan kode\" di halaman beli. Kode akses langsung tampil tanpa kirim apa pun."
-    },
-    {
-      "t": "Berapa lama kode akses muncul setelah saya tekan tombolnya?",
-      "j": "Sekitar satu detik. Aktivasi dikerjakan otomatis oleh server, bukan oleh admin."
-    },
-    {
-      "t": "Metode pembayarannya apa saja?",
-      "j": "QRIS, jadi bisa dibayar dari aplikasi mobile banking atau e-wallet mana pun yang mendukung scan QRIS."
-    },
-    {
-      "t": "Apakah paket ini langganan bulanan?",
-      "j": "Bukan. Rp 39.000 sekali bayar, tanpa perpanjangan otomatis."
-    }
-  ],
-  "penutup": [
-    "Waktu persiapan lebih berharga daripada waktu menunggu kode akses. Bayar, tekan satu tombol, langsung latihan.",
-    "Kalau masih mau mencoba dulu, ada 40 soal contoh berpembahasan yang bisa dikerjakan gratis tanpa akun. Kalau sudah yakin, alur belinya cuma tiga langkah seperti di atas."
-  ],
-  "tautan": [
-    {"teks": "Beli akses penuh — kode langsung aktif", "url": "/beli/?src=artikel_blog&utm_source=artikel_blog&utm_medium=seo&utm_campaign=broadcast_instant"},
-    {"teks": "40 soal contoh gratis", "url": "/contoh/"},
-    {"teks": "Buka aplikasi latihan", "url": "/psikotes/"}
-  ],
-  "diperbarui": "19 Oktober 2026"
+ "slug": "bayar-qris-kode-langsung-aktif",
+ "judul_tab": "Beli Paket Psikotes: Bayar QRIS, Kode Langsung Aktif",
+ "deskripsi": "Cara beli paket latihan psikotes online tanpa ribet: bayar QRIS, tekan satu tombol, kode langsung tampil. Tanpa kirim bukti transfer, tanpa nunggu admin.",
+ "h1": "Bayar QRIS, Kode Akses Langsung Aktif — Tanpa Kirim Bukti, Tanpa Nunggu",
+ "dek": "Alur beli paket latihan psikotes yang seharusnya: satu pembayaran QRIS, satu tombol, kode akses langsung terbuka. Tidak ada kirim bukti transfer. Tidak ada menunggu balasan admin.",
+ "kata_kunci": "beli paket psikotes online, psikotes online QRIS, kode akses langsung aktif, beli soal psikotes TNI",
+ "pembuka": [
+  "Biasanya beli paket latihan psikotes online itu begini: transfer dulu, foto bukti transfer, kirim ke admin, lalu menunggu. Kalau adminnya sibuk atau sedang tidur, kode akses baru datang berjam-jam kemudian. Semangat latihan yang tadinya tinggi bisa habis duluan sebelum soalnya kebuka.",
+  "Di SiapPsikotes alurnya kami buat sependek mungkin. Bayar dengan QRIS, tekan tombol \"Saya sudah bayar — aktifkan kode\", dan kode akses langsung tampil di layar. Tidak ada langkah kirim bukti. Tidak ada menunggu balasan manusia.",
+  "Artikel ini menjelaskan alurnya langkah demi langkah, plus contoh soal dari bank soal yang sama dengan yang kamu dapat setelah beli."
+ ],
+ "bagian": [
+  {
+   "h2": "Alur beli: tiga langkah, selesai dalam hitungan detik",
+   "isi": [
+    "Pertama, buka halaman beli dan tekan tombol tampilkan kode QRIS. Bayar dengan aplikasi bank atau e-wallet apa pun yang bisa scan QRIS, seharga Rp 39.000 sekali bayar.",
+    "Kedua, setelah pembayaran selesai, kembali ke halaman yang sama dan tekan tombol \"Saya sudah bayar — aktifkan kode\".",
+    "Ketiga, kode akses langsung tampil. Tinggal salin, buka aplikasi latihan, dan masuk. Seluruh proses setelah tombol ditekan hanya butuh sekitar satu detik karena aktivasinya dikerjakan otomatis oleh server, bukan oleh admin yang mengetik manual."
+   ],
+   "poin": [
+    "Bayar QRIS Rp 39.000 sekali bayar.",
+    "Tekan \"Saya sudah bayar — aktifkan kode\".",
+    "Kode akses langsung tampil — tanpa kirim bukti transfer, tanpa nunggu."
+   ]
+  },
+  {
+   "h2": "Kenapa tidak perlu kirim bukti transfer",
+   "isi": [
+    "Setiap pesanan di halaman beli membawa penanda yang diikat ke pembayaranmu. Saat kamu menekan tombol aktivasi, server memeriksa pesanan itu dan membuka kode aksesnya otomatis. Pembayaran juga dipantau dari sisi server lewat kanal pembayaran resmi, jadi tidak ada langkah manusia yang perlu kamu tunggu.",
+    "Bagi kamu yang pernah terbakar pengalaman kirim bukti transfer lalu tidak ada kabar, alur ini memangkas semua risiko itu: tidak ada bukti yang bisa telat dibaca, tidak ada pesan yang bisa terlewat."
+   ]
+  },
+  {
+   "h2": "Contoh soal yang menantimu di dalam",
+   "isi": [
+    "Bank soal SiapPsikotes berisi 1.348 soal beserta pembahasan untuk sembilan modul tes, semuanya disusun dan diperiksa lewat pedoman mutu yang bisa kamu periksa sendiri. Sepuluh contoh soal numerik di bawah ini diambil langsung dari bank soal yang sama."
+   ],
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 10
+   }
+  },
+  {
+   "h2": "Yang kamu bayar dan yang kamu dapat",
+   "isi": [
+    "Rp 39.000 sekali bayar membuka seluruh 1.348 soal beserta pembahasannya di sembilan modul tes. Bukan langganan, tanpa perpanjangan otomatis. Satu pembayaran, satu kode akses, langsung pakai."
+   ],
+   "poin": [
+    "1.348 soal + pembahasan, 9 modul psikotes & IQ.",
+    "Rp 39.000 sekali bayar — bukan langganan.",
+    "Kode akses aktif otomatis setelah bayar QRIS."
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "t": "Apakah saya perlu kirim bukti transfer ke admin?",
+   "j": "Tidak. Setelah membayar QRIS, tekan tombol \"Saya sudah bayar — aktifkan kode\" di halaman beli. Kode akses langsung tampil tanpa kirim apa pun."
+  },
+  {
+   "t": "Berapa lama kode akses muncul setelah saya tekan tombolnya?",
+   "j": "Sekitar satu detik. Aktivasi dikerjakan otomatis oleh server, bukan oleh admin."
+  },
+  {
+   "t": "Metode pembayarannya apa saja?",
+   "j": "QRIS, jadi bisa dibayar dari aplikasi mobile banking atau e-wallet mana pun yang mendukung scan QRIS."
+  },
+  {
+   "t": "Apakah paket ini langganan bulanan?",
+   "j": "Bukan. Rp 39.000 sekali bayar, tanpa perpanjangan otomatis."
+  }
+ ],
+ "penutup": [
+  "Waktu persiapan lebih berharga daripada waktu menunggu kode akses. Bayar, tekan satu tombol, langsung latihan.",
+  "Kalau masih mau mencoba dulu, ada 40 soal contoh berpembahasan yang bisa dikerjakan gratis tanpa akun. Kalau sudah yakin, alur belinya cuma tiga langkah seperti di atas."
+ ],
+ "tautan": [
+  {
+   "teks": "Beli akses penuh — kode langsung aktif",
+   "url": "/beli/?src=artikel_blog&utm_source=blog-bayar-qris-kode-langsung-aktif&utm_medium=seo&utm_campaign=broadcast_instant"
+  },
+  {
+   "teks": "40 soal contoh gratis",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Buka aplikasi latihan",
+   "url": "/psikotes/"
+  }
+ ],
+ "diperbarui": "19 Oktober 2026",
+ "utm_source": "blog-bayar-qris-kode-langsung-aktif",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

@@ -46,7 +46,10 @@
    "isi": [
     "Kerjakan 15 soal berikut tanpa membuka pembahasan lebih dulu. Setelah menjawab, buka pembahasannya dan periksa alasanmu: kalau jawabanmu benar tetapi alasannya berbeda, baca alasan pembahasan - sering kali cara berpikir yang lebih singkat justru ada di situ. Catat juga waktu yang kamu pakai, lalu ulangi halaman ini beberapa hari kemudian; kecepatan naik paling terasa pada percobaan kedua dan ketiga."
    ],
-   "soal": {"kategori": "penalaran_logika", "jumlah": 15}
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 15
+   }
   },
   {
    "h2": "Kesalahan yang paling sering membuat nilai logika turun",
@@ -57,19 +60,43 @@
   }
  ],
  "faq": [
-  {"t": "Apakah soal logika psikotes selalu bentuknya sama?", "j": "Tidak selalu. Jenisnya berulang - silogisme, sebab akibat, analitis, pola - tetapi susunan dan tingkat kesulitannya berbeda antar penyelenggara. Latih variasi jenisnya supaya bentuk baru tidak membuatmu panik."},
-  {"t": "Berapa lama waktu yang wajar untuk satu soal logika?", "j": "Umumnya 40-60 detik per butir. Kalau lewat dari itu dan polanya belum terbaca, tandai dan pindah. Soal yang dilewati bisa dikerjakan setelah yang mudah aman."},
-  {"t": "Apakah menebak di soal logika dikenakan penalti?", "j": "Tergantung penyelenggara; ada yang mengurangi nilai untuk jawaban salah, ada yang tidak. Aturannya diumumkan di hari tes, jadi baca dulu sebelum memutuskan menebak."},
-  {"t": "Seberapa sering saya perlu berlatih?", "j": "Sepuluh sampai lima belas menit setiap hari lebih efektif daripada berjam-jam sekali seminggu. Pola soal logika menempel lewat pengulangan yang teratur, bukan lewat durasi panjang satu kali."}
+  {
+   "t": "Apakah soal logika psikotes selalu bentuknya sama?",
+   "j": "Tidak selalu. Jenisnya berulang - silogisme, sebab akibat, analitis, pola - tetapi susunan dan tingkat kesulitannya berbeda antar penyelenggara. Latih variasi jenisnya supaya bentuk baru tidak membuatmu panik."
+  },
+  {
+   "t": "Berapa lama waktu yang wajar untuk satu soal logika?",
+   "j": "Umumnya 40-60 detik per butir. Kalau lewat dari itu dan polanya belum terbaca, tandai dan pindah. Soal yang dilewati bisa dikerjakan setelah yang mudah aman."
+  },
+  {
+   "t": "Apakah menebak di soal logika dikenakan penalti?",
+   "j": "Tergantung penyelenggara; ada yang mengurangi nilai untuk jawaban salah, ada yang tidak. Aturannya diumumkan di hari tes, jadi baca dulu sebelum memutuskan menebak."
+  },
+  {
+   "t": "Seberapa sering saya perlu berlatih?",
+   "j": "Sepuluh sampai lima belas menit setiap hari lebih efektif daripada berjam-jam sekali seminggu. Pola soal logika menempel lewat pengulangan yang teratur, bukan lewat durasi panjang satu kali."
+  }
  ],
  "penutup": [
   "Kalau 15 soal di halaman ini terasa belum cukup, aplikasi latihan SiapPsikotes memuat lebih dari 1.300 soal dari semua kategori psikotes - logika, verbal, numerik, figural, sampai kepribadian - dengan pembahasan yang bisa dibuka setiap soal dan catatan kemajuan per kategori. Satu kali bayar untuk akses penuh, tanpa langganan.",
   "Mulailah dari yang paling sering keluar di seleksimu, kerjakan sedikit setiap hari, dan tinjau ulang soal yang salah. Itu rencana latihan yang paling sederhana - dan yang paling sering berhasil."
  ],
  "tautan": [
-  {"teks": "Contoh soal psikotes lainnya", "url": "/contoh/"},
-  {"teks": "Latihan psikotes 10 menit", "url": "/latihan-psikotes-10-menit/"},
-  {"teks": "Harga & cara beli", "url": "/beli/"}
+  {
+   "teks": "Contoh soal psikotes lainnya",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Latihan psikotes 10 menit",
+   "url": "/latihan-psikotes-10-menit/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  }
  ],
- "diperbarui": "20 Oktober 2026"
+ "diperbarui": "20 Oktober 2026",
+ "utm_source": "blog-contoh-soal-psikotes-logika",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

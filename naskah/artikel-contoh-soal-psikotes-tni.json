@@ -1,50 +1,96 @@
 {
-  "slug": "contoh-soal-psikotes-tni",
-  "judul_tab": "Contoh Soal Psikotes TNI & Jawabannya + Pembahasan Gratis",
-  "deskripsi": "80 contoh soal psikotes TNI: verbal, logika, numerik, matematika. Soal latihan gratis untuk persiapan tes seleksi TNI.",
-  "h1": "Contoh Soal Psikotes TNI dan Jawabannya (Latihan Gratis)",
-  "dek": "Kumpulan contoh soal psikotes TNI yang disusun dari bank soal SiapPsikotes. Soal bisa dikerjakan langsung dengan pembahasan tersembunyi.",
-  "kata_kunci": "contoh soal psikotes TNI dan jawabannya",
-  "pembuka": [
-    "Persiapan tes psikologi TNI menuntut latihan rutin pada empat pilar utama: verbal, logika, numerik, dan matematika. Latihan yang tepat bukan sekadar mengumpulkan kunci, melainkan memahami pola pikir dan manajemen waktu.",
-    "Halaman ini menyediakan contoh soal psikotes TNI gratis yang diambil dari bank soal yang sudah lolos verifikasi mutu. Tiap soal memiliki pembahasan langkah demi langkah sehingga kamu bisa mengevaluasi kesalahan."
-  ],
-  "bagian": [
-    {
-      "h2": "Mengapa latihan contoh soal penting untuk TNI",
-      "isi": ["Seleksi TNI menggunakan tes psikologi sebagai penyaring awal untuk menilai kemampuan kognitif dan stabilitas berpikir.","Latihan dengan batas waktu melatih konsentrasi dan ketahanan di bawah tekanan."],
-      "poin": ["Meningkatkan kecepatan membaca dan memahami instruksi.","Mengenali tipe soal yang sering muncul.","Melatih manajemen waktu dan kontrol stres."]
-    },
-    {
-      "h2": "Contoh soal verbal",
-      "isi": ["Soal sinonim, antonim, dan analogi untuk melatih pemahaman kata."],
-      "soal": {"jumlah":15,"kategori":"verbal"}
-    },
-    {
-      "h2": "Contoh soal logika",
-      "isi": ["Silogisme dan penalaran deduktif."],
-      "soal": {"jumlah":15,"kategori":"penalaran_logika"}
-    },
-    {
-      "h2": "Contoh soal numerik",
-      "isi": ["Deret angka dan operasi cepat."],
-      "soal": {"jumlah":15,"kategori":"numerik"}
-    },
-    {
-      "h2": "Contoh soal matematika",
-      "isi": ["Aritmetika, persentase, dan soal cerita."],
-      "soal": {"jumlah":15,"kategori":"matematika"}
-    }
-  ],
-  "penutup": ["Latihan secara konsisten lebih penting daripada sekadar menghafal pola. Gunakan SiapPsikotes untuk mengakses 1.348 soal terverifikasi."],
-  "faq": [
-    {"j":"Tidak. Ini latihan mandiri untuk persiapan seleksi, bukan berasal dari lembaga.","t":"Apakah soal ini berasal dari lembaga?"},
-    {"j":"Ya, contoh soal pada halaman ini dapat dikerjakan tanpa biaya.","t":"Apakah latihan gratis?"}
-  ],
-  "slug": "contoh-soal-psikotes-tni",
-  "tautan": [
-    {"teks":"Latihan soal psikotes gratis","url":"/latihan-psikotes-gratis-tni/"},
-    {"teks":"Mulai latihan penuh","url":"/contoh/"},
-    {"teks":"Beli akses latihan lengkap 39.000","url":"/beli/"}
-  ]
+ "slug": "contoh-soal-psikotes-tni",
+ "judul_tab": "Contoh Soal Psikotes TNI & Jawabannya + Pembahasan Gratis",
+ "deskripsi": "80 contoh soal psikotes TNI: verbal, logika, numerik, matematika. Soal latihan gratis untuk persiapan tes seleksi TNI.",
+ "h1": "Contoh Soal Psikotes TNI dan Jawabannya (Latihan Gratis)",
+ "dek": "Kumpulan contoh soal psikotes TNI yang disusun dari bank soal SiapPsikotes. Soal bisa dikerjakan langsung dengan pembahasan tersembunyi.",
+ "kata_kunci": "contoh soal psikotes TNI dan jawabannya",
+ "pembuka": [
+  "Persiapan tes psikologi TNI menuntut latihan rutin pada empat pilar utama: verbal, logika, numerik, dan matematika. Latihan yang tepat bukan sekadar mengumpulkan kunci, melainkan memahami pola pikir dan manajemen waktu.",
+  "Halaman ini menyediakan contoh soal psikotes TNI gratis yang diambil dari bank soal yang sudah lolos verifikasi mutu. Tiap soal memiliki pembahasan langkah demi langkah sehingga kamu bisa mengevaluasi kesalahan."
+ ],
+ "bagian": [
+  {
+   "h2": "Mengapa latihan contoh soal penting untuk TNI",
+   "isi": [
+    "Seleksi TNI menggunakan tes psikologi sebagai penyaring awal untuk menilai kemampuan kognitif dan stabilitas berpikir.",
+    "Latihan dengan batas waktu melatih konsentrasi dan ketahanan di bawah tekanan."
+   ],
+   "poin": [
+    "Meningkatkan kecepatan membaca dan memahami instruksi.",
+    "Mengenali tipe soal yang sering muncul.",
+    "Melatih manajemen waktu dan kontrol stres."
+   ]
+  },
+  {
+   "h2": "Contoh soal verbal",
+   "isi": [
+    "Soal sinonim, antonim, dan analogi untuk melatih pemahaman kata."
+   ],
+   "soal": {
+    "jumlah": 15,
+    "kategori": "verbal"
+   }
+  },
+  {
+   "h2": "Contoh soal logika",
+   "isi": [
+    "Silogisme dan penalaran deduktif."
+   ],
+   "soal": {
+    "jumlah": 15,
+    "kategori": "penalaran_logika"
+   }
+  },
+  {
+   "h2": "Contoh soal numerik",
+   "isi": [
+    "Deret angka dan operasi cepat."
+   ],
+   "soal": {
+    "jumlah": 15,
+    "kategori": "numerik"
+   }
+  },
+  {
+   "h2": "Contoh soal matematika",
+   "isi": [
+    "Aritmetika, persentase, dan soal cerita."
+   ],
+   "soal": {
+    "jumlah": 15,
+    "kategori": "matematika"
+   }
+  }
+ ],
+ "penutup": [
+  "Latihan secara konsisten lebih penting daripada sekadar menghafal pola. Gunakan SiapPsikotes untuk mengakses 1.348 soal terverifikasi."
+ ],
+ "faq": [
+  {
+   "j": "Tidak. Ini latihan mandiri untuk persiapan seleksi, bukan berasal dari lembaga.",
+   "t": "Apakah soal ini berasal dari lembaga?"
+  },
+  {
+   "j": "Ya, contoh soal pada halaman ini dapat dikerjakan tanpa biaya.",
+   "t": "Apakah latihan gratis?"
+  }
+ ],
+ "tautan": [
+  {
+   "teks": "Latihan soal psikotes gratis",
+   "url": "/latihan-psikotes-gratis-tni/"
+  },
+  {
+   "teks": "Mulai latihan penuh",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Beli akses latihan lengkap 39.000",
+   "url": "/beli/"
+  }
+ ],
+ "utm_source": "blog-contoh-soal-psikotes-tni",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

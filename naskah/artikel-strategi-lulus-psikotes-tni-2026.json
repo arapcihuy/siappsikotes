@@ -1,114 +1,117 @@
 {
-  "slug": "strategi-lulus-psikotes-tni-2026",
-  "judul_tab": "Strategi Lulus Psikotes TNI 2026: TIU, TWK, TKP & Simulasi",
-  "deskripsi": "Panduan strategi lulus psikotes TNI 2026: TIU verbal numerik logika, TWK wawasan kebangsaan, TKP kepribadian. Pola latihan 14 hari + contoh soal.",
-  "h1": "Strategi Lulus Psikotes TNI 2026: Dari Pola Soal Hingga Simulasi Waktu",
-  "dek": "Panduan praktis persiapan psikotes TNI 2026 dengan struktur TIU, TWK, TKP, pola latihan 14 hari, dan contoh soal terverifikasi dari bank SiapPsikotes.",
-  "kata_kunci": "psikotes TNI 2026, strategi lulus psikotes TNI, latihan psikotes TNI",
-  "pembuka": [
-    "Seleksi TNI 2026 memakai psikotes sebagai penyaring awal. Soal TIU menguji kecepatan berpikir, TWK menguji wawasan kebangsaan, TKP menilai konsistensi sikap. Banyak peserta gagal karena latihan tanpa batas waktu.",
-    "Artikel ini merangkum strategi terukur untuk persiapan psikotes TNI 2026: mengenali pola soal, manajemen waktu, dan simulasi penuh. Semua contoh soal diambil dari bank SiapPsikotes 1.348 soal terverifikasi."
-  ],
-  "bagian": [
-    {
-      "h2": "Struktur psikotes TNI 2026",
-      "isi": [
-        "TIU: verbal, numerik, logika. TWK: Pancasila, UUD 1945, sejarah, lembaga negara. TKP: pernyataan sikap kerja.",
-        "Waktu umum: TIU 60-90 menit untuk ~80-100 soal. TWK 45-60 menit untuk 40-60 soal. TKP 30 menit untuk 60-100 pernyataan."
-      ],
-      "poin": [
-        "TIU menguji kecepatan dan ketepatan.",
-        "TWK menguji hafalan faktual dan pemahaman.",
-        "TKP menilai konsistensi nilai TNI."
-      ]
-    },
-    {
-      "h2": "Pola latihan 14 hari",
-      "isi": [
-        "Hari 1-7: kenali pola, 25 soal campuran per hari dengan timer 20 menit.",
-        "Hari 8-14: fokus kecepatan, 1 sesi penuh tiap akhir pekan."
-      ],
-      "poin": [
-        "Catat jenis kesalahan, bukan jumlah.",
-        "Ulangi soal salah setelah 2-3 hari.",
-        "Sesi penuh tanpa jeda seminggu sekali."
-      ]
-    },
-    {
-      "h2": "Contoh soal verbal untuk TIU",
-      "isi": [
-        "Verbal menguji sinonim, antonim, analogi. Tentukan jenis hubungan dulu."
-      ],
-      "soal": {
-        "jumlah": 5,
-        "kategori": "verbal"
-      }
-    },
-    {
-      "h2": "Contoh soal numerik & deret angka",
-      "isi": [
-        "Deret angka: hitung selisih, cari pola kali/bagi."
-      ],
-      "soal": {
-        "jumlah": 5,
-        "kategori": "numerik"
-      }
-    },
-    {
-      "h2": "Contoh soal logika penalaran",
-      "isi": [
-        "Logika tidak butuh rumus, butuh ketelitian membaca premis."
-      ],
-      "soal": {
-        "jumlah": 5,
-        "kategori": "penalaran_logika"
-      }
-    },
-    {
-      "h2": "Contoh soal TWK wawasan kebangsaan",
-      "isi": [
-        "Fokus Pancasila, UUD 1945, lembaga negara."
-      ],
-      "soal": {
-        "jumlah": 5,
-        "kategori": "tkw"
-      }
-    },
-    {
-      "h2": "Mulai latihan sekarang",
-      "isi": [
-        "Coba 40 soal contoh gratis tanpa akun di halaman contoh.",
-        "Untuk latihan lengkap 1.348 soal + laporan, akses aplikasi Rp 39.000 sekali bayar."
-      ]
-    }
-  ],
-  "faq": [
-    {
-      "t": "Berapa hari ideal persiapan psikotes TNI?",
-      "j": "Minimal 2 minggu latihan terstruktur 25-30 soal per hari lebih efektif daripada marathon di akhir."
-    },
-    {
-      "t": "Apakah contoh soal di sini sama dengan soal ujian TNI?",
-      "j": "Tidak. Soal latihan karya penyusun sendiri untuk mengenali pola, bukan bocoran naskah resmi."
-    }
-  ],
-  "penutup": [
-    "Konsistensi mengalahkan intensitas sesaat. Latih dengan timer, ulangi kesalahan, lakukan simulasi penuh.",
-    "Mulai dari 40 soal contoh gratis, lalu naik ke bank soal lengkap jika siap serius."
-  ],
-  "tautan": [
-    {
-      "teks": "40 soal contoh gratis",
-      "url": "/contoh/"
-    },
-    {
-      "teks": "Buka aplikasi latihan",
-      "url": "/psikotes/"
-    },
-    {
-      "teks": "Harga & cara beli",
-      "url": "/beli/"
-    }
-  ],
-  "diperbarui": "17 Oktober 2026"
+ "slug": "strategi-lulus-psikotes-tni-2026",
+ "judul_tab": "Strategi Lulus Psikotes TNI 2026: TIU, TWK, TKP & Simulasi",
+ "deskripsi": "Panduan strategi lulus psikotes TNI 2026: TIU verbal numerik logika, TWK wawasan kebangsaan, TKP kepribadian. Pola latihan 14 hari + contoh soal.",
+ "h1": "Strategi Lulus Psikotes TNI 2026: Dari Pola Soal Hingga Simulasi Waktu",
+ "dek": "Panduan praktis persiapan psikotes TNI 2026 dengan struktur TIU, TWK, TKP, pola latihan 14 hari, dan contoh soal terverifikasi dari bank SiapPsikotes.",
+ "kata_kunci": "psikotes TNI 2026, strategi lulus psikotes TNI, latihan psikotes TNI",
+ "pembuka": [
+  "Seleksi TNI 2026 memakai psikotes sebagai penyaring awal. Soal TIU menguji kecepatan berpikir, TWK menguji wawasan kebangsaan, TKP menilai konsistensi sikap. Banyak peserta gagal karena latihan tanpa batas waktu.",
+  "Artikel ini merangkum strategi terukur untuk persiapan psikotes TNI 2026: mengenali pola soal, manajemen waktu, dan simulasi penuh. Semua contoh soal diambil dari bank SiapPsikotes 1.348 soal terverifikasi."
+ ],
+ "bagian": [
+  {
+   "h2": "Struktur psikotes TNI 2026",
+   "isi": [
+    "TIU: verbal, numerik, logika. TWK: Pancasila, UUD 1945, sejarah, lembaga negara. TKP: pernyataan sikap kerja.",
+    "Waktu umum: TIU 60-90 menit untuk ~80-100 soal. TWK 45-60 menit untuk 40-60 soal. TKP 30 menit untuk 60-100 pernyataan."
+   ],
+   "poin": [
+    "TIU menguji kecepatan dan ketepatan.",
+    "TWK menguji hafalan faktual dan pemahaman.",
+    "TKP menilai konsistensi nilai TNI."
+   ]
+  },
+  {
+   "h2": "Pola latihan 14 hari",
+   "isi": [
+    "Hari 1-7: kenali pola, 25 soal campuran per hari dengan timer 20 menit.",
+    "Hari 8-14: fokus kecepatan, 1 sesi penuh tiap akhir pekan."
+   ],
+   "poin": [
+    "Catat jenis kesalahan, bukan jumlah.",
+    "Ulangi soal salah setelah 2-3 hari.",
+    "Sesi penuh tanpa jeda seminggu sekali."
+   ]
+  },
+  {
+   "h2": "Contoh soal verbal untuk TIU",
+   "isi": [
+    "Verbal menguji sinonim, antonim, analogi. Tentukan jenis hubungan dulu."
+   ],
+   "soal": {
+    "jumlah": 5,
+    "kategori": "verbal"
+   }
+  },
+  {
+   "h2": "Contoh soal numerik & deret angka",
+   "isi": [
+    "Deret angka: hitung selisih, cari pola kali/bagi."
+   ],
+   "soal": {
+    "jumlah": 5,
+    "kategori": "numerik"
+   }
+  },
+  {
+   "h2": "Contoh soal logika penalaran",
+   "isi": [
+    "Logika tidak butuh rumus, butuh ketelitian membaca premis."
+   ],
+   "soal": {
+    "jumlah": 5,
+    "kategori": "penalaran_logika"
+   }
+  },
+  {
+   "h2": "Contoh soal TWK wawasan kebangsaan",
+   "isi": [
+    "Fokus Pancasila, UUD 1945, lembaga negara."
+   ],
+   "soal": {
+    "jumlah": 5,
+    "kategori": "tkw"
+   }
+  },
+  {
+   "h2": "Mulai latihan sekarang",
+   "isi": [
+    "Coba 40 soal contoh gratis tanpa akun di halaman contoh.",
+    "Untuk latihan lengkap 1.348 soal + laporan, akses aplikasi Rp 39.000 sekali bayar."
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "t": "Berapa hari ideal persiapan psikotes TNI?",
+   "j": "Minimal 2 minggu latihan terstruktur 25-30 soal per hari lebih efektif daripada marathon di akhir."
+  },
+  {
+   "t": "Apakah contoh soal di sini sama dengan soal ujian TNI?",
+   "j": "Tidak. Soal latihan karya penyusun sendiri untuk mengenali pola, bukan bocoran naskah resmi."
+  }
+ ],
+ "penutup": [
+  "Konsistensi mengalahkan intensitas sesaat. Latih dengan timer, ulangi kesalahan, lakukan simulasi penuh.",
+  "Mulai dari 40 soal contoh gratis, lalu naik ke bank soal lengkap jika siap serius."
+ ],
+ "tautan": [
+  {
+   "teks": "40 soal contoh gratis",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Buka aplikasi latihan",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  }
+ ],
+ "diperbarui": "17 Oktober 2026",
+ "utm_source": "blog-strategi-lulus-psikotes-tni-2026",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

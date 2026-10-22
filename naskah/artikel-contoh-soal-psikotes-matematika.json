@@ -36,15 +36,47 @@
     "Tujuh pola berikut mencakup sebagian besar deret yang muncul dalam latihan:"
    ],
    "tabel": {
-    "kepala": ["Pola", "Ciri mudah dikenali", "Contoh singkat"],
+    "kepala": [
+     "Pola",
+     "Ciri mudah dikenali",
+     "Contoh singkat"
+    ],
     "baris": [
-     ["Beda tetap", "Selisih antar suku selalu sama", "4, 9, 14, 19, 24 (selisih +5)"],
-     ["Beda bertingkat", "Selisihnya sendiri membentuk pola teratur", "2, 5, 10, 17, 26 (selisih +3, +5, +7, +9)"],
-     ["Perkalian tetap", "Setiap suku dikalikan atau dibagi angka yang sama", "3, 6, 12, 24, 48 (dikali 2)"],
-     ["Dua deret bergantian", "Suku ganjil dan suku genap punya aturan sendiri", "7, 20, 10, 40, 13, 80 (ganjil +3, genap dikali 2)"],
-     ["Bilangan kuadrat", "Suku mengikuti 1, 4, 9, 16, dan seterusnya", "1, 4, 9, 16, 25 (1x1, 2x2, 3x3, 4x4, 5x5)"],
-     ["Dua operasi bergantian", "Dikali lalu dikurangi, berulang", "5, 10, 8, 16, 14 (dikali 2, dikurangi 2)"],
-     ["Jumlah dua suku sebelumnya", "Tiap suku adalah jumlah dua suku di depannya", "2, 3, 5, 8, 13, 21"]
+     [
+      "Beda tetap",
+      "Selisih antar suku selalu sama",
+      "4, 9, 14, 19, 24 (selisih +5)"
+     ],
+     [
+      "Beda bertingkat",
+      "Selisihnya sendiri membentuk pola teratur",
+      "2, 5, 10, 17, 26 (selisih +3, +5, +7, +9)"
+     ],
+     [
+      "Perkalian tetap",
+      "Setiap suku dikalikan atau dibagi angka yang sama",
+      "3, 6, 12, 24, 48 (dikali 2)"
+     ],
+     [
+      "Dua deret bergantian",
+      "Suku ganjil dan suku genap punya aturan sendiri",
+      "7, 20, 10, 40, 13, 80 (ganjil +3, genap dikali 2)"
+     ],
+     [
+      "Bilangan kuadrat",
+      "Suku mengikuti 1, 4, 9, 16, dan seterusnya",
+      "1, 4, 9, 16, 25 (1x1, 2x2, 3x3, 4x4, 5x5)"
+     ],
+     [
+      "Dua operasi bergantian",
+      "Dikali lalu dikurangi, berulang",
+      "5, 10, 8, 16, 14 (dikali 2, dikurangi 2)"
+     ],
+     [
+      "Jumlah dua suku sebelumnya",
+      "Tiap suku adalah jumlah dua suku di depannya",
+      "2, 3, 5, 8, 13, 21"
+     ]
     ]
    },
    "catatan": "Contoh pada tabel adalah ilustrasi pola supaya mudah diingat, bukan soal yang harus dijawab. Pola yang sama kamu pakai saat mengerjakan blok soal di bawah. Satu catatan tambahan: tidak semua deret memakai aturan yang sama dari awal sampai akhir, jadi periksa selalu dua atau tiga suku terakhir sebelum memastikan pilihanmu."
@@ -54,7 +86,10 @@
    "isi": [
     "Berikut 15 soal matematika pilihan ganda. Kerjakan dulu tanpa membuka jawaban, lalu periksa dengan mengikuti langkah pada pembahasan. Kalau ada butir yang salah, tulis alasan kesalahannya - membaca penyebabnya satu kali lebih berguna daripada mengerjakan dua puluh soal baru tanpa koreksi. Catat juga waktu yang kamu pakai untuk melihat apakah kecepatanmu sudah sesuai target."
    ],
-   "soal": {"kategori": "matematika", "jumlah": 15}
+   "soal": {
+    "kategori": "matematika",
+    "jumlah": 15
+   }
   },
   {
    "h2": "Aritmetika dasar yang sering dipakai: persen, keuntungan, kecepatan",
@@ -85,14 +120,20 @@
    "isi": [
     "Soal numerik menuntut hal yang mirip dengan soal matematika, hanya saja porsi hitungan cepatnya lebih besar dan angkanya kadang disajikan dalam tabel. Setelah 15 soal tadi, lanjutkan dengan 10 soal berikut untuk menguji ketahanan konsentrasimu. Kalau di blok sebelumnya kamu berhenti beberapa kali, perhatikan di soal nomor berapa konsentrasimu mulai turun - itu informasi yang berguna untuk mengatur tempo di hari tes."
    ],
-   "soal": {"kategori": "numerik", "jumlah": 10}
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 10
+   }
   },
   {
    "h2": "Latihan logika: 8 soal penalaran",
    "isi": [
     "Penalaran dan logika lebih menguji cara berpikir daripada kecepatan menghitung: menyimpulkan, meneruskan pola, dan memeriksa pernyataan yang tampak benar tetapi belum tentu. Delapan soal berikut melengkapinya. Di bagian ini kamu akan lebih sering memakai logika bahasa daripada angka, jadi bacalah setiap opsi sampai habis sebelum memilih."
    ],
-   "soal": {"kategori": "penalaran_logika", "jumlah": 8}
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 8
+   }
   },
   {
    "h2": "Kesalahan umum dan cara menghindarinya",
@@ -157,10 +198,25 @@
   "Kalau ingin mencoba lebih dulu, 40 soal berpembahasan tersedia gratis tanpa akun di halaman contoh. Untuk latihan penuh, akses ke dalam aplikasi berisi 1.348 soal untuk 9 jenis tes dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar. SiapPsikotes bukan situs resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah; seluruh soal adalah karya penyusun sendiri untuk latihan, dan pembelian tidak menjamin kelulusan seleksi apa pun."
  ],
  "tautan": [
-  {"teks": "Latihan soal psikotes di aplikasi", "url": "/psikotes/"},
-  {"teks": "40 soal contoh gratis (tanpa akun)", "url": "/contoh/"},
-  {"teks": "Harga dan cara beli", "url": "/beli/"},
-  {"teks": "Mutu dan bukti pemeriksaan soal", "url": "/mutu/"}
+  {
+   "teks": "Latihan soal psikotes di aplikasi",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Harga dan cara beli",
+   "url": "/beli/"
+  },
+  {
+   "teks": "Mutu dan bukti pemeriksaan soal",
+   "url": "/mutu/"
+  }
  ],
- "diperbarui": "17 September 2026"
+ "diperbarui": "17 September 2026",
+ "utm_source": "blog-contoh-soal-psikotes-matematika",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

@@ -3,7 +3,7 @@
 Disusun 14 September 2026 dari `MARKETPLACE-LISTING.md`. Urutannya mengikuti kolom isian
 di platform, jadi cukup salin blok demi blok tanpa mencari di dokumen panjang.
 
-**Sebelum mulai:** siapkan 5 gambar di `~/pk-bisnis/gambar-marketplace/` (sudah jadi,
+**Sebelum mulai:** siapkan 5 gambar di `~/tni-belajar/aset-bisnis/gambar-marketplace/` (sudah jadi,
 1080x1080) dan satu kode akses cadangan dari `tools/kode-pembeli.py` untuk uji coba
 pembelian sendiri.
 
@@ -18,13 +18,13 @@ Angka = jumlah karakter (sudah dihitung).
 
 | # | Judul | Karakter |
 |---|-------|----------|
-| 1 | `Soal Psikotes Kerja Lengkap 1.225 + Pembahasan & Jawaban` | 56 |
-| 2 | `Latihan Psikotes Online 1.225 Soal + Tes IQ & Kepribadian` | 57 |
+| 1 | `Soal Psikotes Kerja Lengkap 1.348 + Pembahasan & Jawaban` | 56 |
+| 2 | `Latihan Psikotes Online 1.348 Soal + Tes IQ & Kepribadian` | 57 |
 | 3 | `Contoh Soal Psikotes Gambar & Logika + Pembahasan Jawaban` | 57 |
-| 4 | `Tes IQ Online + Psikotes Kerja 1.225 Soal, Bisa Offline` | 55 |
-| 5 | `Bank Soal Psikotes Kerja & Kedinasan 1.225 + Pembahasan` | 55 |
+| 4 | `Tes IQ Online + Psikotes Kerja 1.348 Soal, Bisa Offline` | 55 |
+| 5 | `Bank Soal Psikotes Kerja & Kedinasan 1.348 + Pembahasan` | 55 |
 | 6 | `Latihan Soal Psikotes Kerja + Tes Kepribadian Big Five` | 54 |
-| 7 | `Paket Latihan Psikotes Kerja 1.225 Soal: Logika & Gambar` | 56 |
+| 7 | `Paket Latihan Psikotes Kerja 1.348 Soal: Logika & Gambar` | 56 |
 | 8 | `Soal Psikotes Kerja dan Jawabannya + Tes IQ, Tanpa Akun` | 55 |
 
 **Cara memakai:** pakai #1 sebagai judul utama; sisanya jadi judul listing varian / toko kedua agar tidak
@@ -35,30 +35,30 @@ psikotes kedinasan, tanpa akun*). **Tidak ada** klaim "dijamin lolos", "soal asl
 
 ## 2. Kolom "Deskripsi Produk"
 
-> **LATIHAN PSIKOTES & TES IQ — 1.225 SOAL + PEMBAHASAN**
+> **LATIHAN PSIKOTES & TES IQ — 1.348 SOAL + PEMBAHASAN**
 >
 > Aplikasi latihan psikotes untuk persiapan seleksi kerja dan sekolah/instansi kedinasan. Semua soal
 > disusun sendiri dan disertai pembahasan. 40 soal berpembahasan bisa dicoba **gratis tanpa akun** di halaman contoh;
-> akses penuh 1.225 soal, 9 jenis tes, pembahasan, dan Laporan Lengkap **Rp 39.000 sekali bayar, bukan langganan**
+> akses penuh 1.348 soal, 9 jenis tes, pembahasan, dan Laporan Lengkap **Rp 39.000 sekali bayar, bukan langganan**
 > — tanpa akun, bisa dipakai offline.
 >
 > **APA YANG KAMU DAPAT**
-> • 1.225 soal psikotes + tes IQ + tes kepribadian Big Five
+> • 1.348 soal psikotes + tes IQ + tes kepribadian Big Five
 > • Pembahasan di setiap soal (bukan cuma kunci jawaban)
 > • Bisa dikerjakan berulang, tanpa perlu daftar akun
 > • Bisa dipakai offline setelah halaman terbuka
 > • Gratis dicoba: 40 soal berpembahasan di halaman contoh, tanpa akun
 >
 > **PRODUK INI: AKSES PENUH + "LAPORAN LENGKAP" (Rp 39.000)**
-> Pembelian ini membuka **seluruh materi di aplikasi** — 1.225 soal dalam 9 jenis tes beserta pembahasan —
+> Pembelian ini membuka **seluruh materi di aplikasi** — 1.348 soal dalam 9 jenis tes beserta pembahasan —
 > plus **Laporan Lengkap**: rangkuman hasil belajarmu, jawaban benar/salah, dan bahan belajar tambahan.
 > **Sekali bayar, bukan langganan** — tidak ada tagihan berulang.
 >
 > **CARA PAKAI (5 langkah)**
 > 1. Buka halaman aplikasi: https://siappsikotes.my.id/psikotes/
 > 2. Coba dulu **40 soal berpembahasan** di halaman contoh (gratis, tanpa akun).
-> 3. Jika ingin akses penuh (termasuk Laporan Lengkap): lakukan pembayaran **QRIS** sesuai nominal.
-> 4. Kirim **bukti pembayaran** lewat chat Shopee/Tokopedia (sertakan nomor pesanan).
+> 3. Jika ingin akses penuh (termasuk Laporan Lengkap): Checkout pesanan di marketplace ini (Rp 39.000).
+> 4. Setelah pembayaran tercatat, chat pesananmu — kode akses diteruskan ke chatmu.
 > 5. Kamu menerima **kode akses**, lalu masukkan kode itu di aplikasi untuk membuka seluruh materi + Laporan Lengkap.
 >
 > **CARA KIRIM KODE (pengiriman)**
@@ -133,15 +133,18 @@ dan tidak memakai soal/atribut resmi.
 
 **2. Apa bedanya yang gratis dan yang Rp 39.000?**
 Yang **gratis**: 40 soal berpembahasan di halaman contoh, tanpa akun. Yang kamu beli: **akses penuh aplikasi**
-— 1.225 soal, 9 jenis tes, pembahasan, dan Laporan Lengkap. Sekali bayar, bukan langganan.
+— 1.348 soal, 9 jenis tes, pembahasan, dan Laporan Lengkap. Sekali bayar, bukan langganan.
 
 **3. Langsung aktif setelah bayar?**
-Tidak. Kode dikirim **manual** oleh pemilik setelah bukti pembayaran kamu terima. Target ≤ 6 jam pada jam
-kerja (08.00–21.00 WIB).
+Untuk pesanan marketplace: tidak, kode dikirim **manual** lewat chat pesanan setelah pembayaran terbaca.
+Target ≤ 6 jam pada jam
+kerja (08.00–21.00 WIB). Catatan: kalau kamu beli **langsung di siappsikotes.my.id/beli/**, alurnya justru
+**bayar QRIS → kode langsung aktif otomatis** — tanpa chat, tanpa nunggu admin.
 
-**4. Kok tidak langsung otomatis?**
-Kami mengirim kode manual supaya tidak perlu server dan datamu tetap di perangkatmu sendiri. Jadi ada jeda
-pengiriman, dan kami tulis apa adanya.
+**4. Kok di sini tidak langsung otomatis?**
+Kanal marketplace memang dijalankan manual (bayar di marketplace → kode diteruskan ke chat pesanan) supaya
+tidak ada server tambahan dan datamu tetap di perangkatmu sendiri. Jeda ini kami tulis apa adanya — dan bila
+kamu ingin yang instannya, beli langsung di siappsikotes.my.id/beli/ (bayar QRIS, kode langsung aktif).
 
 **5. Kalau kodenya tidak bisa dipakai?**
 Kalau gagal karena kesalahan kami, kode **diganti**. Kami tidak menyediakan refund setelah kode dikirim
@@ -174,8 +177,9 @@ menjanjikan kelulusan — ini alat latihan untuk mengukur dan melatih dirimu.
 > • Coba dulu **40 soal berpembahasan gratis** (tanpa akun): https://siappsikotes.my.id/contoh/
 > • Bisa **tanpa akun** & **offline**
 >
-> **Sudah mau beli?** Lakukan pembayaran QRIS, lalu kirim **bukti pembayaran + nomor pesanan** di chat ini.
-> Kode akses dikirim **manual**, target **≤ 6 jam pada jam kerja (08.00–21.00 WIB)**.
+> **Sudah mau beli?** Checkout langsung di marketplace ini (Rp 39.000). Setelah pembayaran tercatat, chat
+> pesananmu — kode akses diteruskan manual, target **≤ 6 jam pada jam kerja (08.00–21.00 WIB)**.
+> Mau yang cara lebih cepat: beli langsung di https://siappsikotes.my.id/beli/ (QRIS, kode langsung aktif).
 >
 > Mohon dicatat: **kode tidak bisa dikembalikan / refund setelah dikirim.** Kalau mau, coba dulu 40 soal
 > berpembahasan di halaman contoh. Ada pertanyaan lain? Balas chat ini, kami bantu 🙂

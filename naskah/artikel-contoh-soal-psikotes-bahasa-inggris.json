@@ -30,11 +30,27 @@
     "Ketiga bentuk ini bergiliran muncul. Peserta yang berlatih dengan waktu akan cepat mengenali bentuk soal sebelum membaca seluruh pilihan, sehingga waktu tersisa lebih banyak untuk soal yang benar-benar sulit."
    ],
    "tabel": {
-    "kepala": ["Bentuk soal", "Yang diminta", "Cara cepat"],
+    "kepala": [
+     "Bentuk soal",
+     "Yang diminta",
+     "Cara cepat"
+    ],
     "baris": [
-     ["Melengkapi kalimat", "Memilih kata atau bentuk kata kerja yang tepat", "Tentukan dulu waktu kejadian dari penanda seperti yesterday, since, atau by the time"],
-     ["Padanan dan lawan kata", "Memilih kata yang maknanya paling dekat atau paling berlawanan", "Baca kata itu di dalam kalimat, jangan sebagai kata lepas"],
-     ["Pemahaman bacaan", "Menjawab pertanyaan dari paragraf pendek", "Baca pertanyaannya lebih dulu, lalu cari kalimat yang memuat jawabannya"]
+     [
+      "Melengkapi kalimat",
+      "Memilih kata atau bentuk kata kerja yang tepat",
+      "Tentukan dulu waktu kejadian dari penanda seperti yesterday, since, atau by the time"
+     ],
+     [
+      "Padanan dan lawan kata",
+      "Memilih kata yang maknanya paling dekat atau paling berlawanan",
+      "Baca kata itu di dalam kalimat, jangan sebagai kata lepas"
+     ],
+     [
+      "Pemahaman bacaan",
+      "Menjawab pertanyaan dari paragraf pendek",
+      "Baca pertanyaannya lebih dulu, lalu cari kalimat yang memuat jawabannya"
+     ]
     ]
    },
    "catatan": "Bila satu soal memakan lebih dari satu menit, tandai dan lanjut. Soal bahasa Inggris biasanya berbobot sama dengan soal lain."
@@ -71,7 +87,10 @@
    "isi": [
     "Kerjakan lima belas soal berikut tanpa membuka pembahasan lebih dulu. Catat nomor yang salah, lalu kerjakan soal serupa di aplikasi agar polanya terlatih."
    ],
-   "soal": {"kategori": "bahasa_inggris", "jumlah": 15},
+   "soal": {
+    "kategori": "bahasa_inggris",
+    "jumlah": 15
+   },
    "catatan": "Soal diambil dari bank soal SiapPsikotes tanpa diubah. Pembahasan menampilkan alasan pemilihan jawaban, bukan hanya kuncinya."
   },
   {
@@ -86,23 +105,56 @@
   }
  ],
  "faq": [
-  {"t": "Berapa jumlah soal bahasa Inggris dalam psikotes kerja?", "j": "Bergantung penyelenggara. Di banyak seleksi, bahasa Inggris menjadi bagian dari satu paket tes dengan 20 sampai 50 soal. Yang tetap sama adalah bentuk soalnya: melengkapi kalimat, kosakata, dan pemahaman bacaan."},
-  {"t": "Apakah kosakata kedinasan perlu dihafal?", "j": "Untuk seleksi kedinasan, sebagian soal memakai istilah seperti deploy, convoy, reconnaissance, dan logistics. Kata itu jarang muncul di percakapan sehari-hari, jadi layak dikenali, tetapi tetap dipelajari di dalam kalimat."},
-  {"t": "Bagaimana cara cepat menebak kata yang belum dikenal?", "j": "Perhatikan jenis katanya di dalam kalimat, lalu perhatikan kata di sekitarnya. Bila kata yang dicari menempati posisi kata kerja setelah subjek, pilihan yang bukan kata kerja bisa langsung dibuang."},
-  {"t": "Apakah latihan dengan waktu benar-benar berpengaruh?", "j": "Berpengaruh pada ketenangan. Peserta yang sudah terbiasa membaca pertanyaan lebih dulu biasanya menyelesaikan bacaan lebih cepat karena tahu kalimat mana yang perlu dicari."},
-  {"t": "Di mana bisa berlatih lebih banyak soal bahasa Inggris?", "j": "Bank soal SiapPsikotes memuat soal bahasa Inggris lengkap dengan pembahasan. Sebagian bisa dicoba gratis di halaman 40 soal contoh, dan akses penuh dibuka sekali bayar tanpa langganan."}
+  {
+   "t": "Berapa jumlah soal bahasa Inggris dalam psikotes kerja?",
+   "j": "Bergantung penyelenggara. Di banyak seleksi, bahasa Inggris menjadi bagian dari satu paket tes dengan 20 sampai 50 soal. Yang tetap sama adalah bentuk soalnya: melengkapi kalimat, kosakata, dan pemahaman bacaan."
+  },
+  {
+   "t": "Apakah kosakata kedinasan perlu dihafal?",
+   "j": "Untuk seleksi kedinasan, sebagian soal memakai istilah seperti deploy, convoy, reconnaissance, dan logistics. Kata itu jarang muncul di percakapan sehari-hari, jadi layak dikenali, tetapi tetap dipelajari di dalam kalimat."
+  },
+  {
+   "t": "Bagaimana cara cepat menebak kata yang belum dikenal?",
+   "j": "Perhatikan jenis katanya di dalam kalimat, lalu perhatikan kata di sekitarnya. Bila kata yang dicari menempati posisi kata kerja setelah subjek, pilihan yang bukan kata kerja bisa langsung dibuang."
+  },
+  {
+   "t": "Apakah latihan dengan waktu benar-benar berpengaruh?",
+   "j": "Berpengaruh pada ketenangan. Peserta yang sudah terbiasa membaca pertanyaan lebih dulu biasanya menyelesaikan bacaan lebih cepat karena tahu kalimat mana yang perlu dicari."
+  },
+  {
+   "t": "Di mana bisa berlatih lebih banyak soal bahasa Inggris?",
+   "j": "Bank soal SiapPsikotes memuat soal bahasa Inggris lengkap dengan pembahasan. Sebagian bisa dicoba gratis di halaman 40 soal contoh, dan akses penuh dibuka sekali bayar tanpa langganan."
+  }
  ],
  "penutup": [
   "Nilai bahasa Inggris dibangun dari kebiasaan kecil: membaca pertanyaan lebih dulu, memakai penanda waktu, dan tidak menerjemahkan paragraf yang tidak ditanyakan. Kebiasaan itu hanya terbentuk kalau latihannya diukur dengan waktu.",
   "Mulailah dari lima belas soal di halaman ini, catat nomor yang salah, lalu ulangi besok. Dua pekan dengan pola itu biasanya lebih terasa daripada satu malam menghafal daftar kosakata."
  ],
  "tautan": [
-  {"teks": "Latihan bahasa Inggris di aplikasi", "url": "/psikotes/"},
-  {"teks": "Contoh soal psikotes kepribadian", "url": "/contoh-soal-psikotes-kepribadian/"},
-  {"teks": "40 soal contoh gratis (tanpa akun)", "url": "/contoh/"},
-  {"teks": "Contoh soal psikotes kerja dan jawabannya", "url": "/contoh-soal-psikotes-kerja/"},
-  {"teks": "Harga dan cara beli", "url": "/beli/"}
+  {
+   "teks": "Latihan bahasa Inggris di aplikasi",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Contoh soal psikotes kepribadian",
+   "url": "/contoh-soal-psikotes-kepribadian/"
+  },
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Contoh soal psikotes kerja dan jawabannya",
+   "url": "/contoh-soal-psikotes-kerja/"
+  },
+  {
+   "teks": "Harga dan cara beli",
+   "url": "/beli/"
+  }
  ],
  "tanggal_terbit": "2026-09-21",
- "diperbarui": "21 September 2026"
+ "diperbarui": "21 September 2026",
+ "utm_source": "blog-contoh-soal-psikotes-bahasa-inggris",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

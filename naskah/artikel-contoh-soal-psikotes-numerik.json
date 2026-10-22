@@ -34,14 +34,42 @@
     "Enam pola berikut menutup sebagian besar deret yang muncul dalam latihan:"
    ],
    "tabel": {
-    "kepala": ["Pola", "Ciri mudah dikenali", "Contoh singkat"],
+    "kepala": [
+     "Pola",
+     "Ciri mudah dikenali",
+     "Contoh singkat"
+    ],
     "baris": [
-     ["Beda tetap", "Selisih antar suku selalu sama", "3, 8, 13, 18, 23 (selisih +5)"],
-     ["Beda bertingkat", "Selisihnya sendiri membentuk pola", "1, 4, 9, 16, 25 (selisih 3, 5, 7, 9)"],
-     ["Perkalian tetap", "Setiap suku dikali angka yang sama", "2, 6, 18, 54 (dikali 3)"],
-     ["Dua deret bergantian", "Suku ganjil dan genap punya aturan sendiri", "5, 10, 8, 16, 11, 22 (ganjil +3, genap x2)"],
-     ["Operasi bergantian", "Dikali lalu dikurangi, berulang", "4, 12, 9, 27, 22 (x3 lalu -3)"],
-     ["Kuadrat dan pangkat", "Suku mengikuti kuadrat bilangan", "1, 4, 9, 16, 25 (1x1, 2x2, 3x3)"]
+     [
+      "Beda tetap",
+      "Selisih antar suku selalu sama",
+      "3, 8, 13, 18, 23 (selisih +5)"
+     ],
+     [
+      "Beda bertingkat",
+      "Selisihnya sendiri membentuk pola",
+      "1, 4, 9, 16, 25 (selisih 3, 5, 7, 9)"
+     ],
+     [
+      "Perkalian tetap",
+      "Setiap suku dikali angka yang sama",
+      "2, 6, 18, 54 (dikali 3)"
+     ],
+     [
+      "Dua deret bergantian",
+      "Suku ganjil dan genap punya aturan sendiri",
+      "5, 10, 8, 16, 11, 22 (ganjil +3, genap x2)"
+     ],
+     [
+      "Operasi bergantian",
+      "Dikali lalu dikurangi, berulang",
+      "4, 12, 9, 27, 22 (x3 lalu -3)"
+     ],
+     [
+      "Kuadrat dan pangkat",
+      "Suku mengikuti kuadrat bilangan",
+      "1, 4, 9, 16, 25 (1x1, 2x2, 3x3)"
+     ]
     ]
    },
    "catatan": "Tabel di atas adalah ilustrasi pola, bukan soal yang harus dijawab. Periksa selalu dua sampai tiga suku terakhir sebelum memastikan polamu, karena tidak semua deret memakai satu aturan dari awal sampai akhir."
@@ -65,14 +93,20 @@
    "isi": [
     "Kerjakan 15 soal berikut dengan batas 45 detik per soal. Jangan buka pembahasan sebelum menjawab. Setelah selesai, buka pembahasan soal yang salah lebih dulu, lalu soal yang kamu tandai - membaca penyebab kesalahan satu kali lebih berguna daripada mengerjakan dua puluh soal baru tanpa koreksi."
    ],
-   "soal": {"kategori": "numerik", "jumlah": 15}
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 15
+   }
   },
   {
    "h2": "Latihan: 10 soal cerita matematika",
    "isi": [
     "Sepuluh soal berikut berbentuk cerita: untung rugi, kecepatan, dan pekerjaan. Pola pengerjaannya selalu sama - tulis yang diketahui, tulis hubungan antarangka yang dipakai, hitung, lalu periksa apakah hasilnya masuk akal. Soal cerita yang dikerjakan dengan urutan itu hampir selalu lebih cepat daripada yang dikerjakan sambil membaca ulang."
    ],
-   "soal": {"kategori": "matematika", "jumlah": 10}
+   "soal": {
+    "kategori": "matematika",
+    "jumlah": 10
+   }
   },
   {
    "h2": "Kesalahan yang paling mahal di tes numerik",
@@ -83,19 +117,43 @@
   }
  ],
  "faq": [
-  {"t": "Apakah tes numerik psikotes sulit?", "j": "Tingkat hitungannya dasar - persen, perbandingan, deret, soal cerita. Yang membuatnya terasa sulit adalah batas waktu per butir yang ketat dan jumlah soalnya. Keduanya bisa diatasi dengan latihan rutin dan batas waktu latihan."},
-  {"t": "Bolehkah memakai kalkulator saat psikotes numerik?", "j": "Umumnya tidak boleh. Kertas coretan biasanya diperbolehkan dan justru menjadi alat utamamu. Biasakan menghitung dengan tulisan sejak latihan supaya terbiasa saat tes."},
-  {"t": "Bagaimana cara cepat mengerjakan deret angka?", "j": "Tulis selisih antar suku di atas angkanya. Kalau selisihnya tetap, polanya ketemu; kalau tidak, periksa apakah selisih itu sendiri berpola, lalu cek apakah suku ganjil dan genap punya aturan masing-masing."},
-  {"t": "Apakah menebak dikenakan pengurangan nilai?", "j": "Tergantung penyelenggara - ada yang mengurangi nilai jawaban salah, ada yang tidak. Aturannya diumumkan di hari tes. Baca instruksi sebelum memutuskan menebak soal yang tidak kamu pahami."}
+  {
+   "t": "Apakah tes numerik psikotes sulit?",
+   "j": "Tingkat hitungannya dasar - persen, perbandingan, deret, soal cerita. Yang membuatnya terasa sulit adalah batas waktu per butir yang ketat dan jumlah soalnya. Keduanya bisa diatasi dengan latihan rutin dan batas waktu latihan."
+  },
+  {
+   "t": "Bolehkah memakai kalkulator saat psikotes numerik?",
+   "j": "Umumnya tidak boleh. Kertas coretan biasanya diperbolehkan dan justru menjadi alat utamamu. Biasakan menghitung dengan tulisan sejak latihan supaya terbiasa saat tes."
+  },
+  {
+   "t": "Bagaimana cara cepat mengerjakan deret angka?",
+   "j": "Tulis selisih antar suku di atas angkanya. Kalau selisihnya tetap, polanya ketemu; kalau tidak, periksa apakah selisih itu sendiri berpola, lalu cek apakah suku ganjil dan genap punya aturan masing-masing."
+  },
+  {
+   "t": "Apakah menebak dikenakan pengurangan nilai?",
+   "j": "Tergantung penyelenggara - ada yang mengurangi nilai jawaban salah, ada yang tidak. Aturannya diumumkan di hari tes. Baca instruksi sebelum memutuskan menebak soal yang tidak kamu pahami."
+  }
  ],
  "penutup": [
   "Kalau 25 soal di halaman ini masih terasa kurang, aplikasi latihan SiapPsikotes memuat lebih dari 1.300 soal dari semua kategori - numerik, matematika, verbal, logika, figural, hingga kepribadian - dengan pembahasan tiap soal dan catatan kemajuan per kategori. Satu kali bayar untuk akses penuh, tanpa langganan.",
   "Kerjakan sedikit setiap hari, catat waktumu, dan tinjau soal yang salah. Kecepatan numerik bukan bakat - hasil pengulangan yang teratur."
  ],
  "tautan": [
-  {"teks": "Contoh soal psikotes lainnya", "url": "/contoh/"},
-  {"teks": "Contoh soal psikotes matematika", "url": "/contoh-soal-psikotes-matematika/"},
-  {"teks": "Harga & cara beli", "url": "/beli/"}
+  {
+   "teks": "Contoh soal psikotes lainnya",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Contoh soal psikotes matematika",
+   "url": "/contoh-soal-psikotes-matematika/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  }
  ],
- "diperbarui": "20 Oktober 2026"
+ "diperbarui": "20 Oktober 2026",
+ "utm_source": "blog-contoh-soal-psikotes-numerik",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

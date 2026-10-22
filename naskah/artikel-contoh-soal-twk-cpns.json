@@ -32,13 +32,31 @@
     "Tabel berikut merangkum materi itu beserta bentuk soal yang paling sering muncul:"
    ],
    "tabel": {
-    "kepala": ["Materi", "Yang biasanya ditanyakan"],
+    "kepala": [
+     "Materi",
+     "Yang biasanya ditanyakan"
+    ],
     "baris": [
-     ["Nasionalisme", "Sikap cinta tanah air, rela berkorban, dan menjaga persatuan; sering muncul sebagai pilihan sikap atas sebuah peristiwa atau berita."],
-     ["Integritas", "Kejujuran, konsistensi antara ucapan dan perbuatan, serta tanggung jawab atas tugas yang sedang dipegang."],
-     ["Bela negara", "Kesadaran berbangsa dan bernegara, termasuk bentuk bela negara yang bisa dilakukan warga sipil dalam kehidupan sehari-hari."],
-     ["Pilar negara", "Pancasila, UUD 1945, Bhinneka Tunggal Ika, dan Negara Kesatuan Republik Indonesia, termasuk lembaga negara dan hubungan antarlembaga."],
-     ["Bahasa Indonesia", "Gagasan utama, makna kata, kalimat efektif, dan ejaan; paling cepat dikerjakan kalau kamu terbiasa membaca teks pendek dengan teliti."]
+     [
+      "Nasionalisme",
+      "Sikap cinta tanah air, rela berkorban, dan menjaga persatuan; sering muncul sebagai pilihan sikap atas sebuah peristiwa atau berita."
+     ],
+     [
+      "Integritas",
+      "Kejujuran, konsistensi antara ucapan dan perbuatan, serta tanggung jawab atas tugas yang sedang dipegang."
+     ],
+     [
+      "Bela negara",
+      "Kesadaran berbangsa dan bernegara, termasuk bentuk bela negara yang bisa dilakukan warga sipil dalam kehidupan sehari-hari."
+     ],
+     [
+      "Pilar negara",
+      "Pancasila, UUD 1945, Bhinneka Tunggal Ika, dan Negara Kesatuan Republik Indonesia, termasuk lembaga negara dan hubungan antarlembaga."
+     ],
+     [
+      "Bahasa Indonesia",
+      "Gagasan utama, makna kata, kalimat efektif, dan ejaan; paling cepat dikerjakan kalau kamu terbiasa membaca teks pendek dengan teliti."
+     ]
     ]
    },
    "catatan": "Materi yang paling sering diremehkan peserta adalah bahasa Indonesia, karena dianggap mudah. Padahal soal jenis ini memakan waktu paling sedikit bila dilatih, dan tambahan nilainya sama nilainya dengan soal Pancasila yang jauh lebih sulit."
@@ -50,12 +68,27 @@
     "Nilai SKD adalah gabungan dari tiga subtes, sementara ambang batas dinilai per subtes dan ditetapkan pada pengumuman seleksi tahun berjalan. Karena angkanya berubah tiap tahun, tidak ada gunanya menghafal ambang batas tahun lama; yang lebih berguna adalah mengukur berapa banyak jawaban benar yang bisa kamu kumpulkan dalam tempo yang sama."
    ],
    "tabel": {
-    "kepala": ["Pertanyaan", "Jawaban singkat"],
+    "kepala": [
+     "Pertanyaan",
+     "Jawaban singkat"
+    ],
     "baris": [
-     ["Apakah jawaban salah mengurangi nilai?", "Tidak. Jawaban salah dan nomor kosong sama-sama tidak menambah nilai."],
-     ["Lebih baik menebak atau mengosongkan?", "Menebak. Tanpa nilai minus, menebak selalu memberi peluang menambah nilai."],
-     ["Apakah nilai tiga subtes digabung?", "Ya. Nilai SKD adalah gabungan TWK, TIU, dan TKP, sementara ambang batas dinilai per subtes."],
-     ["Apakah ambang batas tetap?", "Tidak. Angka ambang batas ditetapkan pada pengumuman seleksi tahun berjalan dan bisa berubah."]
+     [
+      "Apakah jawaban salah mengurangi nilai?",
+      "Tidak. Jawaban salah dan nomor kosong sama-sama tidak menambah nilai."
+     ],
+     [
+      "Lebih baik menebak atau mengosongkan?",
+      "Menebak. Tanpa nilai minus, menebak selalu memberi peluang menambah nilai."
+     ],
+     [
+      "Apakah nilai tiga subtes digabung?",
+      "Ya. Nilai SKD adalah gabungan TWK, TIU, dan TKP, sementara ambang batas dinilai per subtes."
+     ],
+     [
+      "Apakah ambang batas tetap?",
+      "Tidak. Angka ambang batas ditetapkan pada pengumuman seleksi tahun berjalan dan bisa berubah."
+     ]
     ]
    },
    "catatan": "Aturan di atas berlaku pada format SKD yang dipakai beberapa tahun terakhir. Kalau penyelenggara mengubah format, pembobotan, atau jumlah soal, ikuti ketentuan tahun berjalan dan jangan berpatokan pada pengalaman orang yang ikut ujian beberapa tahun lalu."
@@ -106,15 +139,47 @@
     "Dua pekan cukup untuk mengenali pola soal TWK, asalkan latihannya dipecah dan diukur. Susunan berikut bisa dipakai apa adanya, lalu disesuaikan dengan waktu yang kamu punya:"
    ],
    "tabel": {
-    "kepala": ["Hari", "Fokus", "Keluaran yang terlihat"],
+    "kepala": [
+     "Hari",
+     "Fokus",
+     "Keluaran yang terlihat"
+    ],
     "baris": [
-     ["1 sampai 2", "Pilar negara: Pancasila dan UUD 1945", "Ringkasan seperempat halaman, ditulis dengan bahasa sendiri"],
-     ["3 sampai 4", "Bhinneka Tunggal Ika dan NKRI", "Daftar contoh sikap menjaga keberagaman di lingkungan sendiri"],
-     ["5 sampai 6", "Bela negara dan nasionalisme", "Sepuluh contoh tindakan sehari-hari yang bisa dilakukan warga sipil"],
-     ["7", "Ulangi soal yang salah", "Kumpulan kesalahan sendiri, bukan soal baru"],
-     ["8 sampai 9", "Integritas dan sikap", "Sepuluh contoh dilema dan pilihan sikap yang paling sejalan"],
-     ["10 sampai 11", "Bahasa Indonesia", "Latihan gagasan utama dan kalimat efektif"],
-     ["12 sampai 14", "Set latihan berpacu waktu", "Catatan jumlah benar dan sisa waktu tiap set"]
+     [
+      "1 sampai 2",
+      "Pilar negara: Pancasila dan UUD 1945",
+      "Ringkasan seperempat halaman, ditulis dengan bahasa sendiri"
+     ],
+     [
+      "3 sampai 4",
+      "Bhinneka Tunggal Ika dan NKRI",
+      "Daftar contoh sikap menjaga keberagaman di lingkungan sendiri"
+     ],
+     [
+      "5 sampai 6",
+      "Bela negara dan nasionalisme",
+      "Sepuluh contoh tindakan sehari-hari yang bisa dilakukan warga sipil"
+     ],
+     [
+      "7",
+      "Ulangi soal yang salah",
+      "Kumpulan kesalahan sendiri, bukan soal baru"
+     ],
+     [
+      "8 sampai 9",
+      "Integritas dan sikap",
+      "Sepuluh contoh dilema dan pilihan sikap yang paling sejalan"
+     ],
+     [
+      "10 sampai 11",
+      "Bahasa Indonesia",
+      "Latihan gagasan utama dan kalimat efektif"
+     ],
+     [
+      "12 sampai 14",
+      "Set latihan berpacu waktu",
+      "Catatan jumlah benar dan sisa waktu tiap set"
+     ]
     ]
    },
    "catatan": "Yang menentukan bukan berapa lama kamu membaca, melainkan berapa banyak soal yang kamu selesaikan dan periksa ulang. Satu set tiga puluh soal yang dibahas sampai habis lebih berguna daripada tiga jam membaca tanpa pernah diuji."
@@ -169,5 +234,8 @@
   }
  ],
  "tanggal_terbit": "2026-09-21",
- "diperbarui": "21 September 2026"
+ "diperbarui": "21 September 2026",
+ "utm_source": "blog-contoh-soal-twk-cpns",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

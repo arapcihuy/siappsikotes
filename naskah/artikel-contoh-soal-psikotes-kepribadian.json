@@ -31,12 +31,32 @@
     "Situasi di bawah ini berulang di banyak tes kepribadian, baik untuk seleksi kedinasan maupun perusahaan. Perhatikan bahwa jawaban yang dipilih selalu berupa tindakan, bukan perasaan."
    ],
    "tabel": {
-    "kepala": ["Situasi", "Yang diuji", "Arah jawaban yang wajar"],
+    "kepala": [
+     "Situasi",
+     "Yang diuji",
+     "Arah jawaban yang wajar"
+    ],
     "baris": [
-     ["Konflik dengan atasan", "Cara menyampaikan keberatan", "Tetap sopan, cari waktu bicara, tanyakan cara kerja yang diharapkan"],
-     ["Beban kerja menumpuk", "Cara menentukan prioritas", "Urutkan menurut tenggat dan dampak, lalu laporkan bila waktu memang tidak cukup"],
-     ["Rekan melakukan kesalahan", "Kesetiaan pada hasil kerja", "Bicarakan langsung dengan rekan, bantu perbaiki, laporkan bila berulang"],
-     ["Perintah yang meragukan", "Kepatuhan pada aturan", "Tanyakan maksudnya lebih dulu, jalankan bila sah, tolak dengan alasan bila melanggar aturan"]
+     [
+      "Konflik dengan atasan",
+      "Cara menyampaikan keberatan",
+      "Tetap sopan, cari waktu bicara, tanyakan cara kerja yang diharapkan"
+     ],
+     [
+      "Beban kerja menumpuk",
+      "Cara menentukan prioritas",
+      "Urutkan menurut tenggat dan dampak, lalu laporkan bila waktu memang tidak cukup"
+     ],
+     [
+      "Rekan melakukan kesalahan",
+      "Kesetiaan pada hasil kerja",
+      "Bicarakan langsung dengan rekan, bantu perbaiki, laporkan bila berulang"
+     ],
+     [
+      "Perintah yang meragukan",
+      "Kepatuhan pada aturan",
+      "Tanyakan maksudnya lebih dulu, jalankan bila sah, tolak dengan alasan bila melanggar aturan"
+     ]
     ]
    },
    "catatan": "Perhatikan kata kunci di pertanyaan seperti paling mungkin, pertama, atau sebaiknya. Kata itu menentukan apakah kamu diminta memilih satu tindakan atau menyusun urutan tindakan."
@@ -71,7 +91,10 @@
    "isi": [
     "Kerjakan tanpa melihat pembahasan lebih dulu. Setelah selesai, baca pembahasannya dan bandingkan alasanmu dengan alasan yang tertulis; yang dilatih adalah cara berpikirnya, bukan hafalannya."
    ],
-   "soal": {"kategori": "kepribadian", "jumlah": 15},
+   "soal": {
+    "kategori": "kepribadian",
+    "jumlah": 15
+   },
    "catatan": "Soal diambil apa adanya dari bank soal SiapPsikotes. Pembahasan memuat alasan pemilihan jawaban menurut sudut pandang seleksi kedinasan."
   },
   {
@@ -86,23 +109,56 @@
   }
  ],
  "faq": [
-  {"t": "Apakah soal kepribadian punya jawaban benar dan salah?", "j": "Tidak dalam arti hitungan. Yang ada adalah jawaban yang lebih sesuai dengan tuntutan jabatan. Karena itu pembahasan di halaman ini menjelaskan alasan pemilihan, bukan menetapkan jawaban tunggal yang benar."},
-  {"t": "Apakah jawaban saya bisa terlihat sebagai kebohongan?", "j": "Bisa, bila jawabanmu saling bertentangan. Peserta yang menjawab menurut kebiasaan sendiri umumnya lebih konsisten daripada yang berusaha menebak jawaban ideal di setiap soal."},
-  {"t": "Berapa lama waktu mengerjakan tes kepribadian?", "j": "Umumnya tanpa batas waktu ketat karena yang diukur kecenderungan, bukan kecepatan. Karena itu jangan terburu-buru; baca situasinya sampai habis sebelum memilih."},
-  {"t": "Apakah tes kepribadian menentukan kelulusan?", "j": "Bobotnya bergantung penyelenggara. Di banyak seleksi, hasil kepribadian dipakai sebagai bahan pertimbangan akhir, bahkan setelah nilai akademik memenuhi ambang batas."},
-  {"t": "Di mana bisa berlatih soal kepribadian lebih banyak?", "j": "Bank soal SiapPsikotes memuat soal kepribadian situasional lengkap dengan pembahasan. Sebagian bisa dicoba gratis di halaman 40 soal contoh, dan akses penuh dibuka sekali bayar tanpa langganan."}
+  {
+   "t": "Apakah soal kepribadian punya jawaban benar dan salah?",
+   "j": "Tidak dalam arti hitungan. Yang ada adalah jawaban yang lebih sesuai dengan tuntutan jabatan. Karena itu pembahasan di halaman ini menjelaskan alasan pemilihan, bukan menetapkan jawaban tunggal yang benar."
+  },
+  {
+   "t": "Apakah jawaban saya bisa terlihat sebagai kebohongan?",
+   "j": "Bisa, bila jawabanmu saling bertentangan. Peserta yang menjawab menurut kebiasaan sendiri umumnya lebih konsisten daripada yang berusaha menebak jawaban ideal di setiap soal."
+  },
+  {
+   "t": "Berapa lama waktu mengerjakan tes kepribadian?",
+   "j": "Umumnya tanpa batas waktu ketat karena yang diukur kecenderungan, bukan kecepatan. Karena itu jangan terburu-buru; baca situasinya sampai habis sebelum memilih."
+  },
+  {
+   "t": "Apakah tes kepribadian menentukan kelulusan?",
+   "j": "Bobotnya bergantung penyelenggara. Di banyak seleksi, hasil kepribadian dipakai sebagai bahan pertimbangan akhir, bahkan setelah nilai akademik memenuhi ambang batas."
+  },
+  {
+   "t": "Di mana bisa berlatih soal kepribadian lebih banyak?",
+   "j": "Bank soal SiapPsikotes memuat soal kepribadian situasional lengkap dengan pembahasan. Sebagian bisa dicoba gratis di halaman 40 soal contoh, dan akses penuh dibuka sekali bayar tanpa langganan."
+  }
  ],
  "penutup": [
   "Soal kepribadian tidak menuntut jawaban yang paling mulia, melainkan jawaban yang paling bisa dipertanggungjawabkan. Latihannya sederhana: pilih tindakan, sebutkan langkahnya, dan pastikan jawabanmu tidak bertentangan dengan jawaban sebelumnya.",
   "Mulai dari lima belas soal di halaman ini, catat pilihanmu, lalu baca pembahasannya sebagai pembanding cara berpikir. Setelah itu ulangi di aplikasi dengan situasi lain agar polanya benar-benar terbentuk."
  ],
  "tautan": [
-  {"teks": "Latihan soal kepribadian di aplikasi", "url": "/psikotes/"},
-  {"teks": "Contoh soal psikotes bahasa Inggris", "url": "/contoh-soal-psikotes-bahasa-inggris/"},
-  {"teks": "40 soal contoh gratis (tanpa akun)", "url": "/contoh/"},
-  {"teks": "Contoh soal psikotes kerja dan jawabannya", "url": "/contoh-soal-psikotes-kerja/"},
-  {"teks": "Harga dan cara beli", "url": "/beli/"}
+  {
+   "teks": "Latihan soal kepribadian di aplikasi",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Contoh soal psikotes bahasa Inggris",
+   "url": "/contoh-soal-psikotes-bahasa-inggris/"
+  },
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Contoh soal psikotes kerja dan jawabannya",
+   "url": "/contoh-soal-psikotes-kerja/"
+  },
+  {
+   "teks": "Harga dan cara beli",
+   "url": "/beli/"
+  }
  ],
  "tanggal_terbit": "2026-09-21",
- "diperbarui": "21 September 2026"
+ "diperbarui": "21 September 2026",
+ "utm_source": "blog-contoh-soal-psikotes-kepribadian",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

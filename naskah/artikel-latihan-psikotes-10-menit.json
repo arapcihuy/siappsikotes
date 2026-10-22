@@ -1,66 +1,95 @@
 {
-    "slug": "latihan-psikotes-10-menit",
-    "judul_tab": "Latihan Psikotes TNI 10 Menit: 3 Soal Tiap Hari (Gratis)",
-    "deskripsi": "Kurang waktu belajar psikotes TNI? Coba latihan 10 menit dengan 3 soal tiap hari: verbal, numerik, dan penalaran logika, lengkap pembahasan.",
-    "h1": "Latihan Psikotes TNI 10 Menit: 3 Soal Tiap Hari",
-    "dek": "Metode latihan mikro: tiga soal, sepuluh menit, tiap hari. Cocok untuk persiapan seleksi TNI di sela jadwal padat.",
-    "kata_kunci": "latihan psikotes TNI 10 menit",
-    "pembuka": [
-        "Banyak pendaftar TNI menunda latihan psikotes karena merasa tidak punya satu jam penuh untuk belajar. Padahal membuat kebiasaan belajar justru lebih mudah dengan durasi pendek yang konsisten, bukan sesi panjang sekali sebulan.\nUntuk itu halaman ini menerapkan metode latihan mikro: tiga soal, sepuluh menit, tanpa perlu akun. Kerjakan di sela jadwal, lihat pembahasannya, besok kembali lagi.",
-        "Soal di bawah diambil langsung dari bank soal SiapPsikotes yang telah lolos pemeriksaan mutu, sehingga polanya sama seperti soal yang dipakai di aplikasi latihan."
-    ],
-    "bagian": [
-        {
-            "h2": "Aturan latihan 10 menit",
-            "isi": ["Cukup tiga langkah, dan jangan lebih dulu di minggu-minggu awal."],
-            "poin": [
-                "Atur timer sepuluh menit penuh sebelum membaca soal pertama.",
-                "Kerjakan tiga soal berurutan tanpa membuka pembahasan di tengah soal.",
-                "Baca pembahasan semua soal, termasuk yang benar, lalu catat jenis soal yang salah."
-            ],
-            "catatan": "Kalau tiga soal selesai sebelum sepuluh menit, jangan tambah soal. Gunakan sisa waktu untuk membaca ulang pembahasan, karena pemahaman pola lebih penting daripada kuantitas soal."
-        },
-        {
-            "h2": "Soal 1: verbal",
-            "isi": ["Soal pertama melatih pemahaman kata: sinonim, antonim, dan analogi. Kategori ini rutin muncul di TIU seleksi TNI."],
-            "soal": {"kategori": "verbal", "jumlah": 1}
-        },
-        {
-            "h2": "Soal 2: numerik",
-            "isi": ["Soal kedua menguji kecepatan mengenali pola hitungan waktu di bawah penekanan jam."],
-            "soal": {"kategori": "numerik", "jumlah": 1}
-        },
-        {
-            "h2": "Soal 3: penalaran logika",
-            "isi": ["Soal ketiga melatih penarikan kesimpulan, kategori yang paling banyak membuat calon TNI kehabisan waktu."],
-            "soal": {"kategori": "penalaran_logika", "jumlah": 1}
-        },
-        {
-            "h2": "Lanjutan setelah tiga soal ini",
-            "isi": [
-                "Setelah kebiasaan harian jalan satu minggu, naikkan durasi ke dua puluh menit dengan soal penuh. Pukul latihan yang konsisten tiga hari berturut lebih berharga dari lima puluh soal sekali jalan.",
-                "Versi lengkap aplikasi menyediakan bank soal + simulator CAT berwaktu, supaya latihan rasanya sama seperti hari seleksi."
-            ]
-        }
-    ],
-    "faq": [
-        {
-            "t": "Cukup tiga soal sehari, benar bisa siap psikotes TNI?",
-            "j": "Tiga soal sehari adalah jembatan untuk membangun kebiasaan, bukan target akhir. Setelah dua minggu konsisten, naik ke 20-30 soal berwaktu setiap hari. Apa yang membuat calon gagal umumnya bukan kekurangan soal, tetapi kebiasaan belajar yang berhenti di tengah."
-        },
-        {
-            "t": "Apakah boleh dipakai tanpa membayar?",
-            "j": "Boleh, soal di halaman ini gratis dikerjakan tanpa akun. Artikel lain seperti contoh soal psikotes TNI juga gratis. Seluruh isi aplikasi lengkap dibeli sekali bayar lewat halaman harga."
-        }
-    ],
-    "penutup": [
-        "Sepuluh menit kelihatan kecil, tetapi tiga ratus menit kebiasaan dalam sebulan jauh lebih banyak dari nol. Mulai tiga soal hari ini, lalu buat kuncinya konsisten.",
-        "SiapPsikotes bukan produk resmi instansi mana pun. Soal adalah karya penyusun sendiri untuk latihan dan tidak menjanjikan kelulusan."
-    ],
-    "tautan": [
-        {"teks": "Lihat harga & cara beli", "url": "/beli/?utm_source=seo&utm_medium=artikel&utm_campaign=demo3q1026&utm_content=latihan10menit"},
-        {"teks": "40 soal contoh gratis", "url": "/contoh/"},
-        {"teks": "Latihan psikotes gratis TNI", "url": "/latihan-psikotes-gratis-tni/"}
-    ],
-    "diperbarui": "19 Oktober 2026"
+ "slug": "latihan-psikotes-10-menit",
+ "judul_tab": "Latihan Psikotes TNI 10 Menit: 3 Soal Tiap Hari (Gratis)",
+ "deskripsi": "Kurang waktu belajar psikotes TNI? Coba latihan 10 menit dengan 3 soal tiap hari: verbal, numerik, dan penalaran logika, lengkap pembahasan.",
+ "h1": "Latihan Psikotes TNI 10 Menit: 3 Soal Tiap Hari",
+ "dek": "Metode latihan mikro: tiga soal, sepuluh menit, tiap hari. Cocok untuk persiapan seleksi TNI di sela jadwal padat.",
+ "kata_kunci": "latihan psikotes TNI 10 menit",
+ "pembuka": [
+  "Banyak pendaftar TNI menunda latihan psikotes karena merasa tidak punya satu jam penuh untuk belajar. Padahal membuat kebiasaan belajar justru lebih mudah dengan durasi pendek yang konsisten, bukan sesi panjang sekali sebulan.\nUntuk itu halaman ini menerapkan metode latihan mikro: tiga soal, sepuluh menit, tanpa perlu akun. Kerjakan di sela jadwal, lihat pembahasannya, besok kembali lagi.",
+  "Soal di bawah diambil langsung dari bank soal SiapPsikotes yang telah lolos pemeriksaan mutu, sehingga polanya sama seperti soal yang dipakai di aplikasi latihan."
+ ],
+ "bagian": [
+  {
+   "h2": "Aturan latihan 10 menit",
+   "isi": [
+    "Cukup tiga langkah, dan jangan lebih dulu di minggu-minggu awal."
+   ],
+   "poin": [
+    "Atur timer sepuluh menit penuh sebelum membaca soal pertama.",
+    "Kerjakan tiga soal berurutan tanpa membuka pembahasan di tengah soal.",
+    "Baca pembahasan semua soal, termasuk yang benar, lalu catat jenis soal yang salah."
+   ],
+   "catatan": "Kalau tiga soal selesai sebelum sepuluh menit, jangan tambah soal. Gunakan sisa waktu untuk membaca ulang pembahasan, karena pemahaman pola lebih penting daripada kuantitas soal."
+  },
+  {
+   "h2": "Soal 1: verbal",
+   "isi": [
+    "Soal pertama melatih pemahaman kata: sinonim, antonim, dan analogi. Kategori ini rutin muncul di TIU seleksi TNI."
+   ],
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 1
+   }
+  },
+  {
+   "h2": "Soal 2: numerik",
+   "isi": [
+    "Soal kedua menguji kecepatan mengenali pola hitungan waktu di bawah penekanan jam."
+   ],
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 1
+   }
+  },
+  {
+   "h2": "Soal 3: penalaran logika",
+   "isi": [
+    "Soal ketiga melatih penarikan kesimpulan, kategori yang paling banyak membuat calon TNI kehabisan waktu."
+   ],
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 1
+   }
+  },
+  {
+   "h2": "Lanjutan setelah tiga soal ini",
+   "isi": [
+    "Setelah kebiasaan harian jalan satu minggu, naikkan durasi ke dua puluh menit dengan soal penuh. Pukul latihan yang konsisten tiga hari berturut lebih berharga dari lima puluh soal sekali jalan.",
+    "Versi lengkap aplikasi menyediakan bank soal + simulator CAT berwaktu, supaya latihan rasanya sama seperti hari seleksi."
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "t": "Cukup tiga soal sehari, benar bisa siap psikotes TNI?",
+   "j": "Tiga soal sehari adalah jembatan untuk membangun kebiasaan, bukan target akhir. Setelah dua minggu konsisten, naik ke 20-30 soal berwaktu setiap hari. Apa yang membuat calon gagal umumnya bukan kekurangan soal, tetapi kebiasaan belajar yang berhenti di tengah."
+  },
+  {
+   "t": "Apakah boleh dipakai tanpa membayar?",
+   "j": "Boleh, soal di halaman ini gratis dikerjakan tanpa akun. Artikel lain seperti contoh soal psikotes TNI juga gratis. Seluruh isi aplikasi lengkap dibeli sekali bayar lewat halaman harga."
+  }
+ ],
+ "penutup": [
+  "Sepuluh menit kelihatan kecil, tetapi tiga ratus menit kebiasaan dalam sebulan jauh lebih banyak dari nol. Mulai tiga soal hari ini, lalu buat kuncinya konsisten.",
+  "SiapPsikotes bukan produk resmi instansi mana pun. Soal adalah karya penyusun sendiri untuk latihan dan tidak menjanjikan kelulusan."
+ ],
+ "tautan": [
+  {
+   "teks": "Lihat harga & cara beli",
+   "url": "/beli/?utm_source=blog-latihan-psikotes-10-menit&utm_medium=artikel&utm_campaign=demo3q1026&utm_content=latihan10menit"
+  },
+  {
+   "teks": "40 soal contoh gratis",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Latihan psikotes gratis TNI",
+   "url": "/latihan-psikotes-gratis-tni/"
+  }
+ ],
+ "diperbarui": "19 Oktober 2026",
+ "utm_source": "blog-latihan-psikotes-10-menit",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

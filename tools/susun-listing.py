@@ -126,7 +126,15 @@ kalau tidak, tulis di deskripsi bahwa pengiriman dihitung sejak kode dikirim.
     print('ukuran   : %.1f KB' % (os.path.getsize(KELUAR) / 1024.0))
     # rapikan: buang baris pemisah ganda yang terbawa dari dokumen sumber
     dok = dok.replace('---\n\n---', '---')
+    # Path gambar lama (~/pk-bisnis) sudah mati sejak repo pindah ke ~/tni-belajar.
+    # Tanpa normalisasi ini, listing memuat instruksi ke folder yang tidak ada.
+    dok = dok.replace('~/pk-bisnis/gambar-marketplace/', '~/tni-belajar/aset-bisnis/gambar-marketplace/')
     open(KELUAR, 'w', encoding='utf-8').write(dok)
+    # Cermin ke output/ supaya salinan lama tidak memuat fakta basi (1.225 soal).
+    KELUAR_LAMA = os.path.expanduser('~/tni-belajar/output/LISTING-SIAP-TEMPEL.md')
+    if os.path.isdir(os.path.dirname(KELUAR_LAMA)):
+        open(KELUAR_LAMA, 'w', encoding='utf-8').write(dok)
+        print('cermin   : %s' % KELUAR_LAMA)
     for nama, blok in [('nama produk', judul), ('deskripsi', deskripsi), ('harga', harga),
                        ('tanya-jawab', tanya), ('balasan otomatis', balasan)]:
         print('  bagian %-18s %5d karakter' % (nama, len(blok)))

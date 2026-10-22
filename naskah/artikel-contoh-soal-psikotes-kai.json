@@ -31,12 +31,32 @@
     "Sebagian pengumuman BUMN dibuka lewat jalur bersama yang dikoordinasi forum sumber daya manusia perusahaan negara, sebagian lagi dibuka sendiri oleh perusahaan di lamannya. Dua-duanya bisa kamu temui saat melamar ke KAI, jadi penting tahu bedanya."
    ],
    "tabel": {
-    "kepala": ["Aspek", "Jalur bersama BUMN", "Rekrutmen mandiri KAI"],
+    "kepala": [
+     "Aspek",
+     "Jalur bersama BUMN",
+     "Rekrutmen mandiri KAI"
+    ],
     "baris": [
-     ["Tempat pendaftaran", "Satu portal bersama untuk banyak perusahaan", "Laman karier resmi perusahaan"],
-     ["Pilihan posisi", "Daftar posisi digabung lintas perusahaan", "Posisi dibuka sesuai kebutuhan unit"],
-     ["Seleksi berkas", "Seragam mengikuti ketentuan jalur bersama", "Mengikuti ketentuan yang tertulis di pengumuman"],
-     ["Tahap lanjutan", "Ditentukan perusahaan yang membuka posisi", "Ditentukan perusahaan, sering menyertakan tes khusus bidang"]
+     [
+      "Tempat pendaftaran",
+      "Satu portal bersama untuk banyak perusahaan",
+      "Laman karier resmi perusahaan"
+     ],
+     [
+      "Pilihan posisi",
+      "Daftar posisi digabung lintas perusahaan",
+      "Posisi dibuka sesuai kebutuhan unit"
+     ],
+     [
+      "Seleksi berkas",
+      "Seragam mengikuti ketentuan jalur bersama",
+      "Mengikuti ketentuan yang tertulis di pengumuman"
+     ],
+     [
+      "Tahap lanjutan",
+      "Ditentukan perusahaan yang membuka posisi",
+      "Ditentukan perusahaan, sering menyertakan tes khusus bidang"
+     ]
     ]
    },
    "catatan": "Tabel ini membandingkan bentuk umum, bukan aturan resmi tahun tertentu. Perbedaan paling praktis ada di tempat pendaftaran dan di daftar posisinya, bukan di materi tesnya."
@@ -60,21 +80,30 @@
    "isi": [
     "Dua belas soal berikut bergaya deret angka dan angka hilang. Kerjakan satu blok sekaligus dengan pengatur waktu, lalu baru buka pembahasannya."
    ],
-   "soal": {"kategori": "numerik", "jumlah": 12}
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 12
+   }
   },
   {
    "h2": "Contoh soal penalaran dan logika",
    "isi": [
     "Delapan soal berikut menguji cara menarik kesimpulan dari pernyataan. Baca premisnya dua kali sebelum melihat pilihan jawaban."
    ],
-   "soal": {"kategori": "penalaran_logika", "jumlah": 8}
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 8
+   }
   },
   {
    "h2": "Contoh soal padanan kata dan sinonim",
    "isi": [
     "Soal verbal menguji hubungan antar kata, bukan luas kosakata. Sebutkan dulu hubungannya dalam satu kalimat, lalu cari pasangan dengan hubungan yang sama."
    ],
-   "soal": {"kategori": "verbal", "jumlah": 8}
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 8
+   }
   },
   {
    "h2": "Contoh soal daya ingat angka (digit span)",
@@ -82,17 +111,40 @@
     "Pada digit span, deret angka ditampilkan sebentar lalu kamu menuliskan jawabannya, boleh maju sesuai urutan atau mundur terbalik. Di seleksi, deretnya tidak bisa diulang.",
     "Latih dengan menutup layar setelah membaca soalnya, karena itu inti latihannya: menyimpan angka sementara sambil tetap tenang."
    ],
-   "soal": {"psikologi": "digit_span", "jumlah": 8}
+   "soal": {
+    "psikologi": "digit_span",
+    "jumlah": 8
+   }
   },
   {
    "h2": "Rencana latihan empat sesi",
    "tabel": {
-    "kepala": ["Sesi", "Yang dikerjakan", "Target kecil yang masuk akal"],
+    "kepala": [
+     "Sesi",
+     "Yang dikerjakan",
+     "Target kecil yang masuk akal"
+    ],
     "baris": [
-     ["Hari 1", "Satu blok numerik 12 soal tanpa membuka pembahasan", "Selesai dalam waktu, benar di atas separuh"],
-     ["Hari 2", "Buka pembahasan Hari 1, catat jenis soal yang salah", "Ketemu dua pola kesalahan, bukan dua soal"],
-     ["Hari 3", "Satu blok penalaran dan satu blok verbal", "Membaca premis dua kali sebelum memilih"],
-     ["Hari 4", "Blok digit span, lalu ulangi blok Hari 1", "Angka salah berkurang, tempo lebih rapat"]
+     [
+      "Hari 1",
+      "Satu blok numerik 12 soal tanpa membuka pembahasan",
+      "Selesai dalam waktu, benar di atas separuh"
+     ],
+     [
+      "Hari 2",
+      "Buka pembahasan Hari 1, catat jenis soal yang salah",
+      "Ketemu dua pola kesalahan, bukan dua soal"
+     ],
+     [
+      "Hari 3",
+      "Satu blok penalaran dan satu blok verbal",
+      "Membaca premis dua kali sebelum memilih"
+     ],
+     [
+      "Hari 4",
+      "Blok digit span, lalu ulangi blok Hari 1",
+      "Angka salah berkurang, tempo lebih rapat"
+     ]
     ]
    },
    "catatan": "Ini jadwal latihan, bukan jadwal tes. Sesuaikan temponya dengan sisa waktu yang kamu punya sebelum tanggal seleksi."
@@ -107,22 +159,52 @@
   }
  ],
  "faq": [
-  {"t": "Apakah soal di halaman ini yang keluar di seleksi KAI?", "j": "Tidak ada yang bisa memastikan itu, dan halaman ini tidak mengklaimnya. Semua soal adalah latihan bergaya tes kemampuan dasar yang dipakai di banyak seleksi, termasuk seleksi BUMN. Yang dilatih di sini kecepatan, ketelitian, dan daya ingatnya."},
-  {"t": "Apakah halaman ini resmi dari PT Kereta Api Indonesia?", "j": "Bukan. SiapPsikotes adalah situs latihan mandiri dan tidak berafiliasi dengan PT Kereta Api Indonesia atau lembaga mana pun. Nama KAI dipakai untuk menyebut jenis latihannya, bukan sebagai klaim kerja sama."},
-  {"t": "Apa bedanya digit span maju dan mundur?", "j": "Pada digit span maju kamu menuliskan angka sesuai urutan tampil, pada digit span mundur kamu menuliskan terbalik dari angka terakhir ke pertama. Versi mundur lebih berat karena kamu harus menyimpan deretnya sekaligus membalik urutannya."},
-  {"t": "Saya melamar posisi PJL atau unit properti, apakah halaman ini cukup?", "j": "Tidak cukup. Halaman ini hanya melatih bagian berwaktu yang dipakai semua posisi, bukan tes bidang. Materi tes bidang PJL dan properti hanya bisa kamu dapatkan dari pengumuman resmi perusahaan atau pelatihan bidang."},
-  {"t": "Berapa biaya latihannya?", "j": "Halaman ini dan 40 soal contoh di aplikasi bisa dipakai tanpa bayar. Seluruh 1.348 soal, sembilan modul, dan Laporan Lengkap dibuka sekali bayar Rp 39.000 lewat QRIS, tanpa langganan."}
+  {
+   "t": "Apakah soal di halaman ini yang keluar di seleksi KAI?",
+   "j": "Tidak ada yang bisa memastikan itu, dan halaman ini tidak mengklaimnya. Semua soal adalah latihan bergaya tes kemampuan dasar yang dipakai di banyak seleksi, termasuk seleksi BUMN. Yang dilatih di sini kecepatan, ketelitian, dan daya ingatnya."
+  },
+  {
+   "t": "Apakah halaman ini resmi dari PT Kereta Api Indonesia?",
+   "j": "Bukan. SiapPsikotes adalah situs latihan mandiri dan tidak berafiliasi dengan PT Kereta Api Indonesia atau lembaga mana pun. Nama KAI dipakai untuk menyebut jenis latihannya, bukan sebagai klaim kerja sama."
+  },
+  {
+   "t": "Apa bedanya digit span maju dan mundur?",
+   "j": "Pada digit span maju kamu menuliskan angka sesuai urutan tampil, pada digit span mundur kamu menuliskan terbalik dari angka terakhir ke pertama. Versi mundur lebih berat karena kamu harus menyimpan deretnya sekaligus membalik urutannya."
+  },
+  {
+   "t": "Saya melamar posisi PJL atau unit properti, apakah halaman ini cukup?",
+   "j": "Tidak cukup. Halaman ini hanya melatih bagian berwaktu yang dipakai semua posisi, bukan tes bidang. Materi tes bidang PJL dan properti hanya bisa kamu dapatkan dari pengumuman resmi perusahaan atau pelatihan bidang."
+  },
+  {
+   "t": "Berapa biaya latihannya?",
+   "j": "Halaman ini dan 40 soal contoh di aplikasi bisa dipakai tanpa bayar. Seluruh 1.348 soal, sembilan modul, dan Laporan Lengkap dibuka sekali bayar Rp 39.000 lewat QRIS, tanpa langganan."
+  }
  ],
  "penutup": [
   "Bagian berwaktu adalah tempat nilai paling sering hilang, dan itu bagian yang paling cepat membaik kalau latihannya dibatasi waktu. Kerjakan satu blok tanpa membuka pembahasan, baru periksa, lalu ulangi besok dengan tempo yang lebih ketat.",
   "Kalau kamu ingin tahu bagian mana yang paling lemah tanpa menebak, kerjakan versi penuh di aplikasi: laporannya memisahkan hasil per modul."
  ],
  "tautan": [
-  {"teks": "Coba 40 soal gratis", "url": "/contoh/"},
-  {"teks": "Contoh soal psikotes BUMN", "url": "/contoh-soal-psikotes-bumn/"},
-  {"teks": "Contoh soal TIU CPNS", "url": "/contoh-soal-tiu-cpns/"},
-  {"teks": "Harga dan cara beli akses penuh", "url": "/beli/"}
+  {
+   "teks": "Coba 40 soal gratis",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Contoh soal psikotes BUMN",
+   "url": "/contoh-soal-psikotes-bumn/"
+  },
+  {
+   "teks": "Contoh soal TIU CPNS",
+   "url": "/contoh-soal-tiu-cpns/"
+  },
+  {
+   "teks": "Harga dan cara beli akses penuh",
+   "url": "/beli/"
+  }
  ],
  "tanggal_terbit": "2026-09-22",
- "diperbarui": "22 September 2026"
+ "diperbarui": "22 September 2026",
+ "utm_source": "blog-contoh-soal-psikotes-kai",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

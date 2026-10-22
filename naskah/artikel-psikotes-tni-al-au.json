@@ -1,107 +1,149 @@
 {
-  "slug": "psikotes-tni-al-au",
-  "judul_tab": "Psikotes TNI AL dan AU 2026: Materi, Contoh Soal, Latihan",
-  "deskripsi": "Panduan psikotes TNI AL dan TNI AU: materi tes, contoh soal verbal dan numerik berpembahasan, beda seleksi dengan AD, dan rencana latihan 7 hari.",
-  "h1": "Psikotes TNI AL dan AU: Materi Tes, Contoh Soal, dan Rencana Latihan",
-  "dek": "Panduan persiapan psikotes TNI Angkatan Laut dan Angkatan Udara: materi yang dinilai, contoh soal verbal dan numerik berpembahasan dari bank SiapPsikotes, perbandingan seleksi AL/AU/AD, dan pola latihan 7 hari.",
-  "kata_kunci": "psikotes tni al, psikotes tni au, psikotes bintara tni al, psikotes tamtama tni au, contoh soal psikotes tni al",
-  "pembuka": [
-    "Seleksi TNI Angkatan Laut dan TNI Angkatan Udara memakai psikotes dengan pola yang saling menumpang dengan AD: daya tangkap, ketelitian, kecepatan bekerja, penalaran, dan keseimbangan kepribadian. Yang membedakan adalah volume pesaing dan detail panitia tiap matang — bukan jenis tesnya.",
-    "Artikel ini mengulas materi yang dinilai, menyajikan sepuluh contoh soal berpembahasan yang diambil langsung dari bank SiapPsikotes, lalu menutup dengan rencana latihan tujuh hari yang bisa kamu jalankan mulai hari ini."
-  ],
-  "bagian": [
-    {
-      "h2": "Psikotes TNI AL dan AU Mengukur Apa Saja?",
-      "isi": [
-        "Psikotes adalah salah satu babak seleksi calon bintara dan tamtama TNI AL maupun TNI AU, berdampingan dengan seleksi administrasi, kesehatan, dan jasmani. Penilaiannya dilakukan oleh psikolog, dan hasilnya dipakai bersama nilai tahap lain untuk menentukan lolos atau tidaknya kamu ke babak berikutnya.",
-        "Yang diukur bukan hafalan. Subtes yang muncul antara lain sinonim-anonim (verbal), deret angka dan hitung cepat (numerik), silogisme dan pola (logika), daya ingat, sampai kuesioner kepribadian. Dua casis dengan kemampuan hitung sama bisa berakhir jauh berbeda kalau satu terbiasa dengan format tes dan yang lain belum pernah mencoba.",
-        "Kabar baiknya: karena polanya saling menumpang, bahan latihan untuk AL dan AU sama dengan bahan latihan psikotes TNI secara umum. Tidak ada rahasia khusus laut atau udara di bagian tertulis — yang perlu disiapkan adalah kecepatan dan ketelitian dalam volume besar."
-      ],
-      "catatan": "Mau mencoba dulu tanpa bayar? <a href=\"/contoh/?utm_source=blog-artikel4&utm_medium=blog\">Kerjakan 40 soal contoh gratis di sini</a> — tanpa akun, langsung di browser HP."
-    },
-    {
-      "h2": "Materi dan Urutan Tes di Seleksi Casis Laut dan Udara",
-      "tabel": {
-        "kepala": ["Kelompok tes", "Yang dikerjakan", "Yang dilatih"],
-        "baris": [
-          ["Verbal", "Sinonim, anonim, relasi kata", "Perbendaharaan kata dan kecepatan memilah"],
-          ["Numerik", "Deret angka, hitung cepat, perbandingan", "Hitung tanpa kalkulator di bawah tekanan waktu"],
-          ["Logika", "Silogisme, pola gambar, kesimpulan", "Membaca aturan ketat dan konsisten"],
-          ["Daya ingat", "Deret angka mendengar/melihat, mengingat kembali", "Fokus penuh dan teknik menyimpan sementara"],
-          ["Kepribadian", "Kuesioner sikap dalam jumlah besar", "Jujur dan konsisten menjawab, bukan menebak 'baik'"]
-        ]
-      },
-      "catatan": "Urutan persis dan jumlah soal ditentukan panitia tiap gelombang — jangan mengandalkan cerita sepuh sebagai jaminan, tapi vektor latihannya persis seperti tabel di atas."
-    },
-    {
-      "h2": "Contoh Soal Psikotes TNI AL dan AU + Pembahasan",
-      "soal": {"kategori": "verbal", "jumlah": 5},
-      "catatan": "Subtes verbal paling banyak menjebak casis yang mengandalkan perasaan. Biasakan mencari relasi kata sebelum melihat pilihan jawaban, seperti pada lima soal di atas."
-    },
-    {
-      "h2": "Contoh Soal Numerik: Hitung Cepat untuk Casis Laut dan Udara",
-      "soal": {"kategori": "numerik", "jumlah": 5},
-      "catatan": "Cara paling cepat menaikkan skor numerik adalah menghafal pola, bukan menghafal jawaban: deret kelipatan, selisih tetap, dan perbandingan muncul berulang dengan angka berbeda."
-    },
-    {
-      "h2": "Beda Seleksi Bintara dan Tamtama AL, AU, dibanding AD",
-      "poin": [
-        "Materi tertulis psikotesnya saling menumpang — perbedaan terbesar ada di babak kesehatan dan jasmani yang mengikuti standar masing-masing matang.",
-        "Volume pesaing beda tiap gelombang: matang dengan kuota kecil biasanya punya rasio pesaing lebih ketat, jadi nilai psikotes yang stabil jadi pembeda yang makin penting.",
-        "Jadwal dan tempat seleksi diumumkan resmi oleh panitia masing-masing matang — gunakan pengumuman resmi sebagai acuan, bukan ringkasan dari pihak ketiga.",
-        "Bahan latihan tidak perlu dibedakan per matang: satu bank soal psikotes cukup, yang beda hanya tanggal tesmu."
-      ]
-    },
-    {
-      "h2": "Rencana Latihan 7 Hari Menuju Psikotes AL/AU",
-      "poin": [
-        "Hari 1–2: kerjakan soal contoh tanpa pewaktu untuk mengenali pola tiap subtes.",
-        "Hari 3–4: ulangi dengan pewaktu ketat; catat skor per subtes, bukan rata-rata gabungan.",
-        "Hari 5: tambangi subtes dengan skor terendah sampai stabil di atas 75 persen.",
-        "Hari 6: satu sesi penuh menggabungkan verbal, numerik, dan logika — mensimulasikan lelah seperti hari-H.",
-        "Hari 7: latihan ringan, tidur cukup, siapkan berkas — jangan belajar baru di malam terakhir."
-      ],
-      "catatan": "Untuk volume latihan, <a href=\"/beli/?utm_source=blog-artikel4&utm_medium=blog\">paket penuh 1.348 soal psikotes</a> Rp 39.000 sekali bayar — bukan langganan, kode langsung aktif setelah pembayaran QRIS."
-    },
-    {
-      "h2": "Kesalahan Umum yang Menggagalkan Casis di Psikotes",
-      "isi": [
-        "Kesalahan pertama: mengerjakan latihan tanpa pewaktu. Kecepatan adalah bagian dari nilai, dan casis yang pertama kali merasakan tekanan waktu justru di ruang tes selalu kalah cepat dari yang sudah terbiasa.",
-        "Kesalahan kedua: menjawab kuesioner kepribadian dengan mencoba 'terlihat baik'. Kuesioner kepribadian punya pertanyaan pengulang yang menyapu jawaban tidak konsisten — hasilnya justru mencurigakan. Jawab jujur dan konsisten.",
-        "Kesalahan ketiga: memaksakan satu nomor terlalu lama. Di psikotes, nomor yang ditinggalkan dan digantikan nomor yang terjawab bernilai lebih daripada kebanggaan menyelesaikan satu nomor sulit."
-      ]
-    }
-  ],
-  "faq": [
-    {
-      "t": "Apakah psikotes TNI AL berbeda dengan psikotes TNI AU?",
-      "j": "Subtes tertulisnya saling menumpang — verbal, numerik, logika, daya ingat, dan kepribadian muncul di ketiga matang. Yang berbeda adalah jadwal, panitia, dan babak kesehatan/jasmani milik masing-masing matang. Bahan latihan psikotesnya bisa dipakai untuk keduanya."
-    },
-    {
-      "t": "Apakah materi psikotes tamtama berbeda dengan bintara?",
-      "j": "Jenis subtesnya sama-sama dari psikotes dasar. Yang berbeda biasanya volume, durasi, dan ambang penilaian yang ditetapkan panitia. Pola latihan yang sama berlaku: kenali pola, lalu latih kecepatan dalam volume besar."
-    },
-    {
-      "t": "Berapa lama psikotes TNI AL/AU berlangsung?",
-      "j": "Durasi persisnya ditentukan panitia tiap gelombang dan bisa berbeda. Tes tertulis umumnya selesai dalam hitungan jam dengan beberapa sesi subtes dan jeda di antaranya — siapkan fisik dan konsentrasi untuk sesi panjang, bukan hanya lima belas menit."
-    },
-    {
-      "t": "Bagaimana cara latihan kalau waktunya tinggal seminggu?",
-      "j": "Pakai rencana 7 hari di atas: dua hari mengenali pola tanpa pewaktu, dua hari dengan pewaktu, satu hari menambangi kelemahan, satu hari simulasi gabungan, satu hari istirahat. Yang menentukan bukan banyaknya jam, tapi konsistensi sesi tiap hari."
-    },
-    {
-      "t": "Di mana bisa latihan soal psikotes TNI AL dan AU gratis?",
-      "j": "Halaman contoh SiapPsikotes menyediakan 40 soal berpembahasan tanpa akun dan tanpa bayar. Untuk volume penuh, tersedia paket 1.348 soal dengan pembahasan tiap nomor, sekali bayar."
-    }
-  ],
-  "penutup": [
-    "Casis AL dan AU yang lolos psikotes bukan yang paling pintar di ruangan, tapi yang paling terbiasa dengan format tesnya. Kesibiasaan itu hanya datang dari latihan yang benar-benar dikerjakan.",
-    "Mulai dari 40 soal contoh gratis, ukur skormu, lalu naik ke bank penuh 1.348 soal saat polanya sudah pegang — sekali bayar, kode langsung aktif."
-  ],
-  "tautan": [
-    {"teks": "Paket penuh 1.348 soal psikotes — sekali bayar", "url": "/beli/?utm_source=blog-artikel4&utm_medium=blog"},
-    {"teks": "Coba 40 soal contoh gratis, tanpa akun", "url": "/contoh/?utm_source=blog-artikel4&utm_medium=blog"},
-    {"teks": "Panduan psikotes bintara TNI AD", "url": "/psikotes-tni-ad-bintara/"}
-  ],
-  "diperbarui": "22 Oktober 2026"
+ "slug": "psikotes-tni-al-au",
+ "judul_tab": "Psikotes TNI AL dan AU 2026: Materi, Contoh Soal, Latihan",
+ "deskripsi": "Panduan psikotes TNI AL dan TNI AU: materi tes, contoh soal verbal dan numerik berpembahasan, beda seleksi dengan AD, dan rencana latihan 7 hari.",
+ "h1": "Psikotes TNI AL dan AU: Materi Tes, Contoh Soal, dan Rencana Latihan",
+ "dek": "Panduan persiapan psikotes TNI Angkatan Laut dan Angkatan Udara: materi yang dinilai, contoh soal verbal dan numerik berpembahasan dari bank SiapPsikotes, perbandingan seleksi AL/AU/AD, dan pola latihan 7 hari.",
+ "kata_kunci": "psikotes tni al, psikotes tni au, psikotes bintara tni al, psikotes tamtama tni au, contoh soal psikotes tni al",
+ "pembuka": [
+  "Seleksi TNI Angkatan Laut dan TNI Angkatan Udara memakai psikotes dengan pola yang saling menumpang dengan AD: daya tangkap, ketelitian, kecepatan bekerja, penalaran, dan keseimbangan kepribadian. Yang membedakan adalah volume pesaing dan detail panitia tiap matang — bukan jenis tesnya.",
+  "Artikel ini mengulas materi yang dinilai, menyajikan sepuluh contoh soal berpembahasan yang diambil langsung dari bank SiapPsikotes, lalu menutup dengan rencana latihan tujuh hari yang bisa kamu jalankan mulai hari ini."
+ ],
+ "bagian": [
+  {
+   "h2": "Psikotes TNI AL dan AU Mengukur Apa Saja?",
+   "isi": [
+    "Psikotes adalah salah satu babak seleksi calon bintara dan tamtama TNI AL maupun TNI AU, berdampingan dengan seleksi administrasi, kesehatan, dan jasmani. Penilaiannya dilakukan oleh psikolog, dan hasilnya dipakai bersama nilai tahap lain untuk menentukan lolos atau tidaknya kamu ke babak berikutnya.",
+    "Yang diukur bukan hafalan. Subtes yang muncul antara lain sinonim-anonim (verbal), deret angka dan hitung cepat (numerik), silogisme dan pola (logika), daya ingat, sampai kuesioner kepribadian. Dua casis dengan kemampuan hitung sama bisa berakhir jauh berbeda kalau satu terbiasa dengan format tes dan yang lain belum pernah mencoba.",
+    "Kabar baiknya: karena polanya saling menumpang, bahan latihan untuk AL dan AU sama dengan bahan latihan psikotes TNI secara umum. Tidak ada rahasia khusus laut atau udara di bagian tertulis — yang perlu disiapkan adalah kecepatan dan ketelitian dalam volume besar."
+   ],
+   "catatan": "Mau mencoba dulu tanpa bayar? <a href=\"/contoh/?utm_source=blog-artikel4&utm_medium=blog\">Kerjakan 40 soal contoh gratis di sini</a> — tanpa akun, langsung di browser HP."
+  },
+  {
+   "h2": "Materi dan Urutan Tes di Seleksi Casis Laut dan Udara",
+   "tabel": {
+    "kepala": [
+     "Kelompok tes",
+     "Yang dikerjakan",
+     "Yang dilatih"
+    ],
+    "baris": [
+     [
+      "Verbal",
+      "Sinonim, anonim, relasi kata",
+      "Perbendaharaan kata dan kecepatan memilah"
+     ],
+     [
+      "Numerik",
+      "Deret angka, hitung cepat, perbandingan",
+      "Hitung tanpa kalkulator di bawah tekanan waktu"
+     ],
+     [
+      "Logika",
+      "Silogisme, pola gambar, kesimpulan",
+      "Membaca aturan ketat dan konsisten"
+     ],
+     [
+      "Daya ingat",
+      "Deret angka mendengar/melihat, mengingat kembali",
+      "Fokus penuh dan teknik menyimpan sementara"
+     ],
+     [
+      "Kepribadian",
+      "Kuesioner sikap dalam jumlah besar",
+      "Jujur dan konsisten menjawab, bukan menebak 'baik'"
+     ]
+    ]
+   },
+   "catatan": "Urutan persis dan jumlah soal ditentukan panitia tiap gelombang — jangan mengandalkan cerita sepuh sebagai jaminan, tapi vektor latihannya persis seperti tabel di atas."
+  },
+  {
+   "h2": "Contoh Soal Psikotes TNI AL dan AU + Pembahasan",
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 5
+   },
+   "catatan": "Subtes verbal paling banyak menjebak casis yang mengandalkan perasaan. Biasakan mencari relasi kata sebelum melihat pilihan jawaban, seperti pada lima soal di atas."
+  },
+  {
+   "h2": "Contoh Soal Numerik: Hitung Cepat untuk Casis Laut dan Udara",
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 5
+   },
+   "catatan": "Cara paling cepat menaikkan skor numerik adalah menghafal pola, bukan menghafal jawaban: deret kelipatan, selisih tetap, dan perbandingan muncul berulang dengan angka berbeda."
+  },
+  {
+   "h2": "Beda Seleksi Bintara dan Tamtama AL, AU, dibanding AD",
+   "poin": [
+    "Materi tertulis psikotesnya saling menumpang — perbedaan terbesar ada di babak kesehatan dan jasmani yang mengikuti standar masing-masing matang.",
+    "Volume pesaing beda tiap gelombang: matang dengan kuota kecil biasanya punya rasio pesaing lebih ketat, jadi nilai psikotes yang stabil jadi pembeda yang makin penting.",
+    "Jadwal dan tempat seleksi diumumkan resmi oleh panitia masing-masing matang — gunakan pengumuman resmi sebagai acuan, bukan ringkasan dari pihak ketiga.",
+    "Bahan latihan tidak perlu dibedakan per matang: satu bank soal psikotes cukup, yang beda hanya tanggal tesmu."
+   ]
+  },
+  {
+   "h2": "Rencana Latihan 7 Hari Menuju Psikotes AL/AU",
+   "poin": [
+    "Hari 1–2: kerjakan soal contoh tanpa pewaktu untuk mengenali pola tiap subtes.",
+    "Hari 3–4: ulangi dengan pewaktu ketat; catat skor per subtes, bukan rata-rata gabungan.",
+    "Hari 5: tambangi subtes dengan skor terendah sampai stabil di atas 75 persen.",
+    "Hari 6: satu sesi penuh menggabungkan verbal, numerik, dan logika — mensimulasikan lelah seperti hari-H.",
+    "Hari 7: latihan ringan, tidur cukup, siapkan berkas — jangan belajar baru di malam terakhir."
+   ],
+   "catatan": "Untuk volume latihan, <a href=\"/beli/?utm_source=blog-psikotes-tni-al-au&utm_medium=blog&utm_campaign=artikel_seo\">paket penuh 1.348 soal psikotes</a> Rp 39.000 sekali bayar — bukan langganan, kode langsung aktif setelah pembayaran QRIS."
+  },
+  {
+   "h2": "Kesalahan Umum yang Menggagalkan Casis di Psikotes",
+   "isi": [
+    "Kesalahan pertama: mengerjakan latihan tanpa pewaktu. Kecepatan adalah bagian dari nilai, dan casis yang pertama kali merasakan tekanan waktu justru di ruang tes selalu kalah cepat dari yang sudah terbiasa.",
+    "Kesalahan kedua: menjawab kuesioner kepribadian dengan mencoba 'terlihat baik'. Kuesioner kepribadian punya pertanyaan pengulang yang menyapu jawaban tidak konsisten — hasilnya justru mencurigakan. Jawab jujur dan konsisten.",
+    "Kesalahan ketiga: memaksakan satu nomor terlalu lama. Di psikotes, nomor yang ditinggalkan dan digantikan nomor yang terjawab bernilai lebih daripada kebanggaan menyelesaikan satu nomor sulit."
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "t": "Apakah psikotes TNI AL berbeda dengan psikotes TNI AU?",
+   "j": "Subtes tertulisnya saling menumpang — verbal, numerik, logika, daya ingat, dan kepribadian muncul di ketiga matang. Yang berbeda adalah jadwal, panitia, dan babak kesehatan/jasmani milik masing-masing matang. Bahan latihan psikotesnya bisa dipakai untuk keduanya."
+  },
+  {
+   "t": "Apakah materi psikotes tamtama berbeda dengan bintara?",
+   "j": "Jenis subtesnya sama-sama dari psikotes dasar. Yang berbeda biasanya volume, durasi, dan ambang penilaian yang ditetapkan panitia. Pola latihan yang sama berlaku: kenali pola, lalu latih kecepatan dalam volume besar."
+  },
+  {
+   "t": "Berapa lama psikotes TNI AL/AU berlangsung?",
+   "j": "Durasi persisnya ditentukan panitia tiap gelombang dan bisa berbeda. Tes tertulis umumnya selesai dalam hitungan jam dengan beberapa sesi subtes dan jeda di antaranya — siapkan fisik dan konsentrasi untuk sesi panjang, bukan hanya lima belas menit."
+  },
+  {
+   "t": "Bagaimana cara latihan kalau waktunya tinggal seminggu?",
+   "j": "Pakai rencana 7 hari di atas: dua hari mengenali pola tanpa pewaktu, dua hari dengan pewaktu, satu hari menambangi kelemahan, satu hari simulasi gabungan, satu hari istirahat. Yang menentukan bukan banyaknya jam, tapi konsistensi sesi tiap hari."
+  },
+  {
+   "t": "Di mana bisa latihan soal psikotes TNI AL dan AU gratis?",
+   "j": "Halaman contoh SiapPsikotes menyediakan 40 soal berpembahasan tanpa akun dan tanpa bayar. Untuk volume penuh, tersedia paket 1.348 soal dengan pembahasan tiap nomor, sekali bayar."
+  }
+ ],
+ "penutup": [
+  "Casis AL dan AU yang lolos psikotes bukan yang paling pintar di ruangan, tapi yang paling terbiasa dengan format tesnya. Kesibiasaan itu hanya datang dari latihan yang benar-benar dikerjakan.",
+  "Mulai dari 40 soal contoh gratis, ukur skormu, lalu naik ke bank penuh 1.348 soal saat polanya sudah pegang — sekali bayar, kode langsung aktif."
+ ],
+ "tautan": [
+  {
+   "teks": "Paket penuh 1.348 soal psikotes — sekali bayar",
+   "url": "/beli/?utm_source=blog-psikotes-tni-al-au&utm_medium=blog&utm_campaign=artikel_seo"
+  },
+  {
+   "teks": "Coba 40 soal contoh gratis, tanpa akun",
+   "url": "/contoh/?utm_source=blog-artikel4&utm_medium=blog"
+  },
+  {
+   "teks": "Panduan psikotes bintara TNI AD",
+   "url": "/psikotes-tni-ad-bintara/"
+  }
+ ],
+ "diperbarui": "22 Oktober 2026",
+ "utm_source": "blog-psikotes-tni-al-au",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

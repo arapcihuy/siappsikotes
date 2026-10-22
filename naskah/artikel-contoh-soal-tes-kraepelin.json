@@ -33,16 +33,43 @@
     "Tabel berikut merangkum hal-hal yang paling sering ditanyakan saat pertama kali melihat lembarnya:"
    ],
    "tabel": {
-    "kepala": ["Bagian", "Yang perlu kamu tahu"],
+    "kepala": [
+     "Bagian",
+     "Yang perlu kamu tahu"
+    ],
     "baris": [
-     ["Isi lembar", "Deretan angka satu digit yang tersusun dalam beberapa kolom; setiap kolom berisi banyak angka yang harus dijumlahkan berpasangan."],
-     ["Tugas", "Jumlahkan dua angka yang berdekatan pada baris yang sama, lalu tuliskan hasilnya pada tempat yang ditunjukkan contoh, di sela-sela kedua angka."],
-     ["Angka yang dijumlahkan", "Selalu angka yang tercetak di lembar, bukan angka hasil tulisanmu sendiri. Pandanganmu bergeser satu langkah setiap kali selesai menulis."],
-     ["Arah mengerjakan", "Mengikuti instruksi pengawas. Sebagian lembar dimulai dari baris paling bawah, sebagian dari atas - pastikan arahnya sejak awal."],
-     ["Hasil 10 atau lebih", "Yang ditulis hanya angka satuannya: 12 ditulis 2, 15 ditulis 5, 18 ditulis 8. Kalau hasilnya di bawah 10, tulis utuh."],
-     ["Aba-aba ganti kolom", "Saat tanda berbunyi atau pengawas memberi isyarat, pindah ke kolom berikutnya walau kolom sebelumnya belum selesai."],
-     ["Alat", "Umumnya hanya pensil dan lembar yang disediakan; alat bantu hitung tidak diperbolehkan."],
-     ["Jawaban yang salah", "Umumnya tidak perlu dihapus. Teruskan pada baris berikutnya supaya waktumu tidak habis untuk memperbaiki."]
+     [
+      "Isi lembar",
+      "Deretan angka satu digit yang tersusun dalam beberapa kolom; setiap kolom berisi banyak angka yang harus dijumlahkan berpasangan."
+     ],
+     [
+      "Tugas",
+      "Jumlahkan dua angka yang berdekatan pada baris yang sama, lalu tuliskan hasilnya pada tempat yang ditunjukkan contoh, di sela-sela kedua angka."
+     ],
+     [
+      "Angka yang dijumlahkan",
+      "Selalu angka yang tercetak di lembar, bukan angka hasil tulisanmu sendiri. Pandanganmu bergeser satu langkah setiap kali selesai menulis."
+     ],
+     [
+      "Arah mengerjakan",
+      "Mengikuti instruksi pengawas. Sebagian lembar dimulai dari baris paling bawah, sebagian dari atas - pastikan arahnya sejak awal."
+     ],
+     [
+      "Hasil 10 atau lebih",
+      "Yang ditulis hanya angka satuannya: 12 ditulis 2, 15 ditulis 5, 18 ditulis 8. Kalau hasilnya di bawah 10, tulis utuh."
+     ],
+     [
+      "Aba-aba ganti kolom",
+      "Saat tanda berbunyi atau pengawas memberi isyarat, pindah ke kolom berikutnya walau kolom sebelumnya belum selesai."
+     ],
+     [
+      "Alat",
+      "Umumnya hanya pensil dan lembar yang disediakan; alat bantu hitung tidak diperbolehkan."
+     ],
+     [
+      "Jawaban yang salah",
+      "Umumnya tidak perlu dihapus. Teruskan pada baris berikutnya supaya waktumu tidak habis untuk memperbaiki."
+     ]
     ]
    },
    "catatan": "Tabel di atas adalah gambaran umum untuk latihanmu. Instruksi yang dibacakan pengawas di ruangan selalu berlaku lebih dulu, jadi dengarkan sampai habis sebelum mulai bekerja."
@@ -83,7 +110,10 @@
    "isi": [
     "Dua belas soal berikut membahas hal-hal yang paling sering muncul pada tes Kraepelin: penjumlahan dengan aturan satuan, arah mengerjakan, aba-aba ganti kolom, dan cara kerja yang dinilai. Kerjakan dulu tanpa membuka pembahasan, lalu periksa hasilmu. Soal dan pembahasan diambil utuh dari bank soal SiapPsikotes, bukan ditulis ulang di halaman ini."
    ],
-   "soal": {"kategori": "kraepelin", "jumlah": 12}
+   "soal": {
+    "kategori": "kraepelin",
+    "jumlah": 12
+   }
   },
   {
    "h2": "Kecepatan atau ketelitian: mana yang lebih menentukan",
@@ -161,10 +191,25 @@
   "Kalau ingin mencoba lebih dulu, 40 soal berpembahasan tersedia gratis tanpa akun di halaman contoh. Untuk latihan penuh, akses ke dalam aplikasi berisi 1.348 soal untuk 9 jenis tes dengan pembahasan dan Laporan Lengkap, seharga Rp 39.000 sekali bayar. SiapPsikotes bukan situs resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah; seluruh soal adalah karya penyusun sendiri untuk latihan, dan pembelian tidak menjamin kelulusan seleksi apa pun."
  ],
  "tautan": [
-  {"teks": "Latihan soal psikotes di aplikasi", "url": "/psikotes/"},
-  {"teks": "40 soal contoh gratis (tanpa akun)", "url": "/contoh/"},
-  {"teks": "Harga dan cara beli", "url": "/beli/"},
-  {"teks": "Mutu dan bukti pemeriksaan soal", "url": "/mutu/"}
+  {
+   "teks": "Latihan soal psikotes di aplikasi",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Harga dan cara beli",
+   "url": "/beli/"
+  },
+  {
+   "teks": "Mutu dan bukti pemeriksaan soal",
+   "url": "/mutu/"
+  }
  ],
- "diperbarui": "17 September 2026"
+ "diperbarui": "17 September 2026",
+ "utm_source": "blog-contoh-soal-tes-kraepelin",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

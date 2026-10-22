@@ -46,14 +46,20 @@
    "isi": [
     "Kerjakan 15 soal berikut dalam satu duduk. Targetkan 45 detik per soal, tandai soal yang melewati batas itu, lalu lanjutkan. Setelah selesai, buka pembahasan soal yang kamu tandai lebih dulu - di situ letak celah kecepatanmu."
    ],
-   "soal": {"kategori": "verbal", "jumlah": 15}
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 15
+   }
   },
   {
    "h2": "Latihan lanjutan: 10 soal penalaran",
    "isi": [
     "Sepuluh soal berikut melatih penalaran yang berdiri di belakang soal verbal: kesimpulan yang sah dari pernyataan yang diberikan. Banyak peserta yang kosakatanya luas masih kehilangan nilai di sini karena menjawab dari perasaan. Kerjakan dengan aturan yang sama - 45 detik per soal, lalu periksa pembahasannya."
    ],
-   "soal": {"kategori": "penalaran_logika", "jumlah": 10}
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 10
+   }
   },
   {
    "h2": "Kesalahan umum di tes verbal",
@@ -64,19 +70,43 @@
   }
  ],
  "faq": [
-  {"t": "Apakah tes verbal bisa dilatih tanpa menghafal kosakata?", "j": "Bisa. Latihan dengan banyak soal berpembahasan melatihmu mengenali jenis hubungan kata dan jebakannya lebih cepat daripada menghafal daftar kata. Kosakata ikut bertambah secara sampingan."},
-  {"t": "Berapa banyak soal verbal yang biasanya keluar?", "j": "Bervariasi antar penyelenggara, umumnya 20-50 butir dengan waktu 30-50 detik per butir. Susunannya diumumkan di hari tes, jadi jangan mengandalkan satu angka tetap."},
-  {"t": "Kata yang jarang dipakai sehari-hari muncul di tes?", "j": "Kadang muncul. Saat kata kuncinya asing, periksa imbuhan dan konteks pilihannya - jenis kata dan golongan maknanya biasanya cukup untuk mempersempit pilihan."},
-  {"t": "Bagaimana cara meningkatkan akurasi tanpa kehilangan waktu?", "j": "Baca semua pilihan sebelum memilih, dan uji pilihan dengan kalimat uji yang tetap. Keduanya terasa lebih lambat di awal tetapi justru memangkas waktu total karena mengurangi perbaikan jawaban."}
+  {
+   "t": "Apakah tes verbal bisa dilatih tanpa menghafal kosakata?",
+   "j": "Bisa. Latihan dengan banyak soal berpembahasan melatihmu mengenali jenis hubungan kata dan jebakannya lebih cepat daripada menghafal daftar kata. Kosakata ikut bertambah secara sampingan."
+  },
+  {
+   "t": "Berapa banyak soal verbal yang biasanya keluar?",
+   "j": "Bervariasi antar penyelenggara, umumnya 20-50 butir dengan waktu 30-50 detik per butir. Susunannya diumumkan di hari tes, jadi jangan mengandalkan satu angka tetap."
+  },
+  {
+   "t": "Kata yang jarang dipakai sehari-hari muncul di tes?",
+   "j": "Kadang muncul. Saat kata kuncinya asing, periksa imbuhan dan konteks pilihannya - jenis kata dan golongan maknanya biasanya cukup untuk mempersempit pilihan."
+  },
+  {
+   "t": "Bagaimana cara meningkatkan akurasi tanpa kehilangan waktu?",
+   "j": "Baca semua pilihan sebelum memilih, dan uji pilihan dengan kalimat uji yang tetap. Keduanya terasa lebih lambat di awal tetapi justru memangkas waktu total karena mengurangi perbaikan jawaban."
+  }
  ],
  "penutup": [
   "Setelah 25 soal di halaman ini, lanjutkan ke aplikasi latihan SiapPsikotes: lebih dari 1.300 soal dari seluruh kategori psikotes dengan pembahasan tiap soal, catatan kemajuan per kategori, dan satu kali bayar untuk akses penuh tanpa langganan.",
   "Latih sedikit tetapi rutin, tinjau soal yang salah, dan ukur waktumu. Nilai verbal paling cepat naik dari pengulangan yang teratur - bukan dari sesi belajar yang panjang sekali saja."
  ],
  "tautan": [
-  {"teks": "Contoh soal psikotes lainnya", "url": "/contoh/"},
-  {"teks": "Latihan psikotes gratis TNI", "url": "/latihan-psikotes-gratis-tni/"},
-  {"teks": "Harga & cara beli", "url": "/beli/"}
+  {
+   "teks": "Contoh soal psikotes lainnya",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Latihan psikotes gratis TNI",
+   "url": "/latihan-psikotes-gratis-tni/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  }
  ],
- "diperbarui": "20 Oktober 2026"
+ "diperbarui": "20 Oktober 2026",
+ "utm_source": "blog-contoh-soal-psikotes-verbal",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

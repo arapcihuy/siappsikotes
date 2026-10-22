@@ -29,18 +29,45 @@
    "isi": [
     "Delapan soal berikut diambil apa adanya dari bank soal SiapPsikotes. Soal yang bertipe mundur harus ditulis dari angka paling belakang. Pembahasannya menunjukkan cara membaca deret itu, bukan sekadar kuncinya."
    ],
-   "soal": {"psikologi": "digit_span", "jumlah": 8}
+   "soal": {
+    "psikologi": "digit_span",
+    "jumlah": 8
+   }
   },
   {
    "h2": "Tingkat kesulitan deret angka",
    "tabel": {
-    "kepala": ["Level", "Jumlah angka", "Skor per soal"],
+    "kepala": [
+     "Level",
+     "Jumlah angka",
+     "Skor per soal"
+    ],
     "baris": [
-     ["1", "3 angka", "1"],
-     ["2", "4 angka", "2"],
-     ["3", "5 angka", "3"],
-     ["4", "6 angka", "4"],
-     ["5", "7 angka", "5"]
+     [
+      "1",
+      "3 angka",
+      "1"
+     ],
+     [
+      "2",
+      "4 angka",
+      "2"
+     ],
+     [
+      "3",
+      "5 angka",
+      "3"
+     ],
+     [
+      "4",
+      "6 angka",
+      "4"
+     ],
+     [
+      "5",
+      "7 angka",
+      "5"
+     ]
     ]
    },
    "catatan": "Deret makin panjang, tetapi polanya tetap sama. Kalau deret lima angka sudah lancar, menambah panjang deret jauh lebih mudah daripada menambah kecepatan."
@@ -50,7 +77,10 @@
    "isi": [
     "Tujuh soal berikut juga diambil apa adanya dari bank soal. Setiap pembahasan memuat langkah hitungnya, supaya kamu bisa melihat di langkah mana kesalahan biasanya terjadi."
    ],
-   "soal": {"psikologi": "aritmatika", "jumlah": 7}
+   "soal": {
+    "psikologi": "aritmatika",
+    "jumlah": 7
+   }
   },
   {
    "h2": "Cara berlatih tanpa aplikasi",
@@ -91,13 +121,34 @@
   "Kalau delapan soal daya ingat di atas sudah lancar, lanjutkan dengan deret angka dan hitung cepat pada halaman contoh soal lainnya, lalu coba versi berwaktu di aplikasi latihan."
  ],
  "tautan": [
-  {"teks": "40 soal contoh gratis", "url": "/contoh/"},
-  {"teks": "Contoh soal psikotes kerja", "url": "/contoh-soal-psikotes-kerja/"},
-  {"teks": "Contoh soal tes kraepelin", "url": "/contoh-soal-tes-kraepelin/"},
-  {"teks": "Contoh soal deret angka", "url": "/contoh-soal-deret-angka/"},
-  {"teks": "Buka aplikasi latihan", "url": "/psikotes/"},
-  {"teks": "Harga & cara beli", "url": "/beli/"}
+  {
+   "teks": "40 soal contoh gratis",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Contoh soal psikotes kerja",
+   "url": "/contoh-soal-psikotes-kerja/"
+  },
+  {
+   "teks": "Contoh soal tes kraepelin",
+   "url": "/contoh-soal-tes-kraepelin/"
+  },
+  {
+   "teks": "Contoh soal deret angka",
+   "url": "/contoh-soal-deret-angka/"
+  },
+  {
+   "teks": "Buka aplikasi latihan",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  }
  ],
  "tanggal_terbit": "2026-09-21",
- "diperbarui": "21 September 2026"
+ "diperbarui": "21 September 2026",
+ "utm_source": "blog-contoh-soal-psikotes-daya-ingat",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }

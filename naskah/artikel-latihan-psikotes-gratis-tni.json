@@ -1,159 +1,162 @@
 {
-  "slug": "latihan-psikotes-gratis-tni",
-  "judul_tab": "Latihan Psikotes Gratis TNI & Soal Psikotes TNI (SiapPsikotes)",
-  "deskripsi": "Latihan psikotes gratis untuk persiapan TNI: soal TIU verbal, numerik, logika + TWK wawasan kebangsaan. 40 soal contoh bisa dikerjakan tanpa akun.",
-  "h1": "Latihan Psikotes Gratis untuk Persiapan TNI: Soal TIU, TWK & Cara Berlatih yang Efektif",
-  "dek": "Halaman ini menyediakan latihan psikotes gratis terstruktur untuk calon TNI. Mengambil soal dari bank SiapPsikotes (1.348 soal, 9 jenis tes), kamu bisa mencoba 40 soal contoh tanpa akun, lalu mengakses seluruh bank soal TIU, TWK, dan kepribadian di aplikasi latihan.",
-  "kata_kunci": "latihan psikotes gratis, soal psikotes TNI, siap psikotes",
-  "pembuka": [
-    "Seleksi TNI (Tentara Nasional Indonesia) memakai psikotes sebagai salah satu gerbang awal sebelum wawancara dan tes kesehatan. Yang diuji mencakup intelegensi umum (TIU: verbal, numerik, logika), wawasan kebangsaan (TWK), serta kecenderungan kepribadian (TKP). Banyak calon TNI yang lulus administrasi tapi terhenti di psikotes karena tidak terbiasa dengan tekanan waktu dan pola soal yang unfamiliar.",
-    "SiapPsikotes menyediakan latihan psikotes gratis yang terstruktur untuk persiapan TNI. Bank soal kami berisi 1.348 soal untuk 9 jenis tes yang sudah diperiksa dengan pedoman mutu yang terbuka. Yang gratis: 40 soal contoh berpembahasan di halaman contoh — tanpa akun, langsung bisa dikerjakan. Yang berbayar: seluruh bank soal TIU, TWK, kepribadian, tes gambar, kraepelin, dan bahasa Inggris plus Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara) seharga Rp 39.000 sekali bayar."
-  ],
-  "bagian": [
-    {
-      "h2": "Struktur psikotes TNI: TIU, TWK, dan TKP",
-      "isi": [
-        "Psikotes TNI biasanya terdiri dari tiga blok utama yang dikerjakan berurutan atau dipisah sesi:",
-        "Tes Intelegensi Umum (TIU) mengukur kecepatan dan ketepatan berpikir lewat tiga subtes: kemampuan verbal (sinonim, antonim, analogi), kemampuan numerik (deret angka, aritmetika, perbandingan), serta penalaran & logika (silogisme, urutan kejadian). Waktu per soal rata-rata 45–60 detik.",
-        "Tes Wawasan Kebangsaan (TWK) mengukur pengetahuan dasar kebangsaan: Pancasila, UUD 1945, sejarah perjuangan, lembaga negara, simbol negara, dan perkembangan terkini. Jumlah soal biasanya 40–60 butir dengan waktu 30–45 menit.",
-        "Tes Kepribadian (TKP) bukan tes benar/salah. Bentuknya pernyataan sikap kerja yang harus dipilih atau diurutkan. Yang dinilai adalah konsistensi jawaban, kelengkapan, dan kecenderungan sikap yang cocok dengan nilai-nilai TNI (disiplin, loyalitas, jujur, kerja sama)."
-      ],
-      "poin": [
-        "TIU: verbal + numerik + logika — kecepatan & ketepatan berpikir.",
-        "TWK: wawasan kebangsaan — hafalan faktual & pemahaman konstitusi.",
-        "TKP: kepribadian situasional — konsistensi & kecocokan nilai TNI."
-      ]
-    },
-    {
-      "h2": "Mengapa latihan psikotes gratis di SiapPsikotes berbeda",
-      "isi": [
-        "Banyak situs latihan psikotes gratis hanya menumpuk soal tanpa pembahasan, atau menjual kunci jawaban palsu yang menjanjikan \"soal TNI asli\". SiapPsikotes tidak melakukan hal itu. Prinsip kami: soal latihan adalah alat untuk mengenali pola, bukan naskah ujian yang dibocorkan.",
-        "Setiap soal di bank SiapPsikotes (1.348 butir) adalah karya penyusun sendiri, disusun agar pola dan tingkat kesulitannya mendekati psikotes kerja dan akademik yang umum dipakai di Indonesia — termasuk TNI, Polri, BUMN, CPNS. Soal diperiksa dengan pedoman mutu yang bisa diverifikasi ulang (lihat halaman mutu). Pembahasan tiap soal memuat langkah berpikir, bukan hanya kunci jawaban.",
-        "Fitur latihan gratis (tanpa akun): 40 soal contoh mewakili 9 jenis tes, tiap soal punya tombol pembahasan yang bisa dibuka setelah menjawab. Latihan berjalan penuh offline setelah halaman pertama kali dibuka — praktis untuk latihan di perjalanan atau tempat tanpa sinyal."
-      ],
-      "catatan": "SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun. Kami tidak berafiliasi dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan."
-    },
-    {
-      "h2": "8 contoh soal verbal (sinonim, antonim, analogi)",
-      "isi": [
-        "Bagian verbal TIU menguji ketepatan makna kata dan hubungan antar kata. Kuncinya: tentukan dulu jenis hubungan (makna sama, lawan, sebab-akibat, bagian-dari), baru cari jawabannya. Jangan terburu-buru membaca pilihan — baca pertanyaan sampai tuntas."
-      ],
-      "soal": {
-        "kategori": "verbal",
-        "jumlah": 8
-      }
-    },
-    {
-      "h2": "8 contoh soal numerik & deret angka",
-      "isi": [
-        "Numerik TIU mencakup deret angka, aritmetika cepat, dan perbandingan. Untuk deret: tulis selisih antar suku di kertas coret. Pola paling umum: selisih konstan, selisih berjalan (2, 4, 6...), atau pola kali/bagi. Jangan hitung di kepala untuk soal berlapis."
-      ],
-      "soal": {
-        "kategori": "numerik",
-        "jumlah": 8
-      }
-    },
-    {
-      "h2": "8 contoh soal penalaran & logika",
-      "isi": [
-        "Soal logika tidak butuh hitungan rumit; yang diuji ketelitian membaca premis. Kesalahan paling umum: menambahkan asumsi yang tidak tertulis di soal. Contoh: \"Semua A adalah B\" tidak berarti \"Semua B adalah A\". Latih pola silogisme standar dan urutan kejadian."
-      ],
-      "soal": {
-        "kategori": "penalaran_logika",
-        "jumlah": 8
-      }
-    },
-    {
-      "h2": "8 contoh soal TWK wawasan kebangsaan",
-      "isi": [
-        "TWK TNI mencakup Pancasila (sila, lambang, makna), UUD 1945 (pasal-pasal kunci, amandemen), sejarah proklamasi & perjuangan kemerdekaan, simbol negara (bendera, lambang, lagu kebangsaan), serta struktur lembaga negara (MPR, DPR, DPD, MA, MK, BPK). Hafal fakta kunci, tapi pahami juga konteksnya."
-      ],
-      "soal": {
-        "kategori": "tkw",
-        "jumlah": 8
-      }
-    },
-    {
-      "h2": "Strategi latihan 2 minggu sebelum psikotes TNI",
-      "isi": [
-        "Minggu 1 (Hari 1–7): Fokus mengenali pola. Tiap hari kerjakan 1 set campuran 25 soal (8 verbal, 8 numerik, 5 logika, 4 TWK) dengan timer 20 menit. Catat soal yang salah dan jenis kesalahannya (salah baca, salah hitung, kehabisan waktu, tidak tahu pola).",
-        "Minggu 2 (Hari 8–14): Fokus kecepatan & ketahanan. Tiap hari kerjakan 1 sesi penuh 30 soal (10 verbal, 10 numerik, 10 logika) timer 20 menit. Hari 12–14: tambahkan 1 set TWK 20 soal timer 10 menit. Ulangi soal yang pernah salah di hari 5, 8, 11 — bukan besoknya.",
-        "Sesi penuh akhir pekan: kerjakan simulasi lengkap TIU 50 soal + TWK 40 soal tanpa jeda, catat jumlah benar & sisa waktu. Target: ≥70% benar TIU, ≥75% benar TWK."
-      ],
-      "poin": [
-        "Target harian kecil & berangka: 25 soal berwaktu per hari.",
-        "Catat jenis kesalahan, bukan jumlahnya: salah baca instruksi, salah hitung, kehabisan waktu.",
-        "Ulangi soal salah setelah 2–3 hari, bukan besok.",
-        "Sesi penuh tanpa jeda 1×/minggu untuk latih ketahanan konsentrasi."
-      ],
-      "catatan": "Konsistensi harian 25 menit mengalahkan marathon 5 jam seminggu. Otak belajar pola lewat pengulangan terstruktur, bukan dorongan sesaat."
-    },
-    {
-      "h2": "Kesalahan umum calon TNI di psikotes & cara mengatasinya",
-      "isi": [
-        "Dari pola ribuan latihan, enam kesalahan ini paling sering muncul sekaligus paling mudah diperbaiki sebelum hari-H:"
-      ],
-      "poin": [
-        "Melewatkan kata kunci instruksi: \"kecuali\", \"yang tidak termasuk\", \"paling tidak sesuai\" — selalu lingkari kata kunci sebelum cari jawaban.",
-        "Berhenti terlalu lama di satu soal sampai soal di belakangnya tidak tersentuh — batas 60 detik verbal/logika, 45 detik numerik, lalu tandai & lanjut.",
-        "Menghitung di kepala untuk soal berlapis, lalu keliru di langkah kedua — selalu tulis langkah di kertas coret.",
-        "Tidak menandai soal ragu, sehingga tidak sempat kembali saat waktu tersisa — pakai sistem tanda: ✓ yakin, ? ragu, ✗ lewati.",
-        "Membaca pilihan jawaban sebelum pertanyaan selesai dibaca — baca pertanyaan sampai titik, baru lihat pilihan.",
-        "Belajar dengan membuka kunci jawaban lebih dulu — jawab dulu, catat alasan, baru bandingkan pembahasan."
-      ]
-    },
-    {
-      "h2": "Mulai latihan psikotes gratis sekarang",
-      "isi": [
-        "Kalau ingin mencoba dulu sebelum memutuskan, buka halaman contoh: 40 soal berpembahasan mewakili 9 jenis tes (verbal, numerik, logika, matematika, bahasa Inggris, wawasan kebangsaan/TWK, kepribadian, tes gambar, kraepelin) — tanpa akun, langsung dikerjakan.",
-        "Kalau sudah siap berlatih serius dengan seluruh bank soal (1.348 soal), pembahasan lengkap, Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara), dan akses offline penuh: aplikasi latihan SiapPsikotes Rp 39.000 sekali bayar (bukan langganan). Kode akses dikirim manual target maksimal 6 jam jam kerja (08.00–21.00 WIB)."
-      ]
-    }
-  ],
-  "faq": [
-    {
-      "t": "Berapa lama sebaiknya latihan sebelum psikotes TNI?",
-      "j": "Kalau masih ada dua minggu, 25–30 soal berwaktu setiap hari sudah cukup untuk melihat kemajuan, ditambah satu sesi penuh tanpa jeda setiap akhir pekan. Kalau waktunya tinggal 2–3 hari, jangan menambah materi baru: fokus pada kategori yang paling sering salah dan biasakan bekerja dengan batas waktu ketat."
-    },
-    {
-      "t": "Apakah soal di SiapPsikotes sama dengan soal ujian TNI asli?",
-      "j": "Tidak. Seluruh soal di bank soal kami adalah karya penyusun sendiri untuk latihan, disusun agar polanya mendekati psikotes TNI, Polri, BUMN, CPNS yang umum. Kami bukan situs instansi mana pun dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengenali titik lemah, bukan menggantikan ujian resmi."
-    },
-    {
-      "t": "Apakah latihan psikotes gratis di sini benar-benar gratis tanpa batas waktu?",
-      "j": "Ya. 40 soal contoh di halaman contoh gratis tanpa batas waktu akses, dan berjalan offline setelah dibuka pertama kali. Yang berbayar hanya materi lengkap di aplikasi latihan (1.348 soal, 9 jenis tes, pembahasan, Laporan Lengkap) seharga Rp 39.000 sekali bayar."
-    },
-    {
-      "t": "Apakah hasil latihan ini bisa disebut skor IQ atau skor psikotes TNI?",
-      "j": "Tidak. Hasil di aplikasi ini alat bantu untuk mengukur kesiapan sendiri, bukan laporan hasil resmi dan bukan skor IQ resmi. Skor IQ yang diakui hanya keluar dari pemeriksaan psikolog berlisensi dengan alat baku. Latihan di sini membantu kamu mengenali titik lemah, bukan menggantikan pengukuran tersebut."
-    },
-    {
-      "t": "Bagaimana kalau saya menemukan pembahasan yang terasa keliru?",
-      "j": "Laporkan lewat halaman mutu atau kontak yang tersedia di situs. Bank soal kami diperiksa dengan pedoman mutu yang dapat diperiksa ulang, tetapi 1.348 butir tidak bebas dari kemungkinan salah; laporan pembaca adalah bagian dari pemeriksaan itu dan kami perbaiki setelah diverifikasi."
-    }
-  ],
-  "penutup": [
-    "Psikotes TNI bukan ujian hafalan, jadi menyiapkannya tidak bisa hanya dengan membaca kunci jawaban sampai hafal urutannya. Kerjakan contoh soal dengan batas waktu, periksa kesalahan, ulangi yang salah beberapa hari kemudian, dan lakukan itu berulang beberapa kali sebelum harinya tiba.",
-    "Kalau ingin mulai dari yang paling ringan, buka 40 soal contoh gratis lebih dulu — tanpa akun, langsung bisa dikerjakan. Kalau ingin berlatih lebih panjang dengan seluruh kategori, aplikasi latihan memuat 1.348 soal untuk 9 jenis tes beserta pembahasan dan Laporan Lengkap, Rp 39.000 sekali bayar. Soal di halaman ini berasal dari bank soal yang sama, dan cara pemeriksaannya bisa kamu baca di halaman mutu.",
-    "Catatan kejujuran: SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun dan tidak berafiliasi dengan lembaga pemerintah maupun perusahaan mana pun. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan seleksi. Hasil seleksi bergantung pada usaha dan persiapanmu sendiri."
-  ],
-  "tautan": [
-    {
-      "teks": "40 soal contoh gratis (tanpa akun)",
-      "url": "/contoh/"
-    },
-    {
-      "teks": "Buka aplikasi latihan",
-      "url": "/psikotes/"
-    },
-    {
-      "teks": "Harga & cara beli",
-      "url": "/beli/"
-    },
-    {
-      "teks": "Mutu & bukti pemeriksaan soal",
-      "url": "/mutu/"
-    }
-  ],
-  "diperbarui": "13 Oktober 2026"
+ "slug": "latihan-psikotes-gratis-tni",
+ "judul_tab": "Latihan Psikotes Gratis TNI & Soal Psikotes TNI (SiapPsikotes)",
+ "deskripsi": "Latihan psikotes gratis untuk persiapan TNI: soal TIU verbal, numerik, logika + TWK wawasan kebangsaan. 40 soal contoh bisa dikerjakan tanpa akun.",
+ "h1": "Latihan Psikotes Gratis untuk Persiapan TNI: Soal TIU, TWK & Cara Berlatih yang Efektif",
+ "dek": "Halaman ini menyediakan latihan psikotes gratis terstruktur untuk calon TNI. Mengambil soal dari bank SiapPsikotes (1.348 soal, 9 jenis tes), kamu bisa mencoba 40 soal contoh tanpa akun, lalu mengakses seluruh bank soal TIU, TWK, dan kepribadian di aplikasi latihan.",
+ "kata_kunci": "latihan psikotes gratis, soal psikotes TNI, siap psikotes",
+ "pembuka": [
+  "Seleksi TNI (Tentara Nasional Indonesia) memakai psikotes sebagai salah satu gerbang awal sebelum wawancara dan tes kesehatan. Yang diuji mencakup intelegensi umum (TIU: verbal, numerik, logika), wawasan kebangsaan (TWK), serta kecenderungan kepribadian (TKP). Banyak calon TNI yang lulus administrasi tapi terhenti di psikotes karena tidak terbiasa dengan tekanan waktu dan pola soal yang unfamiliar.",
+  "SiapPsikotes menyediakan latihan psikotes gratis yang terstruktur untuk persiapan TNI. Bank soal kami berisi 1.348 soal untuk 9 jenis tes yang sudah diperiksa dengan pedoman mutu yang terbuka. Yang gratis: 40 soal contoh berpembahasan di halaman contoh — tanpa akun, langsung bisa dikerjakan. Yang berbayar: seluruh bank soal TIU, TWK, kepribadian, tes gambar, kraepelin, dan bahasa Inggris plus Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara) seharga Rp 39.000 sekali bayar."
+ ],
+ "bagian": [
+  {
+   "h2": "Struktur psikotes TNI: TIU, TWK, dan TKP",
+   "isi": [
+    "Psikotes TNI biasanya terdiri dari tiga blok utama yang dikerjakan berurutan atau dipisah sesi:",
+    "Tes Intelegensi Umum (TIU) mengukur kecepatan dan ketepatan berpikir lewat tiga subtes: kemampuan verbal (sinonim, antonim, analogi), kemampuan numerik (deret angka, aritmetika, perbandingan), serta penalaran & logika (silogisme, urutan kejadian). Waktu per soal rata-rata 45–60 detik.",
+    "Tes Wawasan Kebangsaan (TWK) mengukur pengetahuan dasar kebangsaan: Pancasila, UUD 1945, sejarah perjuangan, lembaga negara, simbol negara, dan perkembangan terkini. Jumlah soal biasanya 40–60 butir dengan waktu 30–45 menit.",
+    "Tes Kepribadian (TKP) bukan tes benar/salah. Bentuknya pernyataan sikap kerja yang harus dipilih atau diurutkan. Yang dinilai adalah konsistensi jawaban, kelengkapan, dan kecenderungan sikap yang cocok dengan nilai-nilai TNI (disiplin, loyalitas, jujur, kerja sama)."
+   ],
+   "poin": [
+    "TIU: verbal + numerik + logika — kecepatan & ketepatan berpikir.",
+    "TWK: wawasan kebangsaan — hafalan faktual & pemahaman konstitusi.",
+    "TKP: kepribadian situasional — konsistensi & kecocokan nilai TNI."
+   ]
+  },
+  {
+   "h2": "Mengapa latihan psikotes gratis di SiapPsikotes berbeda",
+   "isi": [
+    "Banyak situs latihan psikotes gratis hanya menumpuk soal tanpa pembahasan, atau menjual kunci jawaban palsu yang menjanjikan \"soal TNI asli\". SiapPsikotes tidak melakukan hal itu. Prinsip kami: soal latihan adalah alat untuk mengenali pola, bukan naskah ujian yang dibocorkan.",
+    "Setiap soal di bank SiapPsikotes (1.348 butir) adalah karya penyusun sendiri, disusun agar pola dan tingkat kesulitannya mendekati psikotes kerja dan akademik yang umum dipakai di Indonesia — termasuk TNI, Polri, BUMN, CPNS. Soal diperiksa dengan pedoman mutu yang bisa diverifikasi ulang (lihat halaman mutu). Pembahasan tiap soal memuat langkah berpikir, bukan hanya kunci jawaban.",
+    "Fitur latihan gratis (tanpa akun): 40 soal contoh mewakili 9 jenis tes, tiap soal punya tombol pembahasan yang bisa dibuka setelah menjawab. Latihan berjalan penuh offline setelah halaman pertama kali dibuka — praktis untuk latihan di perjalanan atau tempat tanpa sinyal."
+   ],
+   "catatan": "SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun. Kami tidak berafiliasi dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan."
+  },
+  {
+   "h2": "8 contoh soal verbal (sinonim, antonim, analogi)",
+   "isi": [
+    "Bagian verbal TIU menguji ketepatan makna kata dan hubungan antar kata. Kuncinya: tentukan dulu jenis hubungan (makna sama, lawan, sebab-akibat, bagian-dari), baru cari jawabannya. Jangan terburu-buru membaca pilihan — baca pertanyaan sampai tuntas."
+   ],
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 8
+   }
+  },
+  {
+   "h2": "8 contoh soal numerik & deret angka",
+   "isi": [
+    "Numerik TIU mencakup deret angka, aritmetika cepat, dan perbandingan. Untuk deret: tulis selisih antar suku di kertas coret. Pola paling umum: selisih konstan, selisih berjalan (2, 4, 6...), atau pola kali/bagi. Jangan hitung di kepala untuk soal berlapis."
+   ],
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 8
+   }
+  },
+  {
+   "h2": "8 contoh soal penalaran & logika",
+   "isi": [
+    "Soal logika tidak butuh hitungan rumit; yang diuji ketelitian membaca premis. Kesalahan paling umum: menambahkan asumsi yang tidak tertulis di soal. Contoh: \"Semua A adalah B\" tidak berarti \"Semua B adalah A\". Latih pola silogisme standar dan urutan kejadian."
+   ],
+   "soal": {
+    "kategori": "penalaran_logika",
+    "jumlah": 8
+   }
+  },
+  {
+   "h2": "8 contoh soal TWK wawasan kebangsaan",
+   "isi": [
+    "TWK TNI mencakup Pancasila (sila, lambang, makna), UUD 1945 (pasal-pasal kunci, amandemen), sejarah proklamasi & perjuangan kemerdekaan, simbol negara (bendera, lambang, lagu kebangsaan), serta struktur lembaga negara (MPR, DPR, DPD, MA, MK, BPK). Hafal fakta kunci, tapi pahami juga konteksnya."
+   ],
+   "soal": {
+    "kategori": "tkw",
+    "jumlah": 8
+   }
+  },
+  {
+   "h2": "Strategi latihan 2 minggu sebelum psikotes TNI",
+   "isi": [
+    "Minggu 1 (Hari 1–7): Fokus mengenali pola. Tiap hari kerjakan 1 set campuran 25 soal (8 verbal, 8 numerik, 5 logika, 4 TWK) dengan timer 20 menit. Catat soal yang salah dan jenis kesalahannya (salah baca, salah hitung, kehabisan waktu, tidak tahu pola).",
+    "Minggu 2 (Hari 8–14): Fokus kecepatan & ketahanan. Tiap hari kerjakan 1 sesi penuh 30 soal (10 verbal, 10 numerik, 10 logika) timer 20 menit. Hari 12–14: tambahkan 1 set TWK 20 soal timer 10 menit. Ulangi soal yang pernah salah di hari 5, 8, 11 — bukan besoknya.",
+    "Sesi penuh akhir pekan: kerjakan simulasi lengkap TIU 50 soal + TWK 40 soal tanpa jeda, catat jumlah benar & sisa waktu. Target: ≥70% benar TIU, ≥75% benar TWK."
+   ],
+   "poin": [
+    "Target harian kecil & berangka: 25 soal berwaktu per hari.",
+    "Catat jenis kesalahan, bukan jumlahnya: salah baca instruksi, salah hitung, kehabisan waktu.",
+    "Ulangi soal salah setelah 2–3 hari, bukan besok.",
+    "Sesi penuh tanpa jeda 1×/minggu untuk latih ketahanan konsentrasi."
+   ],
+   "catatan": "Konsistensi harian 25 menit mengalahkan marathon 5 jam seminggu. Otak belajar pola lewat pengulangan terstruktur, bukan dorongan sesaat."
+  },
+  {
+   "h2": "Kesalahan umum calon TNI di psikotes & cara mengatasinya",
+   "isi": [
+    "Dari pola ribuan latihan, enam kesalahan ini paling sering muncul sekaligus paling mudah diperbaiki sebelum hari-H:"
+   ],
+   "poin": [
+    "Melewatkan kata kunci instruksi: \"kecuali\", \"yang tidak termasuk\", \"paling tidak sesuai\" — selalu lingkari kata kunci sebelum cari jawaban.",
+    "Berhenti terlalu lama di satu soal sampai soal di belakangnya tidak tersentuh — batas 60 detik verbal/logika, 45 detik numerik, lalu tandai & lanjut.",
+    "Menghitung di kepala untuk soal berlapis, lalu keliru di langkah kedua — selalu tulis langkah di kertas coret.",
+    "Tidak menandai soal ragu, sehingga tidak sempat kembali saat waktu tersisa — pakai sistem tanda: ✓ yakin, ? ragu, ✗ lewati.",
+    "Membaca pilihan jawaban sebelum pertanyaan selesai dibaca — baca pertanyaan sampai titik, baru lihat pilihan.",
+    "Belajar dengan membuka kunci jawaban lebih dulu — jawab dulu, catat alasan, baru bandingkan pembahasan."
+   ]
+  },
+  {
+   "h2": "Mulai latihan psikotes gratis sekarang",
+   "isi": [
+    "Kalau ingin mencoba dulu sebelum memutuskan, buka halaman contoh: 40 soal berpembahasan mewakili 9 jenis tes (verbal, numerik, logika, matematika, bahasa Inggris, wawasan kebangsaan/TWK, kepribadian, tes gambar, kraepelin) — tanpa akun, langsung dikerjakan.",
+    "Kalau sudah siap berlatih serius dengan seluruh bank soal (1.348 soal), pembahasan lengkap, Laporan Lengkap (ringkasan kesiapan, profil kepribadian, rencana latihan 14 hari, panduan wawancara), dan akses offline penuh: aplikasi latihan SiapPsikotes Rp 39.000 sekali bayar (bukan langganan). Kode akses dikirim manual target maksimal 6 jam jam kerja (08.00–21.00 WIB)."
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "t": "Berapa lama sebaiknya latihan sebelum psikotes TNI?",
+   "j": "Kalau masih ada dua minggu, 25–30 soal berwaktu setiap hari sudah cukup untuk melihat kemajuan, ditambah satu sesi penuh tanpa jeda setiap akhir pekan. Kalau waktunya tinggal 2–3 hari, jangan menambah materi baru: fokus pada kategori yang paling sering salah dan biasakan bekerja dengan batas waktu ketat."
+  },
+  {
+   "t": "Apakah soal di SiapPsikotes sama dengan soal ujian TNI asli?",
+   "j": "Tidak. Seluruh soal di bank soal kami adalah karya penyusun sendiri untuk latihan, disusun agar polanya mendekati psikotes TNI, Polri, BUMN, CPNS yang umum. Kami bukan situs instansi mana pun dan tidak memiliki akses ke naskah ujian. Latihan di sini membantu mengenali titik lemah, bukan menggantikan ujian resmi."
+  },
+  {
+   "t": "Apakah latihan psikotes gratis di sini benar-benar gratis tanpa batas waktu?",
+   "j": "Ya. 40 soal contoh di halaman contoh gratis tanpa batas waktu akses, dan berjalan offline setelah dibuka pertama kali. Yang berbayar hanya materi lengkap di aplikasi latihan (1.348 soal, 9 jenis tes, pembahasan, Laporan Lengkap) seharga Rp 39.000 sekali bayar."
+  },
+  {
+   "t": "Apakah hasil latihan ini bisa disebut skor IQ atau skor psikotes TNI?",
+   "j": "Tidak. Hasil di aplikasi ini alat bantu untuk mengukur kesiapan sendiri, bukan laporan hasil resmi dan bukan skor IQ resmi. Skor IQ yang diakui hanya keluar dari pemeriksaan psikolog berlisensi dengan alat baku. Latihan di sini membantu kamu mengenali titik lemah, bukan menggantikan pengukuran tersebut."
+  },
+  {
+   "t": "Bagaimana kalau saya menemukan pembahasan yang terasa keliru?",
+   "j": "Laporkan lewat halaman mutu atau kontak yang tersedia di situs. Bank soal kami diperiksa dengan pedoman mutu yang dapat diperiksa ulang, tetapi 1.348 butir tidak bebas dari kemungkinan salah; laporan pembaca adalah bagian dari pemeriksaan itu dan kami perbaiki setelah diverifikasi."
+  }
+ ],
+ "penutup": [
+  "Psikotes TNI bukan ujian hafalan, jadi menyiapkannya tidak bisa hanya dengan membaca kunci jawaban sampai hafal urutannya. Kerjakan contoh soal dengan batas waktu, periksa kesalahan, ulangi yang salah beberapa hari kemudian, dan lakukan itu berulang beberapa kali sebelum harinya tiba.",
+  "Kalau ingin mulai dari yang paling ringan, buka 40 soal contoh gratis lebih dulu — tanpa akun, langsung bisa dikerjakan. Kalau ingin berlatih lebih panjang dengan seluruh kategori, aplikasi latihan memuat 1.348 soal untuk 9 jenis tes beserta pembahasan dan Laporan Lengkap, Rp 39.000 sekali bayar. Soal di halaman ini berasal dari bank soal yang sama, dan cara pemeriksaannya bisa kamu baca di halaman mutu.",
+  "Catatan kejujuran: SiapPsikotes bukan situs TNI, Polri, atau instansi pemerintah mana pun dan tidak berafiliasi dengan lembaga pemerintah maupun perusahaan mana pun. Latihan di sini membantu mengukur kesiapan, bukan menjamin kelulusan seleksi. Hasil seleksi bergantung pada usaha dan persiapanmu sendiri."
+ ],
+ "tautan": [
+  {
+   "teks": "40 soal contoh gratis (tanpa akun)",
+   "url": "/contoh/"
+  },
+  {
+   "teks": "Buka aplikasi latihan",
+   "url": "/psikotes/"
+  },
+  {
+   "teks": "Harga & cara beli",
+   "url": "/beli/"
+  },
+  {
+   "teks": "Mutu & bukti pemeriksaan soal",
+   "url": "/mutu/"
+  }
+ ],
+ "diperbarui": "13 Oktober 2026",
+ "utm_source": "blog-latihan-psikotes-gratis-tni",
+ "utm_medium": "blog",
+ "utm_campaign": "artikel_seo"
 }
