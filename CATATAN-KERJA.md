@@ -313,3 +313,20 @@ Tiga artikel SEO frasa riset Thompson (t_cea185aa) tayang 20 Okt 2026:
 - Gerbang `peraturan-mutu.py` lulus semua (1.348 soal), `tests/test_verifikasi.py`
   lulus (exit 0). Listing marketplace MARKETPLACE-LISTING.md disegarkan: 1.348
   soal + kode akses otomatis pasca-bayar QRIS, LISTING-SIAP-TEMPEL.md diregenerasi.
+
+## 2026-10-23 — Blok kepercayaan berbasis fakta di /beli/ + latensi QRIS terukur (t_268f9265, commit 107ec1e)
+- /beli/ dapat satu baris bukti di bawah CTA: 1.348 soal latihan, 9 modul tes, pembaruan
+  berkala, tautan coba gratis (/contoh/), bukti mutu (/mutu/), dan dana kembali bila kode
+  belum dipakai (/syarat/). Tanpa angka penjualan atau testimoni: payments is_test=0 = 0
+  transaksi nyata, jadi tidak ada data yang boleh ditampilkan (instruksi koreksi operator —
+  kata "resmi" dihindari, menurutian peraturan mutu & penyangkalan afiliasi).
+- qris_tampil kini membawa `dtk_qris` (detik sejak navigasi) di rincian D1 — metrik nyata
+  "QRIS tampil <2 detik" bisa dipantau dari D1. A/B readout aman: token ditambah di akhir
+  rincian, semua pembaca tetap split('|')[0].
+- Worker: master HTML /beli/ ditembolok 120 detik dalam isolat (fetch GitHub raw kadang
+  >1 s dan langsung jadi TTFB mobile). Rewrite A/B tetap per permintaan; master rusak
+  tidak pernah disimpan.
+- Bukti verifikasi: kedua varian di 390x844 — kartu bayar di atas fold (A: bottom 666,
+  B: 644; baseline 844), CSS-loaded gambar QRIS 468 ms (A) / 155 ms (B), QRIS tampak dinding
+  0.56 dtk (A) / 0.20 dtk (B). Uji beacon `|d:4.5|` tercatat is_test=1 (tidak masuk metrik).
+  Gate: peraturan-mutu lulus, uji-situs-live SEHAT.
