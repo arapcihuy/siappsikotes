@@ -57,6 +57,13 @@ if ! $PY tools/verifikasi-soal.py; then
 fi
 
 echo
+echo "=== 2b/7 COPY /beli/ BEBAS KLAIM TERLARANG ==="
+if ! $PY tools/periksa-copy-beli.py; then
+  echo ">>> GAGAL: copy /beli/ memuat klaim terlarang (resmi/dijamin/terjual/testimoni)"
+  GAGAL=1
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do
