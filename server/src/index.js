@@ -1170,6 +1170,32 @@ export default {
         return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="funnel-harian.csv"' } });
       }
 
+      // ---- funnel mingguan per kanal (webhook CSV + UTM): JSON + CSV terbuka ----
+      // Kanal = utm_source. kunjungan dari beacon /api/pantau, pay dari webhook
+      // QRIS/Tripay, kunjung-bayar = kuncian rujukan SP-xxx antara kedua sumber.
+      if (jalan === '/api/dashboard/funnel-kanal' && request.method === 'GET') {
+        const u = new URL(request.url);
+        const days = Math.min(90, Math.max(1, parseInt(u.searchParams.get('days') || '7', 10) || 7));
+        const data = await funnelKanalJson(env, days);
+        if ((u.searchParams.get('format') || '') === 'csv') {
+          const csv = 'kanal,kunjungan,kunjung_bayar,pay,revenue_rp\n' +
+            data.kanal.map(k => [k.kanal, k.kunjungan, k.kunjung_bayar, k.pay, k.revenue_rp].join(',')).join('\n') +
+            '\ntotal,' + [data.total.kunjungan, data.total.kunjung_bayar, data.total.pay, data.total.revenue_rp].join(',') + '\n';
+          return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="funnel-kanal.csv"' } });
+        }
+        return jawab(data, 200, asal);
+      }
+
+      // ---- uji laporan mingguan manual (kode SAMA dengan cron Senin 07:00 WIB; ----
+      //      guard KV TIDAK ditulis di jalur ini supaya ran cron asli tidak termakan) ----
+      if (jalan === '/api/dashboard/mingguan-coba' && request.method === 'POST') {
+        const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+        const laju = await batasiLaju(env, ip, 'mingguan_coba', 5, 300);
+        if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+        const hasil = await laporanMingguan(env, { tanpaGuard: true });
+        return jawab({ ok: !!hasil.ok, tg: hasil.tg, kanal: hasil.kanal || [], total: hasil.total || null }, 200, asal);
+      }
+
       // ---- jalankan laporan harian Telegram secara manual (jalur kode sama dengan cron) ----
       if (jalan === '/api/dashboard/laporan-coba' && request.method === 'POST') {
         const hasil = await laporanHarian(env);
@@ -1327,6 +1353,11 @@ export default {
               if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 8) await rekonsCronPagi(env);
               if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 7) await ringkasanRevenuePagi(env);
               await sweepBayarBaru(env);   // alert revenue: bayar baru -> push Telegram (guard KV rowid, tiap bayar sekali)
+              // Laporan funnel mingguan per kanal (webhook+UTM): Senin 07:00 WIB. Dijadwalkan
+              // dari cron */10 yang SUDAH ada (menit pertama rentang 07:00-07:59 WIB menang,
+              // lalu guard KV menahan yang lain) — nol trigger cron baru.
+              const wibCron = new Date(Date.now() + 7 * 3600e3);
+              if (wibCron.getUTCHours() === 7 && wibCron.getUTCDay() === 1) await laporanMingguan(env);
               if (kini.getUTCHours() % 6 === 0 && kini.getUTCMinutes() <= 10) await simpanSnapshotFunnel(env);
               await ingatkanTripayBelumPasang(env);   // sekali sehari saja, lihat fungsinya
               await cekMonitoringLengkap(env);
@@ -1442,6 +1473,127 @@ export default {
               } catch (e) {
             return { ok: false, ringkasan: String(e.message || e).slice(0, 160) };
             }
+            }
+
+            // ===== Funnel mingguan per kanal (sumber: webhook CSV + UTM beacon) =====
+            // Gabungan DUA sumber yang sudah ada, gratis, tanpa kolom/migrasi baru:
+            //   - peristiwa (beacon /api/pantau): kunjungan /beli/, kolom utm_source = kanal kampanye
+            //   - payments  (webhook QRIS/Tripay): pembayaran sukses, utm_source ikut webhook
+            // Kanal = utm_source; baris '-' = tanpa UTM (direct). kunjung-bayar = rujukan SP-xxx
+            // yang PUNYA event kunjungan DAN pembayaran sukses — atribusinya mengikuti kanal
+            // kunjungan (kanal pertama yang terlihat menang, pola sama dengan abBeliJson);
+            // pembayaran yang rujukannya tidak pernah terlihat di beacon dilaporkan terpisah
+            // (total.bayar_tanpa_kunjungan) supaya tidak ada uang yang hilang dari laporan.
+            async function funnelKanalJson(env, jmlHari) {
+                const jumlah = Math.min(90, Math.max(1, parseInt(jmlHari, 10) || 7)) || 7;
+                const sejak = new Date(Date.now() - (jumlah - 1) * 864e5).toISOString().slice(0, 10);
+                const [pe, pay] = await Promise.all([
+                    env.DB.prepare(
+                        "SELECT utm_source, rincian FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' " +
+                        "AND is_test = 0 AND substr(waktu,1,10) >= ? LIMIT 20000"
+                    ).bind(sejak).all(),
+                    env.DB.prepare(
+                        "SELECT COALESCE(utm_source,'') AS kanal, rujukan, amount FROM payments " +
+                        "WHERE status IN ('success','paid') AND is_test = 0 AND substr(timestamp,1,10) >= ? ORDER BY timestamp ASC LIMIT 5000"
+                    ).bind(sejak).all()
+                ]);
+                const hilangTag = (r) => {
+                    // rincian beacon bisa bernada 'SP-123|var:a' (tag varian A/B) — tag dibuang
+                    // supaya satu rujukan tetap satu rujukan saat disandingkan dengan webhook.
+                    const m = /^(SP-\d{3})\|var:[ab]$/.exec(String(r || '').toUpperCase().trim());
+                    return m ? m[1] : String(r || '').toUpperCase().trim();
+                };
+                const kotak = {};   // kanal -> { kunjungan, kunjung_bayar, pay, revenue_rp }
+                const atur = (k) => {
+                    k = (k ? String(k).slice(0, 50).trim() : '') || '-';
+                    if (!kotak[k]) kotak[k] = { kanal: k, kunjungan: 0, kunjung_bayar: 0, pay: 0, revenue_rp: 0 };
+                    return kotak[k];
+                };
+                // Kunjungan unik per kanal (distinct rincian — konsisten COUNT(DISTINCT) dashboard lain)
+                const setRincian = {};
+                const kanalRujukan = {};
+                for (const r of (pe.results || [])) {
+                    const k = (r.utm_source ? String(r.utm_source) : '') || '-';
+                    setRincian[k] = setRincian[k] || {};
+                    setRincian[k][String(r.rincian || '')] = 1;
+                    atur(k);
+                    const rj = hilangTag(r.rincian);
+                    if (rj && rj.indexOf('SP-') === 0 && !kanalRujukan[rj]) kanalRujukan[rj] = k;
+                }
+                for (const k in setRincian) kotak[k].kunjungan = Object.keys(setRincian[k]).length;
+                const dibayar = {};
+                for (const p of (pay.results || [])) {
+                    const d = atur(p.kanal);
+                    d.pay++;
+                    d.revenue_rp += Math.round(Number(p.amount) || 0);
+                    const rj = hilangTag(p.rujukan);
+                    if (rj && rj.indexOf('SP-') === 0) dibayar[rj] = 1;
+                }
+                const sesibayar = {};
+                for (const rj in dibayar) {
+                    const k = kanalRujukan[rj];
+                    if (k) sesibayar[k] = (sesibayar[k] || 0) + 1;
+                }
+                for (const k in sesibayar) if (kotak[k]) kotak[k].kunjung_bayar = sesibayar[k];
+                const daftar = Object.keys(kotak).map(k => kotak[k]).sort((x, y) => (y.pay - x.pay) || (y.kunjungan - x.kunjungan));
+                const total = { kunjungan: 0, kunjung_bayar: 0, pay: 0, revenue_rp: 0, bayar_tanpa_kunjungan: 0 };
+                for (const d of daftar) {
+                    total.kunjungan += d.kunjungan;
+                    total.kunjung_bayar += d.kunjung_bayar;
+                    total.pay += d.pay;
+                    total.revenue_rp += d.revenue_rp;
+                }
+                for (const rj in dibayar) if (!kanalRujukan[rj]) total.bayar_tanpa_kunjungan++;
+                return {
+                    aplikasi: 'SiapPsikotes',
+                    judul: 'Funnel mingguan /beli/ per kanal (utm_source)',
+                    waktu: new Date().toISOString(),
+                    zona_hari: 'UTC',
+                    jendela: { hari: jumlah, sejak: sejak },
+                    definisi: {
+                        kunjungan: 'pengunjung unik /beli/ per utm_source (beacon kunjungan_beli)',
+                        kunjung_bayar: 'rujukan yang kunjungan dan bayar; kanal diambil dari kanal kunjingannya',
+                        pay: 'webhook pembayaran success|paid is_test=0 per utm_source',
+                        revenue_rp: 'jumlah nominal pembayaran per kanal',
+                        bayar_tanpa_kunjungan: 'rujukan dibayar yang tidak pernah terlihat di beacon'
+                    },
+                    kanal: daftar,
+                    total: total
+                };
+            }
+
+            // Laporan funnel mingguan per kanal ke Telegram admin: Senin 07:00 WIB.
+            // Guard KV 'laporan:mingguan:<senin-WIB>' memastikan sekali per minggu. Uji manual:
+            // POST /api/dashboard/mingguan-coba (melewati guard; guard cron asli tetap utuh).
+            async function laporanMingguan(env, opsi) {
+                const tanpaGuard = !!(opsi && opsi.tanpaGuard);
+                try {
+                    const wib = new Date(Date.now() + 7 * 3600e3);
+                    const mundur = (wib.getUTCDay() + 6) % 7;   // hari Senin pada minggu berjalan
+                    const seninWIB = new Date(wib.getTime() - mundur * 864e5).toISOString().slice(0, 10);
+                    const KUNCI = 'laporan:mingguan:' + seninWIB;
+                    if (!tanpaGuard && (await env.FUNNEL_KV.get(KUNCI))) {
+                        return { ok: true, lewati: 'minggu ini sudah dikirim', senin: seninWIB };
+                    }
+                    const data = await funnelKanalJson(env, 7);
+                    const garis = data.kanal.map(k =>
+                        bersihTeks(k.kanal) + ': kunjungan ' + k.kunjungan + ' · kunjung-bayar ' + k.kunjung_bayar +
+                        ' · pay ' + k.pay + ' · Rp ' + Number(k.revenue_rp).toLocaleString('id-ID')).join('\n');
+                    const pesan = '<b>📊 Funnel mingguan SiapPsikotes — per kanal (UTM)</b>\n' +
+                        'Periode 7 hari s/d ' + data.jendela.sejak + '..' + new Date().toISOString().slice(0, 10) + ' UTC\n\n' +
+                        (garis || '(belum ada kanal)') + '\n\n' +
+                        'Total: kunjungan ' + data.total.kunjungan + ' · kunjung-bayar ' + data.total.kunjung_bayar +
+                        ' · pay ' + data.total.pay + ' · Rp ' + Number(data.total.revenue_rp).toLocaleString('id-ID') +
+                        '\nbayar tanpa kunjungan tercatat: ' + data.total.bayar_tanpa_kunjungan +
+                        '\nCSV: https://siappsikotes-api.rasyidahmad180.workers.dev/api/dashboard/funnel-kanal?days=7&format=csv';
+                    const tg = await kirimTelegramAlert(env, pesan);
+                    if (tg.ok && !tanpaGuard) {
+                        try { await env.FUNNEL_KV.put(KUNCI, JSON.stringify({ waktu: new Date().toISOString(), message_id: tg.message_id || null })); } catch (e) {}
+                    }
+                    return { ok: !!tg.ok, tg, senin: seninWIB, kanal: data.kanal, total: data.total, pesan: pesan };
+                } catch (e) {
+                    return { ok: false, rincian: String(e.message || e).slice(0, 160) };
+                }
             }
 
             // ===== Alert revenue: push Telegram tiap bayar baru + ringkasan pagi 07:00 WIB =====
