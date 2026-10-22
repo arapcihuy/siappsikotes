@@ -23,7 +23,11 @@
   "r",
   "s",
   "t",
+  "tes kraepelin adalah",
+  "tes kraepelin berapa menit",
   "tes kraepelin biasanya berapa detik",
+  "tes kraepelin dan pauli",
+  "tes kraepelin dari atas atau bawah",
   "tes kraepelin pdf",
   "tes kraepelin print",
   "tes kraepelin untuk apa",
@@ -207,6 +211,58 @@
     "Sediakan satu kolom kosong di samping tiap kolom angka untuk menulis satuannya saja.",
     "Gunakan pengatur waktu per kolom (biasanya puluhan detik), bukan stopwatch total.",
     "Cetak hitam-putih; warna tidak menambah nilai dan kadang mengganggu konsentrasi."
+   ]
+  },
+  {
+   "h2": "Tes Kraepelin adalah tes ketahanan, bukan tes hitung: apa artinya",
+   "isi": [
+    "Tes Kraepelin adalah tes tertulis berisi kolom angka dua digit yang harus kamu jumlahkan berderet dari atas ke bawah dalam batas waktu per kolom. Definisi itu sering disederhanakan jadi \"tes hitung cepat\", padahal yang dibaca penguji bukan kecepatan berhitungmu.",
+    "Yang dinilai adalah bentuk grafiknya: apakah kecepatanmu stabil, apakah ketelitian turun saat lelah, dan bagaimana kamu pulih setelah salah. Dua orang bisa mendapat total benar yang sama tetapi dinilai berbeda karena grafiknya berbeda."
+   ],
+   "poin": [
+    "Tes Kraepelin adalah alat ukur ketahanan konsentrasi pada tugas monoton.",
+    "Angka total bukan tujuan; kestabilan antar kolom yang dibaca.",
+    "Grafik naik-turun tajam menunjukkan konsentrasi yang mudah goyah.",
+    "Grafik menurun pelan di akhir adalah pola yang wajar dan sering justru baik."
+   ]
+  },
+  {
+   "h2": "Tes Kraepelin berapa menit dan biasanya berapa detik tiap kolomnya",
+   "isi": [
+    "Pertanyaan \"tes kraepelin berapa menit\" dan \"tes kraepelin biasanya berapa detik\" paling sering muncul karena waktunya terasa sangat pendek. Umumnya total pengerjaan berada di kisaran 10–15 menit, dipecah menjadi puluhan kolom dengan tempo per kolom di bawah 20 detik.",
+    "Angka pastinya selalu dibacakan penguji sebelum mulai dan bisa berbeda antar penyelenggara. Yang penting dilatih bukan angka detiknya, tapi kebiasaan berpindah kolom tepat saat aba-aba — bukan menyelesaikan satu kolom sampai habis."
+   ],
+   "poin": [
+    "Total biasanya 10–15 menit untuk puluhan kolom.",
+    "Tempo per kolom umumnya di bawah 20 detik; angka tepat dibacakan penguji.",
+    "Latih berpindah kolom saat aba-aba, bukan menuntaskan kolom.",
+    "Kalau berlatih dengan tempo lebih cepat dari perkiraan, hari-H terasa longgar."
+   ]
+  },
+  {
+   "h2": "Tes Kraepelin dan Pauli: bedanya di arah dan bentuk grafik",
+   "isi": [
+    "Tes Kraepelin dan Pauli sering disebut berpasangan karena bahannya mirip: deret angka yang dijumlahkan. Perbedaan yang paling praktis adalah arah pengerjaan dan cara grafiknya dibaca.",
+    "Pada Kraepelin kamu bergerak dari atas ke bawah; pada Pauli dari bawah ke atas. Karena arahnya berbeda, efek kelelahan muncul di bagian yang berbeda, dan bentuk grafiknya jadi tidak sama. Karena itu banyak penyelenggara memakai keduanya untuk saling melengkapi."
+   ],
+   "poin": [
+    "Kraepelin: dikerjakan dari atas ke bawah.",
+    "Pauli: dikerjakan dari bawah ke atas.",
+    "Bahan angkanya sejenis; yang berbeda arah dan pola grafiknya.",
+    "Kalau sudah berlatih salah satu, latih juga arah sebaliknya sebelum hari-H."
+   ]
+  },
+  {
+   "h2": "Tes Kraepelin dari atas atau bawah, dan apakah urutannya penting",
+   "isi": [
+    "Pertanyaan \"tes kraepelin dari atas atau bawah\" muncul karena peserta ingin tahu harus mulai dari mana. Jawabannya bergantung lembar yang diberikan: pada Kraepelin mulai dari atas, pada Pauli dari bawah. Ikuti instruksi penguji, jangan menebak.",
+    "Yang lebih penting daripada arah awal adalah konsistensi: begitu kamu mulai, jangan melompati baris. Melompat membuat hitunganmu tidak nyambung dan grafiknya terbaca acak."
+   ],
+   "poin": [
+    "Kraepelin dari atas ke bawah; Pauli dari bawah ke atas.",
+    "Jangan melompati baris — hitungan harus berderet.",
+    "Salah hitung tidak perlu dihapus; lanjutkan dengan angka yang kamu tulis.",
+    "Kalau lupa posisi, mulai lagi dari angka terakhir yang kamu tulis, bukan dari atas."
    ]
   }
  ],
