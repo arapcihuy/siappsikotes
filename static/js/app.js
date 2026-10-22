@@ -70,7 +70,7 @@ function pad(n) { return n < 10 ? '0' + n : '' + n; }
 function katIcon(k) {
 var m = { tkw:'landmark', matematika:'calculator', bahasa_inggris:'globe',
 penalaran_logika:'brain', numerik:'hash', verbal:'pencil',
-kraepelin:'zap', tes_gambar:'layers', kepribadian:'user' };
+kraepelin:'zap', tes_gambar:'layers', kepribadian:'user', batch2:'layers' };
 return m[k] || 'file';
 }
 function loadProgress() {
@@ -197,6 +197,7 @@ return '<div style="margin-bottom:20px">' +
 '</div>' +
 '<div class="section-title">Pilih Kategori Langsung</div>' +
 '<div class="grid-auto">' + catCards + '</div>' +
+(typeof batch2GerbangHtml === 'function' ? batch2GerbangHtml() : '') +
 '<div id="buildTag" style="text-align:center;font-size:11px;color:var(--text3);margin:20px 0 8px">Build v21 · pengulangan berjadwal, rincian per kategori, tema terang</div>' +
 '<div style="text-align:center;margin-bottom:16px"><button class="btn btn-ghost btn-sm" onclick="bukaTentang()">Tentang aplikasi & data</button></div>';
 }

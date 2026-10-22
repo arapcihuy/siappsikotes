@@ -25,6 +25,9 @@ import base64
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KATEGORI_HITUNG = {'matematika', 'numerik', 'kraepelin'}
 SUMBER = os.path.join(ROOT, 'data', 'soal.js')
+SUMBER_BATCH2 = os.path.join(ROOT, 'data', 'soal-batch2.js')
+MODUL_BATCH2 = {'tkw', 'matematika', 'bahasa_inggris', 'penalaran_logika',
+                'numerik', 'verbal', 'kraepelin', 'kepribadian'}
 
 
 def baca_db():
@@ -40,6 +43,61 @@ def baca_db():
             if depth == 0:
                 return json.loads(raw[i:i + n + 1])
     raise SystemExit('SOAL_DATABASE tidak ditemukan di data/soal.js')
+
+
+def baca_db2():
+    """Baca data/soal-batch2.js (window.SOAL_PART.batch2) bila berkasnya ada."""
+    if not os.path.exists(SUMBER_BATCH2):
+        return None
+    raw = open(SUMBER_BATCH2, encoding='utf-8').read()
+    tanda = '.batch2 = '
+    if tanda not in raw:
+        raise SystemExit('soal-batch2.js tidak memuat tanda ".batch2 = "')
+    i = raw.index('{', raw.index(tanda))
+    depth = 0
+    for n, ch in enumerate(raw[i:]):
+        if ch == '{':
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0:
+                return json.loads(raw[i:i + n + 1])
+    raise SystemExit('JSON window.SOAL_PART.batch2 tidak lengkap di data/soal-batch2.js')
+
+
+def ambil_batch2(db_bank):
+    """Ubah batch2 jadi peta per modul (aturan sama dengan bank), plus cek duplikat & merata.
+
+    Kembalikan (db_per_modul, pelanggaran_tambahan) — db_per_modul bisa kosong
+    bila berkas tidak ada.
+    """
+    tambah = []
+    bagian = baca_db2()
+    if bagian is None:
+        return {}, []
+    soal_batch2 = bagian.get('soal') or []
+    per_modul = {m: [] for m in MODUL_BATCH2}
+    semua_bank = {re.sub(r'[^a-z0-9]+', ' ', str(q['pertanyaan']).lower()).strip()
+                  for v in db_bank.values() for q in v['soal']}
+    bank_id = {q['id'] for v in db_bank.values() for q in v['soal']}
+    for q in soal_batch2:
+        modul = str(q.get('modul', ''))
+        if modul not in MODUL_BATCH2:
+            tambah.append(('P1', str(q.get('id', '?')), 'modul batch2 tidak sah: %r' % modul))
+            continue
+        nt = re.sub(r'[^a-z0-9]+', ' ', str(q['pertanyaan']).lower()).strip()
+        if nt in semua_bank:
+            tambah.append(('DUP', q['id'], 'pertanyaan sama dengan bank utama'))
+        elif nt[:45] and any(nt[:45] in b for b in semua_bank):
+            tambah.append(('DUP', q['id'], 'kutipan pertanyaan terkandung di bank utama'))
+        if q['id'] in bank_id:
+            tambah.append(('DUP', q['id'], 'id bertabrakan dengan bank utama'))
+        per_modul[modul].append(q)
+    hitung = {m: len(v) for m, v in per_modul.items() if v}
+    if hitung and len(set(hitung.values())) != 1:
+        tambah.append(('P8', '-', 'jumlah soal antar modul tidak merata: %s' % hitung))
+    db2 = {m: {'nama': 'Set Soal Batch 2 (%s)' % m, 'soal': v} for m, v in per_modul.items() if v}
+    return db2, tambah
 
 
 def _teks_key(q):
@@ -196,6 +254,13 @@ def main():
     print('  total soal:', ringkas['total_soal'])
     print('  sebaran posisi kunci:', ringkas['sebaran_kunci'])
     print('  kunci sebagai opsi terpanjang: %d%%' % ringkas['rasio_kunci_terpanjang'])
+    db2, tambah = ambil_batch2(db)
+    if db2:
+        langgar2, ringkas2 = periksa(db2)
+        total_b2 = sum(len(v['soal']) for v in db2.values())
+        print('  Set Soal Batch 2: %d soal di %d modul, sebaran kunci %s' %
+              (total_b2, len(db2), ringkas2['sebaran_kunci']))
+        langgar += langgar2 + tambah
     if langgar:
         print('\n  PELANGGARAN: %d' % len(langgar))
         per_butir = {}
