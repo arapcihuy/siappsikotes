@@ -87,6 +87,29 @@ else
 fi
 
 echo
+echo "=== 2e/7 QRIS /beli/ DINAMIS (nominal terisi otomatis) ==="
+# QRIS statis memaksa pembeli mengetik nominal + 3 angka unik sendiri — sumber
+# utama salah ketik dan pembayaran tidak tercocok. Uji ini memastikan QR yang
+# dirender peramban benar-benar membawa tag 54 yang cocok dengan nominal halaman.
+if [ -x /Users/mac/venv312/bin/python3 ]; then
+  ( cd "$(dirname "$0")/.." && python3 -m http.server 8799 >/dev/null 2>&1 & echo $! > /tmp/srv-qris.pid )
+  SRV_PID=$(cat /tmp/srv-qris.pid 2>/dev/null || true)
+  for i in 1 2 3 4 5 6 7 8; do
+    curl -sf -o /dev/null "http://127.0.0.1:8799/beli/" && break
+    sleep 1
+  done
+  if ! /Users/mac/venv312/bin/python3 tools/periksa-qris-dinamis.py >/tmp/qris-dinamis.log 2>&1; then
+    echo ">>> GAGAL: QRIS /beli/ tidak dinamis atau nominalnya tidak cocok"
+    tail -6 /tmp/qris-dinamis.log | sed 's/^/      /'
+    GAGAL=1
+  fi
+  [ -n "$SRV_PID" ] && kill "$SRV_PID" 2>/dev/null || true
+  rm -f /tmp/srv-qris.pid
+else
+  echo "  LEWATI | venv312 tidak ada, uji QRIS dinamis tidak dijalankan"
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do

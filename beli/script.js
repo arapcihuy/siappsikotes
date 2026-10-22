@@ -125,6 +125,40 @@
   }
   perbaruiHarga();
   if (elR) elR.textContent = rujukan;
+  gambarQrDinamis();
+
+  // ---- QRIS dinamis: isi nominal otomatis supaya pembeli tidak perlu mengetik ----
+  // QRIS statis tidak membawa nominal, jadi pembeli harus mengetik 39.xxx sendiri —
+  // sumber utama salah ketik dan pembayaran tidak tercocok. Dengan tag 54 terisi,
+  // aplikasi bank/e-wallet langsung menampilkan nominal yang tepat saat dipindai.
+  // Library dimuat dengan defer SEBELUM script.js, tetapi tetap dijaga kalau gagal.
+  function gambarQrDinamis() {
+    try {
+      if (!window.qrisDinamis || typeof qrcode !== 'function' || !qrisBox) return;
+      var payload = window.qrisDinamis.dinamis(nominal);
+      var qr = qrcode(0, 'M');
+      qr.addData(payload);
+      qr.make();
+      var url = qr.createDataURL(8, 2);
+      var img = qrisBox.querySelector('img');
+      if (!img) return;
+      img.src = url;
+      img.removeAttribute('srcset');
+      var pic = qrisBox.querySelector('picture');
+      if (pic) {
+        var srcs = pic.querySelectorAll('source');
+        for (var i = 0; i < srcs.length; i++) srcs[i].remove();
+      }
+      var link = qrisBox.querySelector('a');
+      if (link) link.href = url;
+      img.setAttribute('alt', 'Kode QRIS pembayaran akses SiapPsikotes sebesar ' + teks);
+      img.setAttribute('data-qris-dinamis', '1');
+      var notaD = document.getElementById('beliCatatanDinamis');
+      if (notaD) notaD.hidden = false;
+    } catch (e) {
+      // Gagal -> biarkan QRIS statis tampil (pembeli tetap bisa mengetik nominal).
+    }
+  }
 
   // Validasi kode referensi di server; bila sah, seluruh halaman menunjukkan harga diskon.
   if (refParam) {
@@ -136,6 +170,7 @@
           if (d.kode) refParam = d.kode;
           hargaDasar = HARGA_REF;
           perbaruiHarga();
+          gambarQrDinamis();
         } else refParam = '';
       })
       .catch(function () { refParam = ''; });
@@ -279,6 +314,7 @@
           if (d.diskon) refAktif = true;
           angka = d.nominal - hargaDasar;
           perbaruiHarga();
+          gambarQrDinamis();
         }
         klaimToken = d.klaim_token || klaimToken;
         if (klaimToken) { try { localStorage.setItem('tni_klaim_' + angkaRujukan, JSON.stringify({ token: klaimToken, waktu: Date.now() })); } catch (e) {} }

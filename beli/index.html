@@ -142,13 +142,13 @@
         </a>
       </div>
       <div class="bayar-kunci">
-        <p class="label">Bayar tepat sejumlah</p>
+        <p class="label">Nominal terisi otomatis saat dipindai</p>
         <div class="kode-baris">
           <p class="nominal" id="beliNominal">Rp 39.000</p>
           <button type="button" class="tombol sekunder kecil" id="beliSalin">Salin nominal</button>
         </div>
         <p class="catatan bayar-jelas" style="margin-top:2px">Harga <span id="displayHargaCatatan">Rp 39.000</span> ditambah 3 angka unik. Angka unik itulah yang
-          membuat pembayaranmu mudah dicocokkan.</p>
+          membuat pembayaranmu mudah dicocokkan. <span id="beliCatatanDinamis" hidden>Nominalnya sudah terisi otomatis di QR &mdash; kamu tidak perlu mengetik apa pun.</span></p>
         <p class="catatan" id="beliCatatanDiskon" hidden style="margin-top:6px;color:#4ade80;font-weight:700;">Kode referensi temanmu diterapkan &mdash; hemat Rp 5.000.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:12px 0 10px">
         <p class="label">Kode rujukanmu</p>
@@ -288,6 +288,8 @@
 </footer>
 
 <!-- External script (cached) -->
+<script src="../static/js/qrcode-generator.js" defer></script>
+<script src="../static/js/qris-dinamis.js" defer></script>
 <script src="script.js" defer></script>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
