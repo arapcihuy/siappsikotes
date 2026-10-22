@@ -206,7 +206,7 @@ function isiIdLacak(){var k='';try{k=localStorage.getItem('tni_sim_lacak')||'';}
 	if(!k||!/^[0-9a-f]{8}$/.test(k)){k=Math.random().toString(16).slice(2,10);try{localStorage.setItem('tni_sim_lacak',k);}catch(e){}}return k;}
 var IDKUNJUNG=isiIdLacak();
 kirimPantau('tryout_kunjungan',IDKUNJUNG);
-window.klikCtaFrontPage=function(){kirimPantau('tryout_klik_beli','id:'+IDKUNJUNG);};
+window.klikCtaFrontPage=function(){kirimPantau('tryout_klik_beli',IDKUNJUNG);};
 function kirimPantau(jenis,rujukan){try{var p=new URLSearchParams(location.search);
 	var isi=JSON.stringify({jenis:jenis,rujukan:rujukan||'',utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||''});
 	if(navigator.sendBeacon)navigator.sendBeacon(URL_API+'/api/pantau',new Blob([isi],{type:'text/plain'}));

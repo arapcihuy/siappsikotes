@@ -73,7 +73,7 @@ Beacon dari halaman ke `POST /api/pantau` (Worker `siappsikotes-api`), pola sama
 | Event (jenis di peristiwa) | Kapan | rincian |
 |---|---|---|
 | `tryout:tryout_kunjungan` | Muat halaman | id anonim 8 hex (localStorage `tni_sim_lacak`) |
-| `tryout:tryout_klik_beli` | Klik tautan /beli/ | `id:<id anonim>` |
+| `tryout:tryout_klik_beli` | Klik tautan /beli/ | `<id anonim>` sama dengan kunjungan |
 
 - utm (source/medium/campaign) dibaca dari query string halaman dan disimpan di kolom utm tabel.
 - `is_test` mengikuti deteksi utm `uji-/probe/audit/verify-task/test` yang sudah ada.
