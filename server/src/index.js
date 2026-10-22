@@ -1013,6 +1013,30 @@ export default {
                       const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
                       const laju = await batasiLaju(env, ip, 'payment_webhook', 30, 60);
                       if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      // ===== GERBANG KEAMANAN (23 Okt 2026) =====
+                      // Sebelum ini endpoint menerima POST tanpa autentikasi apa pun, lalu:
+                      // (a) menulis baris payments is_test=0 yang menaikkan revenue, dan
+                      // (b) memanggil aktifkanDariMuatanWebhook() yang MENERBITKAN kode akses.
+                      // Artinya siapa pun yang tahu URL-nya bisa mencetak uang dan kode gratis.
+                      // Dibuktikan: POST {"amount":39000,"status":"success","txid":"PALSU-OP-1"}
+                      // menaikkan revenue 39.000 -> 78.000 tanpa kredensial.
+                      //
+                      // Sekarang WAJIB membawa header X-Webhook-Secret yang cocok dengan
+                      // env.PAYMENT_WEBHOOK_SECRET. Fail closed: kalau secret belum diset,
+                      // endpoint mati (503) — bukan terbuka. Tidak ada pemanggil sah lain:
+                      // frontend, tools/, dan cron tidak memanggil endpoint ini.
+                      const secretEnv = env.PAYMENT_WEBHOOK_SECRET;
+                      if (!secretEnv) return jawab({ pesan: 'webhook belum dikonfigurasi' }, 503, asal);
+                      const secretDikirim = request.headers.get('X-Webhook-Secret') || '';
+                      // Perbandingan waktu-tetap: panjang disamakan dulu supaya tidak bocor.
+                      if (secretDikirim.length !== secretEnv.length) {
+                        return jawab({ pesan: 'tidak berwenang' }, 401, asal);
+                      }
+                      let beda = 0;
+                      for (let i = 0; i < secretEnv.length; i++) {
+                        beda |= secretDikirim.charCodeAt(i) ^ secretEnv.charCodeAt(i);
+                      }
+                      if (beda !== 0) return jawab({ pesan: 'tidak berwenang' }, 401, asal);
                       const b = await request.json().catch(() => ({}));
                       const timestamp = new Date().toISOString();
                       const utmSource = String(b.utm_source || '').slice(0, 50);

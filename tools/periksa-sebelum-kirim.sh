@@ -110,6 +110,17 @@ else
 fi
 
 echo
+echo "=== 2f/7 ENDPOINT TULIS MENOLAK TANPA KREDENSIAL ==="
+# /api/payment-webhook pernah menerima POST tanpa auth dan MENAIKKAN revenue
+# (Rp 39.000 -> Rp 78.000) sekaligus bisa menerbitkan kode akses. Uji ini menjaga
+# agar tidak ada endpoint tulis yang kembali terbuka.
+if ! python3 tools/periksa-endpoint-tulis.py >/tmp/endpoint-tulis.log 2>&1; then
+  echo ">>> GAGAL: ada endpoint tulis yang menerima permintaan tanpa kredensial"
+  grep GAGAL /tmp/endpoint-tulis.log | sed 's/^/      /'
+  GAGAL=1
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do
