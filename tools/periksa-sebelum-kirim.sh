@@ -23,6 +23,11 @@ AKAR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$AKAR" || exit 1
 
 PY=/usr/bin/python3
+# PYTHONPATH warisan (mis. dari shell Hermes / venv Python 3.14) bisa menyuntikkan
+# site-packages versi lain ke Python 3.9 sistem -> Pillow pecah ("cannot import name
+# '_imaging'") dan gerbang OG image gagal padahal produknya sehat. Bersihkan supaya
+# setiap penerjemah memakai paket miliknya sendiri.
+unset PYTHONPATH PYTHONHOME
 # Python sistem bisa mati (mis. macOS: lisensi Xcode belum disetujui -> rc=69).
 # Pakai penerjemah pertama yang benar-benar bisa dijalankan supaya gerbang tidak
 # melaporkan kegagalan produk hanya karena lingkungan.
