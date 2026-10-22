@@ -582,8 +582,8 @@ const COPY_BELI = {
   },
   b: {
     lencana: '<span class="lencana">1.348 soal + pembahasan tiap soal</span>',
-    h1: '<h1 class="h-harga">1.348 soal pola tes resmi, semua dikupas tuntas</h1>',
-    dek: '<p class="dek">Latihan dari soal berpola tes kerja &amp; kedinasan sesungguhnya &mdash; HGT, KSO, AKS, hingga wawancara &mdash; dan tiap soal sudah dikupas langkah demi langkah di pembahasannya. Sekali bayar Rp 39.000, bukan langganan.</p>',
+    h1: '<h1 class="h-harga">1.348 soal berpola tes kedinasan, semua dikupas tuntas</h1>',
+    dek: '<p class="dek">Latihan dari soal berpola tes kerja &amp; kedinasan &mdash; HGT, KSO, AKS, hingga wawancara &mdash; dan tiap soal sudah dikupas langkah demi langkah di pembahasannya. Sekali bayar Rp 39.000, bukan langganan.</p>',
     cta: '<a class="tombol" href="#bayar" id="ctaBayar">Kupas 1.348 soal &mdash; Rp 39.000 sekali bayar</a>'
   }
 };
