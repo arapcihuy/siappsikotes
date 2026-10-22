@@ -416,7 +416,12 @@
       if (img.complete && img.naturalWidth > 0) {
         // lightweight client-side check: ensure nominal & rujukan present
         if (elN && elR && elN.textContent && elR.textContent) {
-          if (!qrisTerlacak) { qrisTerlacak = true; lacak('qris_tampil'); }
+        if (!qrisTerlacak) {
+            qrisTerlacak = true;
+            var dtkQris = 0;
+            try { dtkQris = Math.round(performance.now() / 100) / 10; } catch (e) {}
+            lacak('qris_tampil', dtkQris > 0 ? { dtk_qris: dtkQris } : {});
+        }
         }
         return;
       }

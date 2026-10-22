@@ -548,6 +548,22 @@ const ASAL_BELI_HTML = 'https://raw.githubusercontent.com/arapcihuy/siappsikotes
 
 // Anchor = string persis di beli/index.html master. Kalau master berubah bentuk,
 // rewrite tidak terjadi (halaman kontrol tampil apa adanya) — update anchor mengikuti master.
+
+// Tembolok master HTML 120 detik dalam isolat: fetch GitHub raw kadang lambat (>1 s)
+// dan itu langsung jadi TTFB halaman /beli/ di mobile (target: QRIS <2 detik). Rewrite
+// A/B tetap per permintaan, dijalankan di atas salinan tembolok. Master baru di repo
+// live maksimal 120 detik kemudian; master rusak (anchor hilang) tidak pernah disimpan.
+let beliHtmlCache = '', beliHtmlWaktu = 0;
+async function masterBeliHtml() {
+  const kini = Date.now();
+  if (beliHtmlCache && kini - beliHtmlWaktu < 120000) return beliHtmlCache;
+  const res = await fetch(ASAL_BELI_HTML, { headers: { 'User-Agent': 'siappsikotes-api', 'Accept': 'text/html' } });
+  if (!res.ok) throw new Error('master tidak terjangkau');
+  const html = await res.text();
+  if (html.indexOf('id="ctaBayar"') === -1) throw new Error('master berubah bentuk');
+  beliHtmlCache = html; beliHtmlWaktu = kini;
+  return html;
+}
 const ANCHOR_BELI = {
   lencana: '<span class="lencana">Harga standar A/B test</span>',
   h1: '<h1 class="h-harga">Beli akses penuh &mdash; <span id="displayHarga">Rp 39.000</span> sekali bayar</h1>',
@@ -587,11 +603,11 @@ async function layaniBeliAb(request, url, env, ctx) {
 
   // 2) HTML origin statis (master = sumber deploy Pages). Origin gagal -> pass-through
   //    Pages apa adanya (fail-open — halaman beli tidak pernah diblok).
-  const res = await fetch(ASAL_BELI_HTML, { headers: { 'User-Agent': 'siappsikotes-api', 'Accept': 'text/html' } });
-  if (!res.ok) {
+  let html = '';
+  try { html = await masterBeliHtml(); } catch (e) { html = ''; }
+  if (!html) {
     return fetch('https://siappsikotes.my.id' + url.pathname + (url.search || ''), { headers: { 'Accept': 'text/html' } });
   }
-  let html = await res.text();
 
   // 3) Rewrite 4 elemen + inject varian & id kunjungan untuk beacon (dibaca beli/script.js).
   //    Harga tidak pernah disentuh: string 'Rp 39.000' tetap tampil & angkanya utuh.
@@ -970,8 +986,13 @@ export default {
                             // Nilai di luar ^(a|b)$ dibuang.
                             const varianAb = ['a', 'b'].indexOf(String(b.variant || '').toLowerCase()) !== -1
                               ? String(b.variant).toLowerCase() : '';
+                            // Latensi QRIS tampil (detik sejak navigasi, dari beli/script.js):
+                            // metrik real "QRIS tampil <2 detik di mobile" tanpa kolom baru.
+                            const dtkQris = (jenis === 'qris_tampil' && /^\d{1,4}(\.\d{1,10})?$/.test(String(b.dtk_qris || '')))
+                              ? '|d:' + String(b.dtk_qris).slice(0, 10) : '';
                             const rincianTag = rincian + (varianAb ? '|var:' + varianAb : '')
-                              + (/^[0-9a-f]{4,32}$/.test(String(b.lacak || '')) ? '|id:' + String(b.lacak).toLowerCase() : '');
+                              + (/^[0-9a-f]{4,32}$/.test(String(b.lacak || '')) ? '|id:' + String(b.lacak).toLowerCase() : '')
+                              + dtkQris;
                             const utmSource = String(b.utm_source || '').slice(0, 50);
                             const utmMedium = String(b.utm_medium || '').slice(0, 50);
                             const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
