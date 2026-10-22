@@ -64,6 +64,13 @@ if ! $PY tools/periksa-copy-beli.py; then
 fi
 
 echo
+echo "=== 2c/7 SEMUA HALAMAN TERDAFTAR DI SITEMAP ==="
+if ! $PY tools/periksa-sitemap.py; then
+  echo ">>> GAGAL: ada halaman live yang tidak masuk sitemap (tidak akan terindeks)"
+  GAGAL=1
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do
