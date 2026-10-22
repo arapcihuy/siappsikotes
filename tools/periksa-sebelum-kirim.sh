@@ -132,6 +132,16 @@ if ! python3 tools/uji-rantai-bayar.py >/tmp/rantai-bayar.log 2>&1; then
 fi
 
 echo
+echo "=== 2h/7 SEMUA HALAMAN BEBAS KLAIM TERLARANG ==="
+# Gate 2b/7 hanya memeriksa COPY_BELI. Klaim di halaman LAIN lolos — dibuktikan
+# 23 Okt 2026: /contoh/ (tujuan QR di flyer cetak) memuat "soal asli" tanpa terdeteksi.
+if ! python3 tools/periksa-klaim-halaman.py >/tmp/klaim-halaman.log 2>&1; then
+  echo ">>> GAGAL: ada halaman publik yang memuat klaim terlarang"
+  grep -E 'GAGAL|RINGKAS' /tmp/klaim-halaman.log | sed 's/^/      /'
+  GAGAL=1
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do
