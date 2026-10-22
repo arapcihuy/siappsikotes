@@ -2505,7 +2505,7 @@ export default {
                       "COUNT(DISTINCT CASE WHEN jenis = 'beli:kunjungan_beli' THEN rincian END) AS kunjungan, " +
                       "COUNT(DISTINCT CASE WHEN jenis = 'beli:klik_cta_bayar' THEN rincian END) AS klik, " +
                       "COUNT(DISTINCT CASE WHEN jenis = 'beli:qris_tampil' THEN rincian END) AS qris " +
-                      "FROM peristiwa WHERE jenis IN " + JENIS_AB + " AND substr(waktu,1,10) >= ? GROUP BY varian"
+                      "FROM peristiwa WHERE jenis IN " + JENIS_AB + " AND COALESCE(is_test,0) = 0 AND substr(waktu,1,10) >= ? GROUP BY varian"
                   ).bind(sejak).all(),
                   // Pembayaran sukses per rujukan (definisi sama dengan CSV funnel harian).
                   env.DB.prepare(
@@ -2515,7 +2515,7 @@ export default {
                   // Peta rujukan -> varian dari beacon (baris 'SP-123|var:a' saja).
                   env.DB.prepare(
                       "SELECT rincian, waktu FROM peristiwa WHERE jenis IN " + JENIS_AB + " " +
-                      "AND rincian LIKE 'SP-%|var:%' AND substr(waktu,1,10) >= ? ORDER BY waktu ASC LIMIT 20000"
+                      "AND COALESCE(is_test,0) = 0 AND rincian LIKE 'SP-%|var:%' AND substr(waktu,1,10) >= ? ORDER BY waktu ASC LIMIT 20000"
                   ).bind(sejak).all()
               ]);
               const varianRujukan = {};
