@@ -54,6 +54,7 @@ HALAMAN = [
     ('latihan-psikotes-10-menit/index.html', '/latihan-psikotes-10-menit/', '0.8', 'monthly'),
     ('strategi-lulus-psikotes-tni-2026/index.html', '/strategi-lulus-psikotes-tni-2026/', '0.8', 'monthly'),
     ('penyebab-gagal-psikotes-tni/index.html', '/penyebab-gagal-psikotes-tni/', '0.8', 'monthly'),
+    ('soal-psikotes-tni-ad-pdf/index.html', '/soal-psikotes-tni-ad-pdf/', '0.8', 'monthly'),
     ('bayar-qris-kode-langsung-aktif/index.html', '/bayar-qris-kode-langsung-aktif/', '0.8', 'monthly'),
     ('psikotes-tni-ad-bintara/index.html', '/psikotes-tni-ad-bintara/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-tni-dan-jawabannya/index.html', '/contoh-soal-psikotes-tni-dan-jawabannya/', '0.8', 'monthly'),
