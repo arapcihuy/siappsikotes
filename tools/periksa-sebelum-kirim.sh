@@ -71,6 +71,22 @@ if ! $PY tools/periksa-sitemap.py; then
 fi
 
 echo
+echo "=== 2d/7 KLIK CTA /beli/ BENAR-BENAR MENGIRIM EVENT ==="
+# Funnel pernah buta: 11 orang melihat QRIS, 0 klik tercatat. Uji ini membuka
+# /beli/ di peramban sungguhan, mengklik #ctaBayar, lalu memastikan request
+# beacon klik_cta_bayar benar-benar terkirim. Tanpa ini, "0 klik" tidak bisa
+# dibedakan dari "handler rusak".
+if [ -x /Users/mac/venv312/bin/python3 ]; then
+  if ! /Users/mac/venv312/bin/python3 tools/uji-klik-cta.py >/tmp/uji-klik-cta.log 2>&1; then
+    echo ">>> GAGAL: klik CTA /beli/ tidak mengirim event klik_cta_bayar"
+    tail -12 /tmp/uji-klik-cta.log | sed 's/^/      /'
+    GAGAL=1
+  fi
+else
+  echo "  LEWATI | venv312 tidak ada, uji klik CTA tidak dijalankan"
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do
