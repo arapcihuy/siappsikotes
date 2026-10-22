@@ -1941,6 +1941,31 @@ window.CONTOH_SOAL = [{"t":"PERWIRA : TNI = KOMISIONER : ...","p":["POLRI","BPK"
   var SITUS_CONTOH = 'https://siappsikotes.my.id/contoh/';
   var BANK_SOAL = 1348;
   var PING_ALAMAT = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/ruang/masuk';
+  var PANTau_ALAMAT = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
+
+  // Beacon kunjungan /contoh/ (23 Okt 2026). Halaman ini dipakai sebagai tujuan QR di
+  // flyer cetak, tetapi sebelumnya TIDAK melacak apa pun — kunjungan dari selebaran
+  // karena itu tidak terukur sama sekali. Sekarang setiap kunjungan mengirim satu
+  // beacon `artikel_pageview` beserta utm_source, sehingga flyer bisa dievaluasi.
+  (function () {
+    try {
+      var q = new URLSearchParams(location.search);
+      var isi = JSON.stringify({
+        jenis: 'artikel_pageview',
+        // Rujukan WAJIB kosong: /api/pantau hanya menerima rujukan berformat SP-123 untuk
+        // event non-cardcheck/non-tryout. Mengisi teks bebas ditolak 400 "rincian tidak sah".
+        rujukan: '',
+        utm_source: (q.get('utm_source') || '').slice(0, 50),
+        utm_medium: (q.get('utm_medium') || '').slice(0, 50),
+        utm_campaign: (q.get('utm_campaign') || '').slice(0, 100)
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(PANTau_ALAMAT, new Blob([isi], { type: 'text/plain' }));
+      } else {
+        fetch(PANTau_ALAMAT, { method: 'POST', body: isi, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(function () {});
+      }
+    } catch (e) { /* pelacakan gagal tidak boleh mengganggu latihan */ }
+  })();
   var PING_KODE = 'SPCONTOHSELESAI407OD1';
   var pingTerkirim = false;
   var pesanBagikan = '';

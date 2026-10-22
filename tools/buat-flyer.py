@@ -13,7 +13,10 @@ import sys
 
 AKAR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KELUAR = os.path.expanduser('~/tni-belajar/aset-bisnis/flyer')
-TAUTAN = 'https://siappsikotes.my.id/contoh/'
+# UTM WAJIB: sebelumnya QR hanya menunjuk /contoh/ tanpa penanda, sehingga kunjungan
+# dari selebaran cetak tidak bisa dibedakan dari traffic lain. Dengan utm_source di sini,
+# setiap pindai flyer tercatat sebagai kanal tersendiri di /api/pantau (artikel_pageview).
+TAUTAN = 'https://siappsikotes.my.id/contoh/?utm_source=flyer&utm_medium=cetak&utm_campaign=selebaran-a5'
 VENV = os.path.expanduser('~/venv-siappsikotes/bin/python3')
 QR = os.path.join(KELUAR, 'qr-contoh.png')
 # A5 pada 300 dpi
