@@ -121,6 +121,17 @@ if ! python3 tools/periksa-endpoint-tulis.py >/tmp/endpoint-tulis.log 2>&1; then
 fi
 
 echo
+echo "=== 2g/7 RANTAI PEMBAYARAN UTUH (bayar -> lunas -> kode) ==="
+# HTTP 200 di /beli/ tidak membuktikan pembayaran menghasilkan kode. Uji ini menjalankan
+# rantai penuh: pesan -> webhook -> status lunas -> kode_terbit dibayar -> klaim -> referral,
+# lalu menghapus sendiri semua jejaknya.
+if ! python3 tools/uji-rantai-bayar.py >/tmp/rantai-bayar.log 2>&1; then
+  echo ">>> GAGAL: rantai pembayaran putus (pembeli bisa bayar tanpa menerima kode)"
+  grep -E 'GAGAL' /tmp/rantai-bayar.log | sed 's/^/      /'
+  GAGAL=1
+fi
+
+echo
 echo "=== 3/7 SINTAKS JAVASCRIPT ==="
 if command -v node > /dev/null 2>&1; then
   for f in static/js/*.js data/*.js sw.js; do

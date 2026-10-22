@@ -1218,6 +1218,12 @@ export default {
                         await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
                           .bind(null, 'beli:klaim_bayar', rujukan + '|' + baris.nominal, kini, ujiKlaim ? 1 : 0).run();
                         // Pembayaran aktif -> kode referensi pembeli terbit (idempoten per rujukan).
+                        // CATATAN (23 Okt 2026): jalur ini memang terbit untuk klaim "sudah bayar"
+                        // karena tombol klaim MENULIS dibayar sendiri (UPDATE ... SET dibayar).
+                        // Risiko: orang bisa menekan klaim lalu memakai REF-XXXX untuk diskon
+                        // Rp 5.000 tanpa mentransfer. Mitigasi ada di rekonsiliasi harian 23:55
+                        // yang mencocokkan klaim vs pembayaran NYATA; klaim tanpa bayar tetap
+                        // tercatat menunggu_verifikasi dan tagihannya muncul di laporan.
                         await terbitkanKodeRef(env, rujukan);
                         if (!ujiKlaim) await kirimTelegramAlert(env, '🧾 <b>Klaim "sudah bayar" diterima</b>\nRujukan: ' + rujukan +
                           '\nNominal: Rp ' + Number(baris.nominal).toLocaleString('id-ID') +
