@@ -273,12 +273,121 @@ async function kodeRefValid(env, kode) {
 }
 
 // Status pesanan menurut baris kode_terbit: dibayar NULL = menunggu_bayar; terisi = lunas
-// bila asal 'tripay' (webhook terverifikasi), menunggu_verifikasi bila asal 'klaim'
-// (klaim "sudah bayar" bertanda tangan, dicocokkan laporan harian).
+// bila asal-nya sudah terverifikasi webhook ('tripay', 'klaim-webhook', 'webhook-auto'),
+// menunggu_verifikasi bila asal 'klaim' (klaim "sudah bayar" yang belum ketemu muatan
+// pembayaran masuk — dicocokkan otomatis tiap 10 menit sampai ketemu).
+const ASAL_LUNAS = ['tripay', 'klaim-webhook', 'webhook-auto'];
 function statusPesanan(baris) {
   if (!baris) return 'tidak_ada';
   if (!baris.dibayar) return 'menunggu_bayar';
-  return baris.asal === 'tripay' ? 'lunas' : 'menunggu_verifikasi';
+  return ASAL_LUNAS.indexOf(baris.asal) !== -1 ? 'lunas' : 'menunggu_verifikasi';
+}
+
+// ===== Pencocokan klaim/pesanan <-> muatan webhook masuk (fallback tanpa Tripay) =====
+// Satu nomor nominal pasangan itu berkata dua kali: dasar harga (39/34/29 ribu) plus 3 angka
+// rujukan, dan angka itulah yang pembeli bayarkan. Jadi satu baris muatan webhook (kolom
+// nominal + jam) sudah cukup untuk mengidentifikasi pesanannya — mirip kode rujukan-nya.
+// Jendela waktu: pembayaran tidak bisa lebih dari 5 menit SEBELUM rujukan terbit (tidak
+// mungkin bayar sebelum tahu nominal), dan tak lewat dari 48 jam sesudahnya — lebih dari
+// itu gugur ke verifikasi manual pemilik.
+async function cariBayarCocok(env, nominal, terbit) {
+  try {
+    const jumlah = Math.round(Number(nominal) || 0);
+    if (!jumlah || !terbit) return null;
+    const t0 = new Date(terbit).getTime();
+    if (!isFinite(t0)) return null;
+    const hasil = await env.DB.prepare(
+      "SELECT id, timestamp, amount, txid, rujukan, is_test FROM payments " +
+      "WHERE status IN ('success','paid') AND amount = ? AND timestamp >= ? AND timestamp <= ? " +
+      "ORDER BY id ASC LIMIT 1"
+    ).bind(jumlah, new Date(t0 - 5 * 60e3).toISOString(), new Date(t0 + 48 * 3600e3).toISOString()).all();
+    return (hasil.results && hasil.results[0]) || null;
+  } catch (e) { return null; }
+}
+
+// Klaim/pesanan asal 'klaim' yang ketemu muatannya: naik ke 'klaim-webhook' (lunas) + catat.
+async function tandaKlaimCocok(env, pesanan, bayar, kini) {
+  await env.DB.prepare("UPDATE kode_terbit SET asal = 'klaim-webhook' WHERE kode_hash = ? AND asal = 'klaim'")
+    .bind(pesanan.kode_hash).run();
+  await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
+    .bind(null, 'beli:match_webhook', pesanan.rujukan + '|' + bayar.amount + '|pay:' + bayar.id + '|' + (bayar.txid || ''), kini, bayar.is_test || 0).run();
+}
+
+// Muatan webhook yang masuk mencari pesanannya sendiri, dua arah:
+//  - klaim 'sudah bayar' yang masih menunggu_verifikasi -> klaim-webhook (lunas);
+//  - pesanan belum dibayar sama sekali (pembeli lupa menekan klaim) -> webhook-auto (lunas),
+//    tetapi hanya bila muatan itu TULIS rujukannya atau pesanan satu-satunya dengan nominal
+//    itu — dua pesanan tanpa nama tidak boleh ditebak dari satu nomor saja.
+async function aktifkanDariMuatanWebhook(env, bayar) {
+  try {
+    const jumlah = Math.round(Number(bayar.amount) || 0);
+    if (!jumlah) return;
+    const kini = new Date().toISOString();
+    const klaim = await env.DB.prepare(
+      "SELECT kode_hash, rujukan, terbit, nominal FROM kode_terbit WHERE nominal = ? AND asal = 'klaim' AND dibayar IS NOT NULL LIMIT 5"
+    ).bind(jumlah).all();
+    for (const p of (klaim.results || [])) {
+      // Jendela waktu juga disaring di sini (cariBayarCocok), muatannya harus pas jendelanya.
+      const cocok = await cariBayarCocok(env, p.nominal, p.terbit);
+      if (!cocok || String(cocok.id) !== String(bayar.id)) continue;
+      await tandaKlaimCocok(env, p, cocok, kini);
+    }
+    if (bayar.rujukan && /^SP-\d{3}$/.test(bayar.rujukan)) {
+      const pesanan = await env.DB.prepare(
+        "SELECT kode_hash, rujukan, terbit, nominal, dibayar, asal FROM kode_terbit WHERE nominal = ? AND dibayar IS NULL AND rujukan = ? LIMIT 1"
+      ).bind(jumlah, bayar.rujukan).first();
+      if (pesanan && pesanan.terbit) {
+        const t0 = new Date(pesanan.terbit).getTime();
+        if (isFinite(t0) && new Date(bayar.timestamp).getTime() >= t0 - 5 * 60e3) {
+          await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'webhook-auto' WHERE kode_hash = ? AND dibayar IS NULL")
+            .bind(bayar.timestamp, pesanan.kode_hash).run();
+          await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
+            .bind(null, 'beli:match_webhook', pesanan.rujukan + '|' + jumlah + '|pay:' + bayar.id + '|' + (bayar.txid || ''), kini, bayar.is_test || 0).run();
+          await terbitkanKodeRef(env, pesanan.rujukan);
+        }
+      }
+    } else {
+      // Muatan tanpa nama: aktif bila TEPAT satu pesanan belum dibayar memakai nominal itu.
+      const tanpaNama = await env.DB.prepare(
+        "SELECT kode_hash, rujukan, terbit FROM kode_terbit WHERE nominal = ? AND dibayar IS NULL LIMIT 2"
+      ).bind(jumlah).all();
+      const satu = (tanpaNama.results || [])[0];
+      if (satu && (tanpaNama.results || []).length === 1 && satu.terbit) {
+        const t0 = new Date(satu.terbit).getTime();
+        if (isFinite(t0) && new Date(bayar.timestamp).getTime() >= t0 - 5 * 60e3) {
+          await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'webhook-auto' WHERE kode_hash = ? AND dibayar IS NULL")
+            .bind(bayar.timestamp, satu.kode_hash).run();
+          await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
+            .bind(null, 'beli:match_webhook', satu.rujukan + '|' + jumlah + '|pay:' + bayar.id + '|' + (bayar.txid || ''), kini, bayar.is_test || 0).run();
+          await terbitkanKodeRef(env, satu.rujukan);
+        }
+      }
+    }
+  } catch (e) {}
+}
+
+// Cron */10: klaim "sudah bayar" yang masih menunggu_verifikasi dicocokkan ulang dengan
+// muatan webhook yang mungkin masuk belakangan — janji "aktif maksimal 15 menit"
+// (t_3a03d4b4) dipegang cukup oleh pencocokan klaim saat tekan + cron ini.
+async function selesaikanKlaimTertunda(env) {
+  try {
+    const ada = await env.DB.prepare(
+      "SELECT COUNT(*) AS n FROM kode_terbit WHERE asal = 'klaim' AND dibayar IS NOT NULL AND terbit >= ?"
+    ).bind(new Date(Date.now() - 72 * 3600e3).toISOString()).first();
+    if (!ada || !ada.n) return 0;
+    const kini = new Date().toISOString();
+    const baris = await env.DB.prepare(
+      "SELECT kode_hash, rujukan, terbit, nominal FROM kode_terbit WHERE asal = 'klaim' AND dibayar IS NOT NULL AND terbit >= ? LIMIT 100"
+    ).bind(new Date(Date.now() - 72 * 3600e3).toISOString()).all();
+    let lulus = 0;
+    for (const p of (baris.results || [])) {
+      const cocok = await cariBayarCocok(env, p.nominal, p.terbit);
+      if (!cocok) continue;
+      await tandaKlaimCocok(env, p, cocok, kini);
+      lulus++;
+    }
+    return lulus;
+  } catch (e) { return 0; }
 }
 
 function hexKeBytes(hex) {
@@ -380,10 +489,10 @@ const ANCHOR_BELI = {
 // Harga Rp 39.000 wajib tampil di CTA kedua varian; angka 1.348/9 modul = bank soal.
 const COPY_BELI = {
   a: {
-    lencana: '<span class="lencana">Akses aktif otomatis</span>',
-    h1: '<h1 class="h-harga">Bayar QRIS &rarr; kode akses langsung aktif</h1>',
-    dek: '<p class="dek">Tanpa kirim bukti transfer, tanpa nunggu balasan siapa pun &mdash; begitu QRIS terbayar, kode aksesmu aktif di halaman ini. Sekali bayar Rp 39.000, bukan langganan: 1.348 soal, 9 modul tes, dan Laporan Lengkap.</p>',
-    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar QRIS Rp 39.000 &mdash; kode langsung aktif</a>'
+    lencana: '<span class="lencana">Kode aktif setelah dicek otomatis</span>',
+    h1: '<h1 class="h-harga">Bayar QRIS &rarr; kode akses aktif otomatis</h1>',
+    dek: '<p class="dek">Tanpa kirim bukti transfer: pembayaranmu dicek otomatis dari catatan QRIS &mdash; begitu tercocok, kode akses aktif di halaman ini maksimal 15 menit. Sekali bayar Rp 39.000, bukan langganan: 1.348 soal, 9 modul tes, dan Laporan Lengkap.</p>',
+    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar QRIS Rp 39.000 &mdash; kode aktif otomatis</a>'
   },
   b: {
     lencana: '<span class="lencana">1.348 soal + pembahasan tiap soal</span>',
@@ -838,6 +947,13 @@ export default {
                       const ins = await env.DB.prepare(
                         'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload, is_test, rujukan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
                       ).bind(timestamp, utmSource, utmMedium, product, amount, status, txid, rawPayload, isTest, rujukan || null).run();
+                      // Pencocokan arah masuk (fallback tanpa Tripay, t_3a03d4b4): muatan yang
+                      // barusan tercatat mencari pesanannya sendiri — klaim "sudah bayar" yang
+                      // masih menunggu_verifikasi naik ke lunas, dan pesanan yang lupa diklaim
+                      // pun terbit kode pembayaran-nya (webhook-auto). Data uji tetap ikut
+                      // matching (guard TG/metrik tetap hormat is_test); jejaknya dicatat
+                      // peristiwa beli:match_webhook dengan is_test sama muatannya.
+                      try { await aktifkanDariMuatanWebhook(env, { id: ins && ins.meta && ins.meta.last_row_id, amount, timestamp, txid, rujukan: rujukan || null, is_test: isTest }); } catch (e) {}
                       // Kirim notifikasi Telegram hanya untuk pembayaran yang bukan data test
                       if ((status === 'success' || status === 'paid') && !isTest) {
                         const alertMsg = `✅ <b>Pembayaran Baru</b>\nProduk: ${product}\nJumlah: Rp ${amount.toLocaleString()}\nUTM: ${utmSource} / ${utmMedium}\nTXID: ${txid || '-'}\nWaktu: ${timestamp}`;
@@ -959,11 +1075,20 @@ export default {
                       const kini = new Date().toISOString();
                       // Klaim pertama yang menang; klaim ulang tidak menggeser waktu/rujukan apa pun.
                       const hasil = await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'klaim' WHERE kode_hash = ? AND dibayar IS NULL").bind(kini, hash).run();
-                      const baris = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      const baris = await env.DB.prepare('SELECT kode_hash, dibayar, asal, nominal, terbit FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
                       if (!baris) return jawab({ pesan: 'pesanan tidak ditemukan — tekan dulu Tampilkan kode' }, 404, asal);
                       // Klaim uji (is_test/manual) tetap ditandai is_test: tidak memekikkan
                       // Telegram & tidak mencemari metrik (sama-dengan jalur lain).
                       const ujiKlaim = b.is_test === true || b.is_test === 1 || b.is_test === '1' || b.probe === 1;
+                      // Pencocokan instan (t_3a03d4b4): muatan webhook yang SUDAH masuk (CSV/JSON
+                      // nominal+jam) langsung dites — kalau cocok, klaim ini naik ke lunas saat
+                      // itu juga tanpa menunggu cron/laporan harian.
+                      if (baris.asal === 'klaim') {
+                        const cocokInstan = await cariBayarCocok(env, baris.nominal, baris.terbit);
+                        if (cocokInstan) await tandaKlaimCocok(env, baris, cocokInstan, kini);
+                      }
+                      const barisBaru = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      const cocokWebhook = ['klaim-webhook', 'webhook-auto', 'tripay'].indexOf(barisBaru.asal) !== -1;
                       if (hasil.meta.changes > 0) {
                         // Kontak opsional klaimer (WA/email) untuk tindak lanjut rekonsiliasi
                         // oleh tim marketing. Disanitasi ketat; ditulis hanya pada klaim pertama.
@@ -976,11 +1101,15 @@ export default {
                         await terbitkanKodeRef(env, rujukan);
                         if (!ujiKlaim) await kirimTelegramAlert(env, '🧾 <b>Klaim "sudah bayar" diterima</b>\nRujukan: ' + rujukan +
                           '\nNominal: Rp ' + Number(baris.nominal).toLocaleString('id-ID') +
+                          (cocokWebhook ? '\n✅ Tercocok otomatis dengan muatan webhook — lunas'
+                                        : '\n⏳ Belum ketemu muatan webhook — dicek otomatis maksimal 15 menit (manual bila lewat)') +
                           (kontak ? '\nKontak: ' + kontak : '\nKontak: (tidak diisi)') +
-                          '\nKode akses: AKTIF (status menunggu verifikasi harian)');
+                          '\nKode akses: AKTIF');
                       }
-                      const referensi = baris.dibayar ? await terbitkanKodeRef(env, rujukan) : null;
-                      return jawab({ ok: true, status: statusPesanan(baris), referensi, pesan: 'kode aktif — pembayaran dicocokkan otomatis di laporan harian' }, 200, asal);
+                      const referensi = barisBaru.dibayar ? await terbitkanKodeRef(env, rujukan) : null;
+                      return jawab({ ok: true, status: statusPesanan(barisBaru), referensi,
+                                     pesan: cocokWebhook ? '✅ Pembayaran tercocok otomatis dengan catatan QRIS — lunas.'
+                                       : 'Kode aktif — pembayaran dicek otomatis, lunas maksimal 15 menit.' }, 200, asal);
                     }
 
                     // ---- status pesanan (dipakai polling halaman beli) ----
@@ -1085,7 +1214,7 @@ export default {
                     // DAFTAR asal yang membuat baris kode_terbit dianggap SAH & lunas.
                     // Pakai di semua keputusan Batch 2 agar standarnya satu.
                     function kodeBatch2Sah(baris) {
-                      return !!(baris && baris.dibayar && baris.asal && ['tripay', 'klaim', 'alat-pemilik'].indexOf(baris.asal) !== -1);
+                      return !!(baris && baris.dibayar && baris.asal && ['tripay', 'klaim', 'klaim-webhook', 'webhook-auto', 'alat-pemilik'].indexOf(baris.asal) !== -1);
                     }
 
                     // POST /api/batch2/cek — khusus pemilik kode akses penuh yang SUDAH lunas.
@@ -1580,6 +1709,10 @@ export default {
               if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 8) await rekonsCronPagi(env);
               if ((new Date(Date.now() + 7 * 3600e3)).getUTCHours() === 7) await ringkasanRevenuePagi(env);
               await sweepBayarBaru(env);   // alert revenue: bayar baru -> push Telegram (guard KV rowid, tiap bayar sekali)
+              // Fallback tanpa Tripay (t_3a03d4b4): klaim "sudah bayar" tertunda dicocokkan
+              // tiap 10 menit dengan muatan webhook yang mungkin masuk belakangan — janji
+              // copy "aktif maksimal 15 menit" dipegang ini + pencocokan saat tombol tekan.
+              await selesaikanKlaimTertunda(env);
               // Laporan funnel mingguan per kanal (webhook+UTM): Senin 07:00 WIB. Dijadwalkan
               // dari cron */10 yang SUDAH ada (menit pertama rentang 07:00-07:59 WIB menang,
               // lalu guard KV menahan yang lain) — nol trigger cron baru.
@@ -1725,10 +1858,10 @@ export default {
                       return h + ' · kunjungan ' + d.kunjungan + ' · klik ' + d.klik + ' · bayar ' + d.bayar + ' · ' + conv + ' · Rp ' + Number(d.revenue).toLocaleString('id-ID');
                   }).join('\n');
                   const convTotal = totalV ? ((totalB / totalV) * 100).toFixed(1) + '%' : '-';
-            // ===== Rekonsiliasi klaim "sudah bayar" vs pembayaran nyata (jalur interim B) =====
-            // Klaim (kode_terbit.asal='klaim', kode sudah aktif) dicocokkan dengan pembayaran
-            // nyata yang masuk (payments, is_test=0, rujukan diisi webhook Tripay). Klaim yang
-            // tidak terkonfirmasi perlu rekonsiliasi manual pemilik (mutasi QRIS).
+            // ===== Rekonsiliasi klaim "sudah bayar" (jalur B tanpa Tripay) =====
+            // Klaim yang belum ketemu muatan webhook-nya (asal='klaim'; yang cocok sudah naik ke
+            // 'klaim-webhook' oleh pencocokan instan/cron */10) dihadapkan status laporan:
+            // yang tak pernah ketemu pembayaran nyata perlu rekonsiliasi manual pemilik (mutasi QRIS).
             let rekonsiliasi = 'Klaim "sudah bayar": tidak ada dalam 7 hari.';
             try {
                 const [klaim, masuk] = await Promise.all([

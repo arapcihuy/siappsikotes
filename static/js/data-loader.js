@@ -98,4 +98,16 @@ setTimeout(function () {
 if (!katSiapSemua()) window.pastikanSemua();
 }, 400);
 });
+// Batch 2: gerbang konten berbayar kedua — sengaja TIDAK dimuat di awal supaya
+// beban muat pertama tetap di bawah anggaran. Diunduh sedetik setelah halaman
+// hidup; ia sendiri yang memutuskan (dari /api/batch2/status) apakah kategori
+// "Set Soal Batch 2" tampil di aplikasi.
+setTimeout(function () {
+if (typeof window.batch2Boot === 'function') { window.batch2Boot(); return; }
+var s = document.createElement('script');
+s.src = 'static/js/batch2.js?v=' + versiAset();
+s.onload = function () { if (window.batch2Boot) window.batch2Boot(); };
+s.onerror = function () {};
+document.head.appendChild(s);
+}, 1000);
 })();

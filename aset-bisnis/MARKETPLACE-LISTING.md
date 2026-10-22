@@ -16,12 +16,12 @@ bukan karangan. Kata kunci dipilih dari hasil pencarian nyata (lihat bagian **Su
 | Isi aplikasi | **1.348 soal psikotes + tes IQ + tes kepribadian Big Five**, lengkap pembahasan |
 | Harga akses aplikasi | **Rp 39.000 sekali bayar** (bukan langganan) untuk akses penuh; tanpa akun, bisa dipakai **offline** |
 | Produk berbayar | **Akses penuh + Laporan Lengkap — Rp 39.000 sekali bayar** (bukan langganan) |
-| Cara buka | **Kode akses** (tanpa server). Beli via **siappsikotes.my.id/beli/**: bayar QRIS → kode **langsung aktif otomatis**. Beli via marketplace: kode diteruskan lewat **chat pesanan** |
+| Cara buka | **Kode akses** (tanpa server). Beli via **siappsikotes.my.id/beli/**: bayar QRIS → pembayaran **dicek otomatis, kode aktif maksimal 15 menit**. Beli via marketplace: kode diteruskan lewat **chat pesanan** |
 | Afiliasi | **Tidak berafiliasi** dengan instansi mana pun. **Tanpa lambang resmi.** |
 
 > **Penting soal kode:** pembeli marketplace membayar di marketplace → kode akses **diteruskan lewat chat
 > pesanan** (tidak otomatis di kanal ini). Untuk kanal langsung, siappsikotes.my.id sudah memakai alur
-> **bayar QRIS → kode langsung aktif otomatis** (bukti lihat halaman /bayar-qris-kode-langsung-aktif/).
+> **bayar QRIS → pembayaran dicek otomatis, kode aktif maksimal 15 menit** (bukti lihat halaman /bayar-qris-kode-langsung-aktif/).
 > Jadi jangan menulis "instan/otomatis" untuk pesanan marketplace — tulis itu hanya untuk pembelian langsung di situs.
 
 ---

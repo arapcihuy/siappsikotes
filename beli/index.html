@@ -152,8 +152,8 @@
     </div>
     <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
     <p class="label">Sudah bayar? Ambil kode aksesmu</p>
-    <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
-      jadi kamu tidak perlu menunggu balasan siapa pun.</p>
+    <p class="catatan">Kode akses terbentuk langsung di halaman ini dari kode rujukanmu. Pembayaran dicek
+      otomatis dari catatan QRIS &mdash; begitu tercocok, statusmu lunas maksimal 15 menit. Tidak perlu kirim bukti apa pun.</p>
     <!-- Email capture untuk retention sequence -->
     <div id="beliEmailSection" style="margin:12px 0;">
       <label for="beliEmail" style="display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;">Email untuk tips belajar & update (opsional, tidak dipakai spam)</label>
@@ -163,7 +163,7 @@
       </div>
       <p id="beliEmailStatus" class="catatan" style="margin:6px 0 0;font-size:13px;"></p>
     </div>
-    <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses instan</button>
+    <button type="button" class="tombol kecil" id="beliAmbilKode" style="width:100%; font-size:16px; padding:12px;">🔑 Tampilkan kode akses</button>
 
     <p class="rujukan" id="beliKodeAkses" role="status" hidden></p>
     <div class="kode-baris" id="beliAksiKode" hidden>
@@ -187,9 +187,9 @@
 
   <ol class="langkah" style="background:var(--surface); padding:16px 20px 16px 36px; border-radius:12px; border:1px solid var(--line);">
     <li>Pindai QR di atas, bayar <strong id="beliNominal2">Rp 39.xxx</strong> &mdash; tepat sejumlah itu.</li>
-    <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu &mdash; kode aksesmu muncul saat itu juga.</li>
-    <li>Setelah QRIS terbayar, tekan <strong>Saya sudah bayar &mdash; aktifkan kode</strong>: kode aktif
-      otomatis, tanpa menunggu siapa pun.</li>
+    <li>Tekan <strong>Tampilkan kode akses</strong> di kartu &mdash; kode aksesmu muncul di halaman ini.</li>
+    <li>Tekan <strong>Saya sudah bayar &mdash; aktifkan kode</strong>: pembayaranmu dicek otomatis dari
+      catatan QRIS. Kalau sudah tercatat, langsung lunas; kalau masih diproses, aktif maksimal 15 menit.</li>
     <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
   </ol>
 
@@ -203,10 +203,9 @@
 
   <section id="kendala" style="margin-top:22px;padding:16px 18px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);">
     <h2 style="margin:0 0 8px">Ada kendala?</h2>
-    <p class="catatan" style="margin-top:0">Normalnya tidak ada yang perlu dikirim: pembayaranmu terdeteksi
-      otomatis dari <strong>nominal unik + kode rujukanmu</strong>, dan tombol di atas langsung
-      mengaktifkan kode. Bila kode belum aktif dalam beberapa menit, kirim bukti pembayaran beserta
-      kode rujukanmu lewat:</p>
+    <p class="catatan" style="margin-top:0">Pembayaran dicek otomatis dari <strong>nominal unik + kode rujukanmu</strong>
+      di catatan QRIS, dan tombol &ldquo;Saya sudah bayar&rdquo; mempercepat pengecekannya. Bila lewat dari 15 menit
+      statusmu belum lunas, kirim bukti pembayaran beserta kode rujukanmu lewat:</p>
     <div class="aksi" style="margin-top:12px">
       <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
            tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
@@ -241,10 +240,11 @@
   </details>
   <details>
     <summary>Bagaimana kode akses dikirim?</summary>
-    <p>Kamu mengambilnya sendiri: tekan <strong>Tampilkan kode akses</strong> di halaman ini dan kodenya langsung
-      muncul. Setelah membayar, tekan <strong>Saya sudah bayar — aktifkan kode</strong>: kode langsung aktif dari
-      pembayaranmu, tanpa menunggu balasan. Simpan kodenya, karena kode yang sama juga membuka aplikasi
-      di perangkat lain.</p>
+    <p>Kamu mengambil sendiri di halaman ini: tekan <strong>Tampilkan kode akses</strong>, lalu setelah membayar
+      tekan <strong>Saya sudah bayar — aktifkan kode</strong>. Pembayaranmu dicek otomatis dari catatan QRIS —
+      begitu tercocok, status lunas, maksimal 15 menit. Bila belum tercocok 15 menit, pemilik mengecek manual dan
+      statusmu diperbarui dengan catatan pembayaran yang sama. Simpan kodenya, karena kode yang sama juga membuka
+      aplikasi di perangkat lain.</p>
   </details>
   <details>
     <summary>Dipakai untuk apa saja akses ini?</summary>

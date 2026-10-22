@@ -27,6 +27,7 @@ const FILES = [
   './data/tips.js?v=f18f332',
   './static/css/style.css?v=f18f332',
   './static/js/app.js?v=f18f332',
+  './static/js/batch2.js?v=f18f332',
   './static/js/data-loader.js?v=f18f332',
   './static/js/fitur.js?v=f18f332',
   './static/js/fitur2.js?v=f18f332',

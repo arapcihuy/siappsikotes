@@ -166,8 +166,9 @@
 
   // ---------- Pendaftaran pesanan & klaim "Saya sudah bayar" ----------
   // Pesanan (menunggu_bayar) dicatat server saat pembeli menekan "Tampilkan kode"; nominal
-  // unik dihitung server. Setelah bayar, tombol klaim membawa token HMAC dari server — kode
-  // aktif instan, tanpa kirim bukti, dan laporan harian pemilik mencocokkan pembayarannya.
+  // unik dihitung server. Setelah bayar, tombol klaim mengecek muatan pembayaran webhook
+  // (nominal+jam) langsung — cocok = lunas, belum cocok = dicek otomatis tiap 10 menit
+  // sampai ketemu (maksimal 15 menit), verifikasi manual bila lewat.
   var elSudahBayar = document.getElementById('beliSudahBayar');
   var elStatusBayar = document.getElementById('beliStatusBayar');
   var klaimToken = null;
@@ -288,8 +289,8 @@
       .catch(function () { if (selesai) selesai(); });
   }
 
-  // Polling status: pembayaran terkonfirmasi (jalur Tripay) saat tab masih terbuka menandai
-  // lunas tanpa perlu apa pun dari pembeli.
+  // Polling status: checkout Tripay (jalur A) atau pencocokan webhook (klaim yang belum
+  // ketemu muatannya) menandai lunas saat tab masih terbuka, tanpa gerakan apa pun dari pembeli.
   function mulaiPolling() {
     var sisa = 225; // 225 x 8 detik ≈ 30 menit
     var id = setInterval(function () {
@@ -298,7 +299,12 @@
       fetch(URL_API + '/api/beli/status?rujukan=' + encodeURIComponent(rujukan), { credentials: 'omit' })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) {
-          if (d && d.ok && (d.status === 'lunas' || d.status === 'menunggu_verifikasi')) { tampilkanLunas(d.status); tampilkanReferensi(d.referensi); clearInterval(id); }
+          // menunggu_verifikasi tampil begitu klaim diterima, tapi polling lanjut sampai
+          // benar-benar lunas (muatan webhook ketemu) — janji "maksimal 15 menit" tereksekusi.
+          if (d && d.ok && d.status && d.status !== 'menunggu_bayar' && d.status !== 'tidak_ada') {
+            tampilkanLunas(d.status); tampilkanReferensi(d.referensi);
+            if (d.status === 'lunas') clearInterval(id);
+          }
         }).catch(function () {});
     }, 8000);
   }
