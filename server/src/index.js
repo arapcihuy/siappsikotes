@@ -275,8 +275,9 @@ async function kodeRefValid(env, kode) {
 // Status pesanan menurut baris kode_terbit: dibayar NULL = menunggu_bayar; terisi = lunas
 // bila asal-nya sudah terverifikasi webhook ('tripay', 'klaim-webhook', 'webhook-auto'),
 // menunggu_verifikasi bila asal 'klaim' (klaim "sudah bayar" yang belum ketemu muatan
-// pembayaran masuk — dicocokkan otomatis tiap 10 menit sampai ketemu).
-const ASAL_LUNAS = ['tripay', 'klaim-webhook', 'webhook-auto'];
+// pembayaran masuk — dicocokkan otomatis: instan saat tekan, cron */10 (t_3a03d4b4),
+// dan cron rekonsiliasi 08:00 yang menaikkan asal ke 'klaim-cron' saat cocok).
+const ASAL_LUNAS = ['tripay', 'klaim-webhook', 'webhook-auto', 'klaim-cron'];
 function statusPesanan(baris) {
   if (!baris) return 'tidak_ada';
   if (!baris.dibayar) return 'menunggu_bayar';
@@ -388,6 +389,75 @@ async function selesaikanKlaimTertunda(env) {
     }
     return lulus;
   } catch (e) { return 0; }
+}
+
+// Auto-terbit kode saat rekonsiliasi menemukan klaim yang cocok pembayaran NYATA
+// (is_test=0). Dua jalur:
+//  - jalur A 'rujukan': muatan menyebut rujukan yang SAMA dan nominal sama (terkuat);
+//  - jalur B 'nominal': nominal sama dan muatan TEPAT SATU dalam jendela ±12 jam
+//    sekitar jam klaim — menutup kasus muatan tanpa nama yang nominalnya unik.
+// Baris dinaikkan ke asal 'klaim-cron' (anggota ASAL_LUNAS; skema 'klaim-webhook'/
+// 'webhook-auto' milik pencocokan webhook t_3a03d4b4 tidak disentuh) + terbitkanKodeRef.
+// Muatan yang sudah terpakai satu klaim tidak boleh diambil klaim lain dalam satu run.
+async function autoTerbitkanKlaimCocok(env) {
+  try {
+    const klaim = await env.DB.prepare(
+      "SELECT kode_hash, rujukan, terbit, dibayar, nominal FROM kode_terbit " +
+      "WHERE asal = 'klaim' AND dibayar IS NOT NULL AND dibayar >= ? ORDER BY dibayar DESC LIMIT 100"
+    ).bind(new Date(Date.now() - 14 * 864e5).toISOString()).all();
+    const baris = klaim.results || [];
+    if (!baris.length) return 0;
+    // Klaim uji (peristiwa beli:klaim_bayar is_test=1) TIDAK boleh naik: probe QA
+    // tidak mencerminkan uang nyata, dan muatan asli tidak mencemari data uji.
+    const peristiwa = await env.DB.prepare(
+      "SELECT rincian, is_test FROM peristiwa WHERE jenis = 'beli:klaim_bayar' AND waktu >= ? LIMIT 1000"
+    ).bind(new Date(Date.now() - 14 * 864e5).toISOString()).all();
+    const ujiRujukan = {};
+    for (const u of (peristiwa.results || [])) {
+      const rj = String(u.rincian || '').split('|')[0].toUpperCase();
+      if (rj && Number(u.is_test) === 1) ujiRujukan[rj] = true;
+    }
+    const terpakai = {};
+    const kini = new Date().toISOString();
+    let naik = 0;
+    for (const p of baris) {
+      const jumlah = Math.round(Number(p.nominal) || 0);
+      if (!jumlah || !p.dibayar || !p.terbit) continue;
+      if (ujiRujukan[String(p.rujukan).toUpperCase()]) continue;   // klaim uji: tidak naik
+      // Muatan tidak mungkin lebih lama dari 5 menit SEBELUM rujukan terbit.
+      let bayar = null, jalur = '';
+      const tepat = await env.DB.prepare(
+        "SELECT id, timestamp, amount, txid, is_test FROM payments " +
+        "WHERE status IN ('success','paid') AND is_test = 0 AND rujukan = ? AND amount = ? " +
+        "AND timestamp >= ? LIMIT 1"
+      ).bind(p.rujukan, jumlah, new Date(new Date(p.terbit).getTime() - 5 * 60e3).toISOString()).all();
+      const a = (tepat.results || [])[0];
+      if (a && !terpakai[String(a.id)]) { bayar = a; jalur = 'rujukan'; }
+      if (!bayar) {
+        const rentang = await env.DB.prepare(
+          "SELECT id, timestamp, amount, txid, is_test FROM payments " +
+          "WHERE status IN ('success','paid') AND is_test = 0 AND amount = ? " +
+          "AND timestamp >= ? AND timestamp <= ? ORDER BY id ASC LIMIT 5"
+        ).bind(jumlah,
+          new Date(new Date(p.dibayar).getTime() - 12 * 3600e3).toISOString(),
+          new Date(new Date(p.dibayar).getTime() + 12 * 3600e3).toISOString()).all();
+        const kandidat = (rentang.results || []).filter(x => !terpakai[String(x.id)]);
+        // Ambigu (>=2 kandidat) = verifikasi manual pemilik, bukan tebakan otomatis.
+        if (kandidat.length === 1) { bayar = kandidat[0]; jalur = 'nominal'; }
+      }
+      if (!bayar) continue;
+      terpakai[String(bayar.id)] = true;
+      await env.DB.prepare("UPDATE kode_terbit SET asal = 'klaim-cron' WHERE kode_hash = ? AND asal = 'klaim'")
+        .bind(p.kode_hash).run();
+      await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
+        .bind(null, 'beli:match_cron',
+          p.rujukan + '|' + bayar.amount + '|pay:' + bayar.id + '|jalur:' + jalur + '|' + (bayar.txid || ''),
+          kini, 0).run();
+      await terbitkanKodeRef(env, p.rujukan);
+      naik++;
+    }
+    return naik;
+  } catch (e) { console.error('AUTO-TB-ERROR:', e.message); return -1; }
 }
 
 function hexKeBytes(hex) {
@@ -1214,7 +1284,7 @@ export default {
                     // DAFTAR asal yang membuat baris kode_terbit dianggap SAH & lunas.
                     // Pakai di semua keputusan Batch 2 agar standarnya satu.
                     function kodeBatch2Sah(baris) {
-                      return !!(baris && baris.dibayar && baris.asal && ['tripay', 'klaim', 'klaim-webhook', 'webhook-auto', 'alat-pemilik'].indexOf(baris.asal) !== -1);
+                      return !!(baris && baris.dibayar && baris.asal && ['tripay', 'klaim', 'klaim-webhook', 'webhook-auto', 'klaim-cron', 'alat-pemilik'].indexOf(baris.asal) !== -1);
                     }
 
                     // POST /api/batch2/cek — khusus pemilik kode akses penuh yang SUDAH lunas.
@@ -1580,6 +1650,29 @@ export default {
         if (!viaSesi && (!env.LAPORAN_TOKEN || token !== env.LAPORAN_TOKEN))
           return jawab({ pesan: 'token tidak sah' }, 403, asal);
         const data = await rekonsiliasiRingkasan(env, u.searchParams.get('hari'));
+        // CSV bukti run: ?format=csv — blok ringkasan + tabel klaim, untuk lampiran/holder.
+        if ((u.searchParams.get('format') || '').toLowerCase() === 'csv') {
+          const kutip = t => '"' + String(t == null ? '' : t).replace(/"/g, '""') + '"';
+          const sek = [
+            ['waktu_run', data.waktu], ['hari', data.hari],
+            ['klaim_total', data.ringkasan.klaim_total],
+            ['tercocok', data.ringkasan.tercocok],
+            ['uji', data.ringkasan.uji],
+            ['butuh_pemilik', data.ringkasan.butuh_pemilik],
+            ['nominal_tercocok', data.ringkasan.nominal_tercocok],
+            ['nominal_butuh_pemilik', data.ringkasan.nominal_klaim_tp]
+          ];
+          let csv = 'laporan,rekonsiliasi-ringkasan\n' +
+            sek.map(x => x.map(kutip).join(',')).join('\n') +
+            '\n\nrujukan,kode_akhir,nominal,kontak,klaim_waktu,status,alasan,nominal_masuk,tunggu_jam,payments\n' +
+            (data.klaim || []).map(r => [
+              r.rujukan, r.kode_akhir, r.nominal, r.kontak, r.klaim_waktu, r.status,
+              r.alasan || '', r.nominal_masuk || 0, r.tunggu_jam,
+              (r.payments || []).map(p => p.timestamp + '|' + p.amount + '|' + (p.txid || '')).join(' ')
+            ].map(kutip).join(',')).join('\n') + '\n';
+          const nama = 'rekonsiliasi-run-' + String(data.waktu).slice(0, 10) + '.csv';
+          return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="' + nama + '"' } });
+        }
         return jawab(data, 200, asal);
       }
 
@@ -2114,7 +2207,10 @@ export default {
             async function rekonsiliasiRingkasan(env, hari) {
             const jumlahHari = Math.min(90, Math.max(1, parseInt(hari, 10) || 7)) || 7;
             const sejak = new Date(Date.now() - (jumlahHari - 1) * 864e5).toISOString();
-            const [klaim, masuk] = await Promise.all([
+            // Kode terbit otomatis DULU: klaim yang cocok pembayaran nyata naik ke
+            // 'klaim-cron' sebelum baris dibaca, jadi hitungan di bawah sudah akhir.
+            await autoTerbitkanKlaimCocok(env);
+            const [klaim, masuk, uji] = await Promise.all([
             env.DB.prepare(
                 "SELECT rujukan, nominal, dibayar, kode_akhir, kontak FROM kode_terbit " +
                 "WHERE asal = 'klaim' AND dibayar IS NOT NULL AND dibayar >= ? ORDER BY dibayar DESC LIMIT 200"
@@ -2123,14 +2219,38 @@ export default {
                 "SELECT rujukan, timestamp, amount, txid, utm_source FROM payments " +
                 "WHERE status IN ('success','paid') AND is_test = 0 AND rujukan IS NOT NULL AND timestamp >= ? " +
                 "ORDER BY timestamp DESC LIMIT 2000"
+            ).bind(sejak).all(),
+            // Peristiwa klaim per rujukan: is_test=1 = klaim QA/probe, dikecualikan dari uang.
+            env.DB.prepare(
+                "SELECT rincian, is_test FROM peristiwa WHERE jenis = 'beli:klaim_bayar' AND waktu >= ? LIMIT 1000"
             ).bind(sejak).all()
             ]);
+            const ujiRujukan = {};
+            for (const u of (uji.results || [])) {
+            const rj = String(u.rincian || '').split('|')[0].toUpperCase();
+            if (rj && Number(u.is_test) === 1) ujiRujukan[rj] = true;
+            }
             const kini = Date.now();
-            let jumlahCocok = 0, nominalCocok = 0;
+            let jumlahCocok = 0, nominalCocok = 0, jumlahUji = 0;
             const perRujukan = {};
             for (const p of (masuk.results || [])) (perRujukan[String(p.rujukan)] = perRujukan[String(p.rujukan)] || []).push(p);
             const rows = (klaim.results || []).map(k => {
             const nominal = Math.round(Number(k.nominal) || 0);
+            // Klaim uji (peristiwa beli:klaim_bayar is_test=1, QA/probe): tampil sebagai
+            // status 'uji', dikecualikan dari SEMUA hitungan uang.
+            if (ujiRujukan[String(k.rujukan).toUpperCase()]) {
+            jumlahUji++;
+            return {
+                rujukan: k.rujukan, kode_akhir: k.kode_akhir, nominal: nominal,
+                kontak: k.kontak || null,
+                klaim_waktu: String(k.dibayar),
+                status: 'uji',
+                alasan: 'klaim_is_test',
+                nominal_masuk: 0,
+                payments: [],
+                tunggu_jam: 0
+            };
+            }
             const sembapMasuk = perRujukan[String(k.rujukan)] || [];
             const tepat = sembapMasuk.filter(p => Math.round(Number(p.amount) || 0) === nominal);
             const klaimMs = new Date(String(k.dibayar)).getTime() || 0;
@@ -2173,11 +2293,13 @@ export default {
             ringkasan: {
                 klaim_total: rows.length,
                 tercocok: jumlahCocok,
-                butuh_pemilik: rows.length - jumlahCocok,
+                uji: jumlahUji,
+                butuh_pemilik: rows.filter(r => r.status === 'butuh_pemilik').length,
                 nominal_klaim_tp: rows.filter(r => r.status === 'butuh_pemilik').reduce((a, r) => a + r.nominal, 0),
                 nominal_tercocok: nominalCocok,
                 klaim_24jam: r24.length,
                 tercocok_24jam: r24.filter(r => r.status === 'tercocok').length,
+                uji_24jam: r24.filter(r => r.status === 'uji').length,
                 butuh_pemilik_24jam: r24.filter(r => r.status === 'butuh_pemilik').length,
                 backlog_24jam: rows.filter(r => r.status === 'butuh_pemilik' && r.tunggu_jam > 24).length
             },
@@ -2203,6 +2325,7 @@ export default {
                 ' · tercocok ' + data.ringkasan.tercocok_24jam +
                 ' · belum ' + data.ringkasan.butuh_pemilik_24jam +
                 ' (' + jumlahRupiah(data.ringkasan.nominal_klaim_tp) + ' perlu dicek)\n';
+            if (data.ringkasan.uji) msg += 'Klaim uji dikecualikan dari hitungan uang (event is_test=1): ' + data.ringkasan.uji + '\n';
             if (belum6.length) {
                 msg += '\n<b>Belum nyambung >6 jam (' + belum6.length + '):</b>\n' + belum6.map(r =>
                     '• ' + r.rujukan + ' · Rp ' + Number(r.nominal).toLocaleString('id-ID') +
@@ -2219,7 +2342,8 @@ export default {
                     ' · ' + r.tunggu_jam + ' jam · kontak: ' + (r.kontak || '(kosong)')
                 ).join('\n') + '\n';
             }
-            msg += '\nTabel lengkap: https://siappsikotes-api.rasyidahmad180.workers.dev/api/rekonsiliasi-ringkasan';
+            msg += '\nTabel lengkap: https://siappsikotes-api.rasyidahmad180.workers.dev/api/rekonsiliasi-ringkasan' +
+                (env.LAPORAN_TOKEN ? '\nCSV bukti run: https://siappsikotes-api.rasyidahmad180.workers.dev/api/rekonsiliasi-ringkasan?token=' + encodeURIComponent(env.LAPORAN_TOKEN) + '&format=csv' : '');
             const tg = await kirimTelegramAlert(env, msg);
             // Guard idempoten ditulis SETELAH upaya kirim: pengulangan hari yang sama tak digandakan.
             try { await env.FUNNEL_KV.put(kunci, JSON.stringify({ waktu: data.waktu, terkirin: !!tg.ok, jumlah: belum.length })); } catch (e) {}
