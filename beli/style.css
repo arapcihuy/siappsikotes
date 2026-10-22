@@ -160,9 +160,9 @@ footer p { margin:8px 0; }
   .pita .dek { font-size:14px; line-height:1.55; }
   .aksi { margin-top:12px; }
   h2 { margin-top:36px; padding-top:24px; }
-  #bayar { margin:12px 0 6px; }
+  #bayar { margin:8px 0 4px; }
   .nota-merchant { font-size:12px; padding:8px 10px; margin-bottom:6px; }
-  .kartu-bayar p { margin-top:8px; margin-bottom:0; }
+  .kartu-bayar p { margin-top:6px; margin-bottom:0; }
   .bayar-pokok { flex-wrap:nowrap; gap:10px; }
   .bayar-pokok .qris-kotak { width:130px; padding:5px; }
   .bayar-kunci { flex:1 1 0; min-width:0; }
