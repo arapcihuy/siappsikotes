@@ -122,10 +122,9 @@
   <h2 id="bayar">Cara membayar</h2>
   <div class="beli-dua">
     <div>
-      <p class="nota-merchant">Di aplikasi bank atau e-wallet-mu, kode QRIS ini bisa muncul dengan nama
-        <b>Momo dimsum &mdash; Sleman</b>, bukan &ldquo;SiapPsikotes&rdquo;. Itu memang kode pembayaran
-        pengelola SiapPsikotes, jadi pembayaranmu tetap sah dan tetap masuk ke pengelola yang sama.
-        Yang dicocokkan tetap <b>nominal</b> dan <b>kode rujukanmu</b> di sebelah.</p>
+      <p class="nota-merchant">Nama yang muncul saat scan: <b>Momo dimsum &mdash; Sleman</b> &mdash; itu
+        kanal pembayaran pengelola SiapPsikotes, jadi pembayaranmu tetap sah.
+        Yang dicocokkan: <b>nominal</b> + <b>kode rujukanmu</b> di sebelah.</p>
       <div class="qris-kotak" id="qris" style="border: 2px solid var(--gold); background: #fff;">
         <a href="../static/img/qris-bayar.png?v=1" target="_blank" rel="noopener"
            aria-label="Buka gambar QRIS ukuran penuh untuk dipindai" style="display:block;background:#fff;">
@@ -137,7 +136,7 @@
           </picture>
         </a>
       </div>
-      <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QRIS Langsung Tampil — Scan otomatis dengan GoPay, OVO, DANA, ShopeePay, atau m-Banking!</p>
+      <p class="catatan" style="font-weight:700; color:var(--gold); margin-top:10px;">⚡ QR tampil langsung &mdash; pindai dengan semua bank &amp; e-wallet.</p>
     </div>
     <div>
       <div class="kartu-bayar" style="border-width: 2px;">
@@ -155,7 +154,8 @@
               <div class="kode-baris" style="margin-top:6px;">
                 <button type="button" class="tombol sekunder kecil" id="beliSalinRujukan">Salin kode rujukan</button>
               </div>
-              <p class="catatan">Tulis kode rujukan ini saat mengirim bukti, supaya pembayaranmu cepat dicocokkan.</p>
+              <p class="catatan">Kode rujukan + nominal unik inilah yang mencocokkan pembayaranmu otomatis
+                &mdash; tidak perlu kirim apa pun.</p>
         <hr style="border:0;border-top:1px solid rgba(255,255,255,.09);margin:16px 0 12px">
                 <p class="label">Sudah bayar? Ambil kode aksesmu</p>
                 <p class="catatan">Kode akses untuk kode rujukan di atas dibuat langsung di halaman ini,
@@ -187,34 +187,36 @@
       </div>
       <noscript>
         <p class="catatan">Nomor rujukan dan nominal unik dibuat oleh skrip di perambanmu. Aktifkan JavaScript
-          supaya keduanya muncul, atau tulis <strong>nama lengkap</strong> dan <strong>waktu pembayaran</strong>mu
-          di pesan bukti agar pembayaran tetap bisa dicocokkan.</p>
+          supaya kartu pembayaran di atas bisa dipakai; bila tetap sulit, jalur bantuan ada di bagian
+          &ldquo;Ada kendala?&rdquo;.</p>
       </noscript>
 
       <ol class="langkah" style="background:var(--surface); padding:16px 20px 16px 36px; border-radius:12px; border:1px solid var(--line);">
-        <li>Pindai QR di atas, lalu bayar <strong id="beliNominal2">Rp 39.000</strong> tepat sejumlah itu.</li>
-        <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu atas. Kode aksesmu muncul saat itu juga.</li>
-        <li>Sudah membayar? Tekan <strong>✅ Saya sudah bayar — aktifkan kode</strong>. Kode langsung aktif,
-          tanpa kirim bukti, tanpa menunggu balasan siapa pun.</li>
-        <li>Tekan <strong>Buka aplikasi & pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
-        <li>Ada kendala? Kirim bukti pembayaran beserta kode rujukanmu lewat WhatsApp atau email.</li>
+        <li>Pindai QR di atas, bayar <strong id="beliNominal2">Rp 39.xxx</strong> &mdash; tepat sejumlah itu.</li>
+        <li>Tekan <strong>Tampilkan kode akses instan</strong> di kartu &mdash; kode aksesmu muncul saat itu juga.</li>
+        <li>Setelah QRIS terbayar, tekan <strong>Saya sudah bayar &mdash; aktifkan kode</strong>: kode aktif
+          otomatis, tanpa menunggu siapa pun.</li>
+        <li>Tekan <strong>Buka aplikasi &amp; pakai kode ini</strong> &mdash; kodenya langsung terpasang.</li>
       </ol>
 
-      <div class="aksi">
-        <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
-             tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
-             pesannya dengan kode rujukan. -->
-        <a class="tombol" id="beliBukti" target="_blank" rel="noopener"
-           href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20catat%20pembayarannya%2C%20kode%20akses%20sudah%20saya%20ambil%20di%20halaman%20beli.">Kirim bukti lewat WhatsApp</a>
-        <a class="tombol sekunder" id="beliBuktiSurel"
-           href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
-        <a class="tombol sekunder" href="../contoh/">Coba 40 soal gratis dulu</a>
-        <a class="tombol sekunder" href="../">Buka aplikasi & masukkan kode</a>
-      </div>
-      <p class="catatan">Kode aksesmu aktif lewat tombol <strong>Saya sudah bayar — aktifkan kode</strong>, tanpa
-        mengirim bukti dan tanpa menunggu: pembayaranmu dicocokkan otomatis dari kode rujukan dan nominal unikmu.
-        Kamu tetap bisa mengirim bukti ke <a href="mailto:rasyidahmad180@gmail.com">rasyidahmad180@gmail.com</a>
-        bila ada kendala memakai kode itu.</p>
+      <section id="kendala" style="margin-top:22px;padding:16px 18px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);">
+        <h2 style="margin:0 0 8px">Ada kendala?</h2>
+        <p class="catatan" style="margin-top:0">Normalnya tidak ada yang perlu dikirim: pembayaranmu terdeteksi
+          otomatis dari <strong>nominal unik + kode rujukanmu</strong>, dan tombol di atas langsung
+          mengaktifkan kode. Bila kode belum aktif dalam beberapa menit, kirim bukti pembayaran beserta
+          kode rujukanmu lewat:</p>
+        <div class="aksi" style="margin-top:12px">
+          <!-- Tautan WhatsApp ditulis langsung, bukan hasil skrip: pembeli yang skripnya gagal
+               tetap sampai ke WhatsApp, bukan ke draf surel. Skrip di bawah menyempurnakan
+               pesannya dengan kode rujukan. -->
+          <a class="tombol kecil" id="beliBukti" target="_blank" rel="noopener"
+             href="https://wa.me/6281387906930?text=Halo%2C%20saya%20sudah%20membayar%20akses%20SiapPsikotes.%20Bukti%20pembayaran%20saya%20lampirkan%20di%20chat%20ini.%20Mohon%20catat%20pembayarannya%2C%20kode%20akses%20sudah%20saya%20ambil%20di%20halaman%20beli.">Kirim bukti lewat WhatsApp</a>
+          <a class="tombol sekunder kecil" id="beliBuktiSurel"
+             href="mailto:rasyidahmad180@gmail.com?subject=Bukti%20pembayaran%20SiapPsikotes">Kirim lewat email</a>
+        </div>
+        <p class="catatan">Masih menimbang? <a href="../contoh/">Coba 40 soal gratis dulu</a> &mdash;
+          baru putuskan untuk beli.</p>
+      </section>
     </div>
   </div>
 
@@ -233,8 +235,8 @@
   <details>
     <summary>Bagaimana kode akses dikirim?</summary>
     <p>Kamu mengambilnya sendiri: tekan <strong>Tampilkan kode akses</strong> di halaman ini dan kodenya langsung
-      muncul. Setelah membayar, tekan <strong>Saya sudah bayar — aktifkan kode</strong>: kode langsung aktif tanpa
-      kirim bukti dan tanpa menunggu balasan. Simpan kodenya, karena kode yang sama juga membuka aplikasi
+      muncul. Setelah membayar, tekan <strong>Saya sudah bayar — aktifkan kode</strong>: kode langsung aktif dari
+      pembayaranmu, tanpa menunggu balasan. Simpan kodenya, karena kode yang sama juga membuka aplikasi
       di perangkat lain.</p>
   </details>
   <details>
@@ -263,7 +265,7 @@
       <a href="../privasi/">Kebijakan privasi</a>
     </div>
     <p>SiapPsikotes bukan produk resmi instansi mana pun dan tidak berafiliasi dengan lembaga pemerintah.</p>
-    <p>Halaman ini diperbarui 17 September 2026.</p>
+    <p>Halaman ini diperbarui 22 Oktober 2026.</p>
   </div>
 </footer>
 
