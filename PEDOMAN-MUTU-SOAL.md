@@ -115,3 +115,26 @@ Konsekuensinya, tiga hal menjadi aturan yang diperiksa mesin:
 Yang sudah berjalan tanpa unduhan apa pun: **Tutor Lapisan 0** — menjelaskan inti cara mengerjakan, kiat ingat,
 pembeda tiap opsi, dan mengarahkan ke soal teraudit lain pada topik yang sama. Seluruh isinya diambil dari
 pembahasan yang sudah diaudit, jadi akurasinya sama dengan bank soalnya.
+
+---
+
+## H. Set Soal Batch 2 — bank kedua di luar alur pecah-data (23 Oktober 2026)
+
+Butir 5 SPEC-RETENSI-30-HARI menambahkan bank kedua: `data/soal-batch2.js` — 120 soal varian baru
+(awalan id b2w/b2m/b2e/b2l/b2n/b2v/b2k/b2kp), 8 modul × 15 soal, seluruhnya satu kategori bernama
+"Set Soal Batch 2". Catatan untuk siapa pun yang melanjutkan:
+
+1. Berkas ini **bukan hasil generate** `pecah-data.py`; ia sumber tunggalnya sendiri. Aturan B2
+   ("dilarang mengedit file hasil generate") tidak membatasinya, tetapi ia tetap diperiksa mesin:
+   `tools/peraturan-mutu.py` membacanya dan menjalankan **aturan yang sama persis** — P1 topik,
+   P2/P3 opsi, P4 kunci tidak bocor, P5 kunci terpanjang, P6 isi pembahasan, P7 langkah hitung,
+   P8 sebaran posisi kunci (30/30/30/30) — ditambah cek **duplikat konten** dan **id** dengan
+   bank utama, dan kewajaran jumlah soal **merata antar modul** (15 per modul).
+2. Tiap soal membawa field `modul` (tkw/matematika/bahasa_inggris/penalaran_logika/numerik/verbal/
+   kraepelin/kepribadian) itu yang menjadikan aturan P7 tetap tegas pada soal hitung.
+3. Kategori ini **tidak terdaftar** di `data/soal-index.js`. Ia hanya tampil setelah
+   `GET /api/batch2/status?kode=...` membalas `{ batch2: true }` (baris kode_terbit nominal 29.xxx,
+   asal tripay/klaim/alat-pemilik). Alurnya di `static/js/batch2.js`: kode disimpan di
+   localStorage `tni_batch2`, konten (`data/soal-batch2.js`) baru diunduh setelah izin, dan tanpa
+   izin tidak ada apa pun yang terlihat di aplikasi. `data/soal-batch2.js` sengaja **tidak** masuk
+   daftar precache `sw.js` supaya tidak diunduh untuk semua pengunjung.
