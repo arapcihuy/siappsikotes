@@ -490,9 +490,9 @@ const ANCHOR_BELI = {
 const COPY_BELI = {
   a: {
     lencana: '<span class="lencana">Kode aktif setelah dicek otomatis</span>',
-    h1: '<h1 class="h-harga">Bayar QRIS &rarr; kode akses aktif otomatis</h1>',
+    h1: '<h1 class="h-harga">Bayar QRIS &rarr; kode akses aktif setelah dicek</h1>',
     dek: '<p class="dek">Tanpa kirim bukti transfer: pembayaranmu dicek otomatis dari catatan QRIS &mdash; begitu tercocok, kode akses aktif di halaman ini maksimal 15 menit. Sekali bayar Rp 39.000, bukan langganan: 1.348 soal, 9 modul tes, dan Laporan Lengkap.</p>',
-    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar QRIS Rp 39.000 &mdash; kode aktif otomatis</a>'
+    cta: '<a class="tombol" href="#bayar" id="ctaBayar">Bayar QRIS Rp 39.000 &mdash; kode aktif setelah dicek</a>'
   },
   b: {
     lencana: '<span class="lencana">1.348 soal + pembahasan tiap soal</span>',
