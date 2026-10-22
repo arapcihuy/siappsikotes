@@ -303,3 +303,13 @@ Tiga artikel SEO frasa riset Thompson (t_cea185aa) tayang 20 Okt 2026:
   kotak catatan di tengah + kotak tombol bawah, khusus per artikel agar utm
   terpisah di funnel.
 - Sitemap naik ke 32 halaman, 4 kartu OG baru, gerbang `--cepat` lulus penuh.
+
+## 22 Oktober 2026 — artikel psikotes TNI AL/AU (marketing-godin)
+- `/psikotes-tni-al-au/` (target: psikotes tni al, psikotes tni au) — ~1.600 kata,
+  10 soal contoh dari bank (verbal 5, numerik 5), tabel materi, beda seleksi
+  AL/AU/AD, kesalahan umum casis, rencana latihan 7 hari.
+- Entri ditambahkan ke `/blog/` (skema position 24) + kartu OG baru, UTM
+  `blog-artikel4`. Sitemap naik ke 34 halaman.
+- Gerbang `peraturan-mutu.py` lulus semua (1.348 soal), `tests/test_verifikasi.py`
+  lulus (exit 0). Listing marketplace MARKETPLACE-LISTING.md disegarkan: 1.348
+  soal + kode akses otomatis pasca-bayar QRIS, LISTING-SIAP-TEMPEL.md diregenerasi.

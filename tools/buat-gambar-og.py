@@ -65,6 +65,7 @@ LABEL = [
     ('privasi', 'KETENTUAN', ABU2),
     ('blog', 'PANDUAN & ARTIKEL', EMAS),
     ('psikotes-tni-ad-bintara', 'PANDUAN TNI AD', EMAS),
+    ('psikotes-tni-al-au', 'PANDUAN TNI AL & AU', EMAS),
     ('latihan-psikotes-tni-online-gratis', 'LATIHAN GRATIS', EMAS),
 ]
 LABEL_ARTIKEL = ('CONTOH SOAL', BIRU)
