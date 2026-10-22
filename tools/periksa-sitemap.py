@@ -26,6 +26,7 @@ SITEMAP = os.path.join(AKAR, "sitemap.xml")
 # Direktori yang bukan halaman publik (tidak wajib masuk sitemap).
 KECUALI = {
     "dashboard",      # panel internal, sengaja tidak diindeks
+    "survei",        # noindex: survei riset harga, bukan halaman publik
     "static",
     "aset-bisnis",
     "node_modules",

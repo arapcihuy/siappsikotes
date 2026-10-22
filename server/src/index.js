@@ -972,7 +972,7 @@ export default {
               const b = await request.json().catch(() => ({}));
               const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
                   'salin_kode', 'salin_rujukan', 'salin_referensi', 'qris_tampil', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
-                  'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview',
+                  'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'survei_jawab', 'artikel_pageview',
                   'batch2_kunjungan', 'batch2_cek_ok',
                   // Simulasi Tryout (t_ec85dbfb): beacon halaman /simulasi-tryout/ — kunjungan
                   // (dengan utm kampanye upsell) dan klik CTA ke /beli/. Rujukan bebas

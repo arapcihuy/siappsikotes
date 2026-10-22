@@ -1,0 +1,57 @@
+{
+ "pertanyaan": [
+  {
+   "id": "harga",
+   "t": "Menurutmu, harga yang wajar untuk 1.348 soal + pembahasan + 9 modul tes adalah:",
+   "pilihan": [
+    "Di bawah Rp 25.000",
+    "Rp 25.000 – 39.000",
+    "Rp 40.000 – 60.000",
+    "Di atas Rp 60.000"
+   ]
+  },
+  {
+   "id": "alasan",
+   "t": "Yang paling membuatmu ragu membeli paket latihan online:",
+   "pilihan": [
+    "Harganya",
+    "Tidak yakin kualitas soalnya",
+    "Takut tidak sempat memakainya",
+    "Lebih suka buku/PDF",
+    "Belum merasa butuh"
+   ]
+  },
+  {
+   "id": "bentuk",
+   "t": "Bentuk latihan yang paling kamu butuhkan:",
+   "pilihan": [
+    "Contoh soal + pembahasan",
+    "Simulasi tryout bertimer",
+    "Ringkasan materi",
+    "Latihan kecermatan (Kraepelin)",
+    "Latihan tes gambar (Wartegg)"
+   ]
+  },
+  {
+   "id": "perangkat",
+   "t": "Kamu paling sering belajar pakai:",
+   "pilihan": [
+    "HP",
+    "Laptop/PC",
+    "Cetak di kertas",
+    "Campur"
+   ]
+  },
+  {
+   "id": "bayar",
+   "t": "Metode bayar yang paling kamu pakai:",
+   "pilihan": [
+    "QRIS / e-wallet",
+    "Transfer bank",
+    "Pulsa",
+    "Belum pernah beli online"
+   ]
+  }
+ ],
+ "dibuat": "2026-10-23"
+}
