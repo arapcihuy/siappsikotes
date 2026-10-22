@@ -1,6 +1,12 @@
 (function () {
   'use strict';
 
+  // ?skus=batch2 (link pesan retensi W4) menuju halaman harga khususnya — halaman
+  // /beli/ tetap membahas akses penuh Rp 39.000. Nominal khusus datang dari server.
+  if (/[?&]skus=batch2/.test(window.location.search)) {
+    window.location.replace('batch2-landing.html' + window.location.search);
+  }
+
   // DOM elements
   var elN = document.getElementById('beliNominal');
   var elN2 = document.getElementById('beliNominal2');
@@ -56,6 +62,9 @@
         // Varian A/B ditetapkan server Worker (window.spBeliVar dari HTML hasil rewrite);
         // fallback: cookie sp_beli_var (direct traffic). Kosong kalau halaman bukan hasil Worker.
         variant: window.spBeliVar || bacaCookie('sp_beli_var') || '',
+        // Id kunjungan dari server (window.spLacak, di-inject Worker) — mengikat beacon
+        // client dengan baris kunjungan server-side di D1 (t_eece4f7e).
+        lacak: window.spLacak || '',
         harga_dasar: HARGA_DASAR
       }, extra || {}));
       if (navigator.sendBeacon) {

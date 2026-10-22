@@ -124,6 +124,24 @@ async function batasiLaju(env, ip, alamat, batas, jendelaDetik) {
   return { boleh: jumlah <= batas, jumlah, batas };
 }
 
+// Flag data uji (t_549faa07): utm uji-/probe/audit/verify-task/test atau flag eksplisit
+// berarti baris itu tidak dihitung di metrik revenue/konversi — dipakai semua jalur tulis.
+function deteksiUji(sumber, eksplisit) {
+  if (eksplisit) return 1;
+  const src = String(sumber || '').toLowerCase();
+  const markers = ['uji-', 'probe', 'audit', 'verify-task', 'test'];
+  return markers.some(m => src.startsWith(m)) ? 1 : 0;
+}
+
+// Id kunjungan anonim 8 hex: satu-satunya pengikat antara baris kunjungan /beli/
+// yang direkam SERVER (rincian 'id:xxxx|var:a' — rujukan SP belum ada saat halaman
+// dibuka) dan beacon client yang membawa rujukan ('SP-123|var:a|id:xxxx').
+function idLacakBaru() {
+  const byte = new Uint8Array(4);
+  crypto.getRandomValues(byte);
+  return Array.from(byte).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 // Sidik kode akses — HARUS sama dengan sidikKode di static/js/fitur11.js dan tools/buat-kode.py.
 const KUNCI_KODE = ['siap', 'psikotes', '2026', 'kode'].join('|');
 function sidikKode(data) {
@@ -380,7 +398,7 @@ function varianDariCookie(request) {
   return cocok ? cocok[1] : '';
 }
 
-async function layaniBeliAb(request, url) {
+async function layaniBeliAb(request, url, env, ctx) {
   // 1) Assignment (urutan wajib): utm_source=variant-a|variant-b menang & cookie mengikuti;
   //    lalu cookie sp_beli_var; terakhir random 50/50 (cookie di-set).
   const dariUrl = ({ 'variant-a': 'a', 'variant-b': 'b' })[url.searchParams.get('utm_source')] || '';
@@ -396,14 +414,16 @@ async function layaniBeliAb(request, url) {
   }
   let html = await res.text();
 
-  // 3) Rewrite 4 elemen + inject varian untuk beacon (dibaca beli/script.js).
+  // 3) Rewrite 4 elemen + inject varian & id kunjungan untuk beacon (dibaca beli/script.js).
   //    Harga tidak pernah disentuh: string 'Rp 39.000' tetap tampil & angkanya utuh.
   const salin = COPY_BELI[varian];
+  const idKunjungan = idLacakBaru();
   html = html.replace(ANCHOR_BELI.lencana, salin.lencana)
              .replace(ANCHOR_BELI.h1, salin.h1)
              .replace(ANCHOR_BELI.dek, salin.dek)
              .replace(ANCHOR_BELI.cta, salin.cta)
-             .replace('<script src="script.js"', '<script>window.spBeliVar="' + varian + '";</script><script src="script.js"');
+             .replace('<script src="script.js"',
+                      '<script>window.spBeliVar="' + varian + '";window.spLacak="' + idKunjungan + '";</script><script src="script.js"');
 
   const header = {
     'Content-Type': 'text/html; charset=utf-8',
@@ -413,11 +433,37 @@ async function layaniBeliAb(request, url) {
   if (setCookie) {
     header['Set-Cookie'] = 'sp_beli_var=' + varian + '; Max-Age=2592000; Path=/; SameSite=Lax; Secure';
   }
+
+  // 4) Kunjungan /beli/ tercatat SERVER-SIDE (t_eece4f7e): tidak bergantung beacon client
+  //    (penghadang iklan/MathJax JS mati tidak boleh menelan penghitungan visit).
+  //    UTM dari URL halaman, varian dari assignment server. Dilempar via ctx.waitUntil
+  //    supaya respons page tidak menunggu tulisan D1.
+  if (env && env.DB) {
+    const utmServer = {
+      s: String(url.searchParams.get('utm_source') || '').slice(0, 50),
+      m: String(url.searchParams.get('utm_medium') || '').slice(0, 50),
+      c: String(url.searchParams.get('utm_campaign') || '').slice(0, 100)
+    };
+    const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+    const envAb = env, idSrv = idKunjungan;
+    if (ctx && ctx.waitUntil) {
+      ctx.waitUntil((async () => {
+        try {
+          const laju = await batasiLaju(envAb, ip, 'kunjungan_server', 30, 60); // maksimal 30 pageview/menit/IP
+          if (!laju.boleh) return;
+          await envAb.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign, is_test) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+            .bind(null, 'beli:kunjungan_server', 'id:' + idSrv + '|var:' + varian, new Date().toISOString(),
+                  utmServer.s, utmServer.m, utmServer.c,
+                  deteksiUji(utmServer.s) || deteksiUji(utmServer.c)).run();
+        } catch (e) { /* gagal catat kunjungan tidak boleh menahan halaman */ }
+      })());
+    }
+  }
   return new Response(html, { status: 200, headers: header });
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const asal = request.headers.get('Origin') || '';
     const url = new URL(request.url);
     const jalan = url.pathname.replace(/\/+$/, '') || '/';
@@ -441,7 +487,7 @@ export default {
 
       // ---- A/B /beli/: dokumen HTML di-swap per varian; aset /beli* lain pass-through ----
       if (jalan === '/beli' || jalan === '/beli/index.html') {
-        return layaniBeliAb(request, url);
+        return layaniBeliAb(request, url, env, ctx);
       }
       if (jalan.indexOf('/beli/') === 0) {
         return fetch('https://siappsikotes.my.id' + url.pathname + (url.search || ''), { headers: { 'Accept': '*/*' } });
@@ -731,7 +777,8 @@ export default {
               const b = await request.json().catch(() => ({}));
               const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
                   'salin_kode', 'salin_rujukan', 'salin_referensi', 'qris_tampil', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
-                  'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview'];
+                  'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview',
+                  'batch2_kunjungan', 'batch2_cek_ok'];
               const jenis = String(b.jenis || '');
               if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
               const kartu = jenis.indexOf('cardcheck_') === 0;
@@ -744,11 +791,12 @@ export default {
                             // Nilai di luar ^(a|b)$ dibuang.
                             const varianAb = ['a', 'b'].indexOf(String(b.variant || '').toLowerCase()) !== -1
                               ? String(b.variant).toLowerCase() : '';
-                            const rincianTag = rincian + (varianAb ? '|var:' + varianAb : '');
+                            const rincianTag = rincian + (varianAb ? '|var:' + varianAb : '')
+                              + (/^[0-9a-f]{4,32}$/.test(String(b.lacak || '')) ? '|id:' + String(b.lacak).toLowerCase() : '');
                             const utmSource = String(b.utm_source || '').slice(0, 50);
                             const utmMedium = String(b.utm_medium || '').slice(0, 50);
                             const utmCampaign = String(b.utm_campaign || '').slice(0, 100);
-                            const isTest = (()=>{ const src = utmSource.toLowerCase(); const markers=['uji-','probe','audit','verify-task','test']; if (markers.some(m=>src.startsWith(m))) return 1; if (b.is_test) return 1; return 0; })();
+                            const isTest = deteksiUji(utmSource, b.is_test);
                             await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign, is_test) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
                               .bind(null, awalan + jenis, rincianTag, new Date().toISOString(), utmSource, utmMedium, utmCampaign, isTest).run();
                             return jawab({ ok: true }, 200, asal);
@@ -820,7 +868,27 @@ export default {
                         ? await env.DB.prepare('SELECT payment_id FROM referral_kode WHERE kode = ?').bind(refMasuk).first()
                         : null;
                       const refPakai = (refBaris && refBaris.payment_id !== rujukan) ? refMasuk : null;
-                      const nominalBaru = nominalDasar(refPakai) + parseInt(rujukan.slice(3), 10);
+                      // Set Soal Batch 2 (skus=batch2): agar pemasarannya jujur, pemesanan hanya
+                      // bisa lewat kode akses penuh yang SUDAH lunas — token HMAC 15 menit dari
+                      // POST /api/batch2/cek. Harga dasar 29.000 tetap dihitung SERVER.
+                      const skus = String(b.skus || '').trim();
+                      const pesanBatch2 = skus === 'batch2';
+                      let dasarNominal = nominalDasar(refPakai);
+                      if (pesanBatch2) {
+                        if (!env.KLAIM_HMAC_SECRET) return jawab({ pesan: 'verifikasi kode belum aktif' }, 503, asal);
+                        const isi = await periksaTokenKlaim(env, b.batch2_token);
+                        if (!isi || isi.tujuan !== 'batch2') return jawab({ pesan: 'periksa kode aksesmu dulu di atas — kode ini belum terverifikasi' }, 403, asal);
+                        if (Date.now() - (isi.waktu || 0) > 15 * 60e3) return jawab({ pesan: 'verifikasi kode kedaluwarsa — tempel ulang kode aksesnya' }, 403, asal);
+                        const cek = await env.DB.prepare('SELECT dibayar, asal FROM kode_terbit WHERE kode_hash = ?').bind(isi.kode_hash).first();
+                        if (!kodeBatch2Sah(cek)) return jawab({ pesan: 'kode aksesnya belum sah untuk harga khusus ini' }, 403, asal);
+                        // Rujukan SP-xxx menghasilkan kode akses dari rumus yang memang satu-satunya
+                        // per rujukan: kalau rujukan itu sudah jadi pesanan lain (lunas), nominal
+                        // JANGAN medsapingin — minta angka lain supaya catatan setoran tetap polos.
+                        const sudah = await env.DB.prepare('SELECT dibayar, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                        if (sudah) return jawab({ pesan: 'rujukan ' + rujukan + ' sudah pernah dipakai pesanan lain — pilih 3 angka lain di kolom rujukan' }, 400, asal);
+                        dasarNominal = 29000;
+                      }
+                      const nominalBaru = dasarNominal + parseInt(rujukan.slice(3), 10);
                       // Idempoten: klik "Tampilkan kode" berkali kali -> satu baris yang sama (dibayar tetap apa adanya).
                       const baru = await env.DB.prepare(
                         'INSERT INTO kode_terbit (kode_hash, kode_akhir, terbit, dibayar, rujukan, nominal, asal, ref_kode) VALUES (?, ?, ?, NULL, ?, ?, ?, ?) ON CONFLICT(kode_hash) DO NOTHING'
@@ -849,7 +917,7 @@ export default {
                       const baris = await env.DB.prepare('SELECT dibayar, asal, nominal, ref_kode FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
                       if (baris) { nominalTercatat = Number(baris.nominal) || nominalTercatat; refTerpasang = baris.ref_kode || null; }
                       await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign) VALUES (?, ?, ?, ?, ?, ?, ?)')
-                        .bind(null, 'beli:order', rujukan + '|' + nominalTercatat + (refTerpasang ? '|ref:' + refTerpasang : ''), kini, String(b.utm_source || '').slice(0, 50), String(b.utm_medium || '').slice(0, 50), String(b.utm_campaign || '').slice(0, 100)).run();
+                        .bind(null, pesanBatch2 ? 'beli:order-batch2' : 'beli:order', rujukan + '|' + nominalTercatat + (refTerpasang ? '|ref:' + refTerpasang : ''), kini, String(b.utm_source || '').slice(0, 50), String(b.utm_medium || '').slice(0, 50), String(b.utm_campaign || '').slice(0, 100)).run();
                       // Token klaim diterbitkan bila rahasia jalur B sudah dipasang; tanpa itu pesanan
                       // tetap tercatat dan kode tetap tampil (jalur manual pemilik tetap bekerja).
                       const klaim_token = env.KLAIM_HMAC_SECRET ? await buatTokenKlaim(env, { rujukan, nominal: nominalTercatat }) : null;
@@ -879,17 +947,20 @@ export default {
                       const hasil = await env.DB.prepare("UPDATE kode_terbit SET dibayar = ?, asal = 'klaim' WHERE kode_hash = ? AND dibayar IS NULL").bind(kini, hash).run();
                       const baris = await env.DB.prepare('SELECT dibayar, asal, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
                       if (!baris) return jawab({ pesan: 'pesanan tidak ditemukan — tekan dulu Tampilkan kode' }, 404, asal);
+                      // Klaim uji (is_test/manual) tetap ditandai is_test: tidak memekikkan
+                      // Telegram & tidak mencemari metrik (sama-dengan jalur lain).
+                      const ujiKlaim = b.is_test === true || b.is_test === 1 || b.is_test === '1' || b.probe === 1;
                       if (hasil.meta.changes > 0) {
                         // Kontak opsional klaimer (WA/email) untuk tindak lanjut rekonsiliasi
                         // oleh tim marketing. Disanitasi ketat; ditulis hanya pada klaim pertama.
                         const kontakMasuk = String(b.kontak || '').trim();
                         const kontak = /^[\w@+.\-\s]{1,64}$/.test(kontakMasuk) ? kontakMasuk.slice(0, 64) : null;
                         if (kontak) await env.DB.prepare("UPDATE kode_terbit SET kontak = ? WHERE kode_hash = ? AND asal = 'klaim'").bind(kontak, hash).run();
-                        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu) VALUES (?, ?, ?, ?)')
-                          .bind(null, 'beli:klaim_bayar', rujukan + '|' + baris.nominal, kini).run();
+                        await env.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, is_test) VALUES (?, ?, ?, ?, ?)')
+                          .bind(null, 'beli:klaim_bayar', rujukan + '|' + baris.nominal, kini, ujiKlaim ? 1 : 0).run();
                         // Pembayaran aktif -> kode referensi pembeli terbit (idempoten per rujukan).
                         await terbitkanKodeRef(env, rujukan);
-                        await kirimTelegramAlert(env, '🧾 <b>Klaim "sudah bayar" diterima</b>\nRujukan: ' + rujukan +
+                        if (!ujiKlaim) await kirimTelegramAlert(env, '🧾 <b>Klaim "sudah bayar" diterima</b>\nRujukan: ' + rujukan +
                           '\nNominal: Rp ' + Number(baris.nominal).toLocaleString('id-ID') +
                           (kontak ? '\nKontak: ' + kontak : '\nKontak: (tidak diisi)') +
                           '\nKode akses: AKTIF (status menunggu verifikasi harian)');
@@ -909,6 +980,134 @@ export default {
                       return jawab({ ok: true, rujukan, status: statusPesanan(baris),
                                      nominal: baris ? baris.nominal : (await nominalDiharapkan(env, rujukan)).nominal,
                                      referensi }, 200, asal);
+                    }
+
+                    // ---- retensi & Batch 2 (spesifikasi retensi 30 hari, t_5d6bf642) ----
+                    // Pembacaan saja: webhook Tripay, skema payments, dan alur klaim kode_terbit
+                    // TIDAK diubah. Segmen menurut umur pembayaran (kolom dibayar): H0-H2, H3-H13,
+                    // H14-H27, H28+ — dipakai skrip harian scripts/retensi-harian.sh.
+                    function segmenRetensi(hari) {
+                      if (hari <= 2) return 'SEG-1';
+                      if (hari <= 13) return 'SEG-2';
+                      if (hari <= 27) return 'SEG-3';
+                      return 'SEG-4';
+                    }
+
+                    // CSV daftar follow-up pembeli lunas. Token pola /api/laporan/funnel
+                    // (LAPORAN_TOKEN — lihat scripts/ekspor-funnel.sh). Kosong tetap 200 + header.
+                    if (jalan === '/api/laporan/retensi' && request.method === 'GET') {
+                      const u = new URL(request.url);
+                      const token = u.searchParams.get('token') || (request.headers.get('X-Token') || '');
+                      if (!env.LAPORAN_TOKEN || token !== env.LAPORAN_TOKEN) return jawab({ pesan: 'token tidak sah' }, 403, asal);
+                      // Hanya rujukan sah SP-3digit (pola pesanan nyata /api/beli/kode) — membuang
+                      // baris uji/audit (SP-Munger-Test dan sejenisnya) agar tidak dikirimi pesan.
+                      const daftar = await env.DB.prepare("SELECT rujukan, kode_akhir, kontak, dibayar FROM kode_terbit WHERE dibayar IS NOT NULL AND rujukan GLOB 'SP-[0-9][0-9][0-9]' ORDER BY dibayar ASC LIMIT 5000").all();
+                      const kini = Date.now();
+                      const kutip = t => '"' + String(t || '').replace(/"/g, '""') + '"';
+                      const csv = ['rujukan,kode_akhir,kontak,segmen,hari_sejak_bayar'].concat((daftar.results || []).map(r => {
+                        const hari = Math.max(0, Math.floor((kini - new Date(r.dibayar).getTime()) / 864e5));
+                        return [kutip(r.rujukan), kutip(r.kode_akhir), kutip(r.kontak), segmenRetensi(hari), hari].join(',');
+                      })).join('\n') + '\n';
+                      return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="retensi.csv"' } });
+                    }
+
+                    // ---- CSV funnel 1-baris per pembayaran (t_eece4f7e) ----
+                    // Satu baris per pembayaran QRIS lunas: rujukan -> kunjungan (client beacon +
+                    // server-side), utm, varian A/B, harga, ts bayar, txid. Sumber 100% tabel D1,
+                    // jadi apapun jalurnya (webhook Tripay, payment-webhook, klaim) barisnya muncul
+                    // dan funnel bisa direkonstruksi dari CSV ini saja. Is_test diambil dari
+                    // kunjungan/pembayaran supaya baris uji tidak mencemari keputusan harga.
+                    if (jalan === '/api/funnel/beli.csv' && request.method === 'GET') {
+                      const u = new URL(request.url);
+                      const token = u.searchParams.get('token') || (request.headers.get('X-Token') || '');
+                      if (!env.LAPORAN_TOKEN || token !== env.LAPORAN_TOKEN) return jawab({ pesan: 'token tidak sah' }, 403, asal);
+                      const kutip = t => '"' + String(t == null ? '' : t).replace(/"/g, '""') + '"';
+                      const [lunas, kunjungan, kunjunganSrv, bayarWeb] = await Promise.all([
+                        env.DB.prepare("SELECT rujukan, kode_akhir, terbit, dibayar, nominal, asal FROM kode_terbit WHERE dibayar IS NOT NULL AND rujukan GLOB 'SP-[0-9][0-9][0-9]' ORDER BY dibayar DESC LIMIT 5000").all(),
+                        env.DB.prepare("SELECT rincian, waktu, utm_source, utm_medium, utm_campaign, is_test FROM peristiwa WHERE jenis = 'beli:kunjungan_beli' AND rincian GLOB 'SP-[0-9][0-9][0-9]*' ORDER BY waktu ASC LIMIT 20000").all(),
+                        env.DB.prepare("SELECT rincian, waktu FROM peristiwa WHERE jenis = 'beli:kunjungan_server' ORDER BY waktu ASC LIMIT 20000").all(),
+                        env.DB.prepare("SELECT rujukan, txid, timestamp, amount, is_test FROM payments WHERE status IN ('success','paid') AND rujukan GLOB 'SP-[0-9][0-9][0-9]' ORDER BY timestamp DESC LIMIT 5000").all()
+                      ]);
+                      // Kunjungan client rujukan: ambil yang TERAWAL (touch pertama + utm & varian saat itu).
+                      const visit = {};
+                      for (const p of (kunjungan.results || [])) {
+                        const rjk = String(p.rincian || '').split('|')[0];
+                        if (!/^SP-[0-9]{3}$/.test(rjk) || visit[rjk]) continue;
+                        const im = /(?:^|\|)var:([ab])/.exec(p.rincian), ii = /(?:^|\|)id:([0-9a-f]+)/.exec(p.rincian);
+                        visit[rjk] = { waktu: p.waktu, utm_source: p.utm_source, utm_medium: p.utm_medium,
+                                       utm_campaign: p.utm_campaign, varian: im ? im[1] : '',
+                                       id: ii ? ii[1] : '', is_test: p.is_test || 0 };
+                      }
+                      // Kunjungan server-side menurut id lacak (pageview matematis selalu tercatat).
+                      const visitSrv = {};
+                      for (const p of (kunjunganSrv.results || [])) {
+                        const ii = /(?:^|\|)id:([0-9a-f]+)/.exec(String(p.rincian || ''));
+                        if (!ii || visitSrv[ii[1]]) continue;
+                        visitSrv[ii[1]] = p.waktu;
+                      }
+                      // Pembayaran sukses via /api/payment-webhook yang tidak mempunyai baris kode_terbit lunas.
+                      const viaWeb = {};
+                      for (const p of (bayarWeb.results || [])) {
+                        if (!viaWeb[p.rujukan]) viaWeb[p.rujukan] = p;
+                      }
+                      const barisKunci = {};
+                      for (const k of (lunas.results || [])) barisKunci[k.rujukan] = { ...k, kodeBenar: true };
+                      for (const rjk of Object.keys(viaWeb)) {
+                        if (!barisKunci[rjk]) barisKunci[rjk] = { rujukan: rjk, kode_akhir: '', terbit: null,
+                          dibayar: viaWeb[rjk].timestamp, nominal: Math.round(Number(viaWeb[rjk].amount)) || null, asal: 'webhook' };
+                      }
+                      const barisCsv = Object.values(barisKunci).map(k => {
+                        const v = visit[k.rujukan] || {};
+                        const isTest = (v.is_test || 0) || (viaWeb[k.rujukan] && viaWeb[k.rujukan].is_test) || 0;
+                        return [k.rujukan, k.kode_akhir, v.utm_source || '', v.utm_medium || '', v.utm_campaign || '',
+                                v.varian || '', v.waktu || '', v.id ? (visitSrv[v.id] || '') : '',
+                                k.nominal, k.dibayar, k.asal, (viaWeb[k.rujukan] && viaWeb[k.rujukan].txid) || '', isTest];
+                      }).sort((a, b) => String(b[9]).localeCompare(String(a[9])));
+                      const csv = ['rujukan,kode_akhir,utm_source,utm_medium,utm_campaign,varian,ts_visit,ts_visit_server,harga,ts_bayar,asal,txid,is_test']
+                        .concat(barisCsv.map(r => r.map(kutip).join(','))).join('\n') + '\n';
+                      return new Response(csv, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="funnel-beli.csv"' } });
+                    }
+
+                    // DAFTAR asal yang membuat baris kode_terbit dianggap SAH & lunas.
+                    // Pakai di semua keputusan Batch 2 agar standarnya satu.
+                    function kodeBatch2Sah(baris) {
+                      return !!(baris && baris.dibayar && baris.asal && ['tripay', 'klaim', 'alat-pemilik'].indexOf(baris.asal) !== -1);
+                    }
+
+                    // POST /api/batch2/cek — khusus pemilik kode akses penuh yang SUDAH lunas.
+                    // body { kode: "SP..." } → 200 + token HMAC 15 menit; 404 tidak dikenal; 403 belum lunas.
+                    if (jalan === '/api/batch2/cek' && request.method === 'POST') {
+                      const ip = request.headers.get('CF-Connecting-IP') || 'tanpa-ip';
+                      const laju = await batasiLaju(env, ip, 'batch2_cek', 10, 60);
+                      if (!laju.boleh) return jawab({ pesan: 'terlalu sering' }, 429, asal);
+                      if (!env.KLAIM_HMAC_SECRET) return jawab({ pesan: 'verifikasi kode belum aktif' }, 503, asal);
+                      const b = await request.json().catch(() => ({}));
+                      const kode = String(b.kode || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+                      if (kode.length < 8 || kode.slice(0, 2) !== 'SP') return jawab({ pesan: 'kode tidak sah (contoh: SPXXXXXXXXXXXX)' }, 400, asal);
+                      const hash = await hashKodeTerbit(kode);
+                      const baris = await env.DB.prepare('SELECT kode_akhir, asal, dibayar, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      if (!baris) return jawab({ pesan: 'kode tidak dikenal — periksa tulisan kodenya' }, 404, asal);
+                      if (!kodeBatch2Sah(baris)) return jawab({ pesan: 'kode ini belum lunas — selesaikan pembayaran akses penuh dulu' }, 403, asal);
+                      const token = await buatTokenKlaim(env, { tujuan: 'batch2', kode_hash: hash });
+                      const batas = /^SP-(\d{3})$/.exec(String(baris.rujukan || ''));
+                      const dasar = 29000;
+                      return jawab({ ok: true, token, kode_akhir: baris.kode_akhir,
+                                     nominal_dasar: dasar, teks_harga: 'Rp 29.000 sekali bayar, bukan langganan',
+                                     rujukan: batas ? batas[0] : null }, 200, asal);
+                    }
+
+                    // GET /api/batch2/status?kode=... — izin konten Batch 2 di aplikasi.
+                    // Kuncinya BARIS di kode_terbit dengan nominal 29.xxx (not angka halaman):
+                    // kode akses penuh biasa (39.xxx) tidak membuka Batch 2.
+                    if (jalan === '/api/batch2/status' && request.method === 'GET') {
+                      const kode = (url.searchParams.get('kode') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+                      if (kode.length < 8 || kode.slice(0, 2) !== 'SP') return jawab({ pesan: 'kode tidak sah' }, 400, asal);
+                      const hash = await hashKodeTerbit(kode);
+                      const baris = await env.DB.prepare('SELECT kode_akhir, asal, dibayar, nominal FROM kode_terbit WHERE kode_hash = ?').bind(hash).first();
+                      const buka = kodeBatch2Sah(baris)
+                        && Number(baris.nominal) >= 29000 && Number(baris.nominal) < 30000
+                        && baris.asal !== 'menunggu-bayar';
+                      return jawab({ ok: true, kode_akhir: baris ? baris.kode_akhir : null, batch2: !!buka, nominal: baris ? baris.nominal : null }, 200, asal);
                     }
 
                     // ---- webhook Tripay (jalur A utama: QRIS dinamis, pembayaran terverifikasi) ----
