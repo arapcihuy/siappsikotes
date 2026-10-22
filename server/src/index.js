@@ -973,14 +973,19 @@ export default {
               const JENIS_PANTAU = ['kunjungan_beli', 'klik_cta_bayar', 'salin_nominal', 'tampilkan_kode',
                   'salin_kode', 'salin_rujukan', 'salin_referensi', 'qris_tampil', 'buka_aplikasi', 'klik_bukti_wa', 'klik_bukti_email',
                   'klaim_sudah_bayar', 'cardcheck_kunjungan', 'cardcheck_klik_cta', 'survei_kunjungan', 'artikel_pageview',
-                  'batch2_kunjungan', 'batch2_cek_ok'];
+                  'batch2_kunjungan', 'batch2_cek_ok',
+                  // Simulasi Tryout (t_ec85dbfb): beacon halaman /simulasi-tryout/ — kunjungan
+                  // (dengan utm kampanye upsell) dan klik CTA ke /beli/. Rujukan bebas
+                  // [A-Za-z0-9_-] (mis. sidik sesi demo), tanpa data pribadi.
+                  'tryout_kunjungan', 'tryout_klik_beli'];
               const jenis = String(b.jenis || '');
               if (JENIS_PANTAU.indexOf(jenis) === -1) return jawab({ pesan: 'jenis tidak dikenal' }, 400, asal);
-              const kartu = jenis.indexOf('cardcheck_') === 0;
+              const tryout = jenis.indexOf('tryout_') === 0;
+              const kartu = jenis.indexOf('cardcheck_') === 0 || tryout;
               const rincian = String(b.rujukan || '').slice(0, 20);
               if (rincian && !(kartu ? /^[A-Za-z0-9_-]{1,20}$/.test(rincian) : /^SP-[0-9]{3}$/.test(rincian)))
                 return jawab({ pesan: 'rincian tidak sah' }, 400, asal);
-              const awalan = kartu ? 'cardcheck:' : 'beli:';
+              const awalan = tryout ? 'tryout:' : kartu ? 'cardcheck:' : 'beli:';
                             // Varian A/B /beli/ (direct traffic: beacon kirim cookie sp_beli_var).
                             // Tag di rincian 'SP-123|var:a' — tanpa kolom baru / migrasi D1.
                             // Nilai di luar ^(a|b)$ dibuang.

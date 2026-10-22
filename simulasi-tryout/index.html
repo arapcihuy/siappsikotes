@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; connect-src 'self' https://siappsikotes-api.rasyidahmad180.workers.dev">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0f18">
+<title>Simulasi Tryout Psikotes TNI: Latihan Berformat Ujian dengan Timer &amp; Skor</title>
+<meta name="description" content="Latihan berformat ujian: 120 soal dengan fitur timer mundur, skor akhir, dan rincian hasil per mata uji untuk melihat area terlemah. Demo gratis 20 soal, sesi penuh lewat kode akses.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://siappsikotes.my.id/simulasi-tryout/">
+<meta property="og:title" content="Simulasi Tryout: Latihan Berformat Ujian (Timer + Skor + Rincian per Mata Uji)">
+<meta property="og:description" content="Latihan berformat ujian: 120 soal dengan fitur timer mundur, skor akhir, dan rincian hasil per mata uji untuk melihat area terlemah. Demo gratis 20 soal, sesi penuh lewat kode akses.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://siappsikotes.my.id/simulasi-tryout/">
+<meta property="og:image" content="https://siappsikotes.my.id/og-image.png">
+<meta property="og:image:alt" content="Simulasi Tryout SiapPsikotes">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="SiapPsikotes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="../static/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../static/icons/apple-touch-icon-180.png">
+<style>
+:root{--bg:#0a0f18;--surface:#121a28;--surface2:#172133;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--text:#eaf1f8;--muted:#b3c0d1;--isi:#c9d5e3;--gold:#e6c552;--gold-dark:#c9a227;--blue:#6db3ff;--ok:#4ade80;--bahaya:#f87171}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--text);background:radial-gradient(900px 420px at 12% -8%,rgba(230,197,82,.11),transparent 62%),radial-gradient(760px 400px at 94% 1%,rgba(109,179,255,.08),transparent 62%),var(--bg);background-repeat:no-repeat;font:16.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+h1{font-size:clamp(28px,4.4vw,38px);line-height:1.15;letter-spacing:-1px;font-weight:800;margin:0 0 6px}
+h2{font-size:clamp(21px,2.6vw,26px);letter-spacing:-.5px;margin:34px 0 12px}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line);background:rgba(10,15,24,.86);position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.kepala{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 22px}
+.merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.2px;color:var(--text);text-decoration:none}
+.merek img{width:30px;height:30px;border-radius:8px;display:block}
+.kepala nav{display:flex;align-items:center;gap:22px;font-size:14.5px}
+.kepala nav a{text-decoration:none;color:var(--muted)}
+.kepala nav a:hover{color:var(--text)}
+.pita{margin:26px 0 22px;padding:30px 28px 28px;border-radius:20px;border:1px solid rgba(230,197,82,.28);background:linear-gradient(150deg,rgba(230,197,82,.16),rgba(230,197,82,.04) 46%,rgba(23,33,51,.55));box-shadow:0 20px 45px rgba(0,0,0,.35)}
+.lencana{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1a1405;background:linear-gradient(180deg,#f5c542,var(--gold-dark));padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.pita h1{margin:0 0 12px}
+.pita .dek{margin:0;color:#c3cfdd;font-size:clamp(16px,1.9vw,18px);max-width:44em}
+.aksi{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.tombol{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:13px 22px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;border:1px solid rgba(0,0,0,.14);background:linear-gradient(180deg,var(--gold),var(--gold-dark));color:#1a1405;box-shadow:0 10px 24px rgba(201,162,39,.22);transition:filter .18s ease,transform .18s ease;cursor:pointer;font-family:inherit}
+.tombol:hover{filter:brightness(1.06);transform:translateY(-1px);color:#1a1405}
+.tombol.sekunder{background:#1e2a3d;color:var(--text);border-color:rgba(255,255,255,.28);box-shadow:0 6px 16px rgba(0,0,0,.22);font-weight:600}
+.tombol.sekunder:hover{border-color:var(--gold);color:var(--gold)}
+.tombol.kecil{min-height:38px;padding:8px 14px;font-size:14px;border-radius:10px}
+.tombol:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.angka-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin:0 0 24px}
+.angka-strip div{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.008))}
+.angka-strip b{display:block;font-size:26px;line-height:1.2;color:var(--gold);letter-spacing:-.6px}
+.angka-strip span{font-size:12.5px;color:var(--muted)}
+.syarat{border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008)),var(--surface);padding:18px 20px;margin:0 0 16px}
+.syarat p{margin:0 0 10px;color:var(--isi)}
+.syarat p:last-child{margin-bottom:0}
+.catatan{background:var(--surface2);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0;color:var(--muted);font-size:.94rem}
+.tanya{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px;margin:16px 0;background:var(--surface2)}
+.tanya strong{color:var(--text)}
+.tanya p{margin:6px 0 0;color:var(--isi)}
+.harga{font-size:clamp(30px,5vw,38px);font-weight:800;color:var(--gold);letter-spacing:-1px;line-height:1.15;margin:6px 0 4px}
+.tabel{width:100%;border-collapse:collapse;margin:14px 0}
+.tabel th,.tabel td{border:1px solid rgba(255,255,255,.16);padding:8px 11px;text-align:left;color:var(--isi);font-size:.94rem}
+.tabel th{background:var(--surface2);color:var(--text)}
+.terlemah{color:var(--gold);font-weight:700}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:22px 0 30px;color:var(--muted);font-size:.9rem}
+footer a{color:var(--blue)}
+/* ===== panel ujian ===== */
+.ujian{border:1px solid var(--line2);border-radius:18px;background:var(--surface);padding:20px;margin:18px 0}
+.bar-ujian{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.bar-ujian .etiket{font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:26px;letter-spacing:.5px;color:var(--text)}
+.timer.krisi{color:var(--bahaya)}
+.progres{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px}
+.progres-meter{flex:1;min-width:120px;height:8px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden}
+.progres-meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dark));width:0%}
+.soal-no{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:6px}
+.soal-teks{font-size:17.5px;line-height:1.65;color:var(--text);margin:0 0 14px;white-space:pre-line}
+.gambar-soal{max-width:100%;border-radius:10px;margin:0 0 14px;display:block}
+.opsi{display:flex;flex-direction:column;gap:8px}
+.baris-opsi{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);cursor:pointer;transition:border-color .15s ease,background .15s ease;font-size:15.5px;color:var(--isi)}
+.baris-opsi:hover{border-color:var(--line2)}
+.baris-opsi.dipilih{border-color:var(--gold);background:rgba(230,197,82,.10);color:var(--text)}
+.baris-opsi.dinonaktifkan{cursor:default}
+.baris-opsi .huruf{font-weight:800;color:var(--gold);min-width:18px}
+.baris-opsi.benar{border-color:rgba(74,222,128,.55)}
+.baris-opsi.benar .huruf{color:var(--ok)}
+.baris-opsi.salah{border-color:rgba(248,113,113,.55)}
+.baris-opsi.salah .huruf{color:var(--bahaya)}
+.navigasi{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:16px}
+.peta-jawab{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.peta-jawab button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--muted);font-size:12.5px;font-weight:700;cursor:pointer;padding:0}
+.peta-jawab button.isi{background:rgba(230,197,82,.18);border-color:var(--gold);color:var(--gold)}
+.peta-jawab button.kini{outline:2px solid var(--blue)}
+.kotak-kode{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.kotak-kode input{flex:1;min-width:220px;background:var(--surface2);border:1px solid var(--line2);border-radius:10px;color:var(--text);padding:11px 14px;font-size:15px;text-transform:uppercase;letter-spacing:1px;font-family:inherit}
+.hasil-head{display:flex;flex-wrap:wrap;gap:18px;align-items:baseline}
+.skor-besar{font-size:clamp(42px,7vw,62px);font-weight:800;color:var(--gold);letter-spacing:-2px;line-height:1}
+.pembahasan{border-top:1px dashed rgba(255,255,255,.18);padding-top:10px;margin-top:12px;font-size:.93rem;color:var(--muted);white-space:pre-line}
+@media (max-width:700px){.kepala{padding:12px 18px;gap:10px}.kepala nav{display:none}.pita{padding:24px 20px 22px;border-radius:16px;margin:18px 0}.angka-strip{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Simulasi Tryout: Latihan Berformat Ujian dengan Timer dan Skor","description":"Latihan berformat ujian 120 soal dengan fitur timer mundur, skor akhir, dan rincian per mata uji. Demo gratis 20 soal, sesi penuh lewat kode akses.","inLanguage":"id","mainEntityOfPage":"https://siappsikotes.my.id/simulasi-tryout/","datePublished":"2026-10-23","author":{"@type":"Organization","name":"SiapPsikotes","url":"https://siappsikotes.my.id/"},"publisher":{"@type":"Organization","name":"SiapPsikotes","url":"https://siappsikotes.my.id/"}}
+</script>
+</head>
+<body>
+<header>
+	<div class="kepala">
+		<a class="merek" href="../"><img src="../static/icons/icon-192.png" alt="" width="30" height="30"><span>SiapPsikotes</span></a>
+		<nav>
+			<a href="../">Aplikasi</a>
+			<a href="../beli/?utm_source=simulasi_tryout&amp;utm_medium=header&amp;utm_campaign=upsell-tryout">Kode akses</a>
+		</nav>
+	</div>
+</header>
+<main id="mulai" class="wrap">
+	<div class="pita">
+		<span class="lencana">Latihan berformat ujian</span>
+		<h1>Simulasi Tryout: 120 soal dengan timer mundur</h1>
+		<p class="dek">Latihan yang menyerupai suasana ujian: jumlah soal tetap, waktu terbatas, lalu skor akhir dan rincian hasil per mata uji supaya kamu bisa melihat area terlemahmu — bukan sekadar mengerjakan soal acak tanpa arah.</p>
+		<div class="aksi">
+			<button class="tombol" id="btnDemo">Mulai demo gratis — 20 soal / 25 menit</button>
+			<button class="tombol sekunder" id="btnPenuh">Sesi penuh — 120 soal / 120 menit · kode akses</button>
+		</div>
+		<p class="catatan">Soal pada halaman ini soal latihan buatan platform ini — bukan soal ujian dari instansi mana pun. Fungsinya melatih cara bekerja di bawah timer, bukan meniru butir soal tertentu.</p>
+	</div>
+
+	<section aria-label="Ringkasan format">
+		<div class="angka-strip">
+			<div><b>120</b><span>soal per sesi penuh, komposisi tetap</span></div>
+			<div><b>120 menit</b><span>fitur timer mundur, rata-rata 1 menit per soal</span></div>
+			<div><b>6 mata uji</b><span>wawasan kebangsaan, matematika, Inggris, logika, numerik, verbal</span></div>
+			<div><b>per mata uji</b><span>skor akhir + rincian benar / salah / kosong</span></div>
+		</div>
+	</section>
+
+	<section>
+		<h2>Cara memakainya</h2>
+		<div class="syarat">
+			<p><strong>1. Coba demo (gratis).</strong> 20 soal, timer 25 menit, hasilnya langsung tampil. Tanpa kode akses, tanpa akun.</p>
+			<p><strong>2. Sesi penuh untuk pemegang kode akses.</strong> 120 soal berformat ujian dengan rincian per mata uji tersedia di halaman ini bagi pemegang kode akses premium — bagi mereka yang belum, tombol sesi penuh akan mengarah ke halaman beli.</p>
+			<p><strong>3. Baca pembahasannya.</strong> Setiap soal punya pembahasan langkah demi langkah, jadi skor rendah selalu punya jalur perbaikan yang jelas.</p>
+		</div>
+	</section>
+
+	<section id="panel-ujian" hidden>
+		<h2 id="panelJudul">Sesi latihan berformat ujian</h2>
+		<div class="ujian" id="kotakUjian" aria-live="polite">
+			<!-- diisi oleh skrip -->
+		</div>
+	</section>
+
+	<section id="panelUpsell">
+		<h2>Sesi penuh &amp; rincian per mata uji</h2>
+		<div class="syarat">
+			<p>Bagi pemegang kode akses premium, sesi penuh membuka: 120 soal dengan fitur timer 120 menit, pembahasan semua soal, dan rincian skor per mata uji yang menandai mata uji terlemahmu.</p>
+			<div class="harga">Rp 39.000</div>
+			<p>sekali bayar untuk akses penuh. <strong>Kode aktif setelah dicek</strong> — pembayaran kamu diperiksa dulu, lalu kode aktivasi dikirim ke kamu.</p>
+			<div class="aksi">
+				<a class="tombol" id="ctaBeli" href="../beli/?utm_source=simulasi_tryout&amp;utm_medium=halaman&amp;utm_campaign=upsell-tryout" onclick="klikCtaFrontPage()">Lihat cara beli kode akses</a>
+				<a class="tombol sekunder" href="../">Tentang aplikasi latihan</a>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h2>Yang sering ditanya</h2>
+		<div class="tanya"><strong>Apakah soal di sini dibuat oleh instansi?</strong><p>Tidak. Ini bank soal latihan yang dikurasi platform ini. Tidak ada campur tangan dari instansi seleksi mana pun.</p></div>
+		<div class="tanya"><strong>Apakah skor di halaman ini bergaransi lolos?</strong><p>Tidak. Skor hanya mengukur latihanmu di bawah timer. Anggap ini cermin persiapan, bukan keputusan apa pun tentang hasil di hari ujian.</p></div>
+		<div class="tanya"><strong>Sesudah bayar, kode masuknya kapan?</strong><p>Pembayaran diperiksa oleh pemilik lalu kode aktivasi dikirim. Kode aktif setelah dicek — bukan otomatis dalam detik yang sama.</p></div>
+		<div class="tanya"><strong>Seperti apa komposisi soalnya?</strong><p>Sesi penuh: 30 wawasan kebangsaan, 25 matematika, 16 bahasa Inggris, 18 penalaran &amp; logika, 21 kemampuan numerik, 10 kemampuan verbal. Soal diacak ulang dari bank yang sama setiap sesi.</p></div>
+	</section>
+
+	<section>
+		<h2>Kualitas soal, dipastikan sejak pemuatan bank</h2>
+		<div class="syarat">
+			<p>Semua soal yang tampil di sini berasal dari bank yang sama dengan aplikasi utama — lebih dari 1.300 soal yang darinya setiap rilis melewati pemeriksa mutu otomatis (kunci jawaban, kejelasan soal, sebaran posisi kunci, pembahasan bertahap). Bila pemeriksa itu tidak lulus, rilis tidak naik ke situs.</p>
+		</div>
+	</section>
+</main>
+<footer>
+	<div class="wrap">
+		SiapPsikotes — platform belajar mandiri, tanpa afiliasi dengan instansi seleksi mana pun. <a href="../syarat/">Syarat</a> · <a href="../privasi/">Privasi</a> · <a href="../beli/?utm_source=simulasi_tryout&amp;utm_medium=footer&amp;utm_campaign=upsell-tryout">Kode akses</a>
+	</div>
+</footer>
+<script>
+/* Simulasi Tryout (t_ec85dbfb) — halaman berdiri sendiri.
+   Data soal: berkas bank yang sama dengan aplikasi utama (data/soal-<kategori>.js),
+   sehingga kualas bank tidak pernah terpisah dari pemeriksa mutu repo. */
+var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+var KOMPOSISI_PENUH = [['tkw',30],['matematika',25],['bahasa_inggris',16],['penalaran_logika',18],['numerik',21],['verbal',10]];
+var KOMPOSISI_DEMO  = [['tkw',5],['matematika',4],['bahasa_inggris',3],['penalaran_logika',3],['numerik',3],['verbal',2]];
+var NAMA_MATAUJI = {'tkw':'Wawasan Kebangsaan','matematika':'Matematika','bahasa_inggris':'Bahasa Inggris','penalaran_logika':'Penalaran & Logika','numerik':'Kemampuan Numerik','verbal':'Kemampuan Verbal'};
+var DURASI = {'demo':25*60,'penuh':120*60};
+/* Kunci validasi kode — sidik yang sama persis dengan static/js/fitur11.js aplikasi utama. */
+var KUNCI_KODE = ['siap','psikotes','2026','kode'].join('|');
+function sidikKode(data){var h=2166136261;var s=String(data)+'#'+KUNCI_KODE;for(var i=0;i<s.length;i++){h=h^s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}var pos=h%1679616;var abjad='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';var hasil='';while(pos>0){hasil=abjad.charAt(pos%36)+hasil;pos=Math.floor(pos/36);}while(hasil.length<4)hasil='0'+hasil;return hasil;}
+function periksaKode(kode){var bersih=String(kode||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(bersih.indexOf('SP')!==0||bersih.length<8)return{sah:false,alasan:'Format kode tidak dikenali.'};var isi=bersih.slice(2,bersih.length-4);var cek=bersih.slice(-4);if(sidikKode(isi)===cek)return{sah:true};return{sah:false,alasan:'Kode tidak cocok. Periksa kembali huruf dan angkanya, atau kirim bukti bayar lewat tautan WhatsApp di halaman beli.'};}
+function punyaAksesSim(){try{var k=localStorage.getItem('tni_kode_akses')||'';if(k&&periksaKode(k).sah)return true;}catch(e){}return false;}
+function escapeHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+/* Pelacakan kunjungan — pola sama dengan /beli/ (beacon + utm + id anonim, tanpa PII). */
+function isiIdLacak(){var k='';try{k=localStorage.getItem('tni_sim_lacak')||'';}catch(e){}
+	if(!k||!/^[0-9a-f]{8}$/.test(k)){k=Math.random().toString(16).slice(2,10);try{localStorage.setItem('tni_sim_lacak',k);}catch(e){}}return k;}
+var IDKUNJUNG=isiIdLacak();
+kirimPantau('tryout_kunjungan',IDKUNJUNG);
+window.klikCtaFrontPage=function(){kirimPantau('tryout_klik_beli','id:'+IDKUNJUNG);};
+function kirimPantau(jenis,rujukan){try{var p=new URLSearchParams(location.search);
+	var isi=JSON.stringify({jenis:jenis,rujukan:rujukan||'',utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||''});
+	if(navigator.sendBeacon)navigator.sendBeacon(URL_API+'/api/pantau',new Blob([isi],{type:'text/plain'}));
+	else fetch(URL_API+'/api/pantau',{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain'},body:isi});}catch(e){}}
+/* ===== muat bank soal ===== */
+function muatSkrip(src){return new Promise(function(resolve,reject){var s=document.createElement('script');s.src=src;s.async=true;s.onload=function(){resolve(true);};s.onerror=function(){reject(new Error('gagal memuat '+src));};document.head.appendChild(s);});}
+function acak(a){var x=a.slice();for(var i=x.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=x[i];x[i]=x[j];x[j]=t;}return x;}
+function susunSesi(komposisi){var janji=[];
+	komposisi.forEach(function(k){janji.push(muatSkrip('../data/soal-'+k[0]+'.js').then(function(){var part=(window.SOAL_PART||{})[k[0]];var bank=(part&&part.soal)||[];
+		return acak(bank).slice(0,k[1]).map(function(q){q._kat=k[0];return q;});}).catch(function(){return[];}));});
+	return Promise.all(janji).then(function(berkat){var semua=[];berkat.forEach(function(b){b.forEach(function(q){semua.push(q);});});
+		return semua.length?acak(semua):null;});}
+/* ===== mesin sesi ===== */
+var SESI={aktif:false,soal:[],nomor:0,jawab:[],akhir:0,tick:null,mode:'demo'};
+function mulaiSesi(mode){var panel=document.getElementById('panel-ujian');var kotak=document.getElementById('kotakUjian');
+	if(mode==='penuh'&&!punyaAksesSim()){location.href='../beli/?utm_source=simulasi_tryout&utm_medium=tombol_penuh&utm_campaign=upsell-tryout';return;}
+	panel.hidden=false;panel.scrollIntoView({behavior:'smooth'});
+	kotak.innerHTML='<div class="progres"><span>Menyiapkan soal&#8230;</span><div class="progres-meter"><i></i></div></div>';
+	susunSesi(mode==='penuh'?KOMPOSISI_PENUH:KOMPOSISI_DEMO).then(function(soal){
+		if(!soal){kotak.innerHTML='<p>Bank soal gagal dimuat. Periksa koneksi, lalu muat ulang halaman.</p>';return;}
+		SESI={aktif:true,mode:mode,soal:soal,nomor:0,jawab:new Array(soal.length).fill(null),akhir:Date.now()+DURASI[mode]*1000,tick:null};
+		document.getElementById('panelJudul').textContent=(mode==='penuh'?'Sesi penuh':'Demo gratis')+' — '+soal.length+' soal';
+		timerJalan();renderSoal();
+	});}
+document.getElementById('btnDemo').addEventListener('click',function(){mulaiSesi('demo');});
+document.getElementById('btnPenuh').addEventListener('click',function(){mulaiSesi('penuh');});
+function timerJalan(){clearInterval(SESI.tick);
+	SESI.tick=setInterval(function(){var sisa=Math.max(0,Math.floor((SESI.akhir-Date.now())/1000));var t=document.querySelector('#kotakUjian .timer');
+		if(t){t.textContent=mmss(sisa);t.classList.toggle('krisi',sisa<300);}
+		if(sisa===0){clearInterval(SESI.tick);selesaiSesi('Waktu habis — sesi ditutup otomatis. Soal yang belum dijawab dihitung kosong.');}},250);}
+function mmss(s){var m=Math.floor(s/60),d=s%60;return(m<10?'0':'')+m+':'+(d<10?'0':'')+d;}
+function renderSoal(){var q=SESI.soal[SESI.nomor];var kotak=document.getElementById('kotakUjian');
+	var sudah=SESI.jawab.filter(function(x){return x!==null;}).length;
+	var persen=Math.round((SESI.nomor+1)/SESI.soal.length*100);
+	var sisa=Math.max(0,Math.floor((SESI.akhir-Date.now())/1000));
+	var opsi=q.pilihan.map(function(t,i){var pil=SESI.jawab[SESI.nomor]===i;
+		return'<div class="baris-opsi'+(pil?' dipilih':'')+'" role="button" tabindex="0" onclick="pilihJawab('+i+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();pilihJawab('+i+')}"><span class="huruf">'+String.fromCharCode(65+i)+'</span><span>'+escapeHtml(t)+'</span></div>';}).join('');
+	kotak.innerHTML='<div class="bar-ujian"><span class="etiket">'+(SESI.mode==='penuh'?'Sesi penuh':'Demo gratis')+'</span>'+
+	'<div class="progres"><span>'+sudah+'/'+SESI.soal.length+' terjawab</span><div class="progres-meter"><i style="width:'+persen+'%"></i></div></div>'+
+	'<div class="timer" role="timer" aria-label="Sisa waktu">'+mmss(sisa)+'</div></div>'+
+	'<p class="soal-no">Soal '+(SESI.nomor+1)+' dari '+SESI.soal.length+'</p>'+
+	'<p class="soal-teks">'+escapeHtml(q.pertanyaan)+'</p>'+
+	(q.gambar?'<img class="gambar-soal" src="'+escapeHtml(q.gambar)+'" alt="Gambar soal '+(SESI.nomor+1)+'">':'')+
+	'<div class="opsi" role="radiogroup">'+opsi+'</div>'+
+	'<div class="navigasi"><button class="tombol sekunder kecil" onclick="geser(-1)" '+(SESI.nomor===0?'disabled':'')+'>&#8592; Sebelumnya</button>'+
+	'<button class="tombol sekunder kecil" onclick="akhiriLebihAwal()">Selesai &amp; lihat skor</button>'+
+	'<button class="tombol kecil" onclick="geser(1)" '+(SESI.nomor===SESI.soal.length-1?'disabled':'')+'>Berikutnya &#8594;</button></div>'+
+	'<div class="peta-jawab" aria-label="Peta jawaban">'+SESI.soal.map(function(_,n){return'<button title="Soal '+(n+1)+'" class="'+(n===SESI.nomor?'kini ':(SESI.jawab[n]!==null?'isi':''))+'" onclick="lompat('+n+')">'+(n+1)+'</button>';}).join('')+'</div>';}
+window.pilihJawab=function(i){if(!SESI.aktif)return;SESI.jawab[SESI.nomor]=i;renderSoal();};
+window.geser=function(d){var n=SESI.nomor+d;if(n<0||n>=SESI.soal.length)return;SESI.nomor=n;renderSoal();};
+window.lompat=function(n){SESI.nomor=n;renderSoal();};
+window.akhiriLebihAwal=function(){if(!confirm('Selesaikan sesi sekarang? Soal yang belum dijawab dihitung kosong.'))return;clearInterval(SESI.tick);selesaiSesi('Sesi selesai.');};
+function selesaiSesi(pesan){if(!SESI.aktif)return;clearInterval(SESI.tick);SESI.aktif=false;
+	var per={};var skor=SESI.soal.length?Math.round(SESI.soal.filter(function(q,i){var j=SESI.jawab[i];return j!==null&&j===q.jawaban;}).length/SESI.soal.length*100):0;
+	SESI.soal.forEach(function(q,i){var r=per[q._kat]||(per[q._kat]={nama:NAMA_MATAUJI[q._kat]||q._kat,total:0,benar:0,salah:0,kosong:0});var j=SESI.jawab[i];
+		r.total++;if(j===null)r.kosong++;else if(j===q.jawaban)r.benar++;else r.salah++;});
+	var list=Object.keys(per).map(function(k){return per[k];});
+	list.forEach(function(r){r.persen=Math.round(r.benar/r.total*100);});
+	list.sort(function(a,b){return b.persen-a.persen;});
+	var terlemah=list[list.length-1]||null;
+	/* riwayat singkat di perangkat — tidak ada yang dikirim ke server */
+	var riwayat=[];try{riwayat=JSON.parse(localStorage.getItem('tni_sim_tryout')||'[]');}catch(e){}
+	riwayat.unshift({ts:new Date().toISOString(),mode:SESI.mode,skor:skor,terlemah:terlemah?terlemah.nama:''});
+	try{localStorage.setItem('tni_sim_tryout',JSON.stringify(riwayat.slice(0,10)));}catch(e){}
+	renderHasil(skor,list,terlemah,pesan);}
+function renderHasil(skor,list,terlemah,pesan){var kotak=document.getElementById('kotakUjian');
+	var baris=list.map(function(r){return'<tr><td'+(r===terlemah?' class="terlemah"':'')+'>'+escapeHtml(r.nama)+'</td><td>'+r.total+'</td><td>'+r.benar+'</td><td>'+r.salah+'</td><td>'+r.kosong+'</td><td'+(r===terlemah?' class="terlemah"':'')+'>'+r.persen+'%</td></tr>';}).join('');
+	var pembahasan=SESI.soal.map(function(q,i){var j=SESI.jawab[i];
+		var opsi=q.pilihan.map(function(t,k){var kl=' dinonaktifkan';if(k===q.jawaban)kl+=' benar';else if(j===k)kl+=' salah';
+			return'<div class="baris-opsi'+kl+'"><span class="huruf">'+String.fromCharCode(65+k)+'</span><span>'+escapeHtml(t)+'</span></div>';}).join('');
+		var jawabanmu=j===null?'<p class="pembahasan" style="border-top:none">Jawabanmu: <strong>kosong</strong>.</p>':'<p class="pembahasan" style="border-top:none">Jawabanmu: '+String.fromCharCode(65+j)+'.</p>';
+		return'<div class="tanya"><p class="soal-no">Soal '+(i+1)+'</p><p class="soal-teks">'+escapeHtml(q.pertanyaan)+'</p>'+opsi+jawabanmu+'<div class="pembahasan">'+escapeHtml(q.pembahasan||'')+'</div></div>';}).join('');
+	kotak.innerHTML='<div class="bar-ujian"><span class="etiket">Sesi berakhir</span><span class="etiket">'+escapeHtml(pesan)+'</span></div>'+
+	'<div class="hasil-head"><div><span class="skor-besar">'+skor+'</span><div style="color:var(--muted)">skor akhir — persen soal yang kamu jawab benar</div></div><div style="color:var(--muted)">'+SESI.jawab.filter(function(x){return x!==null;}).length+' dari '+SESI.soal.length+' soal dijawab</div></div>'+
+	'<h3 style="margin:18px 0 6px">Rincian per mata uji</h3><table class="tabel"><thead><tr><th>Mata uji</th><th>Soal</th><th>Benar</th><th>Salah</th><th>Kosong</th><th>% benar</th></tr></thead><tbody>'+baris+'</tbody></table>'+
+	(terlemah?'<p style="color:var(--muted)">Area terlemahmu di sesi ini: <strong class="terlemah">'+escapeHtml(terlemah.nama)+'</strong> ('+terlemah.persen+'% benar). Utamakan latihan terarah di mata uji itu sebelum sesi berikutnya.</p>':'')+
+	'<div class="aksi"><button class="tombol" id="btnUlangi">Ulangi sesi — soal diacak ulang</button>'+
+	'<a class="tombol sekunder" href="../beli/?utm_source=simulasi_tryout&amp;utm_medium=hasil&amp;utm_campaign=upsell-tryout" onclick="klikCtaFrontPage()">'+(SESI.mode==='demo'?'Aktifkan sesi penuh 120 soal — paket akses Rp 39.000':'Kembali ke halaman kode akses')+'</a></div>'+
+	'<h3 style="margin:26px 0 6px">Pembahasan tiap soal</h3>'+pembahasan;
+	document.getElementById('btnUlangi').addEventListener('click',function(){mulaiSesi(SESI.mode);});}
+</script>
+</body>
+</html>
