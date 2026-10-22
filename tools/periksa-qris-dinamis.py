@@ -103,8 +103,10 @@ def main():
         b = p.chromium.launch(executable_path=kandidat[-1])
         ctx = b.new_context(viewport={"width": 390, "height": 844})
         page = ctx.new_page()
-        page.goto(f"{url}/beli/?utm_source=uji-qris", wait_until="domcontentloaded", timeout=40000)
-        page.wait_for_timeout(2500)
+        # networkidle, bukan domcontentloaded: skrip memakai defer sehingga belum
+        # selesai saat DOMContentLoaded — uji akan salah menyimpulkan "statis".
+        page.goto(f"{url}/beli/?utm_source=uji-qris", wait_until="networkidle", timeout=45000)
+        page.wait_for_timeout(1500)
 
         d = page.evaluate("""() => {
             const img = document.querySelector('#qris img');
