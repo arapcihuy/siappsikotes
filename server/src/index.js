@@ -819,7 +819,21 @@ export default {
                       const rawPayload = JSON.stringify(b).slice(0, 5000);
                       // Data hygiene (t_cd642aa0): webhook test/audit/probe ditandai is_test=1 dan
                       // dikeluarkan dari semua metrik revenue. Payload aslinya tetap tersimpan.
-                      const isTest = (['test', 'audit'].indexOf(utmSource.toLowerCase()) !== -1 || b.probe === 1 || b.probe === '1') ? 1 : 0;
+                      // Penanda WAJIB sama dengan jalur beacon /api/pantau (baris ~751): kalau
+                      // daftar ini lebih sempit, transaksi uji ber-utm 'uji-*'/'probe'/'verify-task'
+                      // lolos sebagai is_test=0 dan menggelembungkan revenue (terjadi 2026-10-22:
+                      // UJI-E2E-143 masuk sebagai paid Rp 39.143).
+                      const penandaUji = ['uji-', 'uji_', 'probe', 'audit', 'verify-task', 'test', 'smoke', 'dummy'];
+                      const isTest = (() => {
+                        const src = utmSource.toLowerCase();
+                        if (penandaUji.some(m => src.startsWith(m))) return 1;
+                        if (penandaUji.some(m => src.indexOf(m) !== -1)) return 1;
+                        if (b.is_test === 1 || b.is_test === '1' || b.is_test === true) return 1;
+                        if (b.probe === 1 || b.probe === '1') return 1;
+                        const tx = String(b.txid || '').toUpperCase();
+                        if (/^(UJI|PROBE|TEST|SMOKE|DUMMY)[-_]/.test(tx)) return 1;
+                        return 0;
+                      })();
                       const rujukan = String(b.rujukan || '').toUpperCase().trim().slice(0, 12);
                       const ins = await env.DB.prepare(
                         'INSERT INTO payments (timestamp, utm_source, utm_medium, product, amount, status, txid, raw_payload, is_test, rujukan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
