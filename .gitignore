@@ -14,3 +14,8 @@ server/.dev.vars
 
 # Data kontak pembeli (retensi) — jangan ikut repositori
 docs/devops/retensi/
+
+# Virtualenv untuk menjalankan playwright (pembuat flyer/listing). 151 MB — jangan pernah
+# masuk repositori. Dibuat 2026-10-23 oleh worker distribusi, awalnya TIDAK diabaikan
+# sehingga satu `git add -A` akan menyedot seluruh venv.
+.venv/
