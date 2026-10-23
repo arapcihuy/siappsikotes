@@ -53,7 +53,6 @@ HALAMAN = [
     ('latihan-psikotes-gratis-tni/index.html', '/latihan-psikotes-gratis-tni/', '0.8', 'monthly'),
     ('latihan-psikotes-10-menit/index.html', '/latihan-psikotes-10-menit/', '0.8', 'monthly'),
     ('buku-soal-psikotes-tni/index.html', '/buku-soal-psikotes-tni/', '0.9', 'weekly'),
-    ('aplikasi-latihan-psikotes-tni/index.html', '/aplikasi-latihan-psikotes-tni/', '0.9', 'weekly'),
     ('strategi-lulus-psikotes-tni-2026/index.html', '/strategi-lulus-psikotes-tni-2026/', '0.8', 'monthly'),
     ('penyebab-gagal-psikotes-tni/index.html', '/penyebab-gagal-psikotes-tni/', '0.8', 'monthly'),
     ('soal-psikotes-tni-ad-pdf/index.html', '/soal-psikotes-tni-ad-pdf/', '0.8', 'monthly'),
