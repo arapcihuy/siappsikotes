@@ -240,6 +240,7 @@ def kepala(n, gaya, utm=None):
     <nav aria-label="Halaman">
       <a href="../psikotes/">Aplikasi latihan</a>
       <a href="../contoh/">Contoh gratis</a>
+      <a href="../simulasi-tryout/%(q)s">Simulasi tryout</a>
       <a href="../beli/%(q)s">Harga</a>
       <a href="../mutu/">Mutu</a>
       <a class="tombol sekunder kecil" href="../beli/%(q)s">Beli akses</a>
