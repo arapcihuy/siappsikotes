@@ -649,7 +649,12 @@ async function layaniBeliAb(request, url, env, ctx) {
           await envAb.DB.prepare('INSERT INTO peristiwa (pengguna, jenis, rincian, waktu, utm_source, utm_medium, utm_campaign, is_test) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
             .bind(null, 'beli:kunjungan_server', 'id:' + idSrv + '|var:' + varian, new Date().toISOString(),
                   utmServer.s, utmServer.m, utmServer.c,
-                  deteksiUji(utmServer.s) || deteksiUji(utmServer.c)).run();
+                  // Monitor internal menembak /beli/ tiap 10 menit (cron "*/10 * * * *") dengan
+                  // User-Agent 'SiapPsikotes-Monitor/1.0'. Tanpa penanda ini, 144 ping/hari tercatat
+                  // sebagai pengunjung NYATA (is_test=0) dan menggelembungkan dashboard:
+                  // 22 Okt 327 "kunjungan" padahal manusia sungguhan hanya belasan.
+                  (/SiapPsikotes-Monitor/i.test(String(request.headers.get('User-Agent') || '')) ? 1 : 0)
+                  || deteksiUji(utmServer.s) || deteksiUji(utmServer.c)).run();
         } catch (e) { /* gagal catat kunjungan tidak boleh menahan halaman */ }
       })());
     }
