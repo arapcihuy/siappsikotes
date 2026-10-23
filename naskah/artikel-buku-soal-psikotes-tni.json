@@ -30,14 +30,30 @@
    "h2": "Harga Buku Hasil Penelusuran Marketplace",
    "isi": [
     "Kami menelusuri daftar harga buku kumpulan soal psikotes di Tokopedia pada Oktober 2026. Ini adalah hasil pengamatan toko daring yang beredar saat tulisan ini dibuat, bukan angka resmi dari penerbit atau pihak mana pun — harga dapat berubah sewaktu-waktu.",
-    "Polanya cukup konsisten: judul-judul yang paling laku ditandai lebih dari 10.000 terjual, dengan kisaran harga umumnya antara Rp 100.000 sampai Rp 200.000 per judul; harga seringnya menetap di sekitar Rp 150.000 setelah dihitung rata-rata."
+    "Polanya cukup konsisten: judul-judul yang paling laku ditandai lebih dari 10.000 terjual, dengan harga yang kami catat dari dua judul di Tokopedia: Rp 124.000-148.000 dan Rp 168.000."
    ],
    "tabel": {
-    "kepala": ["Cara membeli", "Kisaran harga yang terpantau", "Catatan"],
+    "kepala": [
+     "Cara membeli",
+     "Kisaran harga yang terpantau",
+     "Catatan"
+    ],
     "baris": [
-     ["Buku fisik di Tokopedia", "Rp 100.000 – Rp 200.000 (rata-rata sekitar Rp 150.000)", "Judul best-seller tercatat 10.000+ terjual; ongkir tergantung lokasi"],
-     ["Buku fisik di Shopee/Gramedia", "Kurang lebih sama dengan Tokopedia", "Kadang ada promo tanggal kembar"],
-     ["Bank soal web SiapPsikotes", "Rp 39.000 sekali bayar (sesuai halaman /beli hari ini)", "Langsung aktif, tanpa ongkir, tanpa tergantung stok"]
+     [
+      "Buku fisik di Tokopedia",
+      "Rp 124.000 – Rp 168.000 (dua judul yang kami periksa)",
+      "Judul best-seller tercatat 10.000+ terjual; ongkir tergantung lokasi"
+     ],
+     [
+      "Buku fisik di Shopee/Gramedia",
+      "Kurang lebih sama dengan Tokopedia",
+      "Kadang ada promo tanggal kembar"
+     ],
+     [
+      "Bank soal web SiapPsikotes",
+      "Rp 39.000 sekali bayar (sesuai halaman /beli hari ini)",
+      "Langsung aktif, tanpa ongkir, tanpa tergantung stok"
+     ]
     ]
    },
    "poin": [
@@ -52,15 +68,47 @@
     "Ini perbedaan utamanya, disusun sejujur yang bisa: setiap format menang di kolomnya sendiri."
    ],
    "tabel": {
-    "kepala": ["Aspek", "Buku fisik", "Bank soal web (SiapPsikotes)"],
+    "kepala": [
+     "Aspek",
+     "Buku fisik",
+     "Bank soal web (SiapPsikotes)"
+    ],
     "baris": [
-     ["Harga", "Sekitar Rp 100–200rb per judul (riset marketplace)", "Rp 39.000 sekali bayar"],
-     ["Jumlah soal", "Ratusan soal per judul, tergantung buku", "1.348 soal, semua berpembahasan"],
-     ["Cara pakai", "Baca, kerjakan sendiri, cocokkan kunci di belakang buku", "Kerjakan di peramban, timer berjalan, skor muncul otomatis"],
-     ["Pembahasan", "Tergantung penerbit; kuncinya kapas di bagian belakang", "Pembahasan tersambung langsung ke tiap soal"],
-     ["Akses", "Menunggu paket / jalan ke toko", "Tanpa install, buka di ponsel atau laptop, masuk dalam hitungan menit"],
-     ["Bisa dipakai ulang", "Ya, selama bukunya ada", "Ya, satu kali bayar untuk akses penuh"],
-     ["Melatih kecepatan", "Tidak — kamu menentukan sendiri waktu dan seringnya melepas", "Ya — batas waktu berjalan dan hasil langsung mengukurmu"]
+     [
+      "Harga",
+      "Sekitar Rp 100–200rb per judul (riset marketplace)",
+      "Rp 39.000 sekali bayar"
+     ],
+     [
+      "Jumlah soal",
+      "Ratusan soal per judul, tergantung buku",
+      "1.348 soal, semua berpembahasan"
+     ],
+     [
+      "Cara pakai",
+      "Baca, kerjakan sendiri, cocokkan kunci di belakang buku",
+      "Kerjakan di peramban, timer berjalan, skor muncul otomatis"
+     ],
+     [
+      "Pembahasan",
+      "Tergantung penerbit; kuncinya kapas di bagian belakang",
+      "Pembahasan tersambung langsung ke tiap soal"
+     ],
+     [
+      "Akses",
+      "Menunggu paket / jalan ke toko",
+      "Tanpa install, buka di ponsel atau laptop, masuk dalam hitungan menit"
+     ],
+     [
+      "Bisa dipakai ulang",
+      "Ya, selama bukunya ada",
+      "Ya, satu kali bayar untuk akses penuh"
+     ],
+     [
+      "Melatih kecepatan",
+      "Tidak — kamu menentukan sendiri waktu dan seringnya melepas",
+      "Ya — batas waktu berjalan dan hasil langsung mengukurmu"
+     ]
     ]
    },
    "poin": [
@@ -98,14 +146,20 @@
    "isi": [
     "Sebelum memilih format mana pun, paling jujur adalah mencicipinya sendiri. Berikut contoh soal dari bank SiapPsikotes — diambil apa adanya, lengkap dengan pembahasannya:"
    ],
-   "soal": {"kategori": "verbal", "jumlah": 5}
+   "soal": {
+    "kategori": "verbal",
+    "jumlah": 5
+   }
   },
   {
    "h2": "Cicip Soal Angka dari Bank",
    "isi": [
     "Bagian angka adalah yang paling sering membuat waktu cetak habis di tengah. Coba kerjakan yang berikut dengan jam di dekatmu:"
    ],
-   "soal": {"kategori": "numerik", "jumlah": 5}
+   "soal": {
+    "kategori": "numerik",
+    "jumlah": 5
+   }
   },
   {
    "h2": "Menggabungkan Keduanya Boleh Saja",
@@ -122,7 +176,7 @@
  "faq": [
   {
    "t": "Berapa harga buku soal psikotes TNI sekarang?",
-   "j": "Berdasar penelusuran halaman produk di Tokopedia pada Oktober 2026, kisarannya Rp 100.000–Rp 200.000 per judul dan rata-ratanya sekitar Rp 150.000. Harga berubah-ubah per toko, penerbit, dan promo — cek halaman produk masing-masing untuk angka saat ini."
+   "j": "Berdasar penelusuran halaman produk di Tokopedia pada Oktober 2026, harga yang tercatat Rp 124.000-148.000 dan Rp 168.000 untuk dua judul. Harga berubah-ubah per toko, penerbit, dan promo — cek halaman produk masing-masing untuk angka saat ini."
   },
   {
    "t": "Apakah buku soal psikotes TNI berisi soal dari pihak TNI?",
@@ -146,10 +200,22 @@
   "Kalau latihan rutin adalah yang kamu butuhkan, buka satu sesi latihan SiapPsikotes, cicip soalnya gratis dulu, dan lihat angkanya sendiri. Ketimbang menumpuk buku yang dibaca sekali, lebih baik punya satu skor yang bisa kamu kalahkan besok."
  ],
  "tautan": [
-  {"teks": "Akses penuh 1.348 soal berpembahasan — sekali bayar Rp 39.000", "url": "/beli/?utm_source=blog-buku-soal-psikotes-tni&utm_medium=blog&utm_campaign=artikel_seo"},
-  {"teks": "Coba simulasi tryout format tes penuh, gratis", "url": "/simulasi-tryout/"},
-  {"teks": "Kumpulan contoh soal psikotes TNI", "url": "/contoh-soal-psikotes-tni/"},
-  {"teks": "Mutu bank soal SiapPsikotes", "url": "/mutu/"}
+  {
+   "teks": "Akses penuh 1.348 soal berpembahasan — sekali bayar Rp 39.000",
+   "url": "/beli/?utm_source=blog-buku-soal-psikotes-tni&utm_medium=blog&utm_campaign=artikel_seo"
+  },
+  {
+   "teks": "Coba simulasi tryout format tes penuh, gratis",
+   "url": "/simulasi-tryout/"
+  },
+  {
+   "teks": "Kumpulan contoh soal psikotes TNI",
+   "url": "/contoh-soal-psikotes-tni/"
+  },
+  {
+   "teks": "Mutu bank soal SiapPsikotes",
+   "url": "/mutu/"
+  }
  ],
  "diperbarui": "23 Oktober 2026"
 }
