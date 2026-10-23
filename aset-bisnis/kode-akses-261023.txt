@@ -1,0 +1,7 @@
+# Kode akses Laporan Lengkap SiapPsikotes
+# Dibuat: 23 October 2026 21:38
+# Cara pakai: pembeli membuka aplikasi -> Laporan -> tempel kode -> Buka laporan
+# Catatan: berkas ini hanya berisi ISI kode. Untuk membuat kode yang BERLAKU,
+#          catat setorannya dulu: python3 tools/terbitkan-kode.py --rujukan ... --nominal ...
+
+SPPSP9012310260158K4
