@@ -391,6 +391,10 @@ INGAT: FPB pakai faktor SAMA dengan pangkat terkecil; KPK pakai SEMUA faktor den
   var beban = JSON.stringify({
     jenis: 'artikel_pageview',
     rincian: '',
+    // Kunjungan tanpa utm_source dicatat 'direct', TAPI pemeriksa uji di server harus tetap
+    // bisa membedakan probe operator dari pembaca nyata. Penanda ada di utm_medium:
+    // semua uji wajib memakai ?utm_source=uji-... sehingga deteksiUji() menandai is_test=1.
+    // Tanpa parameter apa pun, sebuah probe akan tampak identik dengan pembaca 'direct'.
     utm_source: u.get('utm_source') || 'direct',
     utm_medium: u.get('utm_medium') || 'artikel',
     utm_campaign: u.get('utm_campaign') || '',
