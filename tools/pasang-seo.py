@@ -62,6 +62,7 @@ HALAMAN = [
     ('latihan-psikotes-tni-online-gratis/index.html', '/latihan-psikotes-tni-online-gratis/', '0.8', 'monthly'),
     ('psikotes-tni-al-au/index.html', '/psikotes-tni-al-au/', '0.8', 'monthly'),
     ('psikotes-tamtama/index.html', '/psikotes-tamtama/', '0.8', 'monthly'),
+    ('psikotes-akademi-militer/index.html', '/psikotes-akademi-militer/', '0.8', 'monthly'),
     ('kisi-kisi-psikotes-tni/index.html', '/kisi-kisi-psikotes-tni/', '0.8', 'monthly'),
     ('tes-wartegg/index.html', '/tes-wartegg/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-akpol/index.html', '/contoh-soal-psikotes-akpol/', '0.8', 'monthly'),
