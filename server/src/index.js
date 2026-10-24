@@ -623,7 +623,15 @@ async function layaniBeliAb(request, url, env, ctx) {
   const header = {
     'Content-Type': 'text/html; charset=utf-8',
     // WAJIB override max-age=600 GitHub/CF — satu varian tidak boleh ter-cache untuk semua.
-    'Cache-Control': 'private, no-store'
+    'Cache-Control': 'private, no-store',
+    // Header keamanan: /beli/ satu-satunya halaman yang dilewati Worker, jadi header
+    // ini hanya bisa dipasang di sini (Pages _headers tidak berlaku untuk zona ini).
+    // CSP tidak dipasang di sini — sudah ada <meta> di master HTML (terverifikasi).
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=()',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Strict-Transport-Security': 'max-age=31536000'
   };
   if (setCookie) {
     header['Set-Cookie'] = 'sp_beli_var=' + varian + '; Max-Age=2592000; Path=/; SameSite=Lax; Secure';
