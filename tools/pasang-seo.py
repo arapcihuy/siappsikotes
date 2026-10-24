@@ -41,6 +41,7 @@ HALAMAN = [
     ('contoh-soal-psikotes-numerik/index.html', '/contoh-soal-psikotes-numerik/', '0.8', 'monthly'),
     ('contoh-soal-deret-angka/index.html', '/contoh-soal-deret-angka/', '0.8', 'monthly'),
     ('contoh-soal-tes-kraepelin/index.html', '/contoh-soal-tes-kraepelin/', '0.8', 'monthly'),
+    ('timer-kraepelin/index.html', '/timer-kraepelin/', '0.9', 'monthly'),  # alat gratis: magnet tautan
     ('contoh-soal-twk-cpns/index.html', '/contoh-soal-twk-cpns/', '0.8', 'monthly'),
     ('contoh-soal-tiu-cpns/index.html', '/contoh-soal-tiu-cpns/', '0.8', 'monthly'),
     ('contoh-soal-psikotes-bahasa-inggris/index.html', '/contoh-soal-psikotes-bahasa-inggris/', '0.8', 'monthly'),

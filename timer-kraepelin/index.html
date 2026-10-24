@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://siappsikotes-api.rasyidahmad180.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timer Kraepelin Online Gratis — Latihan Kecepatan Hitung | SiapPsikotes</title>
+<meta name="description" content="Timer Kraepelin online gratis: latihan hitung cepat dengan waktu per kolom, jumlah kolom, dan rekap kecepatan. Tanpa daftar, langsung jalan di browser.">
+<link rel="canonical" href="https://siappsikotes.my.id/timer-kraepelin/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="Timer Kraepelin Online Gratis — Latihan Kecepatan Hitung">
+<meta property="og:description" content="Latihan Kraepelin dengan timer per kolom dan rekap kecepatan. Gratis, tanpa daftar.">
+<meta property="og:url" content="https://siappsikotes.my.id/timer-kraepelin/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://siappsikotes.my.id/static/og/timer-kraepelin.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Timer Kraepelin Online Gratis — Latihan Kecepatan Hitung">
+<meta name="twitter:image" content="https://siappsikotes.my.id/static/og/timer-kraepelin.png">
+<meta name="twitter:image:alt" content="Timer Kraepelin Online Gratis — Latihan Kecepatan Hitung">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://siappsikotes.my.id/static/og/timer-kraepelin.png">
+<style>
+:root{--bg:#0a0f18;--surface:#121a28;--line:rgba(255,255,255,.09);--text:#eaf1f8;--muted:#b3c0d1;--gold:#e6c552;--ok:#4ade80;--warn:#f87171}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);
+background:radial-gradient(900px 420px at 12% -8%,rgba(230,197,82,.11),transparent 62%),
+radial-gradient(760px 400px at 94% 1%,rgba(109,179,255,.08),transparent 62%),var(--bg);
+min-height:100vh;padding:22px 16px 60px}
+.wrap{max-width:760px;margin:0 auto}
+a{color:var(--gold)}
+h1{font-size:clamp(1.5rem,4.4vw,2.1rem);line-height:1.25;margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 22px}
+.kartu{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px}
+label{display:block;font-weight:600;font-size:.93rem;margin:0 0 6px}
+select,input[type=number]{width:100%;padding:11px 12px;border-radius:9px;border:1px solid var(--line);
+background:#0e1622;color:var(--text);font:inherit}
+.baris{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 16px}
+@media(max-width:520px){.baris{grid-template-columns:1fr}}
+.tombol{display:inline-block;padding:13px 22px;border-radius:10px;border:0;cursor:pointer;
+font:600 1rem/1 inherit;background:var(--gold);color:#181203;transition:filter .15s}
+.tombol:hover{filter:brightness(1.08)}
+.tombol.sekunder{background:transparent;color:var(--text);border:1px solid var(--line)}
+.tombol:disabled{opacity:.45;cursor:not-allowed}
+.panel{display:none}
+.panel.aktif{display:block}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px}
+.stat div{background:#0e1622;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stat b{display:block;font-size:1.6rem;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums}
+.stat span{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+#angka{font-size:clamp(1.6rem,7vw,2.4rem);font-weight:700;text-align:center;letter-spacing:.06em;
+padding:26px 10px;background:#0e1622;border:1px solid var(--line);border-radius:12px;
+font-variant-numeric:tabular-nums;margin:0 0 16px;min-height:1.2em}
+#jawab{font-size:clamp(1.4rem,6vw,2rem);text-align:center;font-variant-numeric:tabular-nums;
+padding:14px;background:#0e1622;border:1px solid var(--line);border-radius:12px;color:var(--text);
+width:100%;margin:0 0 14px}
+.baris-tombol{display:flex;gap:10px;flex-wrap:wrap}
+.catatan{font-size:.87rem;color:var(--muted);margin:14px 0 0}
+.hasil{list-style:none;padding:0;margin:0}
+.hasil li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);
+font-variant-numeric:tabular-nums}
+.hasil li:last-child{border:0;font-weight:700}
+.pita{display:inline-block;padding:3px 9px;border-radius:99px;font-size:.78rem;font-weight:700}
+.pita.ok{background:rgba(74,222,128,.14);color:var(--ok)}
+.pita.warn{background:rgba(248,113,113,.14);color:var(--warn)}
+footer{margin-top:26px;color:var(--muted);font-size:.85rem;text-align:center}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"WebApplication","name":"Timer Kraepelin Online","url":"https://siappsikotes.my.id/timer-kraepelin/",
+  "applicationCategory":"EducationalApplication","operatingSystem":"Web Browser",
+  "description":"Timer Kraepelin online gratis: latihan hitung cepat dengan batas waktu per kolom dan rekap kecepatan.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"},
+  "inLanguage":"id"},
+ {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Beranda","item":"https://siappsikotes.my.id/"},
+   {"@type":"ListItem","position":2,"name":"Timer Kraepelin","item":"https://siappsikotes.my.id/timer-kraepelin/"}]},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Apakah timer Kraepelin ini gratis?","acceptedAnswer":{"@type":"Answer","text":"Ya, gratis sepenuhnya dan berjalan di browser tanpa perlu mendaftar."}},
+  {"@type":"Question","name":"Berapa detik per kolom pada tes Kraepelin?","acceptedAnswer":{"@type":"Answer","text":"Irama umum adalah 10-20 detik per kolom. Latihan ini bisa diatur 10, 15, 20, atau 30 detik per kolom."}},
+  {"@type":"Question","name":"Apakah hasil latihan ini nilai resmi?","acceptedAnswer":{"@type":"Answer","text":"Bukan. Ini alat latihan kecepatan hitung, bukan tes resmi. Nilai resmi hanya dari penyelenggara."}}]}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Timer Kraepelin Online</h1>
+  <p class="lead">Latihan hitung cepat dengan batas waktu per kolom, persis seperti irama tes Kraepelin. Gratis, tanpa daftar, langsung jalan di browser. <a href="../contoh-soal-tes-kraepelin/">Baca cara mengerjakannya</a>.</p>
+
+  <section class="kartu" id="pengaturan">
+    <div class="baris">
+      <div>
+        <label for="detik">Detik per kolom</label>
+        <select id="detik">
+          <option value="10">10 detik (latihan cepat)</option>
+          <option value="15" selected>15 detik (irama umum)</option>
+          <option value="20">20 detik (longgar)</option>
+          <option value="30">30 detik (pemula)</option>
+        </select>
+      </div>
+      <div>
+        <label for="kolom">Jumlah kolom</label>
+        <select id="kolom">
+          <option value="10" selected>10 kolom</option>
+          <option value="20">20 kolom</option>
+          <option value="30">30 kolom</option>
+          <option value="45">45 kolom (uji penuh)</option>
+        </select>
+      </div>
+    </div>
+    <button class="tombol" id="mulai">Mulai latihan</button>
+    <p class="catatan">Cara kerja: di tiap kolom kamu menjumlahkan dua angka yang bersebelahan, lalu ketik angka terakhirnya (&lt;10). Angka baru muncul begitu jawaban benar. Fokus ke <b>jumlah benar</b> dalam batas waktu — itu yang diukur tes Kraepelin.</p>
+  </section>
+
+  <section class="kartu panel" id="arena">
+    <div class="stat">
+      <div><b id="sisaWaktu">—</b><span>Detik</span></div>
+      <div><b id="kolomKe">—</b><span>Kolom</span></div>
+      <div><b id="benar">0</b><span>Benar</span></div>
+    </div>
+    <div id="angka">—</div>
+    <input id="jawab" inputmode="numeric" autocomplete="off" placeholder="ketik 1 angka" disabled>
+    <div class="baris-tombol">
+      <button class="tombol sekunder" id="ulang">Ulangi</button>
+    </div>
+  </section>
+
+  <section class="kartu panel" id="selesai">
+    <h2 style="margin:0 0 14px;font-size:1.15rem">Hasil latihan</h2>
+    <ul class="hasil" id="rekap"></ul>
+    <div class="baris-tombol" style="margin-top:16px">
+      <button class="tombol" id="lagi">Latihan lagi</button>
+      <a class="tombol sekunder" href="../contoh-soal-tes-kraepelin/" style="text-decoration:none;text-align:center">Cara mengerjakan</a>
+    </div>
+  </section>
+
+  <footer>
+    Timer Kraepelin gratis dari <a href="../">SiapPsikotes</a>. Latihan ini melatih kecepatan hitung, bukan tes resmi.<br>
+    Butuh bank soal lengkap dengan pembahasan? <a href="../beli/">Buka akses penuh Rp 39.000</a>.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var elDetik = document.getElementById('detik');
+  var elKolom = document.getElementById('kolom');
+  var elMulai = document.getElementById('mulai');
+  var elArena = document.getElementById('arena');
+  var elPanelAtur = document.getElementById('pengaturan');
+  var elSelesai = document.getElementById('selesai');
+  var elSisa = document.getElementById('sisaWaktu');
+  var elKolomKe = document.getElementById('kolomKe');
+  var elBenar = document.getElementById('benar');
+  var elAngka = document.getElementById('angka');
+  var elJawab = document.getElementById('jawab');
+  var elUlang = document.getElementById('ulang');
+  var elLagi = document.getElementById('lagi');
+  var elRekap = document.getElementById('rekap');
+
+  var detikPer, totalKolom, sisa, kolomKini, benar, totalBenar, tiket, angkaA, angkaB, jalan;
+
+  function acakAngka() { return Math.floor(Math.random() * 9) + 1; }
+
+  function tampilkanSoal() {
+    angkaA = acakAngka();
+    angkaB = acakAngka();
+    elAngka.textContent = angkaA + '  ' + angkaB;
+  }
+
+  function perbaruiStat() {
+    elSisa.textContent = sisa;
+    elKolomKe.textContent = kolomKini + ' / ' + totalKolom;
+    elBenar.textContent = benar;
+  }
+
+  function mulaiKolomBaru() {
+    kolomKini++;
+    benar = 0;
+    sisa = detikPer;
+    perbaruiStat();
+    tampilkanSoal();
+    elJawab.value = '';
+    elJawab.disabled = false;
+    elJawab.focus();
+  }
+
+  function selesai() {
+    jalan = false;
+    clearInterval(tiket);
+    elJawab.disabled = true;
+    elArena.classList.remove('aktif');
+    elSelesai.classList.add('aktif');
+    elRekap.innerHTML = '';
+    var baris = [
+      ['Kolom dikerjakan', kolomKini + ''],
+      ['Total jawaban benar', totalBenar + ''],
+      ['Detik per kolom', detikPer + ''],
+      ['Kecepatan rata-rata', (totalBenar / Math.max(kolomKini, 1)).toFixed(1) + ' benar/kolom'],
+      ['Irama', (totalBenar / Math.max(kolomKini * detikPer, 1) * 60).toFixed(1) + ' benar/menit']
+    ];
+    baris.forEach(function (b, i) {
+      var li = document.createElement('li');
+      var kiri = document.createElement('span');
+      kiri.textContent = b[0];
+      var kanan = document.createElement('span');
+      kanan.textContent = b[1];
+      li.appendChild(kiri); li.appendChild(kanan);
+      if (i === baris.length - 1) li.style.color = 'var(--gold)';
+      elRekap.appendChild(li);
+    });
+    var cat = document.createElement('p');
+    cat.className = 'catatan';
+    cat.textContent = totalBenar >= kolomKini * 5
+      ? 'Kecepatanmu sudah di atas rata-rata latihan pemula. Naikkan jumlah kolom untuk menahan irama lebih lama.'
+      : 'Fokus latih konsistensi: kerjakan terus-menerus tanpa berhenti di satu kolom. Ulangi dengan jumlah kolom lebih banyak.';
+    elRekap.parentNode.insertBefore(cat, elRekap.nextSibling);
+  }
+
+  function detak() {
+    sisa--;
+    if (sisa <= 0) {
+      totalBenar += benar;
+      if (kolomKini >= totalKolom) { perbaruiStat(); selesai(); return; }
+      mulaiKolomBaru();
+      return;
+    }
+    perbaruiStat();
+  }
+
+  function mulai() {
+    detikPer = parseInt(elDetik.value, 10);
+    totalKolom = parseInt(elKolom.value, 10);
+    kolomKini = 0; totalBenar = 0; jalan = true;
+    elPanelAtur.style.display = 'none';
+    elArena.classList.add('aktif');
+    elSelesai.classList.remove('aktif');
+    mulaiKolomBaru();
+    clearInterval(tiket);
+    tiket = setInterval(detak, 1000);
+  }
+
+  elJawab.addEventListener('input', function () {
+    if (!jalan) return;
+    var v = elJawab.value.replace(/\D/g, '').slice(-1);
+    elJawab.value = v;
+    if (v === '') return;
+    var jumlah = angkaA + angkaB;
+    if (parseInt(v, 10) === jumlah % 10) {
+      benar++;
+      totalBenar++;
+      perbaruiStat();
+      elJawab.value = '';
+      tampilkanSoal();
+    } else {
+      elJawab.value = '';
+    }
+  });
+
+  elMulai.addEventListener('click', mulai);
+  elUlang.addEventListener('click', function () { clearInterval(tiket); mulai(); });
+  elLagi.addEventListener('click', function () {
+    elSelesai.classList.remove('aktif');
+    elPanelAtur.style.display = '';
+    elArena.classList.remove('aktif');
+  });
+})();
+</script>
+</body>
+</html>
