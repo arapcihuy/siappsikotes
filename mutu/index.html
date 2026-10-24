@@ -372,5 +372,26 @@
     <p>Halaman ini diperbarui 17 September 2026.</p>
   </div>
 </footer>
+<script>
+// Penerus atribusi: tautan menuju /beli/ dibuat membawa UTM halaman ini, supaya
+// kunjungan dari flyer/IndexNow/artikel tetap terlacak sampai halaman bayar.
+// Tanpa ini, semua tautan ../beli/ mendarat tanpa atribusi dan kanal asal hilang.
+(function () {
+  try {
+    var q = location.search || '';
+    if (q.indexOf('utm_') === -1) return;
+    var asal = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+      .map(function (k) { var m = new RegExp('[?&]' + k + '=([^&]*)').exec(q); return m ? k + '=' + m[1] : ''; })
+      .filter(Boolean).join('&');
+    if (!asal) return;
+    var pautan = document.querySelectorAll('a[href*="beli"]');
+    for (var i = 0; i < pautan.length; i++) {
+      var h = pautan[i].getAttribute('href');
+      if (!h || h.indexOf('utm_') !== -1 || h.indexOf('#') === 0) continue;
+      pautan[i].setAttribute('href', h + (h.indexOf('?') === -1 ? '?' : '&') + asal);
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
