@@ -1190,8 +1190,16 @@ export default {
                       // Token klaim diterbitkan bila rahasia jalur B sudah dipasang; tanpa itu pesanan
                       // tetap tercatat dan kode tetap tampil (jalur manual pemilik tetap bekerja).
                       const klaim_token = env.KLAIM_HMAC_SECRET ? await buatTokenKlaim(env, { rujukan, nominal: nominalTercatat }) : null;
+                      // KEAMANAN (24 Okt): `kode` hanya boleh terkirim kalau pesanan SUDAH punya
+                      // bukti bayar. Endpoint ini tanpa autentikasi dan rujukan hanya SP-3digit
+                      // (900 kemungkinan, ~45 menit pada rate limit 20/menit), jadi mengirim kode
+                      // untuk status 'menunggu_bayar' berarti membagikan kode akses siapa pun yang
+                      // belum bayar. Kode tetap bisa ditampilkan setelah pembeli membayar (webhook
+                      // menaikkan status), dan pemilik tetap punya jalur /api/pemilik/kode-terbit.
+                      const statusKini = statusPesanan(baris);
+                      const kodeTampil = (statusKini === 'lunas' || statusKini === 'menunggu_verifikasi') ? kode : null;
                       return jawab({ ok: true, rujukan, nominal: nominalTercatat, diskon: refTerpasang ? HARGA_DASAR - HARGA_REF : 0,
-                                     kode, status: statusPesanan(baris), klaim_token,
+                                     kode: kodeTampil, status: statusKini, klaim_token,
                                      tripay_aktif: !!(env.TRIPAY_API_KEY && env.TRIPAY_PRIVATE_KEY && env.TRIPAY_KODE_MERCHANT) }, 200, asal);
                     }
 
