@@ -662,7 +662,13 @@ async function layaniBeliAb(request, url, env, ctx) {
                   // sebagai pengunjung NYATA (is_test=0) dan menggelembungkan dashboard:
                   // 22 Okt 327 "kunjungan" padahal manusia sungguhan hanya belasan.
                   (/SiapPsikotes-Monitor/i.test(String(request.headers.get('User-Agent') || '')) ? 1 : 0)
-                  || deteksiUji(utmServer.s) || deteksiUji(utmServer.c)).run();
+                  || deteksiUji(utmServer.s) || deteksiUji(utmServer.c)
+                  // Klien non-browser (curl/wget/python-requests/headless) TIDAK menjalankan JS,
+                  // jadi tidak akan pernah memicu kunjungan_beli. Kalau tidak ditandai, setiap
+                  // probe operator/uptime-monitor menggelembungkan kunjungan NYATA tanpa klik:
+                  // 24 Okt 338 "kunjungan" is_test=0 padahal beacon hanya 8.
+                  || (/^(curl|wget|python-requests|python-urllib|httpie|go-http-client|libwww-perl|okhttp|java\/|axios|node-fetch|undici)/i.test(String(request.headers.get('User-Agent') || '')) ? 1 : 0)
+                  || (/HeadlessChrome|PhantomJS|Puppeteer|Playwright/i.test(String(request.headers.get('User-Agent') || '')) ? 1 : 0)).run();
         } catch (e) { /* gagal catat kunjungan tidak boleh menahan halaman */ }
       })());
     }
