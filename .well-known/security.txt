@@ -1,4 +1,4 @@
-Contact: mailto:rasyidahmad180@gmail.com
+Contact: mailto:halo@siappsikotes.my.id
 Preferred-Languages: id, en
 Canonical: https://siappsikotes.my.id/.well-known/security.txt
 Expires: 2027-09-13T00:00:00Z

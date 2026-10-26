@@ -407,7 +407,7 @@
     elB.addEventListener('click', function () { lacak('klik_bukti_wa'); });
   }
   if (elBS) {
-    elBS.setAttribute('href', 'mailto:rasyidahmad180@gmail.com?subject=' +
+    elBS.setAttribute('href', 'mailto:halo@siappsikotes.my.id?subject=' +
       encodeURIComponent('Bukti pembayaran ' + rujukan) + '&body=' + encodeURIComponent(pesanBukti));
     elBS.addEventListener('click', function () { lacak('klik_bukti_email'); });
   }

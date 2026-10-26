@@ -13,7 +13,7 @@ gambarQris: 'static/img/qris-bayar.png',           // diisi bila pemilik mengiri
 rekening: 'Bank Mandiri 1370022256982 a/n RASYID ACHMAD FAUZI',
 tampilkanRekening: false,
 whatsapp: '6281387906930', // nomor WhatsApp pemilik, format 62812xxxxxxx
-surel: 'rasyidahmad180@gmail.com',   // surel penerima bukti
+surel: 'halo@siappsikotes.my.id',   // surel penerima bukti
 instruksi: []              // langkah bayar; bila kosong dipakai langkah baku di bawah
 };
 window.LAPORAN_BAYAR_AKTIF = false;
