@@ -1,4 +1,4 @@
-const CACHE = "beli-pwa-v2";
+const CACHE = "beli-pwa-v3";
 // /beli/ + /beli/index.html TIDAK di-cache: Worker menukar copy A/B server-side via
 // cookie sp_beli_var (spesifikasi-ab-beli.md) — HTML varian yang ter-cache akan
 // membekukan satu varian untuk pengunjung berulang. script.js juga selalu lewat

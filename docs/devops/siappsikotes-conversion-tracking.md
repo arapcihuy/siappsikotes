@@ -8,7 +8,7 @@ Menambahkan tracking funnel pembelian di halaman `/beli/` tanpa analitik pihak k
 
 ## Arsitektur
 `beli/index.html` (Cloudflare Pages, statis)
-  → sendBeacon / fetch keepalive POST ke `https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau`
+  → sendBeacon / fetch keepalive POST ke `https://siappsikotes.my.id/api/pantau`
   → `server/src/index.js` (Cloudflare Worker)
      → rate-limit 60/mnt/IP + whitelist `Origin`
      → validasi jenis event & `rujukan` `SP-###`
@@ -29,12 +29,12 @@ Ringkas data pemilik: `GET /api/pemilik/funnel-beli` (butuh session pemilik)
 Semua disertai `rujukan` SP-### (tidak menyimpan data pribadi).
 
 ## Endpoint
-- POST `https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau`
+- POST `https://siappsikotes.my.id/api/pantau`
   Body JSON: `{ jenis: string, rujukan: string }`
   Validasi: jenis whitelist, rujukan `^SP-\d{3}$`, Origin `siappsikotes.my.id`
   Rate limit: 60 event/menit/IP (tabel `batas`)
 
-- GET `https://siappsikotes-api.rasyidahmad180.workers.dev/api/pemilik/funnel-beli`
+- GET `https://siappsikotes.my.id/api/pemilik/funnel-beli`
   Ringkasan: per jenis (jumlah & rujukan unik) + breakdown harian.
 
 ## Keamanan & Privasi

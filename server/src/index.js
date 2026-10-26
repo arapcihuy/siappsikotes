@@ -2058,7 +2058,7 @@ export default {
                 (baris || '(belum ada data)') +
                 `\n\nTotal: kunjungan ${totalV} · klik ${totalK} · bayar ${totalB} · konversi ${convTotal} · Rp ${Number(rev).toLocaleString('id-ID')}` +
                 `\n\n<b>🧾 ${rekonsiliasi}</b>` +
-                `\nCSV: https://siappsikotes-api.rasyidahmad180.workers.dev/api/dashboard/funnel-csv`;
+                `\nCSV: https://siappsikotes.my.id/api/dashboard/funnel-csv`;
             const tg = await kirimTelegramAlert(env, pesan);
             return { ok: !!tg.ok, tg, ringkasan: baris || '(belum ada data)' };
               } catch (e) {
@@ -2176,7 +2176,7 @@ export default {
                         'Total: kunjungan ' + data.total.kunjungan + ' · kunjung-bayar ' + data.total.kunjung_bayar +
                         ' · pay ' + data.total.pay + ' · Rp ' + Number(data.total.revenue_rp).toLocaleString('id-ID') +
                         '\nbayar tanpa kunjungan tercatat: ' + data.total.bayar_tanpa_kunjungan +
-                        '\nCSV: https://siappsikotes-api.rasyidahmad180.workers.dev/api/dashboard/funnel-kanal?days=7&format=csv';
+                        '\nCSV: https://siappsikotes.my.id/api/dashboard/funnel-kanal?days=7&format=csv';
                     const tg = await kirimTelegramAlert(env, pesan);
                     if (tg.ok && !tanpaGuard) {
                         try { await env.FUNNEL_KV.put(KUNCI, JSON.stringify({ waktu: new Date().toISOString(), message_id: tg.message_id || null })); } catch (e) {}
@@ -2425,8 +2425,8 @@ export default {
                     ' · ' + r.tunggu_jam + ' jam · kontak: ' + (r.kontak || '(kosong)')
                 ).join('\n') + '\n';
             }
-            msg += '\nTabel lengkap: https://siappsikotes-api.rasyidahmad180.workers.dev/api/rekonsiliasi-ringkasan' +
-                (env.LAPORAN_TOKEN ? '\nCSV bukti run: https://siappsikotes-api.rasyidahmad180.workers.dev/api/rekonsiliasi-ringkasan?token=' + encodeURIComponent(env.LAPORAN_TOKEN) + '&format=csv' : '');
+            msg += '\nTabel lengkap: https://siappsikotes.my.id/api/rekonsiliasi-ringkasan' +
+                (env.LAPORAN_TOKEN ? '\nCSV bukti run: https://siappsikotes.my.id/api/rekonsiliasi-ringkasan?token=' + encodeURIComponent(env.LAPORAN_TOKEN) + '&format=csv' : '');
             const tg = await kirimTelegramAlert(env, msg);
             // Guard idempoten ditulis SETELAH upaya kirim: pengulangan hari yang sama tak digandakan.
             try { await env.FUNNEL_KV.put(kunci, JSON.stringify({ waktu: data.waktu, terkirin: !!tg.ok, jumlah: belum.length })); } catch (e) {}

@@ -18,7 +18,7 @@ Lihat: `broadcast_a_b.py` (attachment t_adf316d9, id 51).
 Baca leads dari CSV, kirim via Telegram Bot API, state di `broadcast_state.db` (idempotent).
 
 ## Tracking
-- Endpoint pelacakan funnel: `https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau`
+- Endpoint pelacakan funnel: `https://siappsikotes.my.id/api/pantau`
 - Event valid: `kunjungan_beli`, `tampilkan_kode`, `klik_bukti_wa`, `klik_bukti_email`, `buka_aplikasi`, `salin_kode`, `salin_nominal`, `klik_cta_bayar`.
 - Query ringkasan: GET `/api/pemilik/funnel` -> `per_jenis`, `per_hari`.
 

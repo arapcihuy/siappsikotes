@@ -1,6 +1,6 @@
 
 window.AKUN_DB = window.AKUN_DB || {
-api: 'https://siappsikotes-api.rasyidahmad180.workers.dev',
+api: 'https://siappsikotes.my.id',
 aktif: true,
 jedaDorong: 4000          // tunda 4 detik setelah perubahan terakhir sebelum mendorong
 };

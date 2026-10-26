@@ -10,7 +10,7 @@
   'use strict';
 
   var KUNCI_SIMPAN = 'tni_batch2';
-  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+  var URL_API = 'https://siappsikotes.my.id';
   var NAMA_KATEGORI = 'Set Soal Batch 2';
 
   function versiAset() {

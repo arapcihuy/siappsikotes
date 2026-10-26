@@ -253,7 +253,7 @@ mana pun yang menempelkannya — sebaiknya dicabut atau dijadikan kata sandi yan
 
 ## Dashboard A/B /beli/ — 19 Okt 2026
 
-Endpoint baru: `GET https://siappsikotes-api.rasyidahmad180.workers.dev/api/ab-beli` (JSON;
+Endpoint baru: `GET https://siappsikotes.my.id/api/ab-beli` (JSON;
 tambah `?format=csv` untuk ekspor CSV, `?days=30` untuk jendela).
 
 - Sumber: tabel `peristiwa` (beacon, rincian `SP-123|var:a`) dan `payments` (webhook QRIS/Tripay,

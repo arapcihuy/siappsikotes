@@ -27,7 +27,7 @@ tanpa perubahan aplikasi utama. Struktur:
 - Bagian upsell + FAQ + catatan kualitas bank soal.
 
 CSP meta sama dengan halaman landing lain, dengan `connect-src` menambah
-`https://siappsikotes-api.rasyidahmad180.workers.dev` untuk beacon.
+`https://siappsikotes.my.id` untuk beacon.
 
 ## 3. Data soal
 

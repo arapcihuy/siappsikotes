@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+  var URL_API = 'https://siappsikotes.my.id';
   var URL_PANTAU = URL_API + '/api/pantau';
 
   function getUtmParams() {

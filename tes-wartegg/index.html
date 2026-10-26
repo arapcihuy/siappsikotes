@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; connect-src 'self' https://siappsikotes-api.rasyidahmad180.workers.dev https://cloudflareinsights.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; connect-src 'self' https://siappsikotes.my.id https://cloudflareinsights.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0a0f18">
@@ -313,8 +313,8 @@
     utm_campaign: u.get('utm_campaign') || '',
     halaman: location.pathname.replace(/^\//, '').replace(/\/$/, '')
   });
-  try { navigator.sendBeacon('https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau', new Blob([beban], { type: 'text/plain' })); }
-  catch (e) { fetch('https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau', { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
+  try { navigator.sendBeacon('https://siappsikotes.my.id/api/pantau', new Blob([beban], { type: 'text/plain' })); }
+  catch (e) { fetch('https://siappsikotes.my.id/api/pantau', { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
 })();
 </script>
 </body>

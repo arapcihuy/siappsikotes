@@ -2,7 +2,7 @@
 
 ## URL (1 GET, tanpa login)
 
-    https://siappsikotes-api.rasyidahmad180.workers.dev/api/funnel
+    https://siappsikotes.my.id/api/funnel
 
 Satu JSON terbuka: funnel harian /beli/ — kunjungan, klik bayar, QRIS dibuat,
 pembayaran terkonfirmasi (webhook), cart-abandon, revenue, konversi.
@@ -31,7 +31,7 @@ Efeknya: snapshot ditulis saat jam 00/06/12/18 UTC (menit 0-10) = tiap 6 jam,
 
 ## Operasi
 
-- Lihat angka sekarang: `curl https://siappsikotes-api.rasyidahmad180.workers.dev/api/funnel`
+- Lihat angka sekarang: `curl https://siappsikotes.my.id/api/funnel`
 - CSV 30 hari: `GET /api/dashboard/funnel-csv` (sudah ada sebelumnya)
 - Deploy ulang worker: `cd ~/tni-belajar/server && wrangler deploy`
 - Ganti jadwal snapshot: edit kondisi `getUTCHours() % 6` di

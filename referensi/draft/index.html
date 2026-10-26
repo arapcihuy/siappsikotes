@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://siappsikotes-api.rasyidahmad180.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://siappsikotes.my.id https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0a0f18">
@@ -97,7 +97,7 @@
     utm_campaign: u.get('utm_campaign') || '',
     halaman: 'referensi/draft'
   });
-  var PANTAU = 'https://siappsikotes-api.rasyidahmad180.workers.dev/api/pantau';
+  var PANTAU = 'https://siappsikotes.my.id/api/pantau';
   try { navigator.sendBeacon(PANTAU, new Blob([beban], { type: 'text/plain' })); }
   catch (e) { fetch(PANTAU, { method: 'POST', headers: { 'content-type': 'application/json' }, body: beban, keepalive: true, credentials: 'omit' }).catch(function () {}); }
 })();

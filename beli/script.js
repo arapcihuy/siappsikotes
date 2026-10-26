@@ -32,7 +32,7 @@
   // ---------- Constants ----------
   var HARGA_DASAR = 39000;
   var HARGA_REF = 34000;   // diskon Rp 5.000 lewat kode referensi REF-XXXX (divalidasi server)
-  var URL_API = 'https://siappsikotes-api.rasyidahmad180.workers.dev';
+  var URL_API = 'https://siappsikotes.my.id';
   var URL_PANTAU = URL_API + '/api/pantau';
 
   // ---------- Helpers ----------

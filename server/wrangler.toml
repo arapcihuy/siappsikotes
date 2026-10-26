@@ -14,7 +14,11 @@ routes = [
   # A/B /beli/ (spesifikasi-ab-beli.md): Worker menukar 4 elemen copy per varian
   # server-side via cookie sp_beli_var. Path /beli* selain dokumen HTML
   # (script.js, style.css, sw.js, ...) dilempar apa adanya ke origin statis.
-  { pattern = "siappsikotes.my.id/beli*", zone_name = "siappsikotes.my.id" }
+  { pattern = "siappsikotes.my.id/beli*", zone_name = "siappsikotes.my.id" },
+  # API di domain sendiri. Tujuan: host *.rasyidahmad180.workers.dev tidak lagi
+  # muncul di CSP/JS halaman, jadi string email pemilik tidak terindeks mesin
+  # pencari lewat halaman publik. Endpoint lama tetap hidup (workers_dev = true).
+  { pattern = "siappsikotes.my.id/api/*", zone_name = "siappsikotes.my.id" }
 ]
 
 # Cron Trigger: tiap 10 menit untuk monitoring /beli/ + snapshot funnel 6 jaman ke KV
